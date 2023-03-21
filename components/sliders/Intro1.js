@@ -1,93 +1,110 @@
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-SwiperCore.use([Navigation, Pagination]);
+import SwiperCore, { Navigation, Pagination } from "swiper"
+import "swiper/css/pagination"
+import { Swiper, SwiperSlide } from "swiper/react"
+import useFetch from "../../util/useFetch"
+import Link from "next/link"
+SwiperCore.use([Navigation, Pagination])
 
 const Intro1 = () => {
-    return (
-        <>
-            <Swiper
-                slidesPerView={1}
-                spaceBetween={0}
-                
-                pagination={true}
-                navigation={{
-                    prevEl: ".custom_prev_i1",
-                    nextEl: ".custom_next_i1",
-                }}
-                className="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1"
-            >
-                <SwiperSlide>
-                    <div
-                        className="single-hero-slider single-animation-wrap"
-                        style={{
-                            backgroundImage:
-                                "url(assets/imgs/slider/slider-1.png)",
-                        }}
-                    >
-                        <div className="slider-content">
-                            <h1 className="display-2 mb-40">
-                                Don’t miss amazing
-                                <br />
-                                grocery deals
-                            </h1>
-                            <p className="mb-65">
-                                Sign up for the daily newsletter
-                            </p>
-                            <form className="form-subcriber d-flex">
-                                <input
-                                    type="email"
-                                    placeholder="Your emaill address"
-                                />
-                                <button className="btn" type="submit">
-                                    Subscribe
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div
-                        className="single-hero-slider single-animation-wrap"
-                        style={{
-                            backgroundImage:
-                                "url(assets/imgs/slider/slider-2.png)",
-                        }}
-                    >
-                        <div className="slider-content">
-                            <h1 className="display-2 mb-40">
-                                Fresh Vegetables
-                                <br />
-                                Big discount
-                            </h1>
-                            <p className="mb-65">
-                                Save up to 50% off on your first order
-                            </p>
-                            <form className="form-subcriber d-flex">
-                                <input
-                                    type="email"
-                                    placeholder="Your emaill address"
-                                />
-                                <button className="btn" type="submit">
-                                    Subscribe
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </SwiperSlide>
-            </Swiper>
+	const { data, isLoading, error } = useFetch("/api/homepage/")
 
-            <div className="slider-arrow hero-slider-1-arrow">
-                <span className="slider-btn slider-prev slick-arrow custom_prev_i1">
-                    <i className="fi-rs-angle-left"></i>
-                </span>
-                <span className="slider-btn slider-next slick-arrow custom_next_i1">
-                    <i className="fi-rs-angle-right"></i>
-                </span>
-            </div>
-        </>
-    );
-};
+	const Banner = () => {
+		return data?.BannerData.map((url, i) => {
+			//console.log(url.d_img)
+			return (
+			<SwiperSlide key={i}>
+				<div
+					className="single-hero-slider single-animation-wrap .slider-1-height-3"
+					
+				>
+					<Link href={`${url.d_link}`}>
+						 <img src={`${url.d_img}`} />
+						{/* <img src="assets/imgs/slider/slider-1.png" /> */}
+					</Link>
+				</div>
+			</SwiperSlide>
+			)
+		})
+	}
+	return (
+		<>
+			<Swiper
+				/* slidesPerView={1.5} */
+				spaceBetween={0}
+				centeredSlides={true}
+				autoplay={true}
+				loop={true}
+				pagination={{
+					clickable: true,
+				}}
+				navigation={{
+					prevEl: ".custom_prev_i1",
+					nextEl: ".custom_next_i1",
+				}}
+				breakpoints={{
+					500: {
+						slidesPerView: 1,
+					},
+					640: {
+						slidesPerView: 1.3,
+					},
+					992: {
+						slidesPerView: 1.5,
+					},
+					1200: {
+						slidesPerView: 1.95,
+					},
+					1600:{
+						slidesPerView: 2.1,
+					},
+					1800: {
+						slidesPerView: 2.5,
+					},
+					2000: {
+						slidesPerView: 3.1,
+					},
+					2500:{
+						slidePerView:3.5,
+					},
+					3000:{
+						slidePerView:4.5,
+					},
+				}}
+				// modules={[Pagination, Navigation]}
+				className="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1"
+			>
+				{
+					data?.BannerData.map((url, i) => {
+						//console.log(url.d_img)
+						return (
+						<SwiperSlide key={i}>
+							<div
+								className="single-hero-slider single-animation-wrap .slider-1-height-3"
+								/* style={{
+									background:`url(${url.d_img})`
+								}} */
+							>
+								<Link href={`${url.d_link}`}>
+									 <img className="img-hover-slide" src={`${url.d_img}`} />
+								{/*	 <img src="assets/imgs/slider/slider-1.png" /> */}
+								</Link>
+							</div>
+						</SwiperSlide>
+						)
+					})
+				}
+			</Swiper>
 
-export default Intro1;
+			<div className="slider-arrow hero-slider-1-arrow">
+				<span className="slider-btn slider-prev slick-arrow custom_prev_i1">
+					<i className="fi-rs-angle-left"></i>
+				</span>
+				<span className="slider-btn slider-next slick-arrow custom_next_i1">
+					<i className="fi-rs-angle-right"></i>
+				</span>
+			</div>
+		</>
+	)
+}
+
+export default Intro1

@@ -11,7 +11,7 @@ const useFetch = (url) => {
       try {
         setLoading(true);
         const res = await makeRequest.get(url);
-        setData(res.data.data);
+        setData(res.data);
       } catch (err) {
         setError(true);
       }
@@ -19,7 +19,7 @@ const useFetch = (url) => {
     };
     fetchData();
   }, [url]);
-
+  // console.log(data)
   return { data, loading, error };
 };
 

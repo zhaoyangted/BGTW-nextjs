@@ -14,15 +14,15 @@ import Link from "next/link";
 
 export default function Home() {
     return <>
-        <IntroPopup />
+        {/* <IntroPopup /> */}
 
         <Layout noBreadcrumb="d-none">
             <section className="home-slider position-relative mb-30">
-                <div className="container">
-                    <div className="home-slide-cover mt-30">
+                {/* <div className="container"> */}
+                    <div className="home-slide-cover">
                         <Intro1 />
                     </div>
-                </div>
+                {/* </div> */}
             </section>
 
             <section className="popular-categories section-padding">

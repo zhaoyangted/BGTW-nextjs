@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const Search = () => {
+const Search = ({data}) => {
     const [searchTerm, setSearchTerm] = useState("");
     const router = useRouter();
 
@@ -26,7 +26,12 @@ const Search = () => {
         <>
             <form>
                 <select className="select-active">
-                    <option>All Categories</option>
+                    <option>選擇分類</option>
+                    {data?Object.entries(data).map((op,index)=>{
+                        return(
+                          <option key={index}>{op[0].split('_')[0]}</option>  
+                        )
+                    }):<>
                     <option>Women's</option>
                     <option>Men's</option>
                     <option>Cellphones</option>
@@ -37,13 +42,14 @@ const Search = () => {
                     <option>Luggage</option>
                     <option>Shoes</option>
                     <option>Mother & Kids</option>
+                    </>}
                 </select>
                 <input
                     value={searchTerm}
                     onKeyDown={handleInput}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     type="text"
-                    placeholder="Search"
+                    placeholder="商品名"
                 />
             </form>
         </>

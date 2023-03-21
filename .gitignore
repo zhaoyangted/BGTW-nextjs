@@ -102,3 +102,5 @@ dist
 
 # TernJS port file
 .tern-port
+public/uploads/
+public/uploads/action_list/20210929170357190.jpeg

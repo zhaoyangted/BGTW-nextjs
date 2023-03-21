@@ -9,7 +9,12 @@
         "sass": "node-sass --watch public/assets/sass/main.scss public/assets/css/main.css --source-map public/assets/css/main.css.map"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.3.0",
+        "@fortawesome/free-regular-svg-icons": "^6.3.0",
+        "@fortawesome/free-solid-svg-icons": "^6.3.0",
+        "@fortawesome/react-fontawesome": "^0.2.0",
         "axios": "^1.3.4",
+        "babel-plugin-macros": "^3.1.0",
         "bootstrap": "^5.1.3",
         "leaflet": "^1.8.0",
         "next": "^13.2.4",

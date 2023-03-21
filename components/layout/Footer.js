@@ -1,9 +1,80 @@
 import React from "react";
 import Link from "next/link"
 
-const Footer = () => {
-    return <>
-        <footer className="main">
+const Footer = ({data}) => {
+      return (
+    <>
+      {data?<footer>
+            <div className="footBOX">
+                <div className="foot_LinkBox">
+                    <ul>
+                        <Link href="/about"
+                        >關於美麗平台
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/about#position"
+                        >公司據點
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/news"
+                        >最新消息
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/qa"
+                        >常見問題 Q&A
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/cart"
+                        >購物流程
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/clause"
+                        >隱私權條款說明
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/sitemap"
+                        >網站導覽
+                        </Link>
+                    </ul>
+                    <ul>
+                        <Link href="/contact"
+                        >聯絡我們
+                        </Link>
+                    </ul>
+                </div>
+                <div class="FUTALL">
+                    <div class="domeLogoBox"><img src='assets/imgs/theme/beautygarage_logo02.svg' alt=""/></div>
+                    <div class="FUT01">
+                        {Object.values(data)[10]?
+                            <ul className="foot_ConfTxBx"><img src='assets/imgs/theme/foot_ic02.svg' alt=""/>
+                            服務專線：{Object.values(data)[8]}</ul>
+                        :null}
+                        {Object.values(data)[12]?
+                            <ul className="foot_ConfTxBx">
+                                <img src='assets/imgs/theme/foot_ic03.svg' alt=""/>
+                            服務時間：{Object.values(data)[9]}</ul>
+                        :null}
+                        {Object.values(data)[13]?
+                            <ul className="foot_ConfTxBx"><img src='assets/imgs/theme/foot_ic04.svg' alt=""/>
+                            E-mail：{Object.values(data)[10]}</ul>
+                        :null}
+                    </div>
+                </div>
+                <div className="foot_Copy">
+                    <ul>台灣美麗平台股份有限公司 Copyright © 2019 All Right Reserved. </ul>
+                </div>
+            </div>
+        </footer>:null}
+        </>)
+    
+};
+{/* <footer className="main">
             <section className="newsletter mb-15  wow animate__animated animate__fadeIn">
                 <div className="container">
                     <div className="row">
@@ -447,8 +518,5 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-        </footer>
-    </>;
-};
-
+        </footer> */}
 export default Footer;
