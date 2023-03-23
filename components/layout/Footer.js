@@ -48,9 +48,9 @@ const Footer = ({data}) => {
                         </Link>
                     </ul>
                 </div>
-                <div class="FUTALL">
-                    <div class="domeLogoBox"><img src='assets/imgs/theme/beautygarage_logo02.svg' alt=""/></div>
-                    <div class="FUT01">
+                <div className="FUTALL">
+                    <div className="domeLogoBox"><img src='assets/imgs/theme/beautygarage_logo02.svg' alt=""/></div>
+                    <div className="FUT01">
                         {Object.values(data)[10]?
                             <ul className="foot_ConfTxBx"><img src='assets/imgs/theme/foot_ic02.svg' alt=""/>
                             服務專線：{Object.values(data)[8]}</ul>

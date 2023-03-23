@@ -1,9 +1,9 @@
-import SwiperCore, { Navigation, Pagination } from "swiper"
+import SwiperCore, { Autoplay,Navigation, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
 import useFetch from "../../util/useFetch"
 import Link from "next/link"
-SwiperCore.use([Navigation, Pagination])
+SwiperCore.use([Autoplay,Navigation, Pagination])
 
 const Intro1 = () => {
 	const { data, isLoading, error } = useFetch("/api/homepage/")
@@ -55,28 +55,27 @@ const Intro1 = () => {
 						slidesPerView: 1.95,
 					},
 					1600:{
-						slidesPerView: 2.1,
+						slidesPerView: 3.3,
 					},
 					1800: {
-						slidesPerView: 2.5,
+						slidesPerView: 4.3,
 					},
 					2000: {
-						slidesPerView: 3.1,
+						slidesPerView: 4.5,
 					},
 					2500:{
-						slidePerView:3.5,
+						slidePerView:5.1,
 					},
 					3000:{
-						slidePerView:4.5,
+						slidePerView:5.3,
 					},
 				}}
-				// modules={[Pagination, Navigation]}
+				 modules={[Autoplay,Pagination, Navigation]}
 				className="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1"
 			>
 				{
-					data?.BannerData.map((url, i) => {
+					data?.BannerData.map((url, i) => (
 						//console.log(url.d_img)
-						return (
 						<SwiperSlide key={i}>
 							<div
 								className="single-hero-slider single-animation-wrap .slider-1-height-3"
@@ -90,8 +89,7 @@ const Intro1 = () => {
 								</Link>
 							</div>
 						</SwiperSlide>
-						)
-					})
+					))
 				}
 			</Swiper>
 

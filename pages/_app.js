@@ -15,10 +15,11 @@ import StorageWrapper from "../components/ecommerce/storage-wrapper";
 import "../public/assets/css/main.css";
 import store from "../redux/store";
 import Preloader from "./../components/elements/Preloader";
-
-
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config, library } from '@fortawesome/fontawesome-svg-core';
 function MyApp({ Component, pageProps }) {
     const [loading, setLoading] = useState(false);
+    config.autoAddCss = false;
     useEffect(() => {
         setLoading(true);
         setTimeout(() => {

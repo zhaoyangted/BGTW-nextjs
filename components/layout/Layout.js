@@ -35,6 +35,12 @@ const Layout = ({
                 <title>{config?Object.values(config)[1]:"台灣美麗平台線上購物商城"}</title>
                 <meta name="description" content={config?Object.values(config)[7]:"BGTW new front"} />
                 <link rel="icon" href="/assets/imgs/favicon/favicon.ico" />
+                <script
+                    // you might need to get a newer version
+                    src="https://kit.fontawesome.com/fbadad80a0.js"
+                    crossOrigin="anonymous"
+                >
+                </script>
             </Head>
 
             {isToggled && <div className="body-overlay-1" onClick={toggleClick}></div>}
@@ -46,6 +52,7 @@ const Layout = ({
                 {children}
             </main>
             <Footer data={config}/>
+            
         </>
     );
 };

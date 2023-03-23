@@ -6,6 +6,8 @@ import CategoryProduct3 from "../ecommerce/Filter/CategoryProduct3"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons'
+import Image  from 'next/image'
+const img=Image
 const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistItems, data, config }) => {
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
@@ -227,8 +229,8 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 											<span className="lable">會員服務</span>
 											</Link>
 											
-											<div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-												<ul>
+											{config?<div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+												{/* <ul>
 													<li>
 														<Link href="/page-account">
 															<i className="fi fi-rs-user mr-10"></i>My Account
@@ -259,8 +261,34 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 															<i className="fi fi-rs-sign-out mr-10"></i>Sign out
 														</Link>
 													</li>
-												</ul>
-											</div>
+												</ul> */}
+													
+													
+														
+															<div className="HdNAVUBTopTT02">會員服務專區</div>
+															<div className="mendercont">
+																<div className="ImeALBox">
+																	<ul className="IntmenderCr"><Link href="member">前往會員中心</Link></ul>
+																	<ul className="ImePs"><Link href="member/orders">購物紀錄與訂單查詢</Link></ul>
+																	<ul className="ImeLovepord"><Link href="member/favorite">我的收藏</Link></ul>
+																	<ul className="ImeFriend"><Link href="member/friend">邀請好友加入會員</Link></ul>
+																</div>
+																<div className="ImeALBox">
+																	<ul className="ImcoutBx"><Link href="member/account">會員資料修改</Link></ul>
+																	<ul className="ImcoutBx"><Link href="member/point">會員點數查詢</Link></ul>
+																	<ul className="ImcoutBx"><Link href="member/account">訂閱/取消 電子報</Link></ul>
+																	<ul className="ImcoutBx"><Link href="qa">常見問題</Link></ul>
+																</div>
+																<div className="ImeALBox">
+																	<ul className="ImeTel">服務專線：{config?Object.values(config)[9]:null} {Object.values(config)[10]}</ul>
+																	{Object.values(config)[11]?
+																		<ul className="ImeEml">聯絡我們：{Object.values(config)[11]}</ul>
+																	:null}
+																</div>
+															</div>
+														
+													
+											</div>:null}
 										</div>
 										<div className="header-action-icon-2">
 											<Link href="/shop-cart" className="mini-cart-icon">
