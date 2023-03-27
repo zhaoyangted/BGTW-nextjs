@@ -7,11 +7,12 @@ import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons'
 import Image  from 'next/image'
+import { useSession, signIn, signOut } from "next-auth/react"
 const img=Image
 const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistItems, data, config }) => {
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
-
+	const { status, data:session } = useSession()
 	// const menu = JSON.stringify(data)
 	// console.log(menu)
 	//console.log(Object.values(config))
@@ -153,10 +154,10 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap">
 							<div className="header-right">
-								<a href="/guide/first" className="user__link user__link--register">
-								加入會員</a>
-										<a href="/login" className="user__link user__link--login">
-										會員登入</a>
+								<Link href="/page-account" className="user__link user__link--register">
+								加入會員</Link>
+								{status==='authenticated'?(<Link href="" className="user__link user__link--login">您好!您的目前等級：{session.user.d_title}</Link>):(<Link href="/page-login" className="user__link user__link--login">
+								會員登入</Link>)}
 							</div>
 							{/* <div className="header-right IntMemberStatus">
 								<Link href="/shop-compare">加入會員</Link>

@@ -1,12 +1,12 @@
 import SwiperCore, { Autoplay,Navigation, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
-import useFetch from "../../util/useFetch"
+import useSWR from "swr"
 import Link from "next/link"
 SwiperCore.use([Autoplay,Navigation, Pagination])
 
 const Intro1 = () => {
-	const { data, isLoading, error } = useFetch("/api/homepage/")
+	const { data, isLoading, error } = useSWR(process.env.apiServer+"/api/homepage/")
 
 	const Banner = () => {
 		return data?.BannerData.map((url, i) => {
