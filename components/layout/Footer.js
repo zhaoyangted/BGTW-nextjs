@@ -49,19 +49,19 @@ const Footer = ({data}) => {
                     </ul>
                 </div>
                 <div className="FUTALL">
-                    <div className="domeLogoBox"><img src='assets/imgs/theme/beautygarage_logo02.svg' alt=""/></div>
+                    <div className="domeLogoBox"><img src='/assets/imgs/theme/beautygarage_logo02.svg' alt=""/></div>
                     <div className="FUT01">
                         {Object.values(data)[10]?
-                            <ul className="foot_ConfTxBx"><img src='assets/imgs/theme/foot_ic02.svg' alt=""/>
+                            <ul className="foot_ConfTxBx"><img src='/assets/imgs/theme/foot_ic02.svg' alt=""/>
                             服務專線：{Object.values(data)[8]}</ul>
                         :null}
                         {Object.values(data)[12]?
                             <ul className="foot_ConfTxBx">
-                                <img src='assets/imgs/theme/foot_ic03.svg' alt=""/>
+                                <img src='/assets/imgs/theme/foot_ic03.svg' alt=""/>
                             服務時間：{Object.values(data)[9]}</ul>
                         :null}
                         {Object.values(data)[13]?
-                            <ul className="foot_ConfTxBx"><img src='assets/imgs/theme/foot_ic04.svg' alt=""/>
+                            <ul className="foot_ConfTxBx"><img src='/assets/imgs/theme/foot_ic04.svg' alt=""/>
                             E-mail：{Object.values(data)[10]}</ul>
                         :null}
                     </div>

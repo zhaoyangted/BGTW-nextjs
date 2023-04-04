@@ -100,7 +100,7 @@ const SingleProduct = ({
                 <h2>
                     <Link
                         href="/products/[slug]"
-                        as={`/products/${product.slug}`}
+                        as={`/products/7311`}
                     >
                         {product.title}
                     </Link>

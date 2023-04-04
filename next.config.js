@@ -19,6 +19,10 @@ const {
       apiServer : 'http://localhost',
       NEXTAUTH_SECRET : 'ted2zhao',
       NEXTAUTH_URL:'http://localhost:3000',
+      S3_ACCESS_KEY:'',
+      S3_SECRET_KEY:'',
+      BUCKET_NAME:'',
+      s3Host:'https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/uploads/',
       RESTURL_SPEAKERS: (() => {
         if (isDev) return 'http://localhost:4000/speakers'
         if (isProd) {

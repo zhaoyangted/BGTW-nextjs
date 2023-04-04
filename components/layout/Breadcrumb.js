@@ -1,17 +1,21 @@
 
 import Link from "next/link";
-
-const Breadcrumb = ({parent, sub, subChild, noBreadcrumb}) => {
+import styles from '../../components/breadcrumb.module.css'
+const Breadcrumb = ({parent, sub, subChild ,noBreadcrumb}) => {
     return <>
-        <div className={`page-header breadcrumb-wrap ${noBreadcrumb}`}>
-            <div className="container">
-                <div className="breadcrumb">
-                    <Link href="/">
+        
+        <div className="container">
+            <div className={`page-header ${noBreadcrumb}`}>
+                <div className={styles.breadcrumb}>
+                    <li><Link href="/">
                         {parent}
 
-                    </Link>
-                    <span></span> {sub}
-                    <span></span> {subChild}
+                    </Link></li>
+                    {/* <span></span> {sub}
+                    <span></span> {subChild} */}
+                    <div className={styles.breadcrumblink} dangerouslySetInnerHTML={{__html:subChild}}>
+
+                    </div>
                 </div>
             </div>
         </div>

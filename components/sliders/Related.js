@@ -30,6 +30,20 @@ const RelatedSlider = () => {
                     nextEl: ".custom_next_n",
                 }}
                 className="custom-class"
+                breakpoints={{
+                    480: {
+                        slidesPerView: 1
+                    },
+                    640: {
+                        slidesPerView: 2
+                    },
+                    768: {
+                        slidesPerView: 2
+                    },
+                    1024: {
+                        slidesPerView: 4
+                    },
+                }}
             >
                 {related.map((product, i) => (
                     <SwiperSlide key={i}>

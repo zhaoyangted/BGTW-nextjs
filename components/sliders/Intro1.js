@@ -70,7 +70,7 @@ const Intro1 = () => {
 						slidePerView:5.3,
 					},
 				}}
-				 modules={[Autoplay,Pagination, Navigation]}
+				// modules={[Autoplay,Pagination, Navigation]}
 				className="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1"
 			>
 				{

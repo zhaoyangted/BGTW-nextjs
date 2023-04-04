@@ -51,6 +51,7 @@ const Search = ({data}) => {
                     type="text"
                     placeholder="商品名"
                 />
+                <button type="submit"><i className="fi-rs-search"></i></button>
             </form>
         </>
     );
