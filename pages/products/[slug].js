@@ -3,7 +3,6 @@ import ProductDetails from "../../components/ecommerce/ProductDetails"
 import Layout from "../../components/layout/Layout"
 import { server } from "../../config/index"
 import { findProductIndex } from "../../util/util"
-
 const ProductId = ({ product, img,menuTitle }) => {
 	return (
 		<>
@@ -17,7 +16,9 @@ const ProductId = ({ product, img,menuTitle }) => {
 }
 
 ProductId.getInitialProps = async (params) => {
-	const request = await fetch(process.env.apiServer + `/api/product/${params.query.slug}`)
+	const request = await fetch(process.env.apiServer + `/api/product/${params.query.slug}`,
+	{
+	credentials: "include"})
 
 	const data = await request.json()
 
@@ -27,8 +28,8 @@ ProductId.getInitialProps = async (params) => {
 			imag.push(data.dbdata[`d_img${i}`])
 		}
 	}
-
-	return { product:data.dbdata, img: imag,menuTitle:data.Menutitle }
+	//console.log(data.SpecData)
+	return { product:data.dbdata,img:imag,menuTitle:data.Menutitle,specData:data.SpecData }
 }
 
 export default ProductId

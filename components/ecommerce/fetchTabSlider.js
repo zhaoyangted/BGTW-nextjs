@@ -5,18 +5,27 @@ import { server } from "../../config/index";
 import FeaturedSlider from "../sliders/Featured";
 import NewArrivalTabSlider from "../sliders/NewArrivalTab";
 import TrendingSlider from "../sliders/Trending";
-
+import useSWR from 'swr'
 function FeatchTabSlider() {
     const [active, setActive] = useState("1");
     const [featured, setFeatured] = useState([]);
     const [trending, setTrending] = useState([]);
     const [newArrival, setNewArrival] = useState([]);
-
+    const [cats, setCats] = useState([]);
+    const {data,isLoading,error} = useSWR(process.env.apiServer+`/api/product/hot/`);
     const featuredProduct = async () => {
-        const request = await fetch(`${server}/static/product.json`);
+        const request = await fetch(process.env.apiServer+`/api/product/hot/`,
+        {
+        credentials: "include"});
+        const featuedItem = await request.json();
+        setCats(Object.keys(featuedItem))
+        //console.log(hotProd)
+        //const catAllItem = allProducts.filter((item) => item.category);
+        //setCatAll(Object.values(featuedItem)[0]);
+        /* const request = await fetch(`${server}/static/product.json`);
         const allProducts = await request.json();
-        const featuedItem = allProducts.filter((item) => item.featured);
-        setFeatured(featuedItem);
+        const featuedItem = allProducts.filter((item) => item.featured); */
+        setFeatured(Object.values(featuedItem)[0]);
         setActive("1");
     };
 
@@ -43,10 +52,25 @@ function FeatchTabSlider() {
 
     return <>
         <div className="section-title wow animate__animated animate__fadeIn">
-            <h3 className="">Daily Best Sells</h3>
+            <h3 className="">人氣商品特賣</h3>
 
             <ul className="nav nav-tabs links" id="myTab-1" role="tablist">
-                <li className="nav-item" role="presentation">
+                    {cats?.map((item,i)=>{
+                        return (
+                            <li className="nav-item" key={i} role="presentation">
+                                <button
+                                    className={
+                                        active === `${i+1}` ? "nav-link active" : "nav-link"
+                                    }
+                                    onClick={()=>{setFeatured(Object.values(data)[`${i}`]);setActive(`${i+1}`)}}
+                                >
+                                    {item}
+                                </button>
+                            </li>
+                        )
+                    })
+                    }
+                {/* <li className="nav-item" role="presentation">
                     <button className={active === "1" ? "nav-link active" : "nav-link"} onClick={featuredProduct}>
                         Featured
                     </button>
@@ -60,7 +84,7 @@ function FeatchTabSlider() {
                     <button className={active === "3" ? "nav-link active" : "nav-link"} onClick={newArrivalProduct}>
                         New added
                     </button>
-                </li>
+                </li> */}
             </ul>
         </div>
 
@@ -79,7 +103,7 @@ function FeatchTabSlider() {
             </div>
             <div className="col-lg-9 col-md-12">
                 <div className="tab-content wow fadeIn animated" id="myTabContent">
-                    <div className={active === "1" ? "tab-pane fade show active" : "tab-pane fade"}>
+                    {/* <div className={active === "1" ? "tab-pane fade show active" : "tab-pane fade"}>
                         <div className="carausel-4-columns-cover card-product-small arrow-center position-relative">
                             <FeaturedSlider products={featured} />
                         </div>
@@ -94,7 +118,25 @@ function FeatchTabSlider() {
                         <div className="carausel-4-columns-cover card-product-small arrow-center position-relative">
                             <NewArrivalTabSlider products={newArrival} />
                         </div>
+                    </div> */}
+                   {
+                    cats?.map((item,i)=>{
+                        return(
+                            <div
+                                className={
+                                    active === `${i+1}`
+                                        ? "tab-pane fade show active"
+                                        : "tab-pane fade"
+                                }
+                                key={i}
+                            >
+                        <div className="carausel-4-columns-cover card-product-small arrow-center position-relative">
+                            <FeaturedSlider products={featured} />
+                        </div>
                     </div>
+                            )
+                        })
+                    } 
                 </div>
             </div>
         </div>

@@ -11257,7 +11257,7 @@ footer .hotline img {
 .user__link.user__link {
   margin-left: 16px;
 }
-.user__link.user__link--login:before, .user__link.popover-toggel:before {
+.user__link.user__link--register:before,/* .user__link.user__link--login:before, */ .user__link.popover-toggel:before {
   position: absolute;
   height:14px;
   top: 50%;

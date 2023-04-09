@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons'
 import Image  from 'next/image'
 import { useSession, signIn, signOut } from "next-auth/react"
+import styles from '../../components/header.module.css'
 const img=Image
 const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistItems, data, config }) => {
 	const [isToggled, setToggled] = useState(false)
@@ -154,10 +155,11 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap">
 							<div className="header-right">
-								<Link href="/page-account" className="user__link user__link--register">
-								加入會員</Link>
-								{status==='authenticated'?(<Link href="" className="user__link user__link--login">您好!您的目前等級：{session.user.d_title}</Link>):(<Link href="/page-login" className="user__link user__link--login">
-								會員登入</Link>)}
+								
+								{status==='authenticated'?(<><Link href="" className="user__link user__link--login">您好!您的目前等級：{session.user.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;signOut()}} className="user__link user__link--register">
+								會員登出</Link></>):(<><Link href="/page-login" className="user__link user__link--login">
+								會員登入</Link><Link href="/page-account" className="user__link user__link--register">
+								加入會員</Link></>)}
 							</div>
 							{/* <div className="header-right IntMemberStatus">
 								<Link href="/shop-compare">加入會員</Link>
@@ -297,7 +299,7 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 												{/* <i className="fi fi-ss-shopping-cart"></i> */}
 												<FontAwesomeIcon icon={faCartShopping}  className="fi-ss-shopping-cart"/>
 												<span className="pro-count blue">{totalCartItems}</span>
-												<span className="lable">購物車</span>
+												<span className={styles.cartlabel}>購物車</span>
 											</Link>
 											
 											<div className="cart-dropdown-wrap cart-dropdown-hm2">

@@ -1,0 +1,24 @@
+.btnsearch {
+    font-size: 14px;
+    z-index: 3;
+    height: 40px;
+    padding: 0 13px;
+    color: #fff!important;
+    border: 1px solid #3d9ed1!important;
+    background: #3d9ed1!important;
+    border-radius: 0px !important;
+}
+.btnsearch:hover{
+    opacity: .7!important;
+    background-color: #3d9ed1!important;
+}
+.cartlabel{
+    font-size: 11px !important;
+    position: absolute;
+    left: 20%;
+    top: 70%;
+    color: #fff !important;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0px;
+}
