@@ -12,22 +12,22 @@ function FeatchTabSlider() {
     const [trending, setTrending] = useState([]);
     const [newArrival, setNewArrival] = useState([]);
     const [cats, setCats] = useState([]);
-    const {data,isLoading,error} = useSWR(process.env.apiServer+`/api/product/hot/`);
-    const featuredProduct = async () => {
-        const request = await fetch(process.env.apiServer+`/api/product/hot/`,
+    const {data,isLoading,error} = useSWR(process.env.apiServer+`/api/product/newproducts/`);
+    /* const featuredProduct = async () => {
+        const request = await fetch(process.env.apiServer+`/api/product/newproducts/`,
         {
         credentials: "include"});
         const featuedItem = await request.json();
-        setCats(Object.keys(featuedItem))
+        setCats(Object.keys(featuedItem)) */
         //console.log(hotProd)
         //const catAllItem = allProducts.filter((item) => item.category);
         //setCatAll(Object.values(featuedItem)[0]);
         /* const request = await fetch(`${server}/static/product.json`);
         const allProducts = await request.json();
         const featuedItem = allProducts.filter((item) => item.featured); */
-        setFeatured(Object.values(featuedItem)[0]);
+    /*     setFeatured(Object.values(featuedItem)[0]);
         setActive("1");
-    };
+    }; */
 
     const trendingProduct = async () => {
         const request = await fetch(`${server}/static/product.json`);
@@ -46,15 +46,15 @@ function FeatchTabSlider() {
         setActive("3");
     };
 
-    useEffect(() => {
+    /* useEffect(() => {
         featuredProduct();
-    }, []);
+    }, []); */
 
     return <>
         <div className="section-title wow animate__animated animate__fadeIn">
-            <h3 className="">人氣商品特賣</h3>
+            <h3 className="">最新產品初登場</h3>
 
-            <ul className="nav nav-tabs links" id="myTab-1" role="tablist">
+            {/* <ul className="nav nav-tabs links" id="myTab-1" role="tablist">
                     {cats?.map((item,i)=>{
                         return (
                             <li className="nav-item" key={i} role="presentation">
@@ -69,7 +69,7 @@ function FeatchTabSlider() {
                             </li>
                         )
                     })
-                    }
+                    } */}
                 {/* <li className="nav-item" role="presentation">
                     <button className={active === "1" ? "nav-link active" : "nav-link"} onClick={featuredProduct}>
                         Featured
@@ -85,17 +85,17 @@ function FeatchTabSlider() {
                         New added
                     </button>
                 </li> */}
-            </ul>
+            {/* </ul> */}
         </div>
 
         <div className="row">
             <div className="col-lg-3 d-none d-lg-flex wow animate__animated animate__fadeIn">
                 <div className="banner-img style-2">
                     <div className="banner-text">
-                        <h2 className="mb-100">Bring nature into your home</h2>
+                        <h2 className="mb-100">新鮮出爐</h2>
 
                         <Link href="/products" className="btn btn-xs">
-                            Shop Now<i className="fi-rs-arrow-small-right"></i>
+                            快來看看<i className="fi-rs-arrow-small-right"></i>
 
                         </Link>
                     </div>
@@ -120,7 +120,7 @@ function FeatchTabSlider() {
                         </div>
                     </div> */}
                    {
-                    cats?.map((item,i)=>{
+                    data?.map((item,i)=>{
                         return(
                             <div
                                 className={
@@ -131,7 +131,7 @@ function FeatchTabSlider() {
                                 key={i}
                             >
                         <div className="carausel-4-columns-cover card-product-small arrow-center position-relative">
-                            <FeaturedSlider products={featured} />
+                            <FeaturedSlider products={data} />
                         </div>
                     </div>
                             )

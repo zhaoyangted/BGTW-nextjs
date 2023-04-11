@@ -84,17 +84,21 @@ export const authOptions = {
               d_password:credentials.password
             }
             //console.log(payload)
-            const res= await fetchJson(process.env.apiServer+"/api/auth/login/", {
+            const res= await fetchJson(process.env.apiServer+"/api/auth/login/", 
+            {
               method: "POST",
+              //allowedHeaders: ['Cookie', 'Content-Type'],
               body: JSON.stringify(payload),
-              headers: { "Content-Type": "application/json", 
-              Accept: "application/json"
-              },
-              
-            });
-            // console.log(JSON.stringify(payload))
+              headers: { "Content-Type": "application/json"}, 
+              Accept: "application/json",
+              //credentials:"same-origin"
+              /* credentials: 'include', */
+            }
+            );
+            
             //const resData = res.json();
             const user = res.data;
+            //console.log(res)
             //const user = { id: "1", name: "J Smith", email: "jsmith@example.com",isLoggedIn:true }
             // If no error and we have user data, return it
             if (res.isLoggedIn || user) {

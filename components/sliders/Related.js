@@ -3,11 +3,12 @@ import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchByCatagory } from "../../redux/action/product";
 import SingleProduct from "./../ecommerce/SingleProduct";
+import SingleProduct2 from "../ecommerce/SingleProduct2";
 
 SwiperCore.use([Navigation]);
 
-const RelatedSlider = () => {
-    const [related, setRelated] = useState([]);
+const RelatedSlider = ({product}) => {
+    /* const [related, setRelated] = useState([]);
 
     useEffect(() => {
         fetchProducts();
@@ -17,7 +18,7 @@ const RelatedSlider = () => {
         // With Category
         const allProducts = await fetchByCatagory("/static/product.json");
         setRelated(allProducts);
-    };
+    }; */
 
     return (
         <>
@@ -45,9 +46,9 @@ const RelatedSlider = () => {
                     },
                 }}
             >
-                {related.map((product, i) => (
+                {product?.map((item, i) => (
                     <SwiperSlide key={i}>
-                        <SingleProduct product={product} />
+                        <SingleProduct2 product={item} />
                     </SwiperSlide>
                 ))}
             </Swiper>

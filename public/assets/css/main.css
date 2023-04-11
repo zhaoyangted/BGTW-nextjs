@@ -3824,6 +3824,7 @@ table .product-thumbnail img {
 
 /*SHOP*/
 .product-cart-wrap {
+  height: 100%;
   position: relative;
   background-color: #fff;
   border: 1px solid #ececec;

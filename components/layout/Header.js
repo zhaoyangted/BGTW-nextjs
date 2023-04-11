@@ -156,9 +156,9 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 						<div className="header-wrap">
 							<div className="header-right">
 								
-								{status==='authenticated'?(<><Link href="" className="user__link user__link--login">您好!您的目前等級：{session.user.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;signOut()}} className="user__link user__link--register">
+								{status==='authenticated'?(<><Link href="/page-account" className="user__link user__link--login">您好!您的目前等級：{session.user.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;signOut()}} className="user__link user__link--register">
 								會員登出</Link></>):(<><Link href="/page-login" className="user__link user__link--login">
-								會員登入</Link><Link href="/page-account" className="user__link user__link--register">
+								會員登入</Link><Link href="/page-join" className="user__link user__link--register">
 								加入會員</Link></>)}
 							</div>
 							{/* <div className="header-right IntMemberStatus">

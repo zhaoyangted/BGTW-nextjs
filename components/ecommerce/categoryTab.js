@@ -18,8 +18,8 @@ function CategoryTab() {
     
     const catPAll = async () => {
         const request = await fetch(process.env.apiServer+`/api/product/hot/`,
-        {
-        credentials: "include"});
+        {credentials: 'include'});
+        
         const allProducts = await request.json();
         setCats(Object.keys(allProducts))
         //console.log(hotProd)

@@ -19,9 +19,10 @@ const ProductDetails = ({
 	quickView,
 	img,
 	specData,
+	watchedData
 }) => {
 	const [quantity, setQuantity] = useState(1)
-    //console.log(specData)
+    // console.log(specData)
 	const handleCart = (product) => {
 		addToCart(product)
 		toast("Product added to Cart !")
@@ -95,10 +96,14 @@ const ProductDetails = ({
 											<ul className={styles.productmeta}>
 												{product.Chked === "Y" ? (
 														product.isNotAvail!==""?
+														<><li className="mb-5">
+															<div className={styles.dtt}>{product.isMember}:</div>
+															<div className={styles.spec}>NT${product.d_price}</div>
+														</li>
 														<li className="mb-5">
 															<div className={styles.dtt}>{product.isNotAvail}</div>
 															<div className={styles.spec}>資格不符</div>
-														</li>
+														</li></>
 														:<li className="mb-5">
 															<div className={styles.dtt}>{product.isMember}:</div>
 															<div className={styles.spec}>NT${product.d_price}</div>
@@ -142,8 +147,8 @@ const ProductDetails = ({
                                                     <select id="ChangeSpec" className="select_pd">
                                                         <option defaultValue={product.d_id}>{product.d_spectitle}</option>
 														{specData?.map((clr, i) => (
-															<option key={i} value={clr['d_id']}>
-																{clr['d_spectitle']}
+															<option key={i} value={clr.d_id}>
+																{clr.d_spectitle}
 															</option>
 														))}
                                                     </select>
@@ -249,11 +254,11 @@ const ProductDetails = ({
 										<ProductTab product={product} />
 										<div className="row mt-60">
 											<div className="col-12">
-												<h3 className="section-title style-1 mb-30">Related products</h3>
+												<h3 className="section-title style-1 mb-30">最近瀏覽商品</h3>
 											</div>
 											<div className="col-12">
 												<div className="row related-products position-relative">
-													<RelatedSlider />
+													<RelatedSlider product={watchedData}/>
 												</div>
 											</div>
 										</div>

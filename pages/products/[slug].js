@@ -3,12 +3,12 @@ import ProductDetails from "../../components/ecommerce/ProductDetails"
 import Layout from "../../components/layout/Layout"
 import { server } from "../../config/index"
 import { findProductIndex } from "../../util/util"
-const ProductId = ({ product, img,menuTitle }) => {
+const ProductId = ({ product, img,menuTitle,specData,watchedData }) => {
 	return (
 		<>
 			<Layout parent="主頁" sub="Shop" subChild={menuTitle}>
 				<div className="container">
-					<ProductDetails product={product} img={img} />
+					<ProductDetails product={product} img={img} specData={specData} watchedData={watchedData}/>
 				</div>
 			</Layout>
 		</>
@@ -29,7 +29,7 @@ ProductId.getInitialProps = async (params) => {
 		}
 	}
 	//console.log(data.SpecData)
-	return { product:data.dbdata,img:imag,menuTitle:data.Menutitle,specData:data.SpecData }
+	return { product:data.dbdata,img:imag,menuTitle:data.Menutitle,specData:data.SpecData,watchedData:data.TodayWatchData }
 }
 
 export default ProductId

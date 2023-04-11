@@ -1,8 +1,8 @@
-import SwiperCore, { Navigation } from "swiper";
+import SwiperCore, { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SingleProduct2 from "./../ecommerce/SingleProduct2";
 
-SwiperCore.use([Navigation]);
+SwiperCore.use([Navigation,Autoplay]);
 
 const FeaturedSlider = ({ products }) => {
     
@@ -13,7 +13,7 @@ const FeaturedSlider = ({ products }) => {
                 grid={{
                     rows: 2
                 }}
-                
+                autoplay={true}
                 navigation={{
                     prevEl: ".custom_prev_f",
                     nextEl: ".custom_next_f"

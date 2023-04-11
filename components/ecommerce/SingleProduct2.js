@@ -38,12 +38,12 @@ const SingleProduct2 = ({
 
                         <img
                             className="default-img"
-                            src={product.d_img1}
+                            src={`/${product.d_img1}`}
                             alt=""
                         />
                         <img
                             className="hover-img"
-                            src={product.d_img2}
+                            src={product.d_img2?`/${product.d_img2}`:`/${product.d_img1}`}
                             alt=""
                         />
 
@@ -75,10 +75,10 @@ const SingleProduct2 = ({
                     </a>
                 </div>
 
-                {/* <div className="product-badges product-badges-position product-badges-mrg">
-                    {product.trending && <span className="hot">Hot</span>}
-                    {product.created && <span className="new">New</span>}
-                    {product.totalSell > 100 && (
+                <div className="product-badges product-badges-position product-badges-mrg">
+                    {product.Discount===1 && <span className="hot">折</span>}
+                    {product.Discount===2 && <span className="new">特價</span>}
+                    {/* {product.totalSell > 100 && (
                         <span className="best">Best Sell</span>
                     )}
                     {product.discount.isActive && (
@@ -88,8 +88,8 @@ const SingleProduct2 = ({
                         <span className="hot">
                             {product.discount.percentage}%
                         </span>
-                    )}
-                </div> */}
+                    )} */}
+                </div>
             </div>
             <div className="product-content-wrap">
                {/*  <div className="product-category">
@@ -111,10 +111,16 @@ const SingleProduct2 = ({
                 </div>
 
                 <div className="product-price mt-10">
-                    <span>${product.d_price} </span>
-                    <span className="old-price">{product.d_price && `$ ${product.d_sprice}`}</span>
+                    
+                    {product.Lvtitle!=="會員價"&&product.d_price?<><span>{product.Lvtitle} </span>
+                    <span className="price">NT${product.d_price1 && ` ${product.d_price1}`} </span></>
+                    :<>
+                    <span>市價NT$</span>
+                    <span className="price">{product.d_price1 }</span>
+                    </>
+                    }
                 </div>
-                <div className="sold mt-15 mb-15">
+                {/* <div className="sold mt-15 mb-15">
                     <div className="progress mb-5">
                         <div
                             className="progress-bar"
@@ -123,7 +129,7 @@ const SingleProduct2 = ({
                         ></div>
                     </div>
                     <span className="font-xs text-heading"> Sold: 90/120</span>
-                </div>
+                </div> */}
 
                 <a
                     className="btn w-100 hover-up"
