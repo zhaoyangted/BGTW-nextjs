@@ -5,14 +5,14 @@ import { server } from "../../config/index";
 import FeaturedSlider from "../sliders/Featured";
 import NewArrivalTabSlider from "../sliders/NewArrivalTab";
 import TrendingSlider from "../sliders/Trending";
-import useSWR from 'swr'
+// import useSWR from 'swr'
 function FeatchTabSlider() {
     const [active, setActive] = useState("1");
     const [featured, setFeatured] = useState([]);
     const [trending, setTrending] = useState([]);
     const [newArrival, setNewArrival] = useState([]);
     const [cats, setCats] = useState([]);
-    const {data,isLoading,error} = useSWR(process.env.apiServer+`/api/product/newproducts/`);
+    // const {data,isLoading,error} = useSWR(process.env.apiServer+`/api/product/newproducts/`);
     /* const featuredProduct = async () => {
         const request = await fetch(process.env.apiServer+`/api/product/newproducts/`,
         {
@@ -29,7 +29,7 @@ function FeatchTabSlider() {
         setActive("1");
     }; */
 
-    const trendingProduct = async () => {
+    /* const trendingProduct = async () => {
         const request = await fetch(`${server}/static/product.json`);
         const allProducts = await request.json();
         const trendingItem = allProducts.filter((item) => item.trending);
@@ -44,11 +44,18 @@ function FeatchTabSlider() {
         });
         setNewArrival(newArrivalItem);
         setActive("3");
-    };
+    }; */
 
-    /* useEffect(() => {
-        featuredProduct();
-    }, []); */
+    useEffect(() => {
+        /* featuredProduct(); */
+        const getNewProducts = async() =>{
+            const response =await fetch(process.env.apiServer+`/api/product/newproducts/`,
+            {credentials:"include"});
+            const newProducts = await response.json();
+            setNewArrival(newProducts);
+        }
+        getNewProducts();
+    }, []);
 
     return <>
         <div className="section-title wow animate__animated animate__fadeIn">
@@ -120,7 +127,7 @@ function FeatchTabSlider() {
                         </div>
                     </div> */}
                    {
-                    data?.map((item,i)=>{
+                    newArrival?.map((item,i)=>{
                         return(
                             <div
                                 className={
@@ -131,7 +138,7 @@ function FeatchTabSlider() {
                                 key={i}
                             >
                         <div className="carausel-4-columns-cover card-product-small arrow-center position-relative">
-                            <FeaturedSlider products={data} />
+                            <FeaturedSlider products={newArrival} />
                         </div>
                     </div>
                             )

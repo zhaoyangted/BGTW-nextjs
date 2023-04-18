@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 		<>
 			<SWRConfig
 				value={{
-					fetcher: fetchJson,
+					//fetcher: fetchJson,
 					onError: (err) => {
 						console.error(err)
 					},

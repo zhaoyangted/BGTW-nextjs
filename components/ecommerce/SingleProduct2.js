@@ -103,17 +103,19 @@ const SingleProduct2 = ({
                     </Link>
                 </h2>
 
-                <div className="product-rate d-inline-block">
-                    <div
+                <div className="/* product-rate */ d-inline-block">
+                    {/* <div
                         className="product-rating"
                         style={{ width: "90%" }}
-                    ></div>
+                    ></div> */}
                 </div>
 
                 <div className="product-price mt-10">
                     
-                    {product.Lvtitle!=="會員價"&&product.d_price?<><span>{product.Lvtitle} </span>
-                    <span className="price">NT${product.d_price1 && ` ${product.d_price1}`} </span></>
+                    {product.Chked==='Y'&&product.Lvtitle!=="會員價"?<><span>{product.Lvtitle} </span>
+                    <span className="price">NT${product.d_price} </span>
+                    <span className="old-price">NT${product.d_price1}</span>
+                    </>
                     :<>
                     <span>市價NT$</span>
                     <span className="price">{product.d_price1 }</span>

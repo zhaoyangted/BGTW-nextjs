@@ -127,8 +127,15 @@ const SingleProduct = ({
 
                 <div className="product-card-bottom">
                     <div className="product-price">
-                        <span>NT${product.d_price} </span>
+                        {product.Chked==='Y'?
+                        <>
+                        <span>{product.Lvtitle}NT${product.d_price} </span>
                         <span className="old-price">{product.d_price1 && `$ ${product.d_price1}`}</span>
+                        </>
+                        :<>
+                        <span className="price">{product.d_price1 && `$ ${product.d_price1}`}</span>
+                        </>
+                        }
                     </div>
                     <div className="add-cart">
                         <a

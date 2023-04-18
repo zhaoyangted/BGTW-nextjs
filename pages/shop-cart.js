@@ -23,7 +23,7 @@ const Cart = ({
 }) => {
     const price = () => {
         let price = 0;
-        cartItems.forEach((item) => (price += item.price * item.quantity));
+        cartItems.forEach((item) => (price += item.d_price * item.quantity));
 
         return price;
     };
@@ -80,8 +80,7 @@ const Cart = ({
                                                 <td className="image product-thumbnail">
                                                     <img
                                                         src={
-                                                            item.images[0]
-                                                                .img
+                                                            item.d_img1
                                                         }
                                                     />
                                                 </td>
@@ -90,7 +89,7 @@ const Cart = ({
                                                     <h6 className="product-name">
                                                         <Link href="/products">
 
-                                                            {item.title}
+                                                            {item.d_title}
 
                                                         </Link>
                                                     </h6>
@@ -114,7 +113,7 @@ const Cart = ({
                                                     data-title="Price"
                                                 >
                                                     <h4 className="text-brand">
-                                                        ${item.price}
+                                                        ${item.d_price}
                                                     </h4>
                                                 </td>
                                                 <td
@@ -125,7 +124,7 @@ const Cart = ({
                                                         <a
                                                             onClick={(e) =>
                                                                 decreaseQuantity(
-                                                                    item.id
+                                                                    item.d_id
                                                                 )
                                                             }
                                                             className="qty-down"
@@ -138,7 +137,7 @@ const Cart = ({
                                                         <a
                                                             onClick={(e) =>
                                                                 increaseQuantity(
-                                                                    item.id
+                                                                    item.d_id
                                                                 )
                                                             }
                                                             className="qty-up"
@@ -155,7 +154,7 @@ const Cart = ({
                                                     <h4 className="text-body">
                                                         $
                                                         {item.quantity *
-                                                            item.price}
+                                                            item.d_price}
                                                     </h4>
                                                 </td>
                                                 <td
@@ -165,7 +164,7 @@ const Cart = ({
                                                     <a
                                                         onClick={(e) =>
                                                             deleteFromCart(
-                                                                item.id
+                                                                item.d_id
                                                             )
                                                         }
                                                         className="text-muted"

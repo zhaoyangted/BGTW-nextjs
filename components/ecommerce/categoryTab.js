@@ -4,14 +4,12 @@ import Cat1Tab from '../elements/FeaturedTab';
 import Cat2Tab from '../elements/NewArrivalTab';
 import Cat3Tab from '../elements/TrendingTab';
 import Link from "next/link"
-import useSWR from 'swr'
 function CategoryTab() {
     const [active, setActive] = useState("1");
     const [catAll, setCatAll] = useState([]);
     const [cats, setCats] = useState([]);
     const [hotProd, setHotProd] = useState([]);
     const [cat3, setCat3] = useState([]);
-    const {data,isLoading,error} = useSWR(process.env.apiServer+`/api/product/hot/`)
     //console.log(data)
     /* 
     setHotProd(Object.values(data)) */
@@ -24,7 +22,8 @@ function CategoryTab() {
         setCats(Object.keys(allProducts))
         //console.log(hotProd)
         //const catAllItem = allProducts.filter((item) => item.category);
-        setCatAll(Object.values(allProducts)[0]);
+        setCatAll(Object.values(allProducts));
+        setHotProd(Object.values(allProducts)[0])
         setActive("1");
     };
     /* const catP1 = async () => {
@@ -66,7 +65,7 @@ function CategoryTab() {
                                     className={
                                         active === `${i+1}` ? "nav-link active" : "nav-link"
                                     }
-                                    onClick={()=>{setCatAll(Object.values(data)[`${i}`]);setActive(`${i+1}`)}}
+                                    onClick={()=>{setHotProd(catAll[`${i}`]);setActive(`${i+1}`)}}
                                 >
                                     {item}
                                 </button>
@@ -130,7 +129,7 @@ function CategoryTab() {
                                 key={i}
                             >
                     <div className="product-grid-4 row">
-                        <Cat1Tab products={catAll} />
+                        <Cat1Tab products={hotProd} />
                     </div>
                 </div>
                         )

@@ -7,12 +7,13 @@ import MobileMenu from "./MobileMenu"
 import useSWR from "swr"
 const Layout = ({ children, parent, sub, subChild, noBreadcrumb, headerStyle }) => {
 	const [isToggled, setToggled] = useState(false)
-	const { data, loading, error } = useSWR(process.env.apiServer + "/api/menus/")
+	const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
+	const { data, loading, error } = useSWR(process.env.apiServer + "/api/menus/",fetcher)
 	const {
 		data: config,
 		isLoading: configLoading,
 		error: configError,
-	} = useSWR(process.env.apiServer + `/api/menus/config/`)
+	} = useSWR(process.env.apiServer + `/api/menus/config/`,fetcher)
 	const toggleClick = () => {
 		setToggled(!isToggled)
 		isToggled

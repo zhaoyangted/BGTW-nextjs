@@ -8026,7 +8026,7 @@ span.fi-rs-apps {
   position: absolute;
   left: 0;
   min-width: 160px;
-  top: 70%;
+  /* top: 70%; */
   background-color: #ffffff;
   width: 100%;
   padding: 0px 0px 0px 0px;
@@ -8133,8 +8133,8 @@ span.fi-rs-apps {
   border-top-right-radius: 5px;
 }
 
-.mega-menu::before {
-	/* left: calc(100%/7); */
+/*.mega-menu::before {
+	 left: calc(100%/7); 
   position: absolute;
   top: -6px;
   width: 0;
@@ -8169,7 +8169,7 @@ li.position-static:nth-of-type(7) ul.mega-menu::before{
 li.position-static:nth-of-type(8) ul.mega-menu::before{
   left:88%;
 }
-
+*/
 .main-menu > nav > ul > li.dropdownT1 ul.mega-menu li a.menu-title {
   /* font-size: 19px;
   font-weight: 700;

@@ -5,8 +5,8 @@ import CredentialsProvider from "next-auth/providers/credentials"
 // import GithubProvider from "next-auth/providers/github"
 // import TwitterProvider from "next-auth/providers/twitter"
 // import Auth0Provider from "next-auth/providers/auth0"
-import fetchJson from "../../../lib/fetchJson"
-//import type { NextApiRequest, NextApiResponse } from 'next'
+//import fetchJson from "../../../lib/fetchJson"
+//import type { NextApiRequest, NextApiResp } from 'next'
 // import AppleProvider from "next-auth/providers/apple"
 // import EmailProvider from "next-auth/providers/email"
 
@@ -17,11 +17,14 @@ import fetchJson from "../../../lib/fetchJson"
     bodyParser: false,
   },
 } */
-export const authOptions = {
-//export default async function auth(req: NextApiRequest, res: NextApiResponse) {
-  // https://next-auth.js.org/configuration/providers/oauth
- providers: [
-    /* EmailProvider({
+import axios from "axios"
+axios.defaults.withCredentials=true
+const nextAuthOptions = (req, res) => {
+	return {
+		//export default async function auth(req: NextApiRequest, resp: NextApiResp) {
+		// https://next-auth.js.org/configuration/providers/oauth
+		providers: [
+			/* EmailProvider({
          server: process.env.EMAIL_SERVER,
          from: process.env.EMAIL_FROM,
        }),
@@ -38,7 +41,7 @@ export const authOptions = {
       },
     }),
     */
-    /* FacebookProvider({
+			/* FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
@@ -59,79 +62,110 @@ export const authOptions = {
       clientSecret: process.env.AUTH0_SECRET,
       issuer: process.env.AUTH0_ISSUER,
     }), */
-    CredentialsProvider({
-        // The name to display on the sign in form (e.g. "Sign in with...")
-        name: "BGTW",
-        type: "credentials",
-        // `credentials` is used to generate a form on the sign in page.
-        // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-        // e.g. domain, username, password, 2FA token, etc.
-        // You can pass any HTML attribute to the <input> tag through the object.
-        credentials: {
-          username: { label: "Username", type: "text", placeholder: "jsmith" },
-          password: { label: "Password", type: "password" }
-        },
-        async authorize(credentials, req) {
-            // You need to provide your own logic here that takes the credentials
-            // submitted and returns either a object representing a user or value
-            // that is false/null if the credentials are invalid.
-            // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-            // You can also use the `req` object to obtain additional parameters
-            // (i.e., the request IP address)
-            //console.log(credentials)
-            const payload ={
-              d_account:credentials.username,
-              d_password:credentials.password
-            }
-            //console.log(payload)
-            const res= await fetchJson(process.env.apiServer+"/api/auth/login/", 
-            {
-              method: "POST",
-              //allowedHeaders: ['Cookie', 'Content-Type'],
-              body: JSON.stringify(payload),
-              headers: { "Content-Type": "application/json"}, 
-              Accept: "application/json",
-              //credentials:"same-origin"
-              /* credentials: 'include', */
-            }
-            );
-            
-            //const resData = res.json();
-            const user = res.data;
-            //console.log(res)
-            //const user = { id: "1", name: "J Smith", email: "jsmith@example.com",isLoggedIn:true }
-            // If no error and we have user data, return it
-            if (res.isLoggedIn || user) {
-              return user
-            }
-            // Return null if user data could not be retrieved
-            return null
-          }
-      })
-  ],
-    session:{
-      strategy:'jwt',
-      maxAge: 3 * 24 * 60 * 60,
-     },
-    callbacks: {
-      // 每次调用 getSession() 、useSession() 的时候 都会触发并将 token 存入 user 中
-      // 上面登录成功后，jwt 回调会执行， user 中会拿到你 return 出来的数据， 注意： 仅在你调用 signin 接口的时候才会有值，之后都是在 cookie中读取
-       jwt: async ({ token, user }) => {
-        user && (token.user = user);
-        return token;
-      },
-      session: async ({ session, token }) => {
-        session.user = token.user;  // Setting token in session
-        return session;
-      },
-    },
-    
-    pages: {
-       signIn: '/page-login',
-      // signOut: '/auth/signout',
-    },
-    secret: process.env.NEXTAUTH_SECRET,
-    debug: process.env.NODE_ENV === 'development',
+			CredentialsProvider({
+				// The name to display on the sign in form (e.g. "Sign in with...")
+				name: "BGTW",
+				type: "credentials",
+				// `credentials` is used to generate a form on the sign in page.
+				// You can specify which fields should be submitted, by adding keys to the `credentials` object.
+				// e.g. domain, username, password, 2FA token, etc.
+				// You can pass any HTML attribute to the <input> tag through the object.
+				credentials: {
+					username: { label: "Username", type: "text", placeholder: "jsmith" },
+					password: { label: "Password", type: "password" },
+				},
+				async authorize(credentials) {
+					// You need to provide your own logic here that takes the credentials
+					// submitted and returns either a object representing a user or value
+					// that is false/null if the credentials are invalid.
+					// e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
+					// You can also use the `req` object to obtain additional parameters
+					// (i.e., the request IP address)
+					//console.log(credentials)
+					const payload = {
+						d_account: credentials.username,
+						d_password: credentials.password,
+					}
+					//console.log(payload)
+					/* const response = await fetch(process.env.apiServer + "/api/auth/login/", {
+						method: "POST",
+						allowedHeaders: ['Cookie', 'Content-Type'],
+						body: JSON.stringify(payload),
+						headers: { "Content-Type": "application/json" },
+						Accept: "application/json",
+					}) */
+					const response = await axios.post(process.env.apiServer + "/api/auth/login/", {
+						d_account: credentials.username,
+						d_password: credentials.password,
+					})
+					const cookies = response.headers["set-cookie"]
+					// console.log(cookies)
+					res.setHeader("set-cookie", cookies)
+					//const resp = await response.json()
+					//console.log(cookies)
+					//resp.end()
+					//console.log(response)
+					const user = response.data
+					// console.log(resp)
+					//const user = { id: "1", name: "J Smith", email: "jsmith@example.com",isLoggedIn:true }
+					// If no error and we have user data, return it
+					if (response.isLoggedIn || user) {
+						return user
+					}
+					// Return null if user data could not be retrieved
+					return null
+				},
+			}),
+		],
+		session: {
+			strategy: "jwt",
+			maxAge: 1 * 24 * 60 * 60,
+		},
+		callbacks: {
+			// 每次调用 getSession() 、useSession() 的时候 都会触发并将 token 存入 user 中
+			// 上面登录成功后，jwt 回调会执行， user 中会拿到你 return 出来的数据， 注意： 仅在你调用 signin 接口的时候才会有值，之后都是在 cookie中读取
+			jwt: async ({ token, user }) => {
+				user && (token.user = user)
+				return token
+			},
+			session: async ({ session, token }) => {
+				session.user = token.user // Setting token in session
+				return session
+			},
+		},
+		events: {
+			async signOut({ session }) {
+				let headers = {}
+				/* const cookieStore = cookies();
+				const phpSessID = cookieStore.get('PHPSESSID');
+				 */
+				//console.log(req.cookies)
+				headers["set-cookie"] = req.cookies;
+				try {
+					const APIKit = await axios.put(
+						process.env.apiServer + "/api/auth/logout/",
+						{
+							/* withCredentials:true, 
+							Headers:headers,*/
+							/* method: "PUT",
+							credentials:"include" */
+						},
+					)
+					console.log(APIKit)
+				} catch (e) {
+					console.log(e)
+				}
+			},
+		},
+		pages: {
+			signIn: "/page-login",
+			// signOut: '/auth/signout',
+		},
+		secret: process.env.NEXTAUTH_SECRET,
+		debug: process.env.NODE_ENV === "development",
+	}
 }
 
-export default NextAuth(authOptions);
+export default (req, res) => {
+	return NextAuth(req, res, nextAuthOptions(req, res))
+}

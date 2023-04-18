@@ -11,8 +11,9 @@ import Layout from "./../components/layout/Layout";
 import CategorySlider from "./../components/sliders/Category";
 import Intro1 from "./../components/sliders/Intro1";
 import Link from "next/link";
-
+import { useSession } from "next-auth/react";
 export default function Home() {
+    const { status, data:session } = useSession()
     return <>
         {/* <IntroPopup /> */}
 

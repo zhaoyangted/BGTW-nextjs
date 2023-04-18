@@ -6,7 +6,8 @@ import Link from "next/link"
 SwiperCore.use([Autoplay,Navigation, Pagination])
 
 const Intro1 = () => {
-	const { data, isLoading, error } = useSWR(process.env.apiServer+"/api/homepage/")
+	const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
+	const { data, isLoading, error } = useSWR(process.env.apiServer+"/api/homepage/",fetcher)
 
 	const Banner = () => {
 		return data?.BannerData.map((url, i) => {
