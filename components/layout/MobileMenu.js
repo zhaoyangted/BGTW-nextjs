@@ -43,7 +43,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 									{li[1].map((ul, index) => {
 										return (
 											<li key={index}>
-												<Link href="http://localhost/products/products_list/${ul.d_id}">{ul.d_title}</Link>
+												<Link href="/products/products_list/${ul.d_id}">{ul.d_title}</Link>
 												<i className="fi-rs-angle-right"></i>
 											</li>
 										)

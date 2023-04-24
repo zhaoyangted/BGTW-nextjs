@@ -29,7 +29,7 @@ const SingleProduct = ({
         toast("Added to Wishlist !");
     };
     return <>
-        <div className="product-cart-wrap mb-30">
+        <div className="product-cart-wrap pt-30 pb-30">
             <div className="product-img-action-wrap">
                 <div className="product-img product-img-zoom">
                     <Link
@@ -39,12 +39,12 @@ const SingleProduct = ({
 
                         <img
                             className="default-img"
-                            src={product.d_img1}
+                            src={'/'+product.d_img1}
                             alt=""
                         />
                         <img
                             className="hover-img"
-                            src={product.d_img2}
+                            src={product.d_img2?'/'+product.d_img2:'/'+product.d_img2}
                             alt=""
                         />
 

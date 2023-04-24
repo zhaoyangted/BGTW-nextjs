@@ -1,14 +1,16 @@
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
-import CategoryProduct2 from "../ecommerce/Filter/CategoryProduct2"
-import CategoryProduct3 from "../ecommerce/Filter/CategoryProduct3"
+//import CategoryProduct2 from "../ecommerce/Filter/CategoryProduct2"
+//import CategoryProduct3 from "../ecommerce/Filter/CategoryBrand"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons'
 import Image  from 'next/image'
 import { useSession, signIn, signOut } from "next-auth/react"
 import styles from '../../components/header.module.css'
+import axios from "axios"
+axios.defaults.withCredentials=true
 const img=Image
 const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistItems, data, config }) => {
 	const [isToggled, setToggled] = useState(false)
@@ -39,7 +41,7 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 									{/* <i className="fi-rs-angle-down"></i> */}
 									<ul className="mega-menu">
 										<div className="HdNAVUBTopTT">
-											<a className="menu-title" href={`http://localhost/products/index/${li[0].split("_")[1]}`}>
+											<a className="menu-title" href={`/products/index/${li[0].split("_")[1]}`}>
 												{li[0].split("_")[0]}TOP
 											</a>
 										</div>
@@ -47,7 +49,7 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 											//  console.log(ul)
 											return (
 												<li className="sub-mega-menu sub-mega-menu-width-22" key={index}>
-													<Link href={`http://localhost/products/products_list/${ul.d_id}`}>{ul.d_title}</Link>
+													<Link href={`/products/products_list/${ul.d_id}`}>{ul.d_title}</Link>
 													<i className="fi-rs-angle-right"></i>
 												</li>
 											)
@@ -60,6 +62,19 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 				</nav>
 			</div>
 		)
+	}
+	const handleSignOut = async() => {
+		if(status==="authenticated"){
+			const response=await axios.put(process.env.apiServer+"/api/auth/logout/")
+			if (response.status===200){
+				await signOut()
+			}else{
+				alert('logout failed')
+				await signOut()
+			}
+		}else{
+			alert('not login.')
+		}
 	}
 	const handleToggle = () => setToggled(!isToggled)
 	// console.log(Object.values(config)[13])
@@ -156,7 +171,7 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 						<div className="header-wrap">
 							<div className="header-right">
 								
-								{status==='authenticated'?(<><Link href="/page-account" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;signOut()}} className="user__link user__link--register">
+								{status==='authenticated'?(<><Link href="/page-account" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;handleSignOut()}} className="user__link user__link--register">
 								會員登出</Link></>):(<><Link href="/page-login" className="user__link user__link--login">
 								會員登入</Link><Link href="/page-join" className="user__link user__link--register">
 								加入會員</Link></>)}

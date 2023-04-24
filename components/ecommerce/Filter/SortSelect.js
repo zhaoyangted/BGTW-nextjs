@@ -3,40 +3,47 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updateProductFilters } from "../../../redux/action/productFiltersAction";
 
-const SortSelect = ({ updateProductFilters }) => {
+const SortSelect = ({ updateProductFilters,sortList }) => {
     const Router = useRouter();
     const searchTerm = Router.query.search;
-
     const [featured, setFeatured] = useState("");
-
+    
     useEffect(() => {
         const filters = {
             featured,
         };
-
+        
         updateProductFilters(filters);
     }, [searchTerm, featured]);
-
+    
     const seleceOption = (e) => {
         setFeatured(e.target.value);
     };
-
+    
+    //console.log(sortList)
     return (
         <>
             <div className="sort-by-product-wrap">
                 <div className="sort-by">
                     <span>
                         <i className="fi-rs-apps-sort"></i>
-                        Sort by:
+                        {/* Sort by: */}
                     </span>
                 </div>
                 <div className="sort-by-dropdown-wrap custom-select">
                     <select onChange={(e) => seleceOption(e)}>
-                        <option value="">Defaults</option>
+                        {Object.keys(sortList).map((value,i)=>{
+                            return(
+                                <option value={value}key={i}>{Object.values(sortList)[i]}</option>
+                            )
+                        })
+
+                        }
+                        {/* <option value="">Defaults</option>
                         <option value="featured">Featured</option>
                         <option value="trending">Trending</option>
                         <option value="lowToHigh">Low To High</option>
-                        <option value="highToLow">High To Low</option>
+                        <option value="highToLow">High To Low</option> */}
                     </select>
                 </div>
             </div>

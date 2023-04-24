@@ -13,7 +13,7 @@ const PriceRangeSlider = ({ updateProductFilters }) => {
     const Router = useRouter();
     const searchTerm = Router.query.search;
 
-    const [price, setPrice] = useState({ value: { min: 0, max: 500 } });
+    const [price, setPrice] = useState({ value: { min: 0, max: 50000 } });
 
     // console.log(price);
 
@@ -45,7 +45,7 @@ const PriceRangeSlider = ({ updateProductFilters }) => {
                 allowCross={false}
                 defaultValue={[0, 100]}
                 min={0}
-                max={500}
+                max={50000}
                 // onChange={(value) => console.log(value[0], value[1])} 
                 onChange={(value) => setPrice({ value: { min: value[0], max: value[1] } })}
             />

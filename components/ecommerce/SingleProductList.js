@@ -37,17 +37,17 @@ const SingleProductList = ({
                         <div className="product-img-inner">
                             <Link
                                 href="/[id]"
-                                as={`/${product.id}`}
+                                as={`/${product.d_id}`}
                             >
 
                                 <img
                                     className="default-img"
-                                    src={product.images[0].img}
+                                    src={product.d_img1}
                                     alt=""
                                 />
                                 <img
                                     className="hover-img"
-                                    src={product.images[1].img}
+                                    src={product.d_img2/* ?product.d_img2:product.d_img1 */}
                                     alt=""
                                 />
 
@@ -80,7 +80,7 @@ const SingleProductList = ({
                         </a>
                     </div>
 
-                    <div className="product-badges product-badges-position product-badges-mrg">
+                    {/* <div className="product-badges product-badges-position product-badges-mrg">
                         {product.trending && (
                             <span className="hot">Hot</span>
                         )}
@@ -98,20 +98,20 @@ const SingleProductList = ({
                                 {product.discount.percentage}%
                             </span>
                         )}
-                    </div>
+                    </div> */}
                 </div>
                 <div className="product-content-wrap">
                     <div className="product-category">
                         <Link href="/products">
-                            {product.brand}
+                            {/* {product.brand} */}
                         </Link>
                     </div>
                     <h2>
                         <Link
                             href="/[id]"
-                            as={`/${product.id}`}
+                            as={`/${product.d_id}`}
                         >
-                            {product.title}
+                            {product.d_title}
                         </Link>
                     </h2>
                     <div className="product-rate-cover">
@@ -135,11 +135,11 @@ const SingleProductList = ({
                     </p>
 
                     <div className="product-price">
-                        <span>${product.price} </span>
-                        <span className="old-price">{product.oldPrice && `$ ${product.oldPrice}`}</span>
+                        <span>${product.d_price} </span>
+                        {/* <span className="old-price">{product.oldPrice && `$ ${product.oldPrice}`}</span> */}
                     </div>
 
-                    <p className="mt-15">{product.desc}</p>
+                    <p className="mt-15">{product.d_title}</p>
 
                     <div className="mt-30 d-flex align-items-center">
                         <a

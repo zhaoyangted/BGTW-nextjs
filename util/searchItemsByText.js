@@ -1,7 +1,6 @@
 
 
 export default (searchTerm,products) => {
-
     if(!searchTerm) return products
 
     let list = []
@@ -9,7 +8,7 @@ export default (searchTerm,products) => {
 
     for (let index = 0; index < products.length; index++) {
         const product = products[index];
-        const isMatched = matchWordList(product.title,words)
+        const isMatched = matchWordList(product.d_title,words)
         if(isMatched) list.push(product)
     }
 

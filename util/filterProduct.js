@@ -2,45 +2,63 @@
 
 export default (productList, filters) => {
     let filteredList = [...productList];
-
+    //console.log(filters)
     for (const key in filters) {
         if (key !== "price") {
             if (
-                filters[key] === "featured" ||
-                filters[key] === "trending" ||
+                filters["featured"] !=="1"  /*||
+                 filters[key] === "trending" ||
                 filters[key] === "lowToHigh" ||
-                filters[key] === "highToLow"
+                filters[key] === "highToLow" */
+                
             ) {
-                if (filters[key] === "lowToHigh") {
+                if (filters["featured"] === "3") {
                     filteredList = [
                         ...filteredList.sort((a, b) => {
-                            if (a.price < b.price) return -1;
-                            if (a.price > b.price) return 1;
+                            if (a.d_price < b.d_price) return -1;
+                            if (a.d_price > b.d_price) return 1;
                         }),
                     ];
                 } else {
-                    if (filters[key] === "highToLow") {
+                    if (filters["featured"] === "4") {
                         console.log("hi");
                         filteredList = [
                             ...filteredList.sort((a, b) => {
-                                if (b.price < a.price) return -1;
-                                if (b.price > a.price) return 1;
+                                if (b.d_price < a.d_price) return -1;
+                                if (b.d_price > a.d_price) return 1;
                             }),
                         ];
-                    } else {
+                    } /* else {
                         console.log("hi1");
                         filteredList = filteredList.filter(
                             (item) => item[filters[key]]
                         );
-                    }
+                    } */
                 }
             } else {
-                filteredList = filterByKey(filteredList, filters[key], key);
+                if (filters["featured"] !=="1") {
+                    filteredList = [
+                        ...filteredList.sort((a, b) => {
+                            if (a.d_id < b.d_id) return -1;
+                            if (a.d_id > b.d_id) return 1;
+                        }),
+                    ];
+                } else {
+                    filteredList = [
+                    ...filteredList.sort((a, b) => {
+                        if (b.d_id < a.d_id) return -1;
+                        if (b.d_id > a.d_id) return 1;
+                    }),
+                ];
+                }
+                //filteredList = filterByKey(filteredList, filters[key], key);
+                return filteredList
             }
         } else {
             filteredList = filterByPrice(filteredList, filters[key], key);
         }
     }
+    //console.log(filteredList)
     return filteredList;
 };
 
@@ -51,7 +69,7 @@ function filterByPrice(filteredList, price, key) {
 
     for (let index = 0; index < filteredList.length; index++) {
         const product = filteredList[index];
-        const productPrice = product[key];
+        const productPrice = product.d_price;
 
         if (productPrice >= price.min && productPrice <= price.max) {
             list.push(product);

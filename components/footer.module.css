@@ -3,7 +3,7 @@
 .foot_LinkBox { width: 100%; margin: 0px; text-align: center; }
 
 .foot_LinkBox > ul { width: auto; padding: 0px 15px; font-size: 15px; font-weight: 600; color: #ffffff; margin: 0px 10px; display:inline-block; list-style:none;}
-
+.FUT01 { width: auto; height: auto; float: left; margin-left: 15px; }
 .foot_LinkBox > ul a{ color: #fff; }
 @media only screen and (min-width: 0px) and (max-width:860px){
     .FUTALL {
@@ -32,3 +32,9 @@ display: flex;
 .domeLogoBox { width: 250px; height: 60px; margin: 20px 0px; }
 
 .domeLogoBox > img { width: 100%; height: auto; }
+.foot_ConfTxBx > img {
+    height: 16px;
+    width: 16px;
+    margin-top: 0px;
+    margin-right: 6px;
+}

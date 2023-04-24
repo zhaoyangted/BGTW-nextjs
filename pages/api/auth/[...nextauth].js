@@ -134,28 +134,35 @@ const nextAuthOptions = (req, res) => {
 			},
 		},
 		events: {
-			async signOut({ session }) {
-				let headers = {}
-				/* const cookieStore = cookies();
+			/*async signOut({ session }) {
+				let headers = {"Content-Type" : "application/json"}
+				 const cookieStore = cookies();
 				const phpSessID = cookieStore.get('PHPSESSID');
 				 */
-				//console.log(req.cookies)
-				headers["set-cookie"] = req.cookies;
+				/* console.log(req.cookies)
+				headers["Set-Cookie"] = req.cookies; 
+
 				try {
-					const APIKit = await axios.put(
+					const response = await axios.put(
 						process.env.apiServer + "/api/auth/logout/",
-						{
-							/* withCredentials:true, 
-							Headers:headers,*/
-							/* method: "PUT",
-							credentials:"include" */
+						/*{
+							Headers:headers, 
+							 withCredentials:true,
+							method: "PUT",
+							credentials:"include"
 						},
 					)
-					console.log(APIKit)
+					//console.log(response)
+					//const cookies = response.headers["set-cookie"]
+					// console.log(cookies)
+					// res.setHeader("set-cookie", cookies)
+					//const cookies = APIKit.headers["set-cookie"]
+					// console.log(cookies)
+					//res.setHeader("set-cookie", cookies)
 				} catch (e) {
-					console.log(e)
+					console.log(e.response)
 				}
-			},
+			},*/
 		},
 		pages: {
 			signIn: "/page-login",

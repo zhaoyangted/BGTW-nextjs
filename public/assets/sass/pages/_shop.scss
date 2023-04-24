@@ -22,6 +22,7 @@
         padding         : 25px 25px 0 25px;
 
         .product-action-1 {
+            display: inline-flex;
             background-color: #fff;
             border-radius   : 5px;
             border          : 1px solid $border-color-2;

@@ -5,7 +5,7 @@ function SelectOp({ selectChange, showLimit }) {
                 <div className="sort-by">
                     <span>
                         <i className="fi-rs-apps"></i>
-                        Show:
+                       {/*  Show: */}
                     </span>
                 </div>
                 <div className="sort-by-dropdown-wrap custom-select">

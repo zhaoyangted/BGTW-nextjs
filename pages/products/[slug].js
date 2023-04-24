@@ -1,8 +1,8 @@
 import React from "react"
 import ProductDetails from "../../components/ecommerce/ProductDetails"
 import Layout from "../../components/layout/Layout"
-import { server } from "../../config/index"
-import { findProductIndex } from "../../util/util"
+// import { server } from "../../config/index"
+// import { findProductIndex } from "../../util/util"
 const ProductId = ({ product, img,menuTitle,specData,watchedData }) => {
 	return (
 		<>

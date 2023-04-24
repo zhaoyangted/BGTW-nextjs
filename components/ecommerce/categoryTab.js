@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { server } from "../../config/index";
+//import { server } from "../../config/index";
 import Cat1Tab from '../elements/FeaturedTab';
-import Cat2Tab from '../elements/NewArrivalTab';
+/* import Cat2Tab from '../elements/NewArrivalTab';
 import Cat3Tab from '../elements/TrendingTab';
-import Link from "next/link"
+import Link from "next/link" */
 function CategoryTab() {
     const [active, setActive] = useState("1");
     const [catAll, setCatAll] = useState([]);
@@ -128,7 +128,7 @@ function CategoryTab() {
                                 }
                                 key={i}
                             >
-                    <div className="product-grid-4 row">
+                    <div className="product-grid-4 row mb-30">
                         <Cat1Tab products={hotProd} />
                     </div>
                 </div>
