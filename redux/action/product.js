@@ -6,7 +6,7 @@ import * as Types from '../constants/actionTypes'
 // Fetch Product fetchProduct
 export const fetchProduct = (searchTerm, url, filters) => async dispatch => {
     try {
-
+        //console.log(filters)
         const sendRequest = await fetch(url,{credentials:'include'})
         const data = await sendRequest.json()
 
@@ -24,7 +24,8 @@ export const fetchProduct = (searchTerm, url, filters) => async dispatch => {
                        typeData:data.TypeData,
                        brandData:data.BrandData,
                        menuData:data.Menudata,
-                       menu:data.Menu,    
+                       menu:data.Menu,
+                       page:data.dbdata.PageList    
                     }
         })
 

@@ -1,37 +1,36 @@
 import Link from "next/link";
 import React from "react";
 
-const BlogSingle = () => {
+const BlogSingle = ({data}) => {
     return <>
         <div className="single-page pt-50 pr-30">
             <div className="single-header style-2">
                 <div className="row">
                     <div className="col-xl-10 col-lg-12 m-auto">
                         <h6 className="mb-10">
-                            <Link href="#">Recipes</Link>
+                            <Link href={"/news/"+data?.category?.d_id}>{data?.category?.d_title}</Link>
                         </h6>
                         <h2 className="mb-10">
-                            Best smartwatch 2021: the top wearables you can
-                            buy today
+                            {data?.dbdata?.d_title}
                         </h2>
                         <div className="single-header-meta">
                             <div className="entry-meta meta-1 font-xs mt-15 mb-15">
-                                <Link href="#" className="author-avatar">
+                                {/* <Link href="#" className="author-avatar">
                                     <img
                                         className="img-circle"
                                         src="/assets/imgs/blog/author-1.png"
                                         alt=""
                                     />
-                                </Link>
-                                <span className="post-by">
+                                </Link> */}
+                                {/* <span className="post-by">
                                     By <Link href="#">Sugar Rosie</Link>
-                                </span>
+                                </span> */}
                                 <span className="post-on has-dot">
-                                    2 hours ago
+                                    {data?.dbdata?.d_date}
                                 </span>
-                                <span className="time-reading has-dot">
+                                {/* <span className="time-reading has-dot">
                                     8 mins read
-                                </span>
+                                </span> */}
                             </div>
                             <div className="social-icons single-share">
                                 <ul className="text-grey-5 d-inline-block">
@@ -57,13 +56,15 @@ const BlogSingle = () => {
                     </div>
                 </div>
             </div>
-            <figure className="single-thumbnail">
+            {/* <figure className="single-thumbnail">
                 <img src="/assets/imgs/blog/blog-19.png" alt="" />
-            </figure>
-            <div className="single-content">
-                <div className="row">
+            </figure> */}
+
+            <div className="single-content" >
+                {/* <div className="row"> */}
                     <div className="col-xl-10 col-lg-12 m-auto">
-                        <p className="single-excerpt">
+                        <div  dangerouslySetInnerHTML={{__html:data?.dbdata?.d_content}} />
+                        {/* <p className="single-excerpt">
                             Helping everyone live happier, healthier lives
                             at home through their kitchen. Kitchn is a daily
                             food magazine on the Web celebrating life in the
@@ -135,10 +136,10 @@ const BlogSingle = () => {
                             commodo lorem nisl, odio malesuada cras. Tempus
                             lectus sed libero viverra ut. Facilisi rhoncus
                             elit sit sit.
-                        </p>
+                        </p> */}
 
                         <div className="entry-bottom mt-50 mb-30">
-                            <div className="tags w-50 w-sm-100">
+                            {/* <div className="tags w-50 w-sm-100">
                                 <Link
                                     href="/blog-category-big"
                                     rel="tag"
@@ -157,7 +158,7 @@ const BlogSingle = () => {
                                     className="hover-up btn btn-sm btn-rounded mr-10">
                                     conserve
                                 </Link>
-                            </div>
+                            </div> */}
                             <div className="social-icons single-share">
                                 <ul className="text-grey-5 d-inline-block">
                                     <li>
@@ -201,7 +202,7 @@ const BlogSingle = () => {
                             </div>
                         </div>
 
-                        <div className="author-bio p-30 mt-50 border-radius-15 bg-white">
+                        {/* <div className="author-bio p-30 mt-50 border-radius-15 bg-white">
                             <div className="author-image mb-30">
                                 <Link href="/author">
                                     <img
@@ -232,9 +233,9 @@ const BlogSingle = () => {
                                     cursus amet, cras elementum libero
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="comment-form">
+                        {/*<div className="comment-form">
                             <h3 className="mb-15">Leave a Comment</h3>
                             <div className="product-rate d-inline-block mb-30"></div>
                             <div className="row">
@@ -359,7 +360,7 @@ const BlogSingle = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="single-comment justify-content-between d-flex mb-30 ml-30">
+                                             <div className="single-comment justify-content-between d-flex mb-30 ml-30">
                                                 <div className="user justify-content-between d-flex">
                                                     <div className="thumb text-center">
                                                         <img
@@ -414,8 +415,8 @@ const BlogSingle = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="single-comment justify-content-between d-flex">
+                                            </div> */}
+                                            {/* <div className="single-comment justify-content-between d-flex">
                                                 <div className="user justify-content-between d-flex">
                                                     <div className="thumb text-center">
                                                         <img
@@ -470,14 +471,14 @@ const BlogSingle = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*/}
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         </div>
     </>;

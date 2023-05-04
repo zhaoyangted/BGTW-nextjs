@@ -14,7 +14,6 @@ import WishlistModal from "../../../components/ecommerce/WishlistModal";
 import Layout from "../../../components/layout/Layout";
 import { fetchProduct } from "../../../redux/action/product";
 import SingleProduct from "../../../components/ecommerce/SingleProduct";
-import { types } from "util";
 const ProductsList = ({ 
     products, 
     productFilters, 
@@ -30,11 +29,12 @@ const ProductsList = ({
     let [pages, setPages] = useState(products.pages?.TotalPage/* Math.ceil(products.items.length / limit) */);
     let [currentPage, setCurrentPage] = useState(1);
 	const { id } = Router.query;
+    console.log(id)
     useEffect(() => {
 		if (!Router.isReady) {
 			return;
 		}
-        fetchProduct(searchTerm, /* "/static/product.json" */process.env.apiServer+`/api/product/plist/${id}?page=${currentPage-1}&limit=${limit}&order=${productFilters.featured}`, productFilters);
+        fetchProduct(searchTerm, /* "/static/product.json" */process.env.apiServer+`/api/product/toplist/${id}?page=${currentPage-1}&limit=${limit}&order=${productFilters.featured}`, productFilters);
         cratePagination();
     }, [productFilters, limit, pages,currentPage, /* products.items.length */,id]);
 	

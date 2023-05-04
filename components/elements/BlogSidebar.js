@@ -2,21 +2,30 @@ import Link from "next/link";
 import React from "react";
 
 
-const BlogSidebar = () => {
+const BlogSidebar = ({data}) => {
     return <>
         <div className="widget-area">
-            <div className="sidebar-widget-2 widget_search mb-50">
+            {/* <div className="sidebar-widget-2 widget_search mb-50">
                 <div className="search-form">
                     <form action="#">
                         <input type="text" placeholder="Search…" />
                         <button type="submit"><i className="fi-rs-search"></i></button>
                     </form>
                 </div>
-            </div>
+            </div> */}
             <div className="sidebar-widget widget-category-2 mb-50">
                 <h5 className="section-title style-1 mb-30">Category</h5>
                 <ul>
-                    <li>
+                    {data?data.map((item,i)=>{
+                        return (
+                            <li style={{backgroundColor: `${item.d_color}`}} key={i}>
+                                <Link href={`/news/`+item.d_id}> {item.d_title}</Link>
+                            </li>
+                        )
+                    })
+
+                    :null}
+                    {/* <li>
                         <Link href="/products"> <img src="/assets/imgs/theme/icons/category-1.svg" alt="" />Milks & Dairies</Link><span className="count">30</span>
                     </li>
                     <li>
@@ -30,11 +39,11 @@ const BlogSidebar = () => {
                     </li>
                     <li>
                         <Link href="/products"> <img src="/assets/imgs/theme/icons/category-5.svg" alt="" />Fresh Fruit</Link><span className="count">87</span>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
 
-            <div className="sidebar-widget product-sidebar mb-50 p-30 bg-grey border-radius-10">
+            {/* <div className="sidebar-widget product-sidebar mb-50 p-30 bg-grey border-radius-10">
                 <h5 className="section-title style-1 mb-30">Trending Now</h5>
                 <div className="single-post clearfix">
                     <div className="image">
@@ -133,8 +142,8 @@ const BlogSidebar = () => {
                         <Link href="/blog-category-grid"><i className="fi-rs-cross mr-10"></i>Appetizer</Link>
                     </li>
                 </ul>
-            </div>
-            <div className="banner-img wow fadeIn mb-50 animated d-lg-block d-none">
+            </div> */}
+            {/* <div className="banner-img wow fadeIn mb-50 animated d-lg-block d-none">
                 <img src="/assets/imgs/banner/banner-11.png" alt="" />
                 <div className="banner-text">
                     <span>Oganic</span>
@@ -144,7 +153,7 @@ const BlogSidebar = () => {
                         Juice
                     </h4>
                 </div>
-            </div>
+            </div> */}
         </div>
     </>;
 };

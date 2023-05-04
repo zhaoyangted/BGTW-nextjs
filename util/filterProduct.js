@@ -5,11 +5,11 @@ export default (productList, filters) => {
     //console.log(filters)
     for (const key in filters) {
         if (key !== "price") {
-            if (
-                filters["featured"] !=="1"  /*||
+            /* if (
+                filters["featured"] !=="1"  ||
                  filters[key] === "trending" ||
                 filters[key] === "lowToHigh" ||
-                filters[key] === "highToLow" */
+                filters[key] === "highToLow"
                 
             ) {
                 if (filters["featured"] === "3") {
@@ -28,12 +28,12 @@ export default (productList, filters) => {
                                 if (b.d_price > a.d_price) return 1;
                             }),
                         ];
-                    } /* else {
+                    } else {
                         console.log("hi1");
                         filteredList = filteredList.filter(
                             (item) => item[filters[key]]
                         );
-                    } */
+                    }
                 }
             } else {
                 if (filters["featured"] !=="1") {
@@ -53,7 +53,8 @@ export default (productList, filters) => {
                 }
                 //filteredList = filterByKey(filteredList, filters[key], key);
                 return filteredList
-            }
+            } */
+            return filteredList
         } else {
             filteredList = filterByPrice(filteredList, filters[key], key);
         }

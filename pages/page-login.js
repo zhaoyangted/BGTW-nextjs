@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import Layout from "../components/layout/Layout"
 import fetchJson, { FetchError } from "../lib/fetchJson"
 import { useSession, signIn, signOut,getCsrfToken } from "next-auth/react"
-function Login({csrfToken}) {
+function Login(context/* {csrfToken} */) {
 	const [userInfo, setUserInfo] = useState({ email: "", password: "" })
 	const [errorMsg, setErrorMsg] = useState("")
 	const { status, data } = useSession()
@@ -11,6 +11,16 @@ function Login({csrfToken}) {
 		e.preventDefault()
 		signOut()
 	}
+	const [csrfToken,setCsrfToken] = useState(getCsrfToken(context))
+	/* useEffect(async()=>{
+		try {
+			const csrf = await (getCsrfToken(context))
+			setCsrfToken(csrf)
+
+		}catch(e){
+			console.log(e)
+		}
+	},[]) */
 	async function handleSubmit(e) {
 		e.preventDefault()
 		const res = await signIn("credentials", {
@@ -134,11 +144,11 @@ function Login({csrfToken}) {
 		</>
 	)
 }
-export async function getServerSideProps(context) {
+/* export async function getServerSideProps(context) {
     return {
       props: {
         csrfToken: await getCsrfToken(context),
       },
     };
-  }
+  } */
 export default Login

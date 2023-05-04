@@ -1,19 +1,22 @@
 import CategoryTab from "../components/ecommerce/categoryTab";
 import FeatchDeals from "../components/ecommerce/fetchDeals";
-import FeatchTab from "../components/ecommerce/fetchTab";
+//import FeatchTab from "../components/ecommerce/fetchTab";
 import FetchTabSlider from "../components/ecommerce/fetchTabSlider";
 import Bottom from "../components/elements/Bottom";
 import QuickView from "./../components/ecommerce/QuickView";
 import Banner5 from "./../components/elements/Banner5";
-import Deals1 from "./../components/elements/Deals1";
-import IntroPopup from "./../components/elements/IntroPopup";
+//import Deals1 from "./../components/elements/Deals1";
+//import IntroPopup from "./../components/elements/IntroPopup";
 import Layout from "./../components/layout/Layout";
 import CategorySlider from "./../components/sliders/Category";
 import Intro1 from "./../components/sliders/Intro1";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import useSWR from 'swr'
 export default function Home() {
     const { status, data:session } = useSession()
+    const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
+	const { data, isLoading, error } = useSWR(process.env.apiServer+"/api/homepage/",fetcher)
     return <>
         {/* <IntroPopup /> */}
 
@@ -21,7 +24,7 @@ export default function Home() {
             <section className="home-slider position-relative mb-30">
                 {/* <div className="container"> */}
                     <div className="home-slide-cover">
-                        <Intro1 />
+                        <Intro1 data={data?.BannerData}/>
                     </div>
                 {/* </div> */}
             </section>
@@ -30,8 +33,8 @@ export default function Home() {
                 <div className="container wow animate__fadeIn animate__animated">
                     <div className="section-title">
                         <div className="title">
-                            <h3>Featured Categories</h3>
-                            <ul className="list-inline nav nav-tabs links">
+                            <h3>主要品牌</h3>
+                            {/* <ul className="list-inline nav nav-tabs links">
                                 <li className="list-inline-item nav-item">
                                     <Link href="/products" className="nav-link">
                                         Cake & Milk
@@ -52,7 +55,7 @@ export default function Home() {
                                         Vegetables
                                     </Link>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                     <div className="carausel-10-columns-cover position-relative">
@@ -66,7 +69,7 @@ export default function Home() {
             <section className="banners mb-25">
                 <div className="container">
                     <div className="row">
-                        <Banner5 />
+                        <Banner5 data={data?.ActionData}/>
                     </div>
                 </div>
             </section>

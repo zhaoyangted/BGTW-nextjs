@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import SwiperCore, { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { updateProductCategory } from "./../../redux/action/productFiltersAction";
-
+import useSWR from 'swr'
+import { useEffect,useState } from "react";
 SwiperCore.use([Navigation, Autoplay]);
 const data = [
     {
@@ -80,23 +81,32 @@ const CategorySlider = () => {
 
 
     const router = useRouter();
-
     const selectCategory = (e, category) => {
         e.preventDefault();
         // removeSearchTerm();
         updateProductCategory(category);
         router.push({
-            pathname: "/products",
-            query: {
-                cat: category //
-            }
+            pathname:` /products/brands_list/${category}`,
+            /* query: {
+                cat: category 
+            } */
         });
 
-        console.log("Click");
+       // console.log("Click");
     };
-
+    const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
+	const { data, loading, error } = useSWR(process.env.apiServer +"/api/brand",fetcher)
+    //console.log(data)
+    /* let filteredList = [...data]
+    filteredList = [
+        ...filteredList.sort((a, b) => {
+            if (b.d_num < a.d_num) return -1;
+            if (b.d_num > a.d_num) return 1;
+        }),
+    ];
+    const brands = filteredList.slice(0,12) */
     return (
-        <>
+        !loading&&<>
             <Swiper
                 autoplay={true}
                 navigation={{
@@ -122,18 +132,19 @@ const CategorySlider = () => {
                     }
                 }}
             >
-                {data.map((item, i) => (
+                {data?.map((item, i) => (
                     <SwiperSlide key={i}>
-                        <div className={`card-2 ${item.bg} wow animate__animated animate__fadeInUp`} onClick={(e) => selectCategory(e, item.slug)}>
+                        <div className={`card-2 bg-${i+1} wow animate__animated animate__fadeInUp`} onClick={(e) => selectCategory(e, item.d_id)}>
                             <figure className=" img-hover-scale overflow-hidden">
                                 <a>
-                                    <img src={`assets/imgs/shop/${item.img}`} alt="" />
+                                    <img src={`assets/imgs/brands/${item.d_id}.webp`} alt="" />
                                 </a>
+                                
                             </figure>
-                            <h6>
-                                <a>{item.title}</a>
-                            </h6>
-                            <span>26 items</span>
+                            
+                                <a>{item.d_title}</a>
+                            
+                            <span>{item.d_num}</span>
                         </div>
                     </SwiperSlide>
                 ))}

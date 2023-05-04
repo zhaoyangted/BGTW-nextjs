@@ -65,15 +65,15 @@ button.submit, button[type='submit'] {
     padding: 15px 40px;
     color: #ffffff;
     border: none;
-    background-color: $color-brand;
-	border: 1px solid $color-brand-dark;
+    background-color: $color-brand-dark;
+	border: 1px solid $color-brand;
     border-radius: 10px;
     &:hover {
-        background-color: $color-brand-dark !important;
+        background-color: #3d9ed1 !important;
     }
 }
 .btn-brand:hover {
-    background-color: $color-brand-dark !important;
+    background-color: #3d9ed1 !important;
 }
 
 .btn-login {

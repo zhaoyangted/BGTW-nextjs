@@ -40,8 +40,8 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 									<Link href={`/products/products_list/${li[0].split("_")[1]}`}>{li[0].split("_")[0]}</Link>
 									{/* <i className="fi-rs-angle-down"></i> */}
 									<ul className="mega-menu">
-										<div className="HdNAVUBTopTT">
-											<a className="menu-title" href={`/products/index/${li[0].split("_")[1]}`}>
+										<div className={styles.HdNAVUBTopTT}>
+											<a className="menu-title" href={`/products/top_list/${li[0].split("_")[1]}`}>
 												{li[0].split("_")[0]}TOP
 											</a>
 										</div>
@@ -128,7 +128,7 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 							<div className=" col-md-6 col-lg-6">
 								<div className="header-info header-info-right">
 									<ul>
-										<img src="/assets/imgs/theme/TpTLEic01.svg" />
+										<img className={styles.img} src="/assets/imgs/theme/TpTLEic01.svg" />
 										<li>客服專線: {config ? Object.values(config)[8] : null}</li>
 										<i className="fi-rs-angle-small-right" style={{ fontWeight: "900" }}></i>
 										<Link href="/page-account">相關協助與聯繫我們</Link>
@@ -283,24 +283,24 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 													
 													
 														
-															<div className="HdNAVUBTopTT02">會員服務專區</div>
-															<div className="mendercont">
-																<div className="ImeALBox">
-																	<ul className="IntmenderCr"><Link href="member">前往會員中心</Link></ul>
-																	<ul className="ImePs"><Link href="member/orders">購物紀錄與訂單查詢</Link></ul>
-																	<ul className="ImeLovepord"><Link href="member/favorite">我的收藏</Link></ul>
-																	<ul className="ImeFriend"><Link href="member/friend">邀請好友加入會員</Link></ul>
+															<div className={styles.HdNAVUBTopTT02}>會員服務專區</div>
+															<div className={styles.mendercont}>
+																<div className={styles.ImeALBox}>
+																	<ul className={styles.IntmenderCr}><Link href="member">前往會員中心</Link></ul>
+																	<ul className={styles.ImePs}><Link href="member/orders">購物紀錄與訂單查詢</Link></ul>
+																	<ul className={styles.ImeLovepord}><Link href="member/favorite">我的收藏</Link></ul>
+																	<ul className={styles.ImeFriend}><Link href="member/friend">邀請好友加入會員</Link></ul>
 																</div>
-																<div className="ImeALBox">
-																	<ul className="ImcoutBx"><Link href="member/account">會員資料修改</Link></ul>
-																	<ul className="ImcoutBx"><Link href="member/point">會員點數查詢</Link></ul>
-																	<ul className="ImcoutBx"><Link href="member/account">訂閱/取消 電子報</Link></ul>
-																	<ul className="ImcoutBx"><Link href="qa">常見問題</Link></ul>
+																<div className={styles.ImeALBox}>
+																	<ul className={styles.ImcoutBx}><Link href="member/account">會員資料修改</Link></ul>
+																	<ul className={styles.ImcoutBx}><Link href="member/point">會員點數查詢</Link></ul>
+																	<ul className={styles.ImcoutBx}><Link href="member/account">訂閱/取消 電子報</Link></ul>
+																	<ul className={styles.ImcoutBx}><Link href="qa">常見問題</Link></ul>
 																</div>
-																<div className="ImeALBox">
-																	<ul className="ImeTel">服務專線：{config?Object.values(config)[9]:null} {Object.values(config)[10]}</ul>
+																<div className={styles.ImeALBox}>
+																	<ul className={styles.ImeTel}>服務專線：{config?Object.values(config)[9]:null} {Object.values(config)[10]}</ul>
 																	{Object.values(config)[11]?
-																		<ul className="ImeEml">聯絡我們：{Object.values(config)[11]}</ul>
+																		<ul className={styles.ImeEml}>聯絡我們：{Object.values(config)[11]}</ul>
 																	:null}
 																</div>
 															</div>

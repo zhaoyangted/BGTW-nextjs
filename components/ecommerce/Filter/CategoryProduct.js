@@ -42,11 +42,11 @@ const CategoryProduct = (
 		}
 	}
 
-	let domNode = useClickOutside(() => {
+	/* let domNode = useClickOutside(() => {
 		setIsActive({
 			status: false,
 		})
-	})
+	}) */
     useEffect(()=>{
         menusArray?.map((li, index) => {
             //console.log(li.d_id,menuDatas.d_id)
@@ -61,7 +61,7 @@ const CategoryProduct = (
     //console.log(isActive)
     return (
         <>
-        <ul className="mobile-menu-wrap" ref={domNode}>
+        <ul className="mobile-menu-wrap" /* ref={domNode} */>
                 <li onClick={(e) => selectCategory(e, "")}>
                     {/* <a>{menuDatas.d_title}</a> */}
                 </li>

@@ -1,17 +1,17 @@
 .li {
    padding: 0;
-   margin-top:15px;
+   margin-top:5px;
    border:0;
    position: relative;
    width: 100%;
    left: 10%;
    z-index: 1;
    top: 0px;
-   font-size: 14px;
-   line-height: 14px;
+   font-size: 12px;
+   line-height: 12px;
    position: relative;
    display: block;
-   padding: 6px 0px 6px 0px
+  /*  padding: 6px 0px 6px 0px */
 }
 .ul {
    padding: 0;
@@ -22,20 +22,30 @@
    left: 10%;
    z-index: 1;
    top: 0px;
-   font-size: 14px;
-   line-height: 14px;
+   font-size: 12px;
+   line-height: 12px;
    position: relative;
    display: block;
-   padding: 6px 0px 6px 0px
+   /* padding: 6px 0px 6px 0px */
 }
 .menuitem{
     margin-top:5px;
-    font-size: 16px;
-    padding: 6px 4px 6px 10px;
-    line-height: 40px;
+    font-size: 12px;
+    left: 10%;
+   /*  padding: 6px 4px 6px 10px; */
+    /* line-height: 40px; */
 }
 .ul>.li{
     left: 10%;
+    overflow: hidden;
+}
+.ul>.li>.ul{
+    left:10%;
+    overflow: hidden;
+}
+.ul>.ul{
+    left: 10%;
+    overflow: hidden;
 }
 .side-widget .primary-sidebar {
     position: relative;
@@ -43,7 +53,9 @@
     border-radius: 15px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
     padding:20px;
+    overflow: hidden;
 }
-.menuitemhaschildrennone {
+.menuitemhaschildren {
     left:10%;
+    overflow: hidden;
 }

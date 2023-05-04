@@ -20,9 +20,12 @@ import Preloader from "./../components/elements/Preloader"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config, library } from "@fortawesome/fontawesome-svg-core"
 import { SessionProvider } from "next-auth/react"
-
+import '../pages/global.css'
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 	const [loading, setLoading] = useState(false)
+	const [queryClient] = useState(() => new QueryClient());
 	config.autoAddCss = false
 	useEffect(() => {
 		setLoading(true)
@@ -47,9 +50,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 				<SessionProvider session={session}>
 					<Provider store={store}>
 						<StorageWrapper>
-							
-                            <Component {...pageProps} /> 
-                            
+							<QueryClientProvider client={queryClient}>
+                            	<Component {...pageProps} /> 
+								<ReactQueryDevtools initialIsOpen={false} />
+                        	</QueryClientProvider>    
 							<ToastContainer />
 						</StorageWrapper>
 					</Provider>

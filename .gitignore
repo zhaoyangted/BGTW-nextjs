@@ -81,7 +81,7 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 dist
-
+out
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and *not* Next.js
@@ -105,3 +105,24 @@ dist
 public/uploads/
 public/uploads/action_list/20210929170357190.jpeg
 public/uploads
+public/assets/imgs/brands/8.webp
+.gitignore
+public/assets/imgs/brands/19.webp
+public/assets/imgs/brands/14.webp
+.gitignore
+public/assets/imgs/brands/20.webp
+public/assets/imgs/brands/24.webp
+.gitignore
+public/assets/imgs/.DS_Store
+.gitignore
+public/assets/imgs/brands/41.webp
+public/assets/imgs/brands/46.webp
+public/assets/imgs/brands/47.webp
+public/assets/imgs/brands/55.webp
+.gitignore
+public/assets/imgs/brands/68.webp
+.gitignore
+public/assets/imgs/brands/56.webp
+.gitignore
+public/assets/imgs/brands/112.webp
+.DS_Store

@@ -1,32 +1,15 @@
 import SwiperCore, { Autoplay,Navigation, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
-import useSWR from "swr"
+//import useSWR from "swr"
 import Link from "next/link"
 SwiperCore.use([Autoplay,Navigation, Pagination])
 
-const Intro1 = () => {
-	const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
-	const { data, isLoading, error } = useSWR(process.env.apiServer+"/api/homepage/",fetcher)
+const Intro1 = ({data}) => {
+	/* const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
+	const { data, isLoading, error } = useSWR(process.env.apiServer+"/api/homepage/",fetcher) */
 
-	const Banner = () => {
-		return data?.BannerData.map((url, i) => {
-			//console.log(url.d_img)
-			return (
-			<SwiperSlide key={i}>
-				<div
-					className="single-hero-slider single-animation-wrap .slider-1-height-3"
-					
-				>
-					<Link href={`${url.d_link}`}>
-						 <img src={`${url.d_img}`} />
-						{/* <img src="assets/imgs/slider/slider-1.png" /> */}
-					</Link>
-				</div>
-			</SwiperSlide>
-			)
-		})
-	}
+	
 	return (
 		<>
 			<Swiper
@@ -75,7 +58,7 @@ const Intro1 = () => {
 				className="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1"
 			>
 				{
-					data?.BannerData.map((url, i) => (
+					data?.map((url, i) => (
 						//console.log(url.d_img)
 						<SwiperSlide key={i}>
 							<div

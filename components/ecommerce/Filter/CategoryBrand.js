@@ -27,26 +27,14 @@ const CategoryBrand = (
         });
     };
     const [isActive, setIsActive] = useState({
-		status: true,
+		status: false,
 		key:"",
 	})
     const [isActive2, setIsActive2] = useState({
-		status: true,
+		status: false,
 		key:"",
 	})
 	const handleToggle = (key) => {
-		if (isActive.key === key) {
-			setIsActive({
-				status: false,
-			})
-		} else {
-			setIsActive({
-				status: true,
-				key,
-			})
-		}
-	}
-    const handleToggle2 = (key) => {
 		if (isActive2.key === key) {
 			setIsActive({
 				status: false,
@@ -58,21 +46,33 @@ const CategoryBrand = (
 			})
 		}
 	}
-	let domNode = useClickOutside(() => {
+    const handleToggle2 = (key) => {
+		if (isActive2.key === key) {
+			setIsActive2({
+				status: false,
+			})
+		} else {
+			setIsActive2({
+				status: true,
+				key,
+			})
+		}
+	}
+	/* let domNode = useClickOutside(() => {
 		setIsActive({
 			status: false,
 		})
-	})
+	}) */
     
     //console.log(isActive)
     return (
     menusData&&<>
-        <ul className="mobile-menu-wrap" ref={domNode}>
+        <ul className="mobile-menu-wrap" /* ref={domNode} */>
 					{menusArray?.map((li, index) => {
 						return (
 							<li
 								key={index}
-								className={ "menu-item-has-children "+styles.menuitem}
+								className={ styles.menuitemhaschildren + styles.menuitem}
 							>
 								<Link href="#">{li[0]}</Link>
 								<span className="menu-expand" onClick={() => handleToggle(index)}>

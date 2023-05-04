@@ -1,8 +1,8 @@
 
 import Link from "next/link";
 
-const BlogGrid = ({ show, wide }) => {
-    var data = [
+const BlogGrid = ({ show, wide,data }) => {
+   /*  var data = [
         {
             id: 1,
             title: "The litigants on the screen are not actors",
@@ -138,10 +138,11 @@ const BlogGrid = ({ show, wide }) => {
             date: "25 April 2021",
             desc: "These people envy me for having a lifestyle they don’t have, but the truth is, sometimes I envy their lifestyle instead. Struggling to sell one multi.",
         },
-    ];
-
+    ]; */
+    const reg = /src\s*=\s*"(.+?)"/
     return <>
-        {data.slice(0, show).map((item, i) => (
+        {data?.slice(0, show).map((item, i) => (
+            
             <article
                 className={
                     wide
@@ -151,17 +152,17 @@ const BlogGrid = ({ show, wide }) => {
                 key={i}
             >
                 <div className="post-thumb">
-                    <Link href="/blog-post-right">
+                    <Link href={"/news/info/"+item.d_id}>
 
                         <img
                             className="border-radius-15"
-                            src={`/assets/imgs/blog/${item.img}`}
+                            src={item.d_content.split(reg)[1]}
                             alt=""
                         />
 
                     </Link>
                     <div className="entry-meta">
-                        <Link href="/blog-category-grid" className="entry-meta meta-2">
+                        <Link href={"/news/info/"+item.d_id} className="entry-meta meta-2">
 
                             <i className="fi-rs-heart"></i>
 
@@ -170,26 +171,26 @@ const BlogGrid = ({ show, wide }) => {
                 </div>
                 <div className="entry-content-2">
                     <h6 className="mb-10 font-sm">
-                        <Link href="/blog-category-grid" className="entry-meta text-muted">
+                        <Link href={"/news/"+item.TID} className="entry-meta text-muted">
 
-                            {item.category}
+                            {item.TID}
 
                         </Link>
                     </h6>
-                    <h4 className="post-title mb-15">
-                        <Link href="/blog-post-right">
-                            {item.title}
+                    <h6 className="post-title mb-15">
+                        <Link href={"/news/info/"+item.d_id}>
+                            {item.d_title}
                         </Link>
-                    </h4>
+                    </h6>
                     <div className="entry-meta font-xs color-grey mt-10 pb-10">
                         <div>
-                            <span className="post-on mr-10">{item.date}</span>
-                            <span className="hit-count has-dot mr-10">
+                            <span className="post-on mr-10">{item.d_date}</span>
+                            {/* <span className="hit-count has-dot mr-10">
                                 {item.views}k Views
                             </span>
                             <span className="hit-count has-dot">
                                 4 mins read
-                            </span>
+                            </span> */}
                         </div>
                     </div>
                 </div>

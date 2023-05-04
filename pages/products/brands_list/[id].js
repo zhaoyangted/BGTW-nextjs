@@ -27,30 +27,31 @@ const ProductsList = ({
 	
     let [pagination, setPagination] = useState([]);
     let [limit, setLimit] = useState(showLimit);
-    let [pages, setPages] = useState(Math.ceil(products.items.length / limit));
+    let [pages, setPages] = useState(Math.ceil(products.pages?.TotalRecord / limit));
     let [currentPage, setCurrentPage] = useState(1);
 	const { id } = Router.query;
     useEffect(() => {
 		if (!Router.isReady) {
 			return;
 		}
-        fetchProduct(searchTerm, /* "/static/product.json" */process.env.apiServer+`/api/product/blist/${id}`, productFilters);
+        fetchProduct(searchTerm, /* "/static/product.json" */process.env.apiServer+`/api/product/blist/${id}?page=${currentPage-1}&limit=${limit}&order=${productFilters.featured}`, productFilters);
         cratePagination();
-    }, [productFilters, limit, pages, products.items.length,id]);
+    }, [productFilters, limit, currentPage,pages,/*  products.items,*/id]);
 	
     const cratePagination = () => {
 		// set pagination
-        let arr = new Array(Math.ceil(products.items.length / limit))
+        //console.log(products.pages)
+        let arr = new Array(products.pages?.TotalPage/* Math.ceil(products?.pages?.TotalRecord / limit) */)
 		.fill()
 		.map((_, idx) => idx + 1);
 		
         setPagination(arr);
-        setPages(Math.ceil(products.items.length / limit));
+        setPages(products.pages?.TotalPage/* Math.ceil(products.pages?.TotalRecord / limit) */);
     };
 	//console.log(Object.entries(products.menus))
     const startIndex = currentPage * limit - limit;
     const endIndex = startIndex + limit;
-    const getPaginatedProducts = products.items.slice(startIndex, endIndex);
+    const getPaginatedProducts = products.items/* .slice(startIndex, endIndex) */;
 	
     let start = Math.floor((currentPage - 1) / showPagination) * showPagination;
     let end = start + showPagination;
@@ -71,7 +72,7 @@ const ProductsList = ({
     const selectChange = (e) => {
 		setLimit(Number(e.target.value));
         setCurrentPage(1);
-        setPages(Math.ceil(products.items.length / Number(e.target.value)));
+        setPages(Math.ceil(products?.pages.TotalRecord / Number(e.target.value)));
     };
 	//console.log(products.menus);
     return (
@@ -211,7 +212,7 @@ const ProductsList = ({
                                             
                                             找到
                                             <strong className="text-brand">
-                                                {products.items.length}
+                                                {products.pages?.TotalRecord}
                                             </strong>
                                             個產品!
                                         </p>
@@ -224,7 +225,7 @@ const ProductsList = ({
                                             />
                                         </div>
                                         <div className="sort-by-cover">
-                                            <SortSelect sortList={products.sorts}/>
+                                            <SortSelect /* sortList={products.sorts}*/ />
                                         </div>
                                     </div>
                                 </div>

@@ -13,7 +13,8 @@ export default (state = { items: [],sorts:{},types:{} }, action) => {
                 types: {...action.payload.typeData},
                 brands:{...action.payload.brandData},
                 menudatas:{...action.payload.menuData},
-                menus:{...action.payload.menu}
+                menus:{...action.payload.menu},
+                pages:{...action.payload.page}
             };
 
         case Types.FETCHED_MORE_PRODUCT:

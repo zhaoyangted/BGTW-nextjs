@@ -92,7 +92,7 @@
 	}
 	img {
 		max-height: 538px;
-		border-radius: 30px;
+		/* border-radius: 30px; */
 	}
 	.slider-content {
 		position: absolute;
@@ -432,8 +432,8 @@
 }
 
 .swiper-pagination-bullet {
-	width: 15px !important;
-	height: 15px !important;
+	width: 8px !important;
+	height: 8px !important;
 }
 .swiper-pagination-bullet-active {
 	background-color: $color-brand !important;
