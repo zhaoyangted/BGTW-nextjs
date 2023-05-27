@@ -15,7 +15,6 @@
         "@fortawesome/free-regular-svg-icons": "^6.3.0",
         "@fortawesome/free-solid-svg-icons": "^6.3.0",
         "@fortawesome/react-fontawesome": "^0.2.0",
-        "aws-sdk": "^2.1343.0",
         "axios": "^1.3.4",
         "babel-plugin-macros": "^3.1.0",
         "bootstrap": "^5.1.3",
@@ -33,6 +32,7 @@
         "react-redux": "^8.0.2",
         "react-responsive-modal": "^6.2.0",
         "react-toastify": "^9.0.3",
+        "react-twzipcode": "^3.0.1",
         "reactstrap": "^9.0.3",
         "redux": "^4.2.0",
         "redux-devtools-extension": "^2.13.9",
@@ -43,6 +43,8 @@
     },
     "devDependencies": {
         "@types/node": "18.15.7",
+        "@types/react": "^18.2.6",
+        "@types/react-dom": "^18.2.4",
         "sass": "^1.59.3",
         "typescript": "5.0.2"
     }

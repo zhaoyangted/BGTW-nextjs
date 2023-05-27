@@ -16,7 +16,7 @@ const Compare = ({ compare, clearCompare, deleteFromCompare }) => {
                                     Products Compare
                                 </h1>
                                 <h6 className="text-body mb-40">
-                                    There are <span className="text-brand">3</span>
+                                    There are <span className="text-brand">{compare.items.length}</span>
                                     products to compare
                                 </h6>
                                 <div className="table-responsive">

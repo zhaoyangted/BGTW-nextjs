@@ -1,6 +1,6 @@
 // Delete Product from List By Id
 export const deleteProduct = (list, id) => {
-    const filter = list.filter((item) => item.id !== id);
+    const filter = list.filter((item) => item.d_id !== id);
     return filter;
   };
   

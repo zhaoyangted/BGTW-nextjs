@@ -1124,3 +1124,28 @@ a .comm_TxBx  { color:#292b2c; }
 @media only screen and (min-width: 0px) and (max-width: 768px){
 .commBannItm > ul { width: calc( 100% / 2 - 10px); }
 }
+div.page {
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+div.page .current {
+    padding: 3px 8px;
+    color: #fff;
+    background: #999;
+    border-radius: 5px;
+}
+div.page a {
+    padding: 3px 8px;
+    margin: 2px;
+    color: #666;
+    background: #FFF;
+    text-decoration: none;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    display: inline-block;
+}

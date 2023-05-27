@@ -61,7 +61,7 @@ function Login(context/* {csrfToken} */) {
 												{status === "authenticated" ? (
 													<div>
 														This page is Protected for special people. like{"\n"}
-														{JSON.stringify(data.user, null, 2)}
+														{/* {JSON.stringify(data.user, null, 2)} */}
 														{status === "authenticated" && (
 															<a href="#" onClick={handleSignout} className="btn-signin">
 																Sign out

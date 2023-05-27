@@ -75,7 +75,7 @@ const CartSidebar = ({
                                             <span
                                                 onClick={(e) =>
                                                     decreaseQuantity(
-                                                        item.id
+                                                        item.d_id
                                                     )
                                                 }
                                             >
@@ -85,7 +85,7 @@ const CartSidebar = ({
                                             <span
                                                 onClick={(e) =>
                                                     increaseQuantity(
-                                                        item.id
+                                                        item.d_id
                                                     )
                                                 }
                                             >

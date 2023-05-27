@@ -52,11 +52,12 @@ const Wishlist = ({
                                                         <tr className="pt-30" key={i}>
                                                             <td className="image product-thumbnail pt-40">
                                                                 <img
-                                                                    src={
+                                                                    src={'/'+product.d_img1}
+                                                                    /* src={
                                                                         product
                                                                             .images[0]
                                                                             .img
-                                                                    }
+                                                                    } */
                                                                     alt=""
                                                                     className="img-fluid"
                                                                 />
@@ -66,7 +67,7 @@ const Wishlist = ({
                                                                 <h6 className="product-name  mb-10">
                                                                     <a>
                                                                         {
-                                                                            product.title
+                                                                            product.d_title
                                                                         }
                                                                     </a>
                                                                 </h6>
@@ -92,7 +93,7 @@ const Wishlist = ({
                                                                 <h3 className="text-brand">
                                                                     $
                                                                     {
-                                                                        product.price
+                                                                        product.d_price
                                                                     }
                                                                 </h3>
                                                             </td>
@@ -116,7 +117,7 @@ const Wishlist = ({
                                                                 className="text-right"
                                                                 data-title="Cart"
                                                             >
-                                                                {product.stock ===
+                                                                {product.d_stock ===
                                                                 0 ? (
                                                                     <button className="btn btn-sm btn-secondary">
                                                                         Contact
@@ -147,7 +148,7 @@ const Wishlist = ({
                                                                         e
                                                                     ) =>
                                                                         deleteFromWishlist(
-                                                                            product.id
+                                                                            product.d_id
                                                                         )
                                                                     }
                                                                 >

@@ -6,12 +6,12 @@ import { connect } from "react-redux"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons'
-import Image  from 'next/image'
+//import Image  from 'next/image'
 import { useSession, signIn, signOut } from "next-auth/react"
 import styles from '../../components/header.module.css'
 import axios from "axios"
 axios.defaults.withCredentials=true
-const img=Image
+//const img=Image
 const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistItems, data, config }) => {
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
@@ -171,7 +171,7 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 						<div className="header-wrap">
 							<div className="header-right">
 								
-								{status==='authenticated'?(<><Link href="/page-account" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;handleSignOut()}} className="user__link user__link--register">
+								{status==='authenticated'?(<><Link href="/account/" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;handleSignOut()}} className="user__link user__link--register">
 								會員登出</Link></>):(<><Link href="/page-login" className="user__link user__link--login">
 								會員登入</Link><Link href="/page-join" className="user__link user__link--register">
 								加入會員</Link></>)}
@@ -286,15 +286,16 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 															<div className={styles.HdNAVUBTopTT02}>會員服務專區</div>
 															<div className={styles.mendercont}>
 																<div className={styles.ImeALBox}>
-																	<ul className={styles.IntmenderCr}><Link href="member">前往會員中心</Link></ul>
-																	<ul className={styles.ImePs}><Link href="member/orders">購物紀錄與訂單查詢</Link></ul>
-																	<ul className={styles.ImeLovepord}><Link href="member/favorite">我的收藏</Link></ul>
-																	<ul className={styles.ImeFriend}><Link href="member/friend">邀請好友加入會員</Link></ul>
+																	<ul className={styles.IntmenderCr}><Link href={{
+																		pathname: '/account'}}>前往會員中心</Link></ul>
+																	<ul className={styles.ImePs}><Link href="/account/?activeTab=order">購物紀錄與訂單查詢</Link></ul>
+																	<ul className={styles.ImeLovepord}><Link href="/account/?activeTab=favor">我的收藏</Link></ul>
+																	<ul className={styles.ImeFriend}><Link href="/account/?activeTab=friend">邀請好友加入會員</Link></ul>
 																</div>
 																<div className={styles.ImeALBox}>
-																	<ul className={styles.ImcoutBx}><Link href="member/account">會員資料修改</Link></ul>
-																	<ul className={styles.ImcoutBx}><Link href="member/point">會員點數查詢</Link></ul>
-																	<ul className={styles.ImcoutBx}><Link href="member/account">訂閱/取消 電子報</Link></ul>
+																	<ul className={styles.ImcoutBx}><Link href="/account?activeTab=info">會員資料修改</Link></ul>
+																	<ul className={styles.ImcoutBx}><Link href="/account?activeTab=point">會員點數查詢</Link></ul>
+																	<ul className={styles.ImcoutBx}><Link href="/account?activeTab=info">訂閱/取消 電子報</Link></ul>
 																	<ul className={styles.ImcoutBx}><Link href="qa">常見問題</Link></ul>
 																</div>
 																<div className={styles.ImeALBox}>

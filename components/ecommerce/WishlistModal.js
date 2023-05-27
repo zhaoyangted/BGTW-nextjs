@@ -49,18 +49,18 @@ const WishlistModal = ({
                                     </td>
                                 </tr>
 
-                                {wishlist.items.map((product) => (
-                                    <tr>
+                                {wishlist.items.map((product,i) => (
+                                    <tr key={i}>
                                         <td>
                                             <img
-                                                src={product.image}
+                                                src={product.d_image1}
                                                 alt=""
                                                 className="img-fluid"
                                                 width="70"
                                             />
                                         </td>
 
-                                        <td>${product.price}</td>
+                                        <td>${product.d_price}</td>
                                         <td style={{ width: "200px" }}>
                                             <span
                                                 onClick={(e) => handleCart(product)}
@@ -74,7 +74,7 @@ const WishlistModal = ({
                                         >
                                             <span
                                                 onClick={(e) =>
-                                                    deleteFromWishlist(product.id)
+                                                    deleteFromWishlist(product.d_id)
                                                 }
                                             >
                                                 <button>Delete</button>

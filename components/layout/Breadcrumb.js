@@ -11,11 +11,12 @@ const Breadcrumb = ({parent, sub, subChild ,noBreadcrumb}) => {
                         {parent}
 
                     </Link></li>
-                    {/* <span></span> {sub}
-                    <span></span> {subChild} */}
-                    <div className={styles.breadcrumblink} dangerouslySetInnerHTML={{__html:subChild}}>
+                    {sub&&<> <span></span> {sub}
+                     </>}{/* <span></span>{subChild} */}
+                    {subChild&&<div className={styles.breadcrumblink} 
+                    dangerouslySetInnerHTML={{__html:subChild}}>
 
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

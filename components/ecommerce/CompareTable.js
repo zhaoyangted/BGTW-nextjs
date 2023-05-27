@@ -13,31 +13,31 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
     return (
         <table className="table text-center">
             <tbody>
-                {features.map((feature) => (
-                    <tr>
+                {features.map((feature,i) => (
+                    <tr key={i}>
                         <th
                             className="text-muted font-md fw-600"
                             style={{ textTransform: "capitalize" }}
                         >
                             {feature}
                         </th>
-                        {data.map((product) =>
+                        {data.map((product,i) =>
                             feature == "preview" ? (
-                                <td className="row_img">
-                                    <img src={product.images[0].img} />
+                                <td className="row_img" key={i}>
+                                    <img src={product.d_img1} />
                                 </td>
                             ) : feature == "name" ? (
                                 <td className="product_name">
                                     <h5>
-                                        <a href="#">{product.title}</a>
+                                        <a href="#">{product.d_title}</a>
                                     </h5>
                                 </td>
                             ) : feature == "price" ? (
-                                <td className="product_price">
-                                    <span className="price">${product.price}</span>
+                                <td className="product_price" key={i}>
+                                    <span className="price">${product.d_price}</span>
                                 </td>
                             ) : feature == "rating" ? (
-                                <td>
+                                <td key={i}>
                                     <div className="rating_wrap">
                                         {product.review >= 0 && (
                                             <>
@@ -58,12 +58,12 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                     </div>
                                 </td>
                             ) : feature == "description" ? (
-                                <td className="row_text font-xs">
-                                    <p>{product.desc}</p>
+                                <td className="row_text font-xs" key={i}>
+                                    <p>{product.d_desc}</p>
                                 </td>                
                             ) : feature == "stock" ? (
-                                <td className="row_stock">
-                                    {product.stock >= 0 ? (
+                                <td className="row_stock" key={i}>
+                                    {product.d_stock >= 0 ? (
                                         <span>In Stock</span>
                                     ) : (
                                         <span className="text-danger font-weight-bold">
@@ -72,14 +72,14 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                     )}
                                 </td>
                             ) : feature == "weight" ? (
-                                <td className="row_weight">
+                                <td className="row_weight" key={i}>
                                     {product.weight} gram
                                 </td>
                             ) : feature == "dimensions" ? (
                                 <td className="row_dimensions">N/A</td>
                             ) : feature == "buy" ? (
-                                <td className="row_btn">
-                                    {product.stock >= 0 ? (
+                                <td className="row_btn" key={i}>
+                                    {product.d_stock >= 0 ? (
                                         <button
                                             className="btn  btn-sm"
                                             onClick={(e) => handleCart(product)}
@@ -98,10 +98,10 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                     )}
                                 </td>
                             ) : feature == " " ? (
-                                <td className="row_remove">
+                                <td className="row_remove" key={i}>
                                     <a
                                         onClick={() =>
-                                            deleteFromCompare(product.id)
+                                            deleteFromCompare(product.d_id)
                                         }
                                     >
                                         <i className="fi-rs-trash mr-5"></i>
