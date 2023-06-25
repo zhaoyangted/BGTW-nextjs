@@ -4,8 +4,8 @@ import Link from "next/link"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import { useRouter } from "next/router"
-import axios from "axios"
-import { METHODS } from "http"
+//import axios from "axios"
+//import { METHODS } from "http"
 const OrderInfo = () => {
 	const { query } = useRouter()
     const activeTab = useActiveTab()

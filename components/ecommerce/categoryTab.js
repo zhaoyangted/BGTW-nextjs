@@ -55,8 +55,11 @@ function CategoryTab() {
 
     return (
         <>
-            <div className="section-title style-2 wow animate__animated animate__fadeIn">
-                <h3>人氣商品特賣</h3>
+            <div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0" style={{textAlign:"center"}}>
+                <h4>人氣商品特賣</h4>
+            </div>
+            
+                
                 <ul className="nav nav-tabs links" id="myTab" role="tablist">
                     {cats?.map((item,i)=>{
                         return (
@@ -114,7 +117,6 @@ function CategoryTab() {
                         </button>
                     </li> */}
                 </ul>
-            </div>
 
             <div className="tab-content wow fadeIn animated">
                 {

@@ -1027,22 +1027,6 @@ a.menu-title {
 .header-middle-ptb-1 {
 	padding: 0;
 }
-.cart-dropdown-wrap {
-	position: absolute;
-	right: 0;
-	top: calc(100% + 20px);
-	z-index: 99;
-	width: 320px;
-	background-color: #fff;
-	-webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
-	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
-	opacity: 0;
-	visibility: hidden;
-	-webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-	border-radius: 10px;
-	border: 1px solid #ececec;
-}
 .cart-dropdown-wrap.cart-dropdown-hm2 {
     right: 0;
   }
@@ -1148,4 +1132,91 @@ div.page a {
     border: 1px solid #e3e3e3;
     border-radius: 5px;
     display: inline-block;
+}
+.IndSPCont {
+    width: 100%;
+    height: auto;
+    padding: 20px 10px;
+    background-color: #ffffff;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.IndSPContUr {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
+}
+.IndSprPHT {
+    width: 60px;
+    height: auto;
+    float: left;
+}
+.IndSprTxBx {
+    width: calc( 100% - 160px);
+    float: left;
+    font-size: 12px;
+    float: left;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0px 10px;
+}
+.CrProdName {
+    line-height: 16px;
+}
+.CrProdName, .CrPrQTY {
+    width: 100%;
+    font-size: 12px;
+    color: #242424;
+    text-align: justify;
+    padding: 5px 0px;
+}
+.IndSprBaX {
+    width: 100px;
+    height: auto;
+    float: left;
+    padding: 0px 0px 0px 0px;
+}
+.header-action-icon-2:hover > ul > ul {
+    max-height: 580px;
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.085);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.085);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.HtIcBx01:nth-child(2) > ul > ul {
+    width: 460px;
+}
+.MneyBox {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }

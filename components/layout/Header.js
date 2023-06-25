@@ -10,12 +10,43 @@ import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons
 import { useSession, signIn, signOut } from "next-auth/react"
 import styles from '../../components/header.module.css'
 import axios from "axios"
+import useFetchCart from "../../util/fetchCart"
 axios.defaults.withCredentials=true
+import {
+    clearCart,
+    closeCart,
+    decreaseQuantity,
+    deleteFromCart,
+    increaseQuantity,
+    openCart
+} from "../../redux/action/cart";
 //const img=Image
-const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistItems, data, config }) => {
+const Header = ({ 
+	totalCartItems,
+ 	totalCompareItems,
+	toggleClick, 
+	totalWishlistItems, 
+	data, 
+	config,
+	openCart,
+	cartItems,
+	activeCart,
+	closeCart,
+	increaseQuantity,
+	decreaseQuantity,
+	deleteFromCart,
+	clearCart,
+	}) => {
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
+	const [apidata,setApidata] = useState({})
 	const { status, data:session } = useSession()
+	const price = () => {
+        let price = 0;
+        cartItems.forEach((item) => (price += item.d_price * item.quantity));
+
+        return price;
+    };
 	// const menu = JSON.stringify(data)
 	// console.log(menu)
 	//console.log(Object.values(config))
@@ -27,6 +58,26 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 			}
 		})
 	})
+	
+	useEffect(()=>{
+		const point = async () => {
+				let str = '';
+				cartItems?.map((p,i)=>{
+					p.d_id?
+					str=str+p.d_id+'@#'+p.quantity+'@#;'
+					:null;
+				})
+				str = str.replace(/;\s*$/, "");
+				const res = await axios.post(
+				process.env.apiServer+"/api/cart/cart/",
+				{
+					cart:str
+				});
+				setApidata(res.data)
+				//return res.data['BonusTotal']
+			}
+		point()
+	},[cartItems])
 	const Navmenu = () => {
 		return (
 			<div className="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block  font-heading">
@@ -172,8 +223,8 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 							<div className="header-right">
 								
 								{status==='authenticated'?(<><Link href="/account/" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;handleSignOut()}} className="user__link user__link--register">
-								會員登出</Link></>):(<><Link href="/page-login" className="user__link user__link--login">
-								會員登入</Link><Link href="/page-join" className="user__link user__link--register">
+								會員登出</Link></>):(<><Link href="/login" className="user__link user__link--login">
+								會員登入</Link><Link href="/register" className="user__link user__link--register">
 								加入會員</Link></>)}
 							</div>
 							{/* <div className="header-right IntMemberStatus">
@@ -318,63 +369,71 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 												<span className={styles.cartlabel}>購物車</span>
 											</Link>
 											
-											<div className="cart-dropdown-wrap cart-dropdown-hm2">
+											<div className="cart-dropdown-wrap cart-dropdown-hm2"style={{wid
+											:"460px"}}>
+											<ul className="ICBoTX">
+											<div className="HdNAVUBTopTT03">購物車狀態</div>
+											<div className="IndSPCont" >
+											{cartItems.length>0?
 												<ul>
-													<li>
-														<div className="shopping-cart-img">
-															<Link href="/shop-grid-right">
-																<img alt="Evara" src="/assets/imgs/shop/thumbnail-3.jpg" />
-															</Link>
+													{cartItems.length > 0?
+													cartItems.map((item,i)=>{
+													return (
+													<div className="IndSPContUr" key={i}>
+													<ul className="IndSprPHT">
+														<img src={"/"+item['d_img1']} alt=""/>
+													</ul>
+													<ul className="IndSprTxBx">
+														<li className="CrProdName">
+															{item['d_title']}
+															</li>
+													</ul>
+													<ul className="IndSprBaX">
+														<li className="CrProdName">x
+														{item['quantity']}
+														</li>
+													</ul>
+													<ul className="IndSprBaX">
+														<li className="TicPystxc04">單價：NT$
+														{item['d_price']}
+														</li>
+													</ul>
+													</div>
+													)
+													})
+													
+													:null}
+												
+												
+												
+												<div className="IndSPContUr02">
+													<div className="MneyBox">
+														<div className="tpSCtxb">會員購物滿額 
+														{apidata?.OneFreight?.d_free}元免運費
 														</div>
-														<div className="shopping-cart-title">
-															<h4>
-																<Link href="/shop-grid-right">Plain Striola Shirts</Link>
-															</h4>
-															<h3>
-																<span>1 × </span>
-																$800.00
-															</h3>
+														<div className="tpSCtxb">商品紅利小計 
+															<font color="#FF9EDB">
+																{apidata.BonusTotal}點
+															</font>
 														</div>
-														<div className="shopping-cart-delete">
-															<Link href="/#">
-																<i className="fi-rs-cross-small"></i>
-															</Link>
-														</div>
-													</li>
-													<li>
-														<div className="shopping-cart-img">
-															<Link href="/shop-grid-right">
-																<img alt="Evara" src="/assets/imgs/shop/thumbnail-4.jpg" />
-															</Link>
-														</div>
-														<div className="shopping-cart-title">
-															<h4>
-																<Link href="/shop-grid-right">Macbook Pro 2022</Link>
-															</h4>
-															<h3>
-																<span>1 × </span>
-																$3500.00
-															</h3>
-														</div>
-														<div className="shopping-cart-delete">
-															<Link href="/#">
-																<i className="fi-rs-cross-small"></i>
-															</Link>
-														</div>
-													</li>
-												</ul>
+													</div>
+												</div>
 												<div className="shopping-cart-footer">
 													<div className="shopping-cart-total">
 														<h4>
-															Total
-															<span>$383.00</span>
+															金額小計:
+															<span className="MenyToT">NT${price()}</span>
 														</h4>
 													</div>
 													<div className="shopping-cart-button">
-														<Link href="/shop-cart">View cart</Link>
-														<Link href="/shop-checkout">Checkout</Link>
+														<Link href="/shop-cart">購物車</Link>
+														<Link href="/shop-checkout">結帳</Link>
 													</div>
 												</div>
+												</ul>:
+												<h4 style={{textAlign:"center"}}>購物車空</h4>}
+												</div>
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -555,10 +614,21 @@ const Header = ({ totalCartItems, totalCompareItems, toggleClick, totalWishlistI
 	)
 }
 
+
+const mapDispatchToProps = {
+    closeCart,
+    increaseQuantity,
+    decreaseQuantity,
+    deleteFromCart,
+    openCart,
+    clearCart,
+};
 const mapStateToProps = (state) => ({
 	totalCartItems: state.cart.length,
 	totalCompareItems: state.compare.items.length,
 	totalWishlistItems: state.wishlist.items.length,
+	cartItems: state.cart,
+    activeCart: state.counter,
 })
 
-export default connect(mapStateToProps, null)(Header)
+export default connect(mapStateToProps, mapDispatchToProps,null)(Header)

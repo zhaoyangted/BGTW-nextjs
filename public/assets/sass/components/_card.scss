@@ -46,6 +46,7 @@
     margin-bottom: 20px;
     min-height: 180px;
     transition: 0.2s;
+    box-sizing: content-box;
     &:hover {
         background: #fff;
         border: 1px solid $border-color-2;

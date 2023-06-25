@@ -871,7 +871,7 @@ button.submit, button[type=submit] {
   border: none;
   background-color: #003366;
   border: 1px solid #3d9ed1;
-  border-radius: 10px;
+  /*  border-radius: 10px; */
 }
 button.submit:hover, button[type=submit]:hover {
   background-color: #3d9ed1 !important;
@@ -1519,7 +1519,6 @@ label {
   position: relative;
 }
 .hero-slider-1 .single-hero-slider {
-  height: 538px;
   border-radius: 30px;
   background-size: cover;
   background-position: center center;
@@ -1539,6 +1538,7 @@ label {
 }
 .hero-slider-1 img {
   max-height: 538px;
+  width: 100%;
   /* border-radius: 30px; */
 }
 .hero-slider-1 .slider-content {
@@ -1892,6 +1892,7 @@ label {
   margin-bottom: 20px;
   min-height: 180px;
   transition: 0.2s;
+  box-sizing: content-box;
 }
 .card-2:hover {
   background: #fff;
@@ -2092,7 +2093,7 @@ label {
 /*COMPONENTS -> TABS*/
 .nav-tabs {
   border: 0;
-  margin-bottom: 4px;
+  margin-bottom: 40px;
 }
 .nav-tabs .nav-link {
   background-color: rgb(238, 238, 238);
@@ -5556,6 +5557,9 @@ h6.post-title {
   opacity: 1;
   visibility: visible;
   top: calc(100% + 10px);
+  max-height: 580px;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.085);
+  transition: all 0.5s ease;
 }
 
 .header-middle-ptb-1 {
@@ -5642,7 +5646,7 @@ h6.post-title {
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total {
   border-top: 2px solid #f3f3f3;
   margin: 25px 0;
-  padding: 17px 0 0;
+  padding: 20px;
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total h4 {
   color: #9b9b9b;
@@ -5657,12 +5661,13 @@ h6.post-title {
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   flex-wrap: wrap;
   margin-top: 20px;
   align-items: center;
   align-self: center;
+  margin-bottom: 30px;
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a {
   display: inline-block;
@@ -5722,7 +5727,7 @@ h6.post-title {
   color: #253D4E;
   font-size: 16px;
   font-weight: 700;
-  min-height: 50px;
+  min-height: 40px;
   /* border: 1px solid $border-color; */
   border-right: 1px solid #ececec;
   width: 140px;
@@ -5744,7 +5749,6 @@ h6.post-title {
   width: 100%;
   max-width: 683px;
   font-size: 14px;
-  background-image: url(../imgs/theme/icons/search.png);
   background-repeat: no-repeat;
   background-position: center right;
   padding-left: 0;
@@ -5767,6 +5771,9 @@ h6.post-title {
   position: absolute;
   right: 0px;
   top: 50%;
+  border: 1px solid #3d9ed1;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
   transform: translateY(-50%);
   background-color: transparent;
   padding: 0;
@@ -6010,7 +6017,7 @@ h6.post-title {
 .mobile-header-wrapper-style {
   position: fixed;
   top: 0;
-  width: 360px;
+  width: 100%;
   min-height: 100vh;
   bottom: 0;
   left: 0;
@@ -6352,6 +6359,7 @@ h6.post-title {
   background-color: #fff;
 }
 .header-style-1 .search-style-2 form input {
+  height: 40px;
   max-width: 600px;
   border-width: 0px;
   border-radius: 0 5px 5px 0;
@@ -9065,9 +9073,6 @@ footer .hotline img {
     width: 270px;
     font-size: 25px;
     padding: 21px 20px 12px 0;
-  }
-  .mobile-header-wrapper-style {
-    width: 380px;
   }
   .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-top {
     padding: 15px 30px 13px 30px;

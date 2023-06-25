@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import Layout from "../components/layout/Layout"
 import fetchJson, { FetchError } from "../lib/fetchJson"
+import styles from '../components/account.module.css'
 import { useSession, signIn, signOut,getCsrfToken } from "next-auth/react"
 function Login(context/* {csrfToken} */) {
 	const [userInfo, setUserInfo] = useState({ email: "", password: "" })
@@ -21,6 +22,11 @@ function Login(context/* {csrfToken} */) {
 			console.log(e)
 		}
 	},[]) */
+	const handleImgClick =(e) =>{
+		
+		e.preventDefault();//console.log(e.target)
+		e.target.src=process.env.apiServer+'/login/make_vcode_img'+'?'+Math.random()
+	}
 	async function handleSubmit(e) {
 		e.preventDefault()
 		const res = await signIn("credentials", {
@@ -46,17 +52,17 @@ function Login(context/* {csrfToken} */) {
 						<div className="row">
 							<div className="col-xl-8 col-lg-10 col-md-12 m-auto">
 								<div className="row">
-									<div className="col-lg-6 pr-30 d-none d-lg-block">
+									{/* <div className="col-lg-6 pr-30 d-none d-lg-block">
 										<img className="border-radius-15" src="assets/imgs/page/login-1.png" alt="" />
-									</div>
+									</div> */}
 									<div className="col-lg-6 col-md-8">
 										<div className="login_wrap widget-taber-content background-white">
-											<div className="padding_eight_all bg-white">
-												<div className="heading_s1">
-													<h1 className="mb-5">Login</h1>
-													<p className="mb-30">
+											<div className="content_box">
+												<div className="mbox">
+													<h1 className={styles.title01}>會員登入</h1>
+													{/* <p className="mb-30">
 														Don't have an account? <Link href="/page-register">{errorMsg?errorMsg:'Create here'}</Link>
-													</p>
+													</p> */}
 												</div>
 												{status === "authenticated" ? (
 													<div>
@@ -70,7 +76,50 @@ function Login(context/* {csrfToken} */) {
 													</div>
 												) : (
 													<form method="post" onSubmit={handleSubmit}>
-														<div className="form-group">
+														<ul className={styles.styled_input}>
+															<li>
+																<h2>帳號*</h2>
+																{/* <input type="text" name="d_account" /> */}
+																<input
+																type="text"
+																required=""
+																name="email"
+																placeholder="Username or Email *"
+																value={userInfo.email}
+																onChange={({ target }) => setUserInfo({ ...userInfo, email: target.value })}
+															/>
+															</li>
+															<li>
+																<h2>密碼*</h2>
+																{/* <input type="password" name="d_password" /> */}
+																<input
+																required=""
+																type="password"
+																name="password"
+																placeholder="Your password *"
+																value={userInfo.password}
+																onChange={({ target }) => setUserInfo({ ...userInfo, password: target.value })}
+															/>
+															</li>
+															<li>
+																<h2>驗証碼*</h2>
+																<input type="text" name="d_captcha" />
+															</li>
+															<li className={styles.contact_captcha}>
+																<img  id="captcha" src={process.env.apiServer + "/login/make_vcode_img"} onClick={handleImgClick}/>
+															</li>
+															<div className="pw"><a href='/login/forgetpwd'>忘記密碼?</a></div>
+															<li style={{textAlign:"center"}}>
+																<input type="submit" className={styles.btn_style02} value="登入" />
+																<input type="button" className={styles.btn_style02} value="加入會員" onClick={()=>{'/login/join'}} />
+															</li>
+															 <input
+                                                                name="csrfToken"
+                                                                type="hidden"
+                                                                defaultValue={csrfToken}
+                                                                />
+															</ul>
+														{/*<div className="form-group">
                                                             <input
                                                                 name="csrfToken"
                                                                 type="hidden"
@@ -94,8 +143,8 @@ function Login(context/* {csrfToken} */) {
 																value={userInfo.password}
 																onChange={({ target }) => setUserInfo({ ...userInfo, password: target.value })}
 															/>
-														</div>
-														<div className="login_footer form-group">
+														</div> */}
+														{/* <div className="login_footer form-group">
 															<div className="chek-form">
 																<input type="text" required="" name="security" placeholder="Security code *" />
 															</div>
@@ -129,7 +178,7 @@ function Login(context/* {csrfToken} */) {
 															<button type="submit" className="btn btn-heading btn-block hover-up" name="login">
 																Log in
 															</button>
-														</div>
+														</div> */}
 													</form>
 												)}
 											</div>

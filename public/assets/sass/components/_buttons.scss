@@ -67,7 +67,7 @@ button.submit, button[type='submit'] {
     border: none;
     background-color: $color-brand-dark;
 	border: 1px solid $color-brand;
-    border-radius: 10px;
+   /*  border-radius: 10px; */
     &:hover {
         background-color: #3d9ed1 !important;
     }
