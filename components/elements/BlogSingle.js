@@ -8,7 +8,7 @@ const BlogSingle = ({data}) => {
                 <div className="row">
                     <div className="col-xl-10 col-lg-12 m-auto">
                         <h6 className="mb-10">
-                            <Link href={"/news/"+data?.category?.d_id}>{data?.category?.d_title}</Link>
+                            <Link href={"/news/?id="+data?.category?.d_id}>{data?.category?.d_title}</Link>
                         </h6>
                         <h2 className="mb-10">
                             {data?.dbdata?.d_title}

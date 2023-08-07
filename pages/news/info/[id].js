@@ -5,7 +5,7 @@ import { useQuery} from 'react-query'
 function PageBlogSingle() {
     const Router = useRouter()
     const {id} =  Router.query 
-    const fetchNew = async () =>{
+    const fetchNew = async (id) =>{
         const request = await fetch(process.env.apiServer + `/api/news/${id}`,
         {
         credentials: "include"})
@@ -17,8 +17,8 @@ function PageBlogSingle() {
         return data
         }
     const { isSuccess, data, isLoading, isError,refetch,isPreviousData } = useQuery({
-        queryKey:["getNew",''],
-        queryFn:() => fetchNew(),
+        queryKey:["getNew",id],
+        queryFn:() => fetchNew(id),
         keepPreviousData: true,
         staleTime: 5000,
         enabled:id!==undefined && Router.isReady,

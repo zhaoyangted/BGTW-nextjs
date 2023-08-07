@@ -126,3 +126,4 @@ public/assets/imgs/brands/56.webp
 .gitignore
 public/assets/imgs/brands/112.webp
 .DS_Store
+build

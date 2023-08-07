@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 
-const BlogGrid = ({ show, wide,data }) => {
+const BlogGrid = ({ show, wide,data,cat }) => {
    /*  var data = [
         {
             id: 1,
@@ -171,9 +171,9 @@ const BlogGrid = ({ show, wide,data }) => {
                 </div>
                 <div className="entry-content-2">
                     <h6 className="mb-10 font-sm">
-                        <Link href={"/news/"+item.TID} className="entry-meta text-muted">
+                        <Link href={"/news/?id="+item.TID} className="entry-meta text-muted">
 
-                            {item.TID}
+                            {cat}
 
                         </Link>
                     </h6>

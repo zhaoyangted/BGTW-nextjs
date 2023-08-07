@@ -10,7 +10,7 @@ export const deleteProduct = (list, id) => {
     return index;
   };
   export const findProductIndexById = (list, id) => {
-    const index = list.findIndex((item) => item.id === id);
+    const index = list.findIndex((item) => item.d_id === id);
     return index;
   };
   

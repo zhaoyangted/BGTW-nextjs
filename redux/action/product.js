@@ -1,75 +1,75 @@
 // import fetch from 'isomorphic-unfetch'
-import filterProductList from '../../util/filterProduct'
-import searchItemsByText from '../../util/searchItemsByText'
-import * as Types from '../constants/actionTypes'
+import filterProductList from "../../util/filterProduct"
+import searchItemsByText from "../../util/searchItemsByText"
+import * as Types from "../constants/actionTypes"
+import axios from "axios"
 
 // Fetch Product fetchProduct
-export const fetchProduct = (searchTerm, url, filters) => async dispatch => {
-    try {
-        //console.log(filters)
-        const sendRequest = await fetch(url,{credentials:'include'})
-        const data = await sendRequest.json()
-
-        /* window.products = data.dbdata.dbdata
+export const fetchProduct = (searchTerm, url, filters, podata) => async (dispatch) => {
+	let data
+	try {
+		//console.log(podata)
+		let sendRequest = ""
+		if (!podata) {
+			sendRequest = await fetch(url, { credentials: "include" })
+			data = await sendRequest.json()
+		} else {
+			sendRequest = await axios.post(url, podata, { credentials: "include" })
+			data = sendRequest.data
+		}
+		//console.log(data.dbdata.dbdata)
+		/* window.products = data.dbdata.dbdata
         window.sortData = data.OrderArray
         window.typeData = data.TypeData */
 
-        const searchedItems = searchItemsByText(searchTerm, data.dbdata.dbdata)
-        const filteredList = filterProductList(searchedItems, filters)
+		const searchedItems = searchItemsByText(searchTerm, data.dbdata.dbdata)
+		const filteredList = filterProductList(searchedItems, filters)
 
-        dispatch({
-            type: Types.FETCHED_PRODUCT,
-            payload: { products:filteredList,
-                       sortData:data.OrderArray,
-                       typeData:data.TypeData,
-                       brandData:data.BrandData,
-                       menuData:data.Menudata,
-                       menu:data.Menu,
-                       page:data.dbdata.PageList    
-                    }
-        })
-
-    } catch (error) {
-        console.log(error)
-    }
-
+		dispatch({
+			type: Types.FETCHED_PRODUCT,
+			payload: {
+				products: filteredList,
+				sortData: data.OrderArray,
+				typeData: data.TypeData,
+				brandData: data.BrandData,
+				menuData: data.Menudata,
+				menu: data.Menu,
+				page: data.dbdata.PageList,
+			},
+		})
+	} catch (error) {
+		console.log(error)
+	}
 }
 
+// Fetch More Product
+export const fetchMoreProduct = (url, total) => async (dispatch) => {
+	try {
+		const sendRequest = await fetch(url)
+		const data = await sendRequest.json()
 
-// Fetch More Product 
-export const fetchMoreProduct = (url, total) => async dispatch => {
-    try {
+		// const searchedItems = searchItemsByText(searchTerm,data)
+		// const filteredList  = filterProductList(searchedItems,filters)
 
-        const sendRequest = await fetch(url)
-        const data = await sendRequest.json()
-
-        // const searchedItems = searchItemsByText(searchTerm,data)
-        // const filteredList  = filterProductList(searchedItems,filters)
-
-        dispatch({
-            type: Types.FETCHED_MORE_PRODUCT,
-            payload: { products: data, total }
-        })
-
-    } catch (error) {
-        console.log(error)
-    }
-
+		dispatch({
+			type: Types.FETCHED_MORE_PRODUCT,
+			payload: { products: data, total },
+		})
+	} catch (error) {
+		console.log(error)
+	}
 }
-
 
 // Fetch Product By Catagory
 
 export const fetchByCatagory = async (url, filters) => {
-    try {
+	try {
+		const sendRequest = await fetch(url)
+		const data = await sendRequest.json()
+		const filteredList = filterProductList(data, filters)
 
-        const sendRequest = await fetch(url)
-        const data = await sendRequest.json()
-        const filteredList = filterProductList(data, filters)
-
-        return filteredList
-
-    } catch (error) {
-        console.log(error)
-    }
+		return filteredList
+	} catch (error) {
+		console.log(error)
+	}
 }

@@ -248,7 +248,7 @@ const OrderInfo = () => {
                                                                         </div>
                                                                         <div className={styles.numberbox}>
                                                                             <div className={styles.number}>{d.d_num}</div>
-                                                                            <div className={styles.price}>$NT+{parseInt(d.d_total)}</div>
+                                                                            <div className={styles.price}>NT${parseInt(d.d_total)}</div>
                                                                         </div>
                                                                         {d.Stitle ? (
                                                                             <div className={styles.salesbox}>
@@ -278,7 +278,7 @@ const OrderInfo = () => {
                                                                                     <div className={styles.sbox}>
                                                                                         <div className={styles.dtt}>單價</div>
                                                                                         <div className={styles.spec}>
-                                                                                            <span>NT$+{parseInt(a.d_price)}</span>
+                                                                                            <span>NT${parseInt(a.d_price)}</span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </dt>
@@ -287,7 +287,7 @@ const OrderInfo = () => {
                                                                         <div className={styles.numberbox}>
                                                                             <div className={styles.number}>1</div>
                                                                             <div className={styles.price}>
-                                                                                $NT+
+                                                                                $NT
                                                                                 {a.d_price}
                                                                             </div>
                                                                         </div>
@@ -318,7 +318,7 @@ const OrderInfo = () => {
                                                                         </div>
                                                                         <div className={styles.numberbox}>
                                                                             <div className={styles.number}>1</div>
-                                                                            <div className={styles.price}>---</div>
+                                                                            <div className={styles.price}></div>
                                                                         </div>
                                                                         <div className={styles.salesbox}>
                                                                             <div className={styles.slist}>

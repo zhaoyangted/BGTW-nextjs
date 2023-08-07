@@ -22,25 +22,34 @@ const ProductDetails = ({
 	watchedData
 }) => {
 	const [quantity, setQuantity] = useState(1)
+	const [info, setInfo] = useState()
     // console.log(specData)
 	const handleCart = (product) => {
 		addToCart(product)
-		toast("Product added to Cart !")
+		toast("產品已加入購物車 !")
 	}
 
 	const handleCompare = (product) => {
 		addToCompare(product)
-		toast("Added to Compare list !")
+		toast("產品加入比較 !")
 	}
 
 	const handleWishlist = (product) => {
 		addToWishlist(product)
-		toast("Added to Wishlist !")
+		toast("產品加入願望清單 !")
 	}
-
-	const inCart = cartItems.find((cartItem) => cartItem.id === product.id)
-
-	console.log(product.d_price)
+	const handleChange = (e) => {
+		e.preventDefault
+		const fieldName = e.target?.name
+		const fieldValue = e.target?.value
+		setInfo((prevStat) => ({
+			...prevStat,
+			[fieldName]: fieldValue,
+		}))
+	}
+	const inCart = cartItems.find((cartItem) => cartItem.id === product.d_id)
+	const inStock = (parseInt(product.d_stock)-quantity)>=0;
+	//console.log(product.d_price)
 
 	return (
 		<>
@@ -63,7 +72,7 @@ const ProductDetails = ({
 									</div>
 									<div className="col-md-6 col-sm-12 col-xs-12">
 										<div className={styles.detailinfo}>
-											{product.d_stock === 0 && <span className="stock-status out-stock"> Sale Off </span>}
+											{product.d_stock === 0 && <span className="stock-status out-stock"> 無庫存 </span>}
 											<h2 className={styles.titledetail}>{product.d_title}</h2>
 											<ul className={styles.productmeta}>
 												<li>
@@ -144,7 +153,7 @@ const ProductDetails = ({
 												<ul className={styles.productmeta}>
 													<div className={styles.dtt}>商品規格</div>
 													<div className={styles.spec}>
-                                                    <select id="ChangeSpec" className="select_pd">
+                                                    <select id="ChangeSpec" className="select_pd" onChange={handleChange}>
                                                         <option defaultValue={product.d_id}>{product.d_spectitle}</option>
 														{specData?.map((clr, i) => (
 															<option key={i} value={clr.d_id}>
@@ -189,10 +198,10 @@ const ProductDetails = ({
 											</div> */}
 											<div className="product-detail-rating">
 												<div className="product-rate-cover text-end">
-													<div className="product-rate d-inline-block">
+													{/* <div className="product-rate d-inline-block">
 														<div className="product-rating" style={{ width: "90%" }}></div>
 													</div>
-													<span className="font-small ml-5 text-muted"> (32 reviews)</span>
+													<span className="font-small ml-5 text-muted"> (32 reviews)</span> */}
 												</div>
 											</div>
 											<div className="bt-1 border-color-1 mt-30 mb-30"></div>
@@ -209,7 +218,7 @@ const ProductDetails = ({
 													</a>
 													<span className="qty-val">{inCart?.quantity || quantity}</span>
 													<a
-														onClick={() => (!inCart ? setQuantity(quantity + 1) : increaseQuantity(product.d_id))}
+														onClick={() => (!inCart&&parseInt(product.d_stock)-quantity>0 ? setQuantity(quantity + 1) : increaseQuantity(product.d_id))}
 														className="qty-up"
 													>
 														<i className="fi-rs-angle-small-up"></i>
@@ -219,15 +228,15 @@ const ProductDetails = ({
 											<div className="detail-extralink">
 												<div className="product-extra-link2">
 													<button
-														onClick={(e) =>
+														onClick={(e) => parseInt(product.d_stock)-quantity>0?
 															handleCart({
 																...product,
 																quantity: quantity || 1,
-															})
+															}):null
 														}
 														className="button button-add-to-cart"
 													>
-														加入購物車
+														{parseInt(product.d_stock)-quantity>=0?"加入購物車":"無庫存"}
 													</button>
 													<a
 														aria-label="Add To Wishlist"

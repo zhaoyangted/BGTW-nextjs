@@ -12,7 +12,7 @@ import Friends from "../components/account/Friends"
 //import OrderInfo from "../components/account/OrderInfo"
 const Account = (props) => {
     const { query } = useRouter()
-	const { status } = useSession()
+	const { data:session } = useSession()
     const activeTab = useActiveTab()
 	const router = useRouter()
     const orderId = query.orderId
@@ -24,17 +24,17 @@ const Account = (props) => {
 	const handleOnClick = (index) => {
 		setActiveIndex(index) // remove the curly braces
 	} */
-	/* React.useEffect(() => {
-		if (status !== "authenticated") {
-			router.push("/page-login/")
+	React.useEffect(() => {
+		if (!session ) {
+			router.push("/login/")
 		}
 		return
-	}, []) */
+	}, [])
 	//console.log(activeTab)
 
 	return (
 		<>
-			<Layout parent="Home" /*sub="Account" */ subChild=" > 會員中心">
+			<Layout parent="首頁" /*sub="Account" */ subChild=" > 會員中心">
 				<div className="page-content pt-50 pb-50">
 					<div className="container-fluid">
 						<div className="row">
@@ -125,6 +125,14 @@ const Account = (props) => {
 											</div>
                                             <div className={activeTab === 'order' && orderId ? "tab-pane fade active show" : "tab-pane fade "}>
 												{/* <OrderInfo /> */}
+											</div>
+											<div className={activeTab === '/member/orders/ask/' && orderId ? "tab-pane fade active show" : "tab-pane fade "}>
+											</div>
+											<div className={activeTab === '/member/orders/cancel/' && orderId ? "tab-pane fade active show" : "tab-pane fade "}>
+											</div>
+											<div className={activeTab === '/member/orders/refund/' && orderId ? "tab-pane fade active show" : "tab-pane fade "}>
+											</div>
+											<div className={activeTab === '/member/orders/pay/' && orderId ? "tab-pane fade active show" : "tab-pane fade "}>
 											</div>
 										</div>
 									</div>

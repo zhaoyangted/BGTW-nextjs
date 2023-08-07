@@ -266,6 +266,8 @@ h6.post-title {
 	}
 }
 .post-thumb {
+	height: 350px;
+	box-sizing: content-box;
     overflow: hidden;
 	position: relative;
     &.border-radius-5 img{
@@ -318,6 +320,8 @@ h6.post-title {
 				margin-bottom: 30px;
 			}
 			.post-thumb {
+				height: 350px;
+				box-sizing: content-box;
 				min-height: 366px;
 				min-width: 438px;
 				background-repeat: no-repeat;

@@ -3,29 +3,29 @@
 .product-cart-wrap {
     position        : relative;
     background-color: #fff;
-    border          : 1px solid $border-color;
+    /* border          : 1px solid $border-color; */
     border-radius   : 15px;
     overflow        : hidden;
     @include transistion-duration-2s;
 
     &:hover {
         box-shadow: $box-shadown-2;
-        border    : 1px solid $border-color-2;
+        /* border    : 1px solid $border-color-2; */
         @include transistion-duration-2s;
     }
 
     .product-img-action-wrap {
         position        : relative;
         background-color: #fff;
-        overflow        : hidden;
-        max-height      : 320px;
+        //overflow        : hidden;
+        //max-height      : 320px;
         padding         : 25px 25px 0 25px;
 
         .product-action-1 {
             display: inline-flex;
             background-color: #fff;
             border-radius   : 5px;
-            border          : 1px solid $border-color-2;
+            border          : 1px solid $color-brand;
         }
 
         .product-img {
@@ -255,12 +255,15 @@
         }
 
         h2 {
-            font-size    : 16px;
+            font-size    : 14px;
             font-weight  : 700;
             margin-bottom: 5px;
-
+            line-height: 20px;
             a {
                 color: $color-heading;
+                overflow: hidden;
+                height: 40px;
+                display: block;
 
                 &:hover {
                     color: $color-brand;
@@ -272,10 +275,15 @@
             padding-top: 5px;
 
             span {
-                font-size  : 18px;
+                /* font-size  : 18px;
                 font-weight: bold;
                 color      : $color-brand;
-
+                font-size: 1.2rem; */
+                position: relative;
+                display: inline-block;
+                line-height: 14px;
+                min-width: 80px;
+                color: #fc003b;
                 &.new-price {
                     color: $color-brand;
                 }
@@ -343,16 +351,17 @@
 
         .add-cart {
             cursor: pointer;
-
+            width: 100%;
+            text-align: center;
             .add {
                 position        : relative;
                 display         : inline-block;
                 padding         : 6px 20px 6px 20px;
                 border-radius   : 4px;
-                background-color: $background-3;
                 font-size       : 14px;
                 font-weight     : 700;
-
+                width: 100%;
+                border: 1px solid $color-brand;
                 &:hover {
                     background-color: $color-brand;
                     color           : #fff;

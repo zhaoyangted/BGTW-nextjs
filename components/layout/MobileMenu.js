@@ -206,7 +206,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 												<Link href="/shop-wishlist">Shop – Wishlist</Link>
 											</li>
 											<li>
-												<Link href="/shop-cart">Shop – Cart</Link>
+												<Link href="/cart">Shop – Cart</Link>
 											</li>
 											<li>
 												<Link href="/shop-checkout">Shop – Checkout</Link>

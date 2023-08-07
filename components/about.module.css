@@ -1,0 +1,303 @@
+.title01 {
+	width: 100%;
+	color: #333;
+	font-size: 28px;
+	margin: 0px 0px 50px 0;
+	padding: 0 0px 0px 0px;
+	font-weight: 600;
+	text-align: center;
+}
+.store {
+    margin: 0px 0 0px 0px;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.store li {
+    width: calc(100% / 2 - 20px);
+    background: #fff;
+    margin: 20px 10px 0 10px;
+    list-style: none;
+    float: left;
+    min-height: 520px;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    padding: 2rem;
+    background-color: #f7f6f6;
+	box-sizing: content-box;
+}
+.store li > h2 {
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
+    font-size: 19px;
+    color: #000;
+    border-bottom: 2px solid #70accb;
+    font-weight: bold;
+}
+.store li .sbox {
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    height: auto;
+    overflow: hidden;
+    min-height: 180px;
+}
+.store li .sbox .stxt {
+    width: 100%;
+    float: left;
+}
+.store li .sbox .smap {
+    width: 100%;
+    float: left;
+}
+.store li .sbox .stxt > h3 {
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 0px 0px 0px;
+    height: auto;
+    overflow: hidden;
+	font-size: initial;
+}
+.user_editor >h3 {
+	margin-bottom: 0.5rem;
+	font-size: initial;
+}
+.contact_box {
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-start;
+}
+.w16 {
+    font-size: 16px;
+    color: #333;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    line-height: 2;
+}
+.box_contact_us {
+    border: 1px solid #eeeeee;
+    line-height: 1;
+    margin: 0px 10px 20px 0px;
+    width: calc(50% - 10px);
+    border-radius: 4px;
+    text-align: center;
+    padding: 2rem;
+    background-color: #f7f6f6;
+}
+.box_contact_us p {
+    font-size: 16px;
+    width: 100%;
+    color: #666;
+}
+.styled_input {
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.join_line {
+    margin: 10px 0px 20px 0px;
+    padding: 0px 0px 20px 0px;
+    border-top: 1px solid #eee;
+    width: 100%;
+}
+.styled_input li {
+    width: 100%;
+    margin: 0px 0px 30px 0px;
+    padding: 0;
+    list-style: none;
+    height: auto;
+    overflow: hidden;
+    font-size: 15px;
+    color: #666;
+}
+.styled_input h2 {
+    float: left;
+    font-size: 15px;
+    color: #666;
+    font-weight: bold;
+    width: 110px;
+    padding: 0px 0;
+    margin: 5px 0 0 0;
+}
+.styled_input select {
+    float: left;
+    width: calc(100% - 110px);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    font-family: "Microsoft JhengHei";
+}
+.styled_input textarea {
+    float: left;
+    width: calc(100% - 110px);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    font-family: "Microsoft JhengHei";
+}
+.title03 {
+    width: 100%;
+    color: #666;
+    font-size: 20px;
+    margin: 0px 0px 10px 0;
+    padding: 0 0px 0px 0px;
+    font-weight: 600;
+}
+.styled_input input[type="text"], .styled_input input[type="password"], .styled_input textarea, .styled_input select {
+    float: left;
+    width: calc(100% - 110px);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    font-family: "Microsoft JhengHei";
+    height: 40px;
+}
+.styled_input li.half {
+    width: calc(50% - 5px);
+}
+.mem_add {
+    width: calc( 100% - 110px);
+    padding: 0px 0px 0px 0px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.styled_input input[type="text2"] {
+    float: left;
+    width: calc(100% - 110px);
+    margin-left: 110px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    font-family: "Microsoft JhengHei";
+}
+.btn_style02 {
+    padding: 0px 10px;
+    margin: 0px 10px 0px 0px;
+    width: calc( 50% - 13px );
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    color: #fff;
+    line-height: 50px;
+    background: #003366;
+    border-radius: 4px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    font-family: "Microsoft JhengHei";
+    border: none;
+}
+.btn_style02:nth-child(2) {
+    padding: 0px 10px;
+    margin: 0px 0px 0px 10px;
+    width: calc( 50% - 13px );
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    color: #FFF;
+    line-height: 50px;
+    background: #4d7194;
+    border-radius: 4px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    font-family: "Microsoft JhengHei";
+    border: none;
+}
+.contact_captcha {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.btn_style02:hover, .btn_style02:nth-child(2):hover {
+    background: #ff3c6c;
+}
+.title02 {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px 0px 30px 0px;
+}
+.title02:before {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    left: 0px;
+    height: 2px;
+    background: #e0e0e0;
+    content: "";
+}
+.title02:after {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 80px;
+    height: 2px;
+    background: #70accb;
+    content: "";
+}
+.site_box {
+    margin: 0px 0px 50px 0px;
+    width: 100%;
+}
+.site_box ul {
+    margin: -10px 0px 0px 0px;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+}
+.site_box ul li {
+    margin: 0px 0px 0px 0px;
+    width: calc(100% / 4 - 5px);
+    padding: 0;
+    color: #70ACCB;
+    font-size: 15px;
+    display: inline-block;
+}
+.site_box ul li:before {
+    top: 0;
+    padding: 0 0px 0 5px;
+    content: "・";
+    color: #70ACCB;
+}
+.site_box ul li a {
+    color: #70ACCB;
+}

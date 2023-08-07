@@ -1,12 +1,56 @@
 import React, { useEffect, useState } from "react"
 import styles from "../../components/account.module.css"
 import axios from "axios"
+import Pagination from "../ecommerce/Pagination"
 const Orders = () => {
 	//const fetcher = (url) => fetch(url, { method:"POST", credentials: "include" }).then((r) => r.json())
 	//const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/orders", fetcher)
-	const [info, setInfo] = useState({ pay_type: "", order_source: "" })
+	const [info, setInfo] = useState({ pay_type: "", order_source: "",page:0 })
 	const [data, setData] = useState({})
+	const showLimit = 5,
+		showPagination = 4
+	let [pagination, setPagination] = useState([])
+	let [limit, setLimit] = useState(showLimit)
+	let [pages, setPages] = useState(Math.ceil(data?.dbdata?.PageList?.TotalRecord / limit))
+	let [currentPage, setCurrentPage] = useState(1)
+	let [getPaginationGroup, setGetPaginationGroup] = useState()
+	useEffect(() => {
+		const cratePagination = () => {
+			// set pagination
+			let arr = new Array(data?.dbdata?.PageList?.TotalPage /* Math.ceil(data?.dbdata?.PageList?.TotalRecord / limit) */)
+				.fill()
+				.map((_, idx) => idx + 1)
 
+			setPagination(arr)
+			setPages(data?.dbdata?.PageList?.TotalPage /* Math.ceil(data?.dbdata?.PageList?.TotalRecord / limit) */)
+			let start = Math.floor((currentPage - 1) / showPagination) * showPagination
+			let end = start + showPagination
+			setGetPaginationGroup(arr.slice(start, end))
+		}
+		cratePagination()
+	}, [data, currentPage])
+
+	const next = () => {
+		setCurrentPage((page) => page + 1)
+	}
+
+	const prev = () => {
+		setCurrentPage((page) => page - 1)
+	}
+
+	const handleActive = (item) => {
+		setCurrentPage(item)
+		setInfo((prevStat) => ({
+			...prevStat,
+			['page']: item,
+		}))
+	}
+
+	const selectChange = (e) => {
+		setLimit(Number(e.target.value))
+		setCurrentPage(1)
+		setPages(Math.ceil(products?.pages.TotalRecord / Number(e.target.value)))
+	}
 	const handlSubmit = async () => {
 		//e.preventDefault()
 		//console.log(e.target.value)
@@ -14,7 +58,7 @@ const Orders = () => {
 		Object.entries(info).forEach(([key, value]) => {
 			data.append(key, value)
 		})
-		const formURL = process.env.apiServer + "/api/member/orders/"
+		const formURL = process.env.apiServer + `/api/member/orders/?page=${currentPage-1}`
 		await axios
 			.post(formURL, data, { credentials: "include" })
 			.then((response) => setData(response.data))
@@ -38,6 +82,7 @@ const Orders = () => {
 		}
 	}
 	const Pay_types = arrayColumn(data?.Pay_types, "d_title", "d_id")
+	//console.log(info)
 	return (
 		<>
 			{data && (
@@ -123,7 +168,7 @@ const Orders = () => {
 													{o.d_pay === 1 && o.d_orderstatus < 3 ? (
 														<a
 															className={"bn" + o.d_paystatus === 3 ? "2" : ""}
-															href={o.d_paystatus === 3 ? "javascript: void(0)" : "member/orders/pay/" + o.d_id}
+															href={o.d_paystatus === 3 ? null : "member/orders/pay/" + o.d_id}
 														>
 															{" "}
 															{o.d_paystatus === 3 ? "已填寫" : "匯款回覆"}
@@ -158,12 +203,32 @@ const Orders = () => {
 							  })
 							: null}
 					</div>
+					<div className="pagination-area mt-15 mb-sm-5 mb-lg-0">
+							<nav aria-label="Page navigation example">
+								{getPaginationGroup && (
+									<Pagination
+										getPaginationGroup={getPaginationGroup}
+										currentPage={currentPage}
+										pages={pages}
+										next={next}
+										prev={prev}
+										handleActive={handleActive}
+									/>
+								)}
+							</nav>
+					</div>
 				</section>
 			)}
-			{data?.dbdata?.dbdata?
-            <div dangerouslySetInnerHTML={{__html:data?.dbdata?.PageList}} >
-            </div>
-            :''}
+			{/* {data?.dbdata?.dbdata ? <div dangerouslySetInnerHTML={{ __html: data?.dbdata?.PageList }}></div> : ""} */}
+			{/* <Script
+				strategy="afterInteractive"
+				dangerouslySetInnerHTML={{
+					__html: `
+    				function changepage(Topage){$('#ToPage').val(Topage);
+					$("#search_form").submit();
+  					`,
+				}}
+			/> */}
 		</>
 	)
 }

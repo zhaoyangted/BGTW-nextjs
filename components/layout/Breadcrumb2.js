@@ -9,7 +9,7 @@ const Breadcrumb2 = ({parent, sub, subChild, noBreadcrumb,types,menuData}) => {
     const titlex = types?.d_title?types?.d_title:types?.d_stitle
     return <>
         <div className="page-header mt-30 mb-50">
-        <div className="container">
+        <div className="container-fluid">
             <div className="archive-header">
                 <div className="row align-items-center">
                     <div className="col-xl-4">

@@ -103,12 +103,12 @@ const SingleProduct2 = ({
                     </Link>
                 </h2>
 
-                <div className="/* product-rate */ d-inline-block">
-                    {/* <div
+              {/*   <div className=" product-rate  d-inline-block">
+                    <div
                         className="product-rating"
                         style={{ width: "90%" }}
-                    ></div> */}
-                </div>
+                    ></div> 
+                </div>*/}
 
                 <div className="product-price mt-10">
                     

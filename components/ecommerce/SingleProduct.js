@@ -129,20 +129,23 @@ const SingleProduct = ({
                     <div className="product-price">
                         {product.Chked==='Y'?
                         <>
-                        <span>{product.Lvtitle}NT${product.d_price} </span>
-                        <span className="old-price">{product.d_price1 && `$ ${product.d_price1}`}</span>
+                        <span>{product.Lvtitle}${product.d_price} </span>
+                        <span className="old-price">市價$:{product.d_price1 && `$ ${product.d_price1}`}</span>
                         </>
                         :<>
-                        <span className="price">{product.d_price1 && `$ ${product.d_price1}`}</span>
+                        <span className="price">市價$:{product.d_price1 && `${product.d_price1}`}</span>
                         </>
                         }
                     </div>
-                    <div className="add-cart">
+                    
+                </div>
+                <div className="product-card-bottom" >
+                <div className="add-cart">
                         <a
                             className="add"
                             onClick={(e) => handleCart(product)}
                         >
-                            <i className="fi-rs-shopping-cart mr-5"></i> Add
+                          +  <i className="fi-rs-shopping-cart mr-5"></i> 
                         </a>
                     </div>
                 </div>

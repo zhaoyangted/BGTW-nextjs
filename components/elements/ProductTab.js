@@ -4,6 +4,7 @@ const ProductTab = ({ product }) => {
 	const [activeIndex, setActiveIndex] = useState(1)
 	const content = product?.d_content?.replace(new RegExp("\\\\", "g"), "");
 	const qa = product?.d_qacontent?.replace(new RegExp("\\\\", "g"), "");
+	const bc = product?.d_bcontent?.replace(new RegExp("\\\\", "g"), "");
 	const handleOnClick = (index) => {
 		setActiveIndex(index)
 	}
@@ -19,7 +20,7 @@ const ProductTab = ({ product }) => {
 							data-bs-toggle="tab"
 							onClick={() => handleOnClick(1)}
 						>
-							Description
+							產品說明
 						</a>
 					</li>
 					<li className="nav-item">
@@ -29,10 +30,10 @@ const ProductTab = ({ product }) => {
 							data-bs-toggle="tab"
 							onClick={() => handleOnClick(2)}
 						>
-							Additional info
+							問與答
 						</a>
 					</li>
-					<li className="nav-item">
+					{/* <li className="nav-item">
 						<a
 							className={activeIndex === 3 ? "nav-link active" : "nav-link"}
 							id="Reviews-tab"
@@ -41,7 +42,7 @@ const ProductTab = ({ product }) => {
 						>
 							Vendor
 						</a>
-					</li>
+					</li> */}
 					<li className="nav-item">
 						<a
 							className={activeIndex === 4 ? "nav-link active" : "nav-link"}
@@ -49,7 +50,7 @@ const ProductTab = ({ product }) => {
 							data-bs-toggle="tab"
 							onClick={() => handleOnClick(4)}
 						>
-							Reviews (3)
+							購買說明
 						</a>
 					</li>
 				</ul>
@@ -60,7 +61,7 @@ const ProductTab = ({ product }) => {
 						</div>
 					</div>
 					<div className={activeIndex === 2 ? "tab-pane fade show active" : "tab-pane fade"} id="Additional-info">
-						<div dangerouslySetInnerHTML={{__html:qa}}></div>
+						<div className={styles.desc} dangerouslySetInnerHTML={{__html:qa}}></div>
 						{/* <table className="font-md">
 							<tbody>
 								<tr className="stand-up">
@@ -150,7 +151,7 @@ const ProductTab = ({ product }) => {
 							</tbody>
 						</table> */}
 					</div>
-					<div className={activeIndex === 3 ? "tab-pane fade show active" : "tab-pane fade"} id="Reviews">
+					{/* <div className={activeIndex === 3 ? "tab-pane fade show active" : "tab-pane fade"} id="Reviews">
 						<div className="vendor-logo d-flex mb-30">
 							<img src="/assets/imgs/vendor/vendor-18.svg" alt="" />
 							<div className="vendor-name ml-15">
@@ -197,11 +198,12 @@ const ProductTab = ({ product }) => {
 							revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington,
 							D.C.
 						</p>
-					</div>
+					</div> */}
 					<div className={activeIndex === 4 ? "tab-pane fade show active" : "tab-pane fade"} id="Reviews">
 						<div className="comments-area">
 							<div className="row">
-								<div className="col-lg-8">
+							<div className={styles.desc} dangerouslySetInnerHTML={{__html:bc}}></div>
+								{/* <div className="col-lg-8">
 									<h4 className="mb-30">Customer questions & answers</h4>
 									<div className="comment-list">
 										<div className="single-comment justify-content-between d-flex">
@@ -395,10 +397,11 @@ const ProductTab = ({ product }) => {
 										How are ratings calculated?
 									</a>
 								</div>
-							</div>
+							</div> */}
+						</div>
 						</div>
 
-						<div className="comment-form">
+					{/* 	<div className="comment-form">
 							<h4 className="mb-15">Add a review</h4>
 							<div className="product-rate d-inline-block mb-30"></div>
 							<div className="row">
@@ -447,7 +450,7 @@ const ProductTab = ({ product }) => {
 									</form>
 								</div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>

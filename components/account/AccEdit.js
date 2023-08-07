@@ -194,8 +194,8 @@ const AccEdit = () => {
 					<div className={styles.mbox}>
 						<dd className={styles.sell} style={{ marginTop: "-20px" }}>
 							<li>
-								<label className="method-label checked" htmlFor="deliver02">
-									<input type="radio" id="deliver02" defaultChecked /* onChange={handleInput}  *//>
+								<label className={styles.checked} htmlFor="deliver02">
+									<input type="radio" id="deliver02" defaultChecked /* onChange={handleInput}  */className={styles.account}/>
 									{data?.dbdata.d_title}
 								</label>
 							</li>
@@ -371,6 +371,7 @@ const AccEdit = () => {
 									type="checkbox"
 									id="c2"
 									name="d_newsletter"
+									className={styles.account}
 									//value="Y"
 									checked={formData?.d_newsletter==='Y'}
 									onChange={(e) => {

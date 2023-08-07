@@ -10,7 +10,6 @@ import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons
 import { useSession, signIn, signOut } from "next-auth/react"
 import styles from '../../components/header.module.css'
 import axios from "axios"
-import useFetchCart from "../../util/fetchCart"
 axios.defaults.withCredentials=true
 import {
     clearCart,
@@ -39,7 +38,7 @@ const Header = ({
 	}) => {
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
-	const [apidata,setApidata] = useState({})
+	const [apiData,setApiData] = useState({})
 	const { status, data:session } = useSession()
 	const price = () => {
         let price = 0;
@@ -69,11 +68,11 @@ const Header = ({
 				})
 				str = str.replace(/;\s*$/, "");
 				const res = await axios.post(
-				process.env.apiServer+"/api/cart/cart/",
+				process?.env?.apiServer+"/api/cart/cart/",
 				{
 					cart:str
 				});
-				setApidata(res.data)
+				setApiData(res.data)
 				//return res.data['BonusTotal']
 			}
 		point()
@@ -182,7 +181,7 @@ const Header = ({
 										<img className={styles.img} src="/assets/imgs/theme/TpTLEic01.svg" />
 										<li>客服專線: {config ? Object.values(config)[8] : null}</li>
 										<i className="fi-rs-angle-small-right" style={{ fontWeight: "900" }}></i>
-										<Link href="/page-account">相關協助與聯繫我們</Link>
+										<Link href="/">相關協助與聯繫我們</Link>
 										{/*   <li>
                                         <Link href="/#" className="language-dropdown-active">
 
@@ -223,8 +222,8 @@ const Header = ({
 							<div className="header-right">
 								
 								{status==='authenticated'?(<><Link href="/account/" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;handleSignOut()}} className="user__link user__link--register">
-								會員登出</Link></>):(<><Link href="/login" className="user__link user__link--login">
-								會員登入</Link><Link href="/register" className="user__link user__link--register">
+								會員登出</Link></>):(<><Link href="/login/" className="user__link user__link--login">
+								會員登入</Link><Link href="/register/" className="user__link user__link--register">
 								加入會員</Link></>)}
 							</div>
 							{/* <div className="header-right IntMemberStatus">
@@ -291,7 +290,7 @@ const Header = ({
 											</Link>
 										</div>
 										<div className="header-action-icon-2">
-											<Link href="/page-account" className="mini-menu-icon">
+											<Link href="/account" className="mini-menu-icon">
 												<FontAwesomeIcon icon={faBars}  className="fi-ss-shopping-cart"  />
 												{/* <i className="fi fi-br-menu-burger"></i> */}
 												{/* <img className="svgInject" alt="Nest" src="/assets/imgs/theme/icons/icon-user.svg" /> */}
@@ -361,7 +360,7 @@ const Header = ({
 											</div>:null}
 										</div>
 										<div className="header-action-icon-2">
-											<Link href="/shop-cart" className="mini-cart-icon">
+											<Link href="/cart" className="mini-cart-icon">
 												{/* <img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg" /> */}
 												{/* <i className="fi fi-ss-shopping-cart"></i> */}
 												<FontAwesomeIcon icon={faCartShopping}  className="fi-ss-shopping-cart"/>
@@ -409,11 +408,11 @@ const Header = ({
 												<div className="IndSPContUr02">
 													<div className="MneyBox">
 														<div className="tpSCtxb">會員購物滿額 
-														{apidata?.OneFreight?.d_free}元免運費
+														{apiData?.OneFreight?.d_free}元免運費
 														</div>
 														<div className="tpSCtxb">商品紅利小計 
 															<font color="#FF9EDB">
-																{apidata.BonusTotal}點
+																{apiData.BonusTotal}點
 															</font>
 														</div>
 													</div>
@@ -426,8 +425,8 @@ const Header = ({
 														</h4>
 													</div>
 													<div className="shopping-cart-button">
-														<Link href="/shop-cart">購物車</Link>
-														<Link href="/shop-checkout">結帳</Link>
+														<Link href="/cart">購物車</Link>
+														<Link href="/checkout">結帳</Link>
 													</div>
 												</div>
 												</ul>:
@@ -539,7 +538,7 @@ const Header = ({
 										</Link>
 									</div>
 									<div className="header-action-icon-2">
-										<Link href="/shop-cart" >
+										<Link href="/cart" >
 											{/* <i className="fi fi-ss-shopping-cart"></i> */}
 											
 											<img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg" />
