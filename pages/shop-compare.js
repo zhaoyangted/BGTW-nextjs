@@ -7,17 +7,17 @@ import { clearCompare, deleteFromCompare } from "../redux/action/compareAction";
 const Compare = ({ compare, clearCompare, deleteFromCompare }) => {
     return (
         <>
-            <Layout parent="Home" sub="Shop" subChild="Compare">
+            <Layout parent="首頁" /* sub="Shop" */ subChild=" > 產品比價">
                 <section className="mt-50 mb-50">
                     <div className="container">
                         <div className="row">
                             <div className="col-xl-10 col-lg-12 m-auto">
                                 <h1 className="heading-2 mb-10">
-                                    Products Compare
+                                    產品比較
                                 </h1>
                                 <h6 className="text-body mb-40">
-                                    There are <span className="text-brand">{compare.items.length}</span>
-                                    products to compare
+                                    共有 <span className="text-brand">{compare.items.length}</span>
+                                    產品進行比較
                                 </h6>
                                 <div className="table-responsive">
                                     {compare.items.length > 0 ? (
@@ -25,18 +25,21 @@ const Compare = ({ compare, clearCompare, deleteFromCompare }) => {
                                             <CompareTable
                                                 data={compare.items}
                                                 features={[
-                                                    "preview",
-                                                    "name",
-                                                    "price",
-                                                    "rating",
-                                                    "description",
-                                                    "color",
+                                                    "產品預覽",
+                                                    "產品名稱",
+                                                    "產品價格",
+                                                    /* "rating", */
+                                                    /* "產品描述", */
+                                                    /* "產品顏色", */
                                                     // "sizes",
-                                                    "stock",
-                                                    "weight",
+                                                    "產品編號",
+                                                    "產品庫存",
+                                                    "產品紅利",
+                                                    "產品購買"
+                                                    /* "weight",
                                                     "dimensions",
                                                     "buy",
-                                                    " ",
+                                                    " ", */
                                                 ]}
                                                 deleteFromCompare={
                                                     deleteFromCompare
@@ -47,12 +50,12 @@ const Compare = ({ compare, clearCompare, deleteFromCompare }) => {
                                                     className="clear-btn"
                                                     onClick={clearCompare}
                                                 >
-                                                    Clear All
+                                                    清除
                                                 </span>
                                             </div>
                                         </>
                                     ) : (
-                                        <h4>No Products</h4>
+                                        <h4>沒有比較商品</h4>
                                     )}
                                 </div>
                             </div>

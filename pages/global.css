@@ -53,7 +53,7 @@
 	border-top-right-radius: 8px;
 }
 
-.HdNAVUBTopTT02::after {
+/* .HdNAVUBTopTT02::after {
 	content: "\f21d";
 	font-family: FontAwesome;
 	font-size: 22px;
@@ -63,7 +63,7 @@
 	right: 0;
 	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
-}
+} */
 .mendercont {
 	width: 100%;
 	height: auto;
@@ -261,7 +261,7 @@
 	display: inline-flex;
 	-webkit-box-pack: start;
 	-ms-flex-pack: start;
-	justify-content: flex-start;
+	justify-content: space-between;
 	-ms-flex-line-pack: center;
 	align-content: center;
 	-webkit-box-align: center;

@@ -5,7 +5,7 @@ import styles from "../../components/qa.module.css"
 const Qainfo = ({ modal, closeQainfolistModal, id }) => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/qa/qainfo/" + id, fetcher)
-	console.log(data)
+	//console.log(data)
 	return (
 		<>
 			{data && (

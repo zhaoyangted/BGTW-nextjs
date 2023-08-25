@@ -1,31 +1,27 @@
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
-//import CategoryProduct2 from "../ecommerce/Filter/CategoryProduct2"
-//import CategoryProduct3 from "../ecommerce/Filter/CategoryBrand"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCartShopping,faBars,faHeart } from '@fortawesome/free-solid-svg-icons'
-//import Image  from 'next/image'
+import { faCartShopping, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { useSession, signIn, signOut } from "next-auth/react"
-import styles from '../../components/header.module.css'
+import styles from "../../components/header.module.css"
 import axios from "axios"
-axios.defaults.withCredentials=true
+axios.defaults.withCredentials = true
 import {
-    clearCart,
-    closeCart,
-    decreaseQuantity,
-    deleteFromCart,
-    increaseQuantity,
-    openCart
-} from "../../redux/action/cart";
-//const img=Image
-const Header = ({ 
+	clearCart,
+	closeCart,
+	decreaseQuantity,
+	deleteFromCart,
+	increaseQuantity,
+	openCart,
+} from "../../redux/action/cart"
+const Header = ({
 	totalCartItems,
- 	totalCompareItems,
-	toggleClick, 
-	totalWishlistItems, 
-	data, 
+	totalCompareItems,
+	toggleClick,
+	totalWishlistItems,
+	data,
 	config,
 	openCart,
 	cartItems,
@@ -35,17 +31,17 @@ const Header = ({
 	decreaseQuantity,
 	deleteFromCart,
 	clearCart,
-	}) => {
+}) => {
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
-	const [apiData,setApiData] = useState({})
-	const { status, data:session } = useSession()
+	const [apiData, setApiData] = useState({})
+	const { status, data: session } = useSession()
 	const price = () => {
-        let price = 0;
-        cartItems.forEach((item) => (price += item.d_price * item.quantity));
+		let price = 0
+		cartItems.forEach((item) => (price += item.d_price * item.quantity))
 
-        return price;
-    };
+		return price
+	}
 	// const menu = JSON.stringify(data)
 	// console.log(menu)
 	//console.log(Object.values(config))
@@ -57,26 +53,22 @@ const Header = ({
 			}
 		})
 	})
-	
-	useEffect(()=>{
+
+	useEffect(() => {
 		const point = async () => {
-				let str = '';
-				cartItems?.map((p,i)=>{
-					p.d_id?
-					str=str+p.d_id+'@#'+p.quantity+'@#;'
-					:null;
-				})
-				str = str.replace(/;\s*$/, "");
-				const res = await axios.post(
-				process?.env?.apiServer+"/api/cart/cart/",
-				{
-					cart:str
-				});
-				setApiData(res.data)
-				//return res.data['BonusTotal']
-			}
+			let str = ""
+			cartItems?.map((p, i) => {
+				p.d_id ? (str = str + p.d_id + "@#" + p.quantity + "@#;") : null
+			})
+			str = str.replace(/;\s*$/, "")
+			const res = await axios.post(process?.env?.apiServer + "/api/cart/cart/", {
+				cart: str,
+			})
+			setApiData(res.data)
+			//return res.data['BonusTotal']
+		}
 		point()
-	},[cartItems])
+	}, [cartItems])
 	const Navmenu = () => {
 		return (
 			<div className="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block  font-heading">
@@ -100,7 +92,9 @@ const Header = ({
 											return (
 												<li className="sub-mega-menu sub-mega-menu-width-22" key={index}>
 													<Link href={`/products/products_list/${ul.d_id}`}>{ul.d_title}</Link>
-													<i className="fi-rs-angle-right"></i>
+													<span className="menu-expand" onClick={() => handleToggle(index)}>
+														<i className="fi-rs-angle-right"></i>
+													</span>
 												</li>
 											)
 										})}
@@ -113,17 +107,17 @@ const Header = ({
 			</div>
 		)
 	}
-	const handleSignOut = async() => {
-		if(status==="authenticated"){
-			const response=await axios.put(process.env.apiServer+"/api/auth/logout/")
-			if (response.status===200){
+	const handleSignOut = async () => {
+		if (status === "authenticated") {
+			const response = await axios.put(process.env.apiServer + "/api/auth/logout/")
+			if (response.status === 200) {
 				await signOut()
-			}else{
-				alert('logout failed')
+			} else {
+				alert("logout failed")
 				await signOut()
 			}
-		}else{
-			alert('not login.')
+		} else {
+			alert("not login.")
 		}
 	}
 	const handleToggle = () => setToggled(!isToggled)
@@ -149,32 +143,10 @@ const Header = ({
 											<li className="header-info-left-info">
 												<Link href="">{config ? Object.values(config)[12] : null}</Link>
 											</li>
-											{/* <li>
-                                        <Link href="/shop-wishlist">
-                                            Wishlist
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/page-account">
-                                            Order Tracking
-                                        </Link>
-                                    </li> */}
 										</ul>
 									) : null}
 								</div>
 							</div>
-							{/* 							<div className=" col-md-4 col-lg-4">
-								<div className="text-center">
-									<div id="news-flash" className="d-inline-block">
-										<ul>
-											<li>
-											{config?Object.values(config)[4]:null}
-												 <Link href="/shop-grid-right">View details</Link> 
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div> */}
 							<div className=" col-md-6 col-lg-6">
 								<div className="header-info header-info-right">
 									<ul>
@@ -182,34 +154,6 @@ const Header = ({
 										<li>客服專線: {config ? Object.values(config)[8] : null}</li>
 										<i className="fi-rs-angle-small-right" style={{ fontWeight: "900" }}></i>
 										<Link href="/">相關協助與聯繫我們</Link>
-										{/*   <li>
-                                        <Link href="/#" className="language-dropdown-active">
-
-                                            <i className="fi-rs-world"></i>English<i className="fi-rs-angle-small-down"></i>
-
-                                        </Link>
-                                        <ul className="language-dropdown">
-                                            <li>
-                                                <Link href="/#">
-
-                                                    <img src="/assets/imgs/theme/flag-fr.png" alt="" />Français
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a className="language-dropdown-active" href="#">
-                                            USD <i className="fi-rs-angle-small-down"></i>
-                                        </a>
-                                        <ul className="language-dropdown">
-                                            <li>
-                                                <a href="#">
-                                                    <img src="/assets/imgs/theme/flag-ru.png" alt="" />
-                                                    EU
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> */}
 									</ul>
 								</div>
 							</div>
@@ -220,24 +164,38 @@ const Header = ({
 					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap">
 							<div className="header-right">
-								
-								{status==='authenticated'?(<><Link href="/account/" className="user__link user__link--login">會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}</Link><Link href="/#" onClick={(e)=>{e.preventDefault;handleSignOut()}} className="user__link user__link--register">
-								會員登出</Link></>):(<><Link href="/login/" className="user__link user__link--login">
-								會員登入</Link><Link href="/register/" className="user__link user__link--register">
-								加入會員</Link></>)}
+								{status === "authenticated" ? (
+									<>
+										<Link href="/account/" className="user__link user__link--login">
+											會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}
+										</Link>
+										<Link
+											href="/#"
+											onClick={(e) => {
+												e.preventDefault
+												handleSignOut()
+											}}
+											className="user__link user__link--register"
+										>
+											會員登出
+										</Link>
+									</>
+								) : (
+									<>
+										<Link href="/login/" className="user__link user__link--login">
+											會員登入
+										</Link>
+										<Link href="/register/" className="user__link user__link--register">
+											加入會員
+										</Link>
+									</>
+								)}
 							</div>
-							{/* <div className="header-right IntMemberStatus">
-								<Link href="/shop-compare">加入會員</Link>
-
-								<Link className="IntMemberBefore" href="/shop-compare">
-									會員登入
-								</Link>
-							</div> */}
 						</div>
 					</div>
 				</div>
 				<div className="header-middle header-middle-ptb-1 d-none d-lg-block">
-					<div className="row" style={{ margin: "0px 10px 0px 10px"}}>
+					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap header-space-between">
 							<div className="logo logo-width-1">
 								<Link href="/">
@@ -250,26 +208,6 @@ const Header = ({
 							<div className="header-right">
 								<div className="header-action-right">
 									<div className="header-action-2">
-										{/* <div className="search-location">
-                                        <form action="#">
-                                            <select className="select-active">
-                                                <option>Your Location</option>
-                                                <option>Alabama</option>
-                                                <option>Alaska</option>
-                                                <option>Arizona</option>
-                                                <option>Delaware</option>
-                                                <option>Florida</option>
-                                                <option>Georgia</option>
-                                                <option>Hawaii</option>
-                                                <option>Indiana</option>
-                                                <option>Maryland</option>
-                                                <option>Nevada</option>
-                                                <option>New Jersey</option>
-                                                <option>New Mexico</option>
-                                                <option>New York</option>
-                                            </select>
-                                        </form>
-                                    </div> */}
 										<div className="header-action-icon-2">
 											<Link href="/shop-compare">
 												<img className="svgInject" alt="Evara" src="/assets/imgs/theme/icons/icon-compare.svg" />
@@ -281,7 +219,7 @@ const Header = ({
 										</div>
 										<div className="header-action-icon-2">
 											<Link href="/shop-wishlist">
-											{/* <FontAwesomeIcon icon={faHeart} size="lg"  className="svgInject"  /> */}
+												{/* <FontAwesomeIcon icon={faHeart} size="lg"  className="svgInject"  /> */}
 												<img className="svgInject" alt="Evara" src="/assets/imgs/theme/icons/icon-heart.svg" />
 												<span className="pro-count blue">{totalWishlistItems}</span>
 											</Link>
@@ -291,147 +229,134 @@ const Header = ({
 										</div>
 										<div className="header-action-icon-2">
 											<Link href="/account" className="mini-menu-icon">
-												<FontAwesomeIcon icon={faBars}  className="fi-ss-shopping-cart"  />
+												<FontAwesomeIcon icon={faBars} className="fi-ss-shopping-cart" />
 												{/* <i className="fi fi-br-menu-burger"></i> */}
 												{/* <img className="svgInject" alt="Nest" src="/assets/imgs/theme/icons/icon-user.svg" /> */}
-											<span className="lable">會員服務</span>
+												<span className="lable">會員服務</span>
 											</Link>
-											
-											{config?<div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-												{/* <ul>
-													<li>
-														<Link href="/page-account">
-															<i className="fi fi-rs-user mr-10"></i>My Account
-														</Link>
-													</li>
-													<li>
-														<Link href="/page-account">
-															<i className="fi fi-rs-location-alt mr-10"></i>Order Tracking
-														</Link>
-													</li>
-													<li>
-														<Link href="/page-account">
-															<i className="fi fi-rs-label mr-10"></i>My Voucher
-														</Link>
-													</li>
-													<li>
-														<Link href="/shop-wishlist">
-															<i className="fi fi-rs-heart mr-10"></i>My Wishlist
-														</Link>
-													</li>
-													<li>
-														<Link href="/page-account">
-															<i className="fi fi-rs-settings-sliders mr-10"></i>Setting
-														</Link>
-													</li>
-													<li>
-														<Link href="/page-login">
-															<i className="fi fi-rs-sign-out mr-10"></i>Sign out
-														</Link>
-													</li>
-												</ul> */}
-													
-													
-														
-															<div className={styles.HdNAVUBTopTT02}>會員服務專區</div>
-															<div className={styles.mendercont}>
-																<div className={styles.ImeALBox}>
-																	<ul className={styles.IntmenderCr}><Link href={{
-																		pathname: '/account'}}>前往會員中心</Link></ul>
-																	<ul className={styles.ImePs}><Link href="/account/?activeTab=order">購物紀錄與訂單查詢</Link></ul>
-																	<ul className={styles.ImeLovepord}><Link href="/account/?activeTab=favor">我的收藏</Link></ul>
-																	<ul className={styles.ImeFriend}><Link href="/account/?activeTab=friend">邀請好友加入會員</Link></ul>
-																</div>
-																<div className={styles.ImeALBox}>
-																	<ul className={styles.ImcoutBx}><Link href="/account?activeTab=info">會員資料修改</Link></ul>
-																	<ul className={styles.ImcoutBx}><Link href="/account?activeTab=point">會員點數查詢</Link></ul>
-																	<ul className={styles.ImcoutBx}><Link href="/account?activeTab=info">訂閱/取消 電子報</Link></ul>
-																	<ul className={styles.ImcoutBx}><Link href="qa">常見問題</Link></ul>
-																</div>
-																<div className={styles.ImeALBox}>
-																	<ul className={styles.ImeTel}>服務專線：{config?Object.values(config)[9]:null} {Object.values(config)[10]}</ul>
-																	{Object.values(config)[11]?
-																		<ul className={styles.ImeEml}>聯絡我們：{Object.values(config)[11]}</ul>
-																	:null}
-																</div>
-															</div>
-														
-													
-											</div>:null}
+
+											{config ? (
+												<div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+													<div className={styles.HdNAVUBTopTT02}>
+														會員服務專區<i className="fi-rs-user ml-25" style={{ right: "0px" }}></i>
+													</div>
+													<div className={styles.mendercont}>
+														<div className={styles.ImeALBox}>
+															<ul className={styles.IntmenderCr}>
+																<i className="fi-rs-home mr-20" style={{ left: "0px" }}></i>
+																<Link
+																	href={{
+																		pathname: "/account",
+																	}}
+																>
+																	前往會員中心
+																</Link>
+															</ul>
+															<ul className={styles.ImePs}>
+																<i className="fi-rs-list mr-20" style={{ left: "0px" }}></i>
+																<Link href="/account/?activeTab=order">購物紀錄與訂單查詢</Link>
+															</ul>
+															<ul className={styles.ImeLovepord}>
+																<i className="fi-rs-star mr-20" style={{ left: "0px" }}></i>
+																<Link href="/account/?activeTab=favor">我的收藏</Link>
+															</ul>
+															<ul className={styles.ImeFriend}>
+																<i className="fi-rs-users mr-20" style={{ left: "0px" }}></i>
+																<Link href="/account/?activeTab=friend">邀請好友加入會員</Link>
+															</ul>
+														</div>
+														<div className={styles.ImeALBox}>
+															<ul className={styles.ImcoutBx}>
+																<Link href="/account?activeTab=info">會員資料修改</Link>
+															</ul>
+															<ul className={styles.ImcoutBx}>
+																<Link href="/account?activeTab=point">會員點數查詢</Link>
+															</ul>
+															<ul className={styles.ImcoutBx}>
+																<Link href="/account?activeTab=info">訂閱/取消 電子報</Link>
+															</ul>
+															<ul className={styles.ImcoutBx}>
+																<Link href="qa">常見問題</Link>
+															</ul>
+														</div>
+														<div className={styles.ImeALBox}>
+															<ul className={styles.ImeTel}>
+																服務專線：{config ? Object.values(config)[9] : null} {Object.values(config)[10]}
+															</ul>
+															{Object.values(config)[11] ? (
+																<ul className={styles.ImeEml}>聯絡我們：{Object.values(config)[11]}</ul>
+															) : null}
+														</div>
+													</div>
+												</div>
+											) : null}
 										</div>
 										<div className="header-action-icon-2">
 											<Link href="/cart" className="mini-cart-icon">
-												{/* <img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg" /> */}
-												{/* <i className="fi fi-ss-shopping-cart"></i> */}
-												<FontAwesomeIcon icon={faCartShopping}  className="fi-ss-shopping-cart"/>
+												<FontAwesomeIcon icon={faCartShopping} className="fi-ss-shopping-cart" />
 												<span className="pro-count blue">{totalCartItems}</span>
 												<span className={styles.cartlabel}>購物車</span>
 											</Link>
-											
-											<div className="cart-dropdown-wrap cart-dropdown-hm2"style={{wid
-											:"460px"}}>
-											<ul className="ICBoTX">
-											<div className="HdNAVUBTopTT03">購物車狀態</div>
-											<div className="IndSPCont" >
-											{cartItems.length>0?
-												<ul>
-													{cartItems.length > 0?
-													cartItems.map((item,i)=>{
-													return (
-													<div className="IndSPContUr" key={i}>
-													<ul className="IndSprPHT">
-														<img src={"/"+item['d_img1']} alt=""/>
-													</ul>
-													<ul className="IndSprTxBx">
-														<li className="CrProdName">
-															{item['d_title']}
-															</li>
-													</ul>
-													<ul className="IndSprBaX">
-														<li className="CrProdName">x
-														{item['quantity']}
-														</li>
-													</ul>
-													<ul className="IndSprBaX">
-														<li className="TicPystxc04">單價：NT$
-														{item['d_price']}
-														</li>
-													</ul>
+
+											<div className="cart-dropdown-wrap cart-dropdown-hm2" style={{ wid: "460px" }}>
+												<ul className="ICBoTX">
+													<div className="HdNAVUBTopTT03">購物車狀態</div>
+													<div className="IndSPCont">
+														{cartItems.length > 0 ? (
+															<ul>
+																{cartItems.length > 0
+																	? cartItems.map((item, i) => {
+																			return (
+																				<div className="IndSPContUr" key={i}>
+																					<ul className="IndSprPHT">
+																						<img src={"/" + item["d_img1"]} alt="" />
+																					</ul>
+																					<ul className="IndSprTxBx">
+																						<li className="CrProdName">{item["d_title"]}</li>
+																					</ul>
+																					<ul className="IndSprBaX">
+																						<li className="CrProdName">x{item["quantity"]}</li>
+																					</ul>
+																					<ul className="IndSprBaX">
+																						<li className="TicPystxc04">
+																							單價：NT$
+																							{item["d_price"]}
+																						</li>
+																					</ul>
+																				</div>
+																			)
+																	  })
+																	: null}
+
+																<div className="IndSPContUr02">
+																	<div className="MneyBox">
+																		<div className="tpSCtxb">
+																			會員購物滿額
+																			{apiData?.OneFreight?.d_free}元免運費
+																		</div>
+																		<div className="tpSCtxb">
+																			商品紅利小計
+																			<font color="#FF9EDB">{apiData.BonusTotal}點</font>
+																		</div>
+																	</div>
+																</div>
+																<div className="shopping-cart-footer">
+																	<div className="shopping-cart-total">
+																		<h4>
+																			金額小計:
+																			<span className="MenyToT">NT${price()}</span>
+																		</h4>
+																	</div>
+																	<div className="shopping-cart-button">
+																		<Link href="/cart">購物車</Link>
+																		<Link href="/checkout">結帳</Link>
+																	</div>
+																</div>
+															</ul>
+														) : (
+															<h4 style={{ textAlign: "center" }}>購物車空</h4>
+														)}
 													</div>
-													)
-													})
-													
-													:null}
-												
-												
-												
-												<div className="IndSPContUr02">
-													<div className="MneyBox">
-														<div className="tpSCtxb">會員購物滿額 
-														{apiData?.OneFreight?.d_free}元免運費
-														</div>
-														<div className="tpSCtxb">商品紅利小計 
-															<font color="#FF9EDB">
-																{apiData.BonusTotal}點
-															</font>
-														</div>
-													</div>
-												</div>
-												<div className="shopping-cart-footer">
-													<div className="shopping-cart-total">
-														<h4>
-															金額小計:
-															<span className="MenyToT">NT${price()}</span>
-														</h4>
-													</div>
-													<div className="shopping-cart-button">
-														<Link href="/cart">購物車</Link>
-														<Link href="/checkout">結帳</Link>
-													</div>
-												</div>
-												</ul>:
-												<h4 style={{textAlign:"center"}}>購物車空</h4>}
-												</div>
 												</ul>
 											</div>
 										</div>
@@ -448,79 +373,14 @@ const Header = ({
 							: "header-bottom header-bottom-bg-color sticky-bar"
 					}
 				>
-					<div className="container" style={{maxWidth:"1200px" }}>
+					<div className="container" style={{ maxWidth: "1200px" }}>
 						<div className="header-wrap header-space-between position-relative">
 							<div className="logo logo-width-1 d-block d-lg-none">
 								<Link href="/">
 									<img src="/assets/imgs/theme/beautygarage_logo.svg" alt="logo" />
 								</Link>
 							</div>
-							<div className="header-nav d-none d-lg-flex">
-								{/* <div className="main-categori-wrap d-none d-lg-block">
-                                <a className="categories-button-active" onClick={handleToggle}>
-                                    <span className="fi-rs-apps"></span>
-                                    <span className="et">Browse</span> All Categories
-                                    <i className="fi-rs-angle-down"></i>
-                                </a>
-
-                                <div className={isToggled ? "categories-dropdown-wrap categories-dropdown-active-large font-heading open" : "categories-dropdown-wrap categories-dropdown-active-large font-heading"}>
-                                    <div className="d-flex categori-dropdown-inner">
-                                        <CategoryProduct2 />
-                                        <CategoryProduct3 />
-                                    </div>
-                                    <div className="more_slide_open" style={{ display: "none" }}>
-                                        <div className="d-flex categori-dropdown-inner">
-                                            <ul>
-                                                <li>
-                                                    <Link href="/products">
-
-                                                        {" "}
-                                                        <img src="/assets/imgs/theme/icons/icon-1.svg" alt="" />Milks and Dairies
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/products">
-
-                                                        {" "}
-                                                        <img src="/assets/imgs/theme/icons/icon-2.svg" alt="" />Clothing & beauty
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                            <ul className="end">
-                                                <li>
-                                                    <Link href="/products">
-
-                                                        {" "}
-                                                        <img src="/assets/imgs/theme/icons/icon-3.svg" alt="" />Wines & Drinks
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/products">
-
-                                                        {" "}
-                                                        <img src="/assets/imgs/theme/icons/icon-4.svg" alt="" />Fresh Seafood
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="more_categories">
-                                        <span className="icon"></span> <span className="heading-sm-1">Show more...</span>
-                                    </div>
-                                </div>
-                            </div> */}
-								{data ? (
-									<Navmenu />
-								) : null}
-							</div>
-							{/* <div className="hotline d-none d-lg-flex">
-                            <img src="/assets/imgs/theme/icons/icon-headphone.svg" alt="hotline" />
-
-                            <p>
-                                1900 - 888<span>24/7 Support Center</span>
-                            </p>
-                        </div> */}
-
+							<div className="header-nav d-none d-lg-flex">{data ? <Navmenu /> : null}</div>
 							<div className="header-action-icon-2 d-block d-lg-none">
 								<div className="burger-icon burger-icon-white" onClick={toggleClick}>
 									<span className="burger-icon-top"></span>
@@ -538,70 +398,12 @@ const Header = ({
 										</Link>
 									</div>
 									<div className="header-action-icon-2">
-										<Link href="/cart" >
+										<Link href="/cart">
 											{/* <i className="fi fi-ss-shopping-cart"></i> */}
-											
+
 											<img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg" />
 											<span className="pro-count white">{totalCartItems}</span>
 										</Link>
-										{/* <div className="cart-dropdown-wrap cart-dropdown-hm2">
-											<ul>
-												<li>
-													<div className="shopping-cart-img">
-														<Link href="/shop-grid-right">
-															<img alt="Evara" src="/assets/imgs/shop/thumbnail-3.jpg" />
-														</Link>
-													</div>
-													<div className="shopping-cart-title">
-														<h4>
-															<Link href="/shop-grid-right">Plain Striola Shirts</Link>
-														</h4>
-														<h3>
-															<span>1 × </span>
-															$800.00
-														</h3>
-													</div>
-													<div className="shopping-cart-delete">
-														<Link href="/#">
-															<i className="fi-rs-cross-small"></i>
-														</Link>
-													</div>
-												</li>
-												<li>
-													<div className="shopping-cart-img">
-														<Link href="/shop-grid-right">
-															<img alt="Evara" src="/assets/imgs/shop/thumbnail-4.jpg" />
-														</Link>
-													</div>
-													<div className="shopping-cart-title">
-														<h4>
-															<Link href="/shop-grid-right">Macbook Pro 2022</Link>
-														</h4>
-														<h3>
-															<span>1 × </span>
-															$3500.00
-														</h3>
-													</div>
-													<div className="shopping-cart-delete">
-														<Link href="/#">
-															<i className="fi-rs-cross-small"></i>
-														</Link>
-													</div>
-												</li>
-											</ul>
-											<div className="shopping-cart-footer">
-												<div className="shopping-cart-total">
-													<h4>
-														Total
-														<span>$383.00</span>
-													</h4>
-												</div>
-												<div className="shopping-cart-button">
-													<Link href="/shop-cart">View cart</Link>
-													<Link href="/shop-checkout">Checkout</Link>
-												</div>
-											</div>
-										</div> */}
 									</div>
 								</div>
 							</div>
@@ -613,21 +415,20 @@ const Header = ({
 	)
 }
 
-
 const mapDispatchToProps = {
-    closeCart,
-    increaseQuantity,
-    decreaseQuantity,
-    deleteFromCart,
-    openCart,
-    clearCart,
-};
+	closeCart,
+	increaseQuantity,
+	decreaseQuantity,
+	deleteFromCart,
+	openCart,
+	clearCart,
+}
 const mapStateToProps = (state) => ({
 	totalCartItems: state.cart.length,
 	totalCompareItems: state.compare.items.length,
 	totalWishlistItems: state.wishlist.items.length,
 	cartItems: state.cart,
-    activeCart: state.counter,
+	activeCart: state.counter,
 })
 
-export default connect(mapStateToProps, mapDispatchToProps,null)(Header)
+export default connect(mapStateToProps, mapDispatchToProps, null)(Header)

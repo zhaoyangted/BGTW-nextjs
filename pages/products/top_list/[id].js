@@ -14,6 +14,7 @@ import WishlistModal from "../../../components/ecommerce/WishlistModal"
 import Layout from "../../../components/layout/Layout"
 import { fetchProduct } from "../../../redux/action/product"
 import SingleProduct from "../../../components/ecommerce/SingleProduct"
+import ShowFilter from "../../../components/ecommerce/Filter/ShowFilter"
 const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	let router = useRouter(),
 		searchTerm = router.query.search,
@@ -26,6 +27,10 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	let [currentPage, setCurrentPage] = useState(1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
 	const { id } = router.query
+	const [modal, setModal] = useState(false)
+	const handleModalClose = () => {
+		setModal(!modal)
+	}
 	useEffect(() => {
 		if (!router.isReady) {
 			return
@@ -77,13 +82,15 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 				<section className="mt-50 mb-50">
 					<div className="container-fluid">
 						<div className="row flex-row">
-							<div className="col-lg-3 primary-sidebar sticky-sidebar">
+							<div className={
+									modal ? "d-block stick-sidebar col-lg-3" : "col-lg-3 primary-sidebar sticky-sidebar d-none d-lg-flex"
+								}>
 								<div className="sidebar-widget  mb-30">
 									<h5 className="section-title style-1 mb-30">{products.menudatas?.d_title}</h5>
 									<CategoryProduct menuDatas={products.types} menus={products.menus} />
 								</div>
 
-								<div className="sidebar-widget price_range range mb-30">
+								{/*	<div className="sidebar-widget price_range range mb-30">
 									<h5 className="section-title style-1 mb-30">Fill by price</h5>
 
 									<div className="price-filter">
@@ -106,7 +113,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									<br />
 								</div>
 
-								{/* <div className="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+								 <div className="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                                 <h5 className="section-title style-1 mb-30">New products</h5>
                                     <div className="single-post clearfix">
                                         <div className="image">
@@ -204,6 +211,9 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 										</p>
 									</div>
 									<div className="sort-by-product-area">
+										<div className="sort-by-cover d-block d-lg-none mr-10">
+											<ShowFilter setModal={handleModalClose} modal={modal} />
+										</div>
 										<div className="sort-by-cover mr-10">
 											<ShowSelect selectChange={selectChange} showLimit={showLimit} />
 										</div>

@@ -107,7 +107,7 @@ function Register() {
 	console.log(formData)
 	return (
 		<>
-			<Layout parent="Home" /* sub="Pages" */ subChild="Login & Register">
+			<Layout parent="首頁" /* sub="Pages" */ subChild=" > 加入會員">
 				<div className="container">
 					<div className="col-lg-">
 						<section className={styles.content_box}>

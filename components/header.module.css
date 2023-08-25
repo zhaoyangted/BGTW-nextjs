@@ -57,9 +57,9 @@
 	border-top-right-radius: 8px;
 }
 
-.HdNAVUBTopTT02::after {
+/* .HdNAVUBTopTT02::after {
 	content: "\f21d";
-	font-family: FontAwesome;
+	font-family: 'uicons-regular-straight';
 	font-size: 22px;
 	margin-right: 15px;
 	color: #cccccc;
@@ -67,7 +67,7 @@
 	right: 0;
 	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
-}
+} */
 .mendercont {
 	width: 100%;
 	height: auto;
@@ -157,10 +157,10 @@
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 	padding: 6px 0px;
-	padding-left: 18px;
+	/* padding-left: 18px; */
 }
 
-.IntmenderCr::after,
+/* .IntmenderCr::after,
 .ImePs::after,
 .ImeLovepord::after,
 .ImeQpy::after,
@@ -169,7 +169,7 @@
 .ImeEml::after,
 .ImeFriend::after {
 	content: "\f1ae";
-	font-family: FontAwesome;
+	font-family: 'uicons-regular-straight';
 	font-size: 10px;
 	color: #343434;
 	position: absolute;
@@ -177,32 +177,36 @@
 	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
-
-.ImePs::after {
+ */
+/* .ImePs::after {
 	content: "\f15c";
-	font-family: FontAwesome02;
+	font-family: 'uicons-regular-straight';
 }
 
 .ImeLovepord::after {
 	content: "\f004";
-	font-family: FontAwesome02;
+	font-family: 'uicons-regular-straight';
 }
 
 .ImeQpy::after {
 	content: "\f0e7";
+  font-family: 'uicons-regular-straight';
 }
 
 .ImeNewPord::after {
 	content: "\f291";
+  font-family: 'uicons-regular-straight';
 }
 
 .ImeEml::after {
 	content: "\f291";
+  font-family: 'uicons-regular-straight';
 }
 
 .ImeFriend::after {
 	content: "\f500";
-}
+  font-family: 'uicons-regular-straight';
+} */
 
 .ImcoutBx {
 	width: 100%;
@@ -232,7 +236,7 @@
 
 .ImeEml::after {
 	content: "\f0e0";
-	font-family: FontAwesome02;
+	font-family: 'uicons-regular-straight';
 }
 .header-info-right>ul>img {
     width: 12px;

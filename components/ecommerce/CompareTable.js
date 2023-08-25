@@ -8,7 +8,7 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
 
     const handleCart = (product) => {
         addToCart(product);
-        toast("Product added to Cart !");
+        toast("產品已加入購物車!");
     };
     return (
         <table className="table text-center">
@@ -22,17 +22,17 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                             {feature}
                         </th>
                         {data.map((product,i) =>
-                            feature == "preview" ? (
+                            feature == "產品預覽" ? (
                                 <td className="row_img" key={i}>
-                                    <img src={product.d_img1} />
+                                    <img style={{width:"30%"}}src={product.d_img1} />
                                 </td>
-                            ) : feature == "name" ? (
-                                <td className="product_name">
+                            ) : feature == "產品名稱" ? (
+                                <td className="product_name" key={i}>
                                     <h5>
-                                        <a href="#">{product.d_title}</a>
+                                        <a href={"/products/"+product.d_id}>{product.d_title}</a>
                                     </h5>
                                 </td>
-                            ) : feature == "price" ? (
+                            ) : feature == "產品價格" ? (
                                 <td className="product_price" key={i}>
                                     <span className="price">${product.d_price}</span>
                                 </td>
@@ -57,27 +57,27 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                         )}
                                     </div>
                                 </td>
-                            ) : feature == "description" ? (
+                            ) : feature == "產品描述" ? (
                                 <td className="row_text font-xs" key={i}>
                                     <p>{product.d_desc}</p>
                                 </td>                
-                            ) : feature == "stock" ? (
+                            ) : feature == "產品庫存" ? (
                                 <td className="row_stock" key={i}>
                                     {product.d_stock >= 0 ? (
-                                        <span>In Stock</span>
+                                        <span>{product.d_stock}</span>
                                     ) : (
                                         <span className="text-danger font-weight-bold">
-                                            Out of stock
+                                            無庫存
                                         </span>
                                     )}
                                 </td>
-                            ) : feature == "weight" ? (
+                            ) : feature == "產品紅利" ? (
                                 <td className="row_weight" key={i}>
-                                    {product.weight} gram
+                                    {product.d_bonus}
                                 </td>
-                            ) : feature == "dimensions" ? (
-                                <td className="row_dimensions">N/A</td>
-                            ) : feature == "buy" ? (
+                            ) : feature == "產品編號" ? (
+                                <td className="row_dimensions" key={i}>{product.d_model}</td>
+                            ) : feature == "產品購買" ? (
                                 <td className="row_btn" key={i}>
                                     {product.d_stock >= 0 ? (
                                         <button
@@ -85,13 +85,13 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                             onClick={(e) => handleCart(product)}
                                         >
                                             <i className="fi-rs-shopping-bag mr-5"></i>
-                                            Add to cart
+                                            添加購物車
                                         </button>
                                     ) : (
                                         <Link href="/contact" legacyBehavior>
                                         <button className="btn  btn-sm btn-secondary">
                                             <i className="fi-rs-headset mr-5"></i>
-                                            Contact Us
+                                            聯繫我們
                                         </button>
                                         </Link>
                                         
@@ -105,7 +105,7 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                         }
                                     >
                                         <i className="fi-rs-trash mr-5"></i>
-                                        <span>Remove</span>
+                                        <span>移出</span>
                                     </a>
                                 </td>
                             ) : null

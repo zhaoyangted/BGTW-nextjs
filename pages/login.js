@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import Layout from "../components/layout/Layout"
-import fetchJson, { FetchError } from "../lib/fetchJson"
 import styles from '../components/account.module.css'
+import {useRouter} from "next/router"
 import { useSession, signIn, signOut,getCsrfToken } from "next-auth/react"
 function Login(context/* {csrfToken} */) {
 	const [userInfo, setUserInfo] = useState({ email: "", password: "" })
 	const [errorMsg, setErrorMsg] = useState("")
 	const { status, data } = useSession()
+	const router = useRouter()
 	const handleSignout = (e) => {
 		e.preventDefault()
 		signOut()
@@ -35,6 +36,7 @@ function Login(context/* {csrfToken} */) {
             redirect: false,
 			username: userInfo.email,
 			password: userInfo.password,
+			d_captcha: userInfo.d_captcha,
 			// The page where you want to redirect to after a
 			// successful login
 			callbackUrl: `${window.location.origin}`
@@ -46,19 +48,19 @@ function Login(context/* {csrfToken} */) {
     //console.log(csrfToken)
 	return (
 		<>
-			<Layout parent="Home" sub="Pages" subChild="Login & Register">
+			<Layout parent="首頁" /* sub="Pages"  */subChild=" > 會員中心">
 				<div className="page-content pt-150 pb-150">
 					<div className="container">
-						<div className="row">
-							<div className="col-xl-8 col-lg-10 col-md-12 m-auto">
+						{/*<div className="row">
+							 <div className="col-xl-8 col-lg-10 col-md-12 m-auto"> */}
 								<div className="row">
 									{/* <div className="col-lg-6 pr-30 d-none d-lg-block">
 										<img className="border-radius-15" src="assets/imgs/page/login-1.png" alt="" />
 									</div> */}
-									<div className="col-lg-6 col-md-8">
-										<div className="login_wrap widget-taber-content background-white">
-											<div className="content_box">
-												<div className="mbox">
+									{/*<div className="col-lg-6 col-md-8">
+										 <div className="login_wrap widget-taber-content background-white"> */}
+											<div className={styles.content_box}>
+												<div className={styles.mbox}>
 													<h1 className={styles.title01}>會員登入</h1>
 													{/* <p className="mb-30">
 														Don't have an account? <Link href="/page-register">{errorMsg?errorMsg:'Create here'}</Link>
@@ -82,7 +84,7 @@ function Login(context/* {csrfToken} */) {
 																{/* <input type="text" name="d_account" /> */}
 																<input
 																type="text"
-																required=""
+																required
 																name="email"
 																placeholder="Username or Email *"
 																value={userInfo.email}
@@ -93,7 +95,7 @@ function Login(context/* {csrfToken} */) {
 																<h2>密碼*</h2>
 																{/* <input type="password" name="d_password" /> */}
 																<input
-																required=""
+																required
 																type="password"
 																name="password"
 																placeholder="Your password *"
@@ -103,15 +105,15 @@ function Login(context/* {csrfToken} */) {
 															</li>
 															<li>
 																<h2>驗証碼*</h2>
-																<input type="text" name="d_captcha" />
+																<input required type="text" name="d_captcha" onChange={({target})=> setUserInfo({...userInfo,d_captcha:target.value})} />
 															</li>
 															<li className={styles.contact_captcha}>
 																<img  id="captcha" src={process.env.apiServer + "/login/make_vcode_img"} onClick={handleImgClick}/>
 															</li>
-															<div className="pw"><a href='/login/forgetpwd'>忘記密碼?</a></div>
+															<div className={styles.pw}><a href='/fetchpassword'>忘記密碼?</a></div>
 															<li style={{textAlign:"center"}}>
 																<input type="submit" className={styles.btn_style02} value="登入" />
-																<input type="button" className={styles.btn_style02} value="加入會員" onClick={()=>{'/login/join'}} />
+																<input type="button" className={styles.btn_style02} value="加入會員" onClick={()=>{router.push('/register')}} />
 															</li>
 															 <input
                                                                 name="csrfToken"
@@ -182,12 +184,12 @@ function Login(context/* {csrfToken} */) {
 													</form>
 												)}
 											</div>
-										</div>
+										{/* </div> */}
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
+							{/* </div>
+						</div> 
+					</div>*/}
 				</div>
 			</Layout>
 		</>

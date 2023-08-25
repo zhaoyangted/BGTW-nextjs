@@ -15,6 +15,7 @@ import Layout from "../../../components/layout/Layout"
 import { fetchProduct } from "../../../redux/action/product"
 import SingleProduct from "../../../components/ecommerce/SingleProduct"
 import CategoryBrand from "../../../components/ecommerce/Filter/CategoryBrand"
+import ShowFilter from "../../../components/ecommerce/Filter/ShowFilter"
 const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	let Router = useRouter(),
 		searchTerm = Router.query.search,
@@ -27,6 +28,10 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	let [currentPage, setCurrentPage] = useState(1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
 	const { id } = Router.query
+	const [modal, setModal] = useState(false)
+	const handleModalClose = () => {
+		setModal(!modal)
+	}
 	useEffect(() => {
 		if (!Router.isReady) {
 			return
@@ -79,13 +84,17 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 				<section className="mt-50 mb-50">
 					<div className="container-fluid">
 						<div className="row flex-row">
-							<div className="col-lg-3 primary-sidebar sticky-sidebar">
+							<div
+								className={
+									modal ? "d-block stick-sidebar col-lg-3" : "col-lg-3 primary-sidebar sticky-sidebar d-none d-lg-flex"
+								}
+							>
 								<div className="sidebar-widget  mb-30">
 									<h5 className="section-title style-1 mb-30">品牌馆</h5>
 									<CategoryBrand menusData={products.menus} />
 								</div>
 
-								<div className="sidebar-widget price_range range mb-30">
+								{/* <div className="sidebar-widget price_range range mb-30">
 									<h5 className="section-title style-1 mb-30">Fill by price</h5>
 
 									<div className="price-filter">
@@ -106,9 +115,9 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 										</div>
 									</div>
 									<br />
-								</div>
+								</div> */}
 
-								<div className="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+								{/* <div className="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
 									<h5 className="section-title style-1 mb-30">New products</h5>
 									<div className="single-post clearfix">
 										<div className="image">
@@ -152,7 +161,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> 
 								<div className="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
 									<img src="/assets/imgs/banner/banner-11.png" alt="" />
 									<div className="banner-text">
@@ -164,7 +173,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 											Juice
 										</h4>
 									</div>
-								</div>
+								</div>*/}
 							</div>
 							<div className="col-lg-9 ">
 								<div className="shop-product-fillter">
@@ -176,6 +185,9 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 										</p>
 									</div>
 									<div className="sort-by-product-area">
+										<div className="sort-by-cover d-block d-lg-none mr-10">
+											<ShowFilter setModal={handleModalClose} modal={modal} />
+										</div>
 										<div className="sort-by-cover mr-10">
 											<ShowSelect selectChange={selectChange} showLimit={showLimit} />
 										</div>
@@ -185,7 +197,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									</div>
 								</div>
 								<div className="row product-grid-3">
-									{products.items.length === 0 && <h3>No Products Found </h3>}
+									{products.items.length === 0 && <h3>無產品</h3>}
 
 									{products.items.map((item, i) => (
 										<div className="col-lg-3 col-md-4 col-12 col-sm-6 mb-30" key={i}>

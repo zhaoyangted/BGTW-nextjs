@@ -137,7 +137,7 @@ const SingleProduct2 = ({
                     className="btn w-100 hover-up"
                     onClick={(e) => handleCart(product)}
                 >
-                    <i className="fi-rs-shopping-cart mr-5"></i> Add To Cart
+                   <i className="fi-rs-shopping-cart-add mr-5"></i> 
                 </a>
             </div>
         </div>

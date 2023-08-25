@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useState } from "react"
 import useClickOutside from "../../util/outsideClick"
-
+import Search from "../ecommerce/Search"
 const MobileMenu = ({ isToggled, toggleClick, data }) => {
 	const [isActive, setIsActive] = useState({
 		status: false,
@@ -38,13 +38,15 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 								<span className="menu-expand" onClick={() => handleToggle(index)}>
 									<i className="fi-rs-angle-small-down"></i>
 								</span>
-								<Link href="/index">{li[0].split("_")[0]}</Link>
+								<Link href={`/products/top_list/${li[0].split("_")[1]}`}>{li[0].split("_")[0]}TOP</Link>
 								<ul className={isActive.key == index ? "dropdown" : "d-none"}>
 									{li[1].map((ul, index) => {
 										return (
 											<li key={index}>
-												<Link href="/products/products_list/${ul.d_id}">{ul.d_title}</Link>
+												<Link href={"/products/products_list/"+ul.d_id}>{ul.d_title}</Link>
+												<span className="menu-expand" >
 												<i className="fi-rs-angle-right"></i>
+												</span>
 											</li>
 										)
 									})}
@@ -81,81 +83,15 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 					</div>
 					<div className="mobile-header-content-area">
 						<div className="mobile-search search-style-3 mobile-header-border">
-							<form action="#">
+							{/* <form action="#">
 								<input type="text" placeholder="Search for items…" />
 								<button type="submit">
 									<i className="fi-rs-search"></i>
 								</button>
-							</form>
+							</form> */}
+							<Search data={data} />
 						</div>
 						<div className="mobile-menu-wrap mobile-header-border">
-							{/* <div className="main-categori-wrap mobile-header-border">
-                            <Link href="#" className="categori-button-active-2">
-
-                                <span className="fi-rs-apps"></span>Browse
-                                                                        Categories
-                            </Link>
-                            <div className="categori-dropdown-wrap categori-dropdown-active-small">
-                                <ul>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-dress"></i>Women's Clothing
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-tshirt"></i>Men's Clothing
-                                       </Link>
-                                    </li>
-                                    <li>
-                                        {" "}
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-smartphone"></i>{" "}Cellphones
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-desktop"></i>Computer & Office
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-cpu"></i>Consumer Electronics
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-home"></i>Home & Garden
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-high-heels"></i>Shoes
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-teddy-bear"></i>Mother & Kids
-                                       </Link>
-                                    </li>
-                                    <li>
-                                       <Link href="/shop-grid-right">
-
-                                           <i className="evara-font-kite"></i>Outdoor fun
-                                       </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> */}
-
 							{data?<Navmenu/>:<nav>
 								<ul className="mobile-menu" ref={domNode}>
 									<li className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"}>
@@ -369,15 +305,15 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 							</nav>}
 						</div>
 						<div className="mobile-header-info-wrap mobile-header-border">
-							<div className="single-mobile-header-info mt-30">
+							{/* <div className="single-mobile-header-info mt-30">
 								<Link href="/page-contact">Our location</Link>
-							</div>
+							</div> */}
 							<div className="single-mobile-header-info">
-								<Link href="/page-login-register">Log In / Sign Up</Link>
+								<Link href="/login">會員登入 / 加入會員</Link>
 							</div>
-							<div className="single-mobile-header-info">
+							{/* <div className="single-mobile-header-info">
 								<Link href="#">(+01) - 2345 - 6789</Link>
-							</div>
+							</div> */}
 						</div>
 						<div className="mobile-social-icon">
 							<h5 className="mb-15 text-grey-4">Follow Us</h5>

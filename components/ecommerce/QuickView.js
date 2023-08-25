@@ -26,13 +26,14 @@ const QuickView = ({ quickView, closeQuickView }) => {
         slidesToShow: 1,
         slidesToScroll: 1,
     };
+    const img=[quickView?.d_img1]
 
     return (
         <>
             <Modal open={quickView ? true : false} onClose={closeQuickView}>
                 {quickView && (
                     <div className="quick-view">
-                        <ProductDetails product={quickView} quickView={quickView} />
+                        <ProductDetails product={quickView} quickView={quickView} img={img}/>
                     </div>
                 )}
             </Modal>
@@ -42,6 +43,7 @@ const QuickView = ({ quickView, closeQuickView }) => {
 
 const mapStateToProps = (state) => ({
     quickView: state.quickView,
+    
 });
 
 export default connect(mapStateToProps, { closeQuickView })(QuickView);

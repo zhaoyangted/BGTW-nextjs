@@ -19,11 +19,11 @@ const Wishlist = ({
 
     const handleCart = (product) => {
         addToCart(product);
-        toast("Product added to Cart !");
+        toast("加入購物車成功 !");
     };
     return (
         <>
-            <Layout parent="Home" sub="Shop" subChild="Wishlist">
+            <Layout parent="首頁" /* sub="Shop"  */subChild=" > 我的最愛">
                 <section className="mt-50 mb-50">
                     <div className="container">
                         <div className="row">
@@ -34,15 +34,15 @@ const Wishlist = ({
                                             <thead>
                                                 <tr className="main-heading">
                                                     <th className="custome-checkbox start pl-30" colSpan="2">
-                                                        Product
+                                                        產品
                                                     </th>
-                                                    <th scope="col">Price</th>
+                                                    <th scope="col">價格</th>
                                                     <th scope="col">
-                                                        Stock Status
+                                                        庫存
                                                     </th>
                                                     <th scope="col">Action</th>
                                                     <th scope="col" className="end">
-                                                        Remove
+                                                        移出
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -104,12 +104,11 @@ const Wishlist = ({
                                                                 {product.stock ===
                                                                 0 ? (
                                                                     <span className="stock-status out-stock mb-0">
-                                                                        Out of
-                                                                        stock
+                                                                        無庫存
                                                                     </span>
                                                                 ) : (
                                                                     <span className="stock-status in-stock mb-0">
-                                                                        In Stock
+                                                                        有庫存
                                                                     </span>
                                                                 )}
                                                             </td>
@@ -119,9 +118,8 @@ const Wishlist = ({
                                                             >
                                                                 {product.d_stock ===
                                                                 0 ? (
-                                                                    <button className="btn btn-sm btn-secondary">
-                                                                        Contact
-                                                                        Us
+                                                                    <button className="btn btn-sm btn-secondary" onClick={()=>Router.push("/contact")}>
+                                                                        聯繫我們
                                                                     </button>
                                                                 ) : (
                                                                     <button
@@ -134,14 +132,13 @@ const Wishlist = ({
                                                                             )
                                                                         }
                                                                     >
-                                                                        Add to
-                                                                        cart
+                                                                        加入購物車
                                                                     </button>
                                                                 )}
                                                             </td>
                                                             <td
                                                                 className="action"
-                                                                data-title="Remove"
+                                                                data-title="移出"
                                                             >
                                                                 <a
                                                                     onClick={(
@@ -165,12 +162,12 @@ const Wishlist = ({
                                                 className="clear-btn"
                                                 onClick={clearWishlist}
                                             >
-                                                Clear All
+                                                全部移出
                                             </span>
                                         </div>
                                     </div>
                                 ) : (
-                                    <h4 className="mb-0">No Products</h4>
+                                    <h4 className="mb-0">無產品</h4>
                                 )}
                             </div>
                         </div>

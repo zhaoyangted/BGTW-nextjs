@@ -19,11 +19,11 @@ const ProductDetails = ({
 	quickView,
 	img,
 	specData,
-	watchedData
+	watchedData,
 }) => {
 	const [quantity, setQuantity] = useState(1)
 	const [info, setInfo] = useState()
-    // console.log(specData)
+	// console.log(specData)
 	const handleCart = (product) => {
 		addToCart(product)
 		toast("產品已加入購物車 !")
@@ -48,7 +48,7 @@ const ProductDetails = ({
 		}))
 	}
 	const inCart = cartItems.find((cartItem) => cartItem.id === product.d_id)
-	const inStock = (parseInt(product.d_stock)-quantity)>=0;
+	const inStock = parseInt(product.d_stock) - quantity >= 0
 	//console.log(product.d_price)
 
 	return (
@@ -75,52 +75,64 @@ const ProductDetails = ({
 											{product.d_stock === 0 && <span className="stock-status out-stock"> 無庫存 </span>}
 											<h2 className={styles.titledetail}>{product.d_title}</h2>
 											<ul className={styles.productmeta}>
-												<li>
-													<div className={styles.dtt}>商品品牌</div>
-													<div className={styles.spec}>
-														<a href={"/products/brands_list/"+product.BID}>{product.pbtitle}</a>
-													</div>
-												</li>
-												<li>
-													<div className={styles.dtt}>商品編號</div>
-													{/* <a href="#" rel="tag" className="me-1"> */}
-													<div className={styles.spec}>{product.d_model}</div>
-													{/*  </a> */}
-												</li>
-												<li>
-													<div className={styles.dtt}>庫存數量</div>
-													<div className={styles.spec}>
-														<span className="in-stock text-success">{product.d_stock}</span>
-													</div>
-												</li>
-												<li>
-													<div className={styles.dtt}>運費</div>
-													<div className={styles.spec}>
-														<span className="in-stock text-success">
-															{product.d_free !== "0" ? `訂單滿NT${product.d_free}免運費` : `免運費`}
-														</span>
-													</div>
-												</li>
+												{product.pbtitle ? (
+													<li>
+														<div className={styles.dtt}>商品品牌</div>
+														<div className={styles.spec}>
+															<a href={"/products/brands_list/" + product.BID}>{product.pbtitle}</a>
+														</div>
+													</li>
+												) : null}
+												{product.d_model ? (
+													<li>
+														<div className={styles.dtt}>商品編號</div>
+														<div className={styles.spec}>{product.d_model}</div>
+													</li>
+												) : null}
+												{product.d_stock ? (
+													<li>
+														<div className={styles.dtt}>庫存數量</div>
+														<div className={styles.spec}>
+															<span className="in-stock text-success">{product.d_stock}</span>
+														</div>
+													</li>
+												) : null}
+												{product.d_free ? (
+													<li>
+														<div className={styles.dtt}>運費</div>
+														<div className={styles.spec}>
+															<span className="in-stock text-success">
+																{product.d_free !== "0" ? `訂單滿NT${product.d_free}免運費` : `免運費`}
+															</span>
+														</div>
+													</li>
+												) : null}
 											</ul>
 											<ul className={styles.productmeta}>
 												{product.Chked === "Y" ? (
-														product.isNotAvail!==""?
-														<><li className="mb-5">
+													product.isNotAvail !== "" ? (
+														<>
+															<li className="mb-5">
+																<div className={styles.dtt}>{product.isMember}:</div>
+																<div className={styles.spec}>NT${product.d_price}</div>
+															</li>
+															<li className="mb-5">
+																<div className={styles.dtt}>{product.isNotAvail}</div>
+																<div className={styles.spec}>資格不符</div>
+															</li>
+														</>
+													) : (
+														<li className="mb-5">
 															<div className={styles.dtt}>{product.isMember}:</div>
 															<div className={styles.spec}>NT${product.d_price}</div>
 														</li>
-														<li className="mb-5">
-															<div className={styles.dtt}>{product.isNotAvail}</div>
-															<div className={styles.spec}>資格不符</div>
-														</li></>
-														:<li className="mb-5">
-															<div className={styles.dtt}>{product.isMember}:</div>
-															<div className={styles.spec}>NT${product.d_price}</div>
-														</li>)
-												:<li className="mb-5">
-													<div className={styles.dtt}>市價</div>
-													<div className={styles.spec}>NT${product.d_price}</div>
-											</li>}
+													)
+												) : (
+													<li className="mb-5">
+														<div className={styles.dtt}>市價</div>
+														<div className={styles.spec}>NT${product.d_price}</div>
+													</li>
+												)}
 												{product.d_dprice != 0 ? (
 													<li className="mb-5">
 														<div className={styles.dtt}>出清價</div>
@@ -142,25 +154,26 @@ const ProductDetails = ({
 												{product.isBonus ? (
 													<li>
 														<div className={styles.dtt}>
-                                                            <i className="fa fa-product-hunt" aria-hidden="true"></i>獲得紅利</div>
+															<i className="fa fa-product-hunt" aria-hidden="true"></i>獲得紅利
+														</div>
 														<div className={styles.spec}>
 															<span className="in-stock text-success">{product.d_bonus}%</span>
 														</div>
 													</li>
 												) : null}
 											</ul>
-											{specData !== [""] ? (
+											{specData ? (
 												<ul className={styles.productmeta}>
 													<div className={styles.dtt}>商品規格</div>
 													<div className={styles.spec}>
-                                                    <select id="ChangeSpec" className="select_pd" onChange={handleChange}>
-                                                        <option defaultValue={product.d_id}>{product.d_spectitle}</option>
-														{specData?.map((clr, i) => (
-															<option key={i} value={clr.d_id}>
-																{clr.d_spectitle}
-															</option>
-														))}
-                                                    </select>
+														<select id="ChangeSpec" className="select_pd" onChange={handleChange}>
+															<option defaultValue={product.d_id}>{product.d_spectitle}</option>
+															{specData?.map((clr, i) => (
+																<option key={i} value={clr.d_id}>
+																	{clr.d_spectitle}
+																</option>
+															))}
+														</select>
 													</div>
 												</ul>
 											) : null}
@@ -179,7 +192,7 @@ const ProductDetails = ({
                                                 <p className="font-lg">{product.d_title}</p>
                                             </div> */}
 
-										{/* 	<div className="attr-detail attr-size">
+											{/* 	<div className="attr-detail attr-size">
 												<strong className="mr-10">Size</strong>
 												<ul className="list-filter size-filter font-small">
 													<li className="active">
@@ -218,7 +231,11 @@ const ProductDetails = ({
 													</a>
 													<span className="qty-val">{inCart?.quantity || quantity}</span>
 													<a
-														onClick={() => (!inCart&&parseInt(product.d_stock)-quantity>0 ? setQuantity(quantity + 1) : increaseQuantity(product.d_id))}
+														onClick={() =>
+															!inCart && parseInt(product.d_stock) - quantity > 0
+																? setQuantity(quantity + 1)
+																: increaseQuantity(product.d_id)
+														}
 														className="qty-up"
 													>
 														<i className="fi-rs-angle-small-up"></i>
@@ -228,15 +245,17 @@ const ProductDetails = ({
 											<div className="detail-extralink">
 												<div className="product-extra-link2">
 													<button
-														onClick={(e) => parseInt(product.d_stock)-quantity>0?
-															handleCart({
-																...product,
-																quantity: quantity || 1,
-															}):null
+														onClick={(e) =>
+															parseInt(product.d_stock) - quantity > 0
+																? handleCart({
+																		...product,
+																		quantity: quantity || 1,
+																  })
+																: null
 														}
 														className="button button-add-to-cart"
 													>
-														{parseInt(product.d_stock)-quantity>=0?"加入購物車":"無庫存"}
+														{parseInt(product.d_stock) - quantity >= 0 ? "加入購物車" : "無庫存"}
 													</button>
 													<a
 														aria-label="Add To Wishlist"
@@ -267,7 +286,7 @@ const ProductDetails = ({
 											</div>
 											<div className="col-12">
 												<div className="row related-products position-relative">
-													<RelatedSlider product={watchedData}/>
+													<RelatedSlider product={watchedData} />
 												</div>
 											</div>
 										</div>
