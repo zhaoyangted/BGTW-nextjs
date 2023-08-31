@@ -3,6 +3,7 @@ import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
 //import useSWR from "swr"
 import Link from "next/link"
+import 'swiper/scss';
 SwiperCore.use([Autoplay,Navigation, Pagination])
 
 const Intro1 = ({data}) => {

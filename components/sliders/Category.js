@@ -95,7 +95,7 @@ const CategorySlider = () => {
        // console.log("Click");
     };
     const fetcher = url => fetch(url,{credentials:'include'}).then(r => r.json())
-	const { data, loading, error } = useSWR(process.env.apiServer +"/api/brand",fetcher)
+	const { data, loading, error } = useSWR(process.env.apiServer +"/api/brand/",fetcher)
     //console.log(data)
     /* let filteredList = [...data]
     filteredList = [

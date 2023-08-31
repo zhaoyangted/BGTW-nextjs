@@ -167,7 +167,7 @@ const nextAuthOptions = (req, res) => {
 			},*/
 		},
 		pages: {
-			signIn: "/page-login",
+			signIn: "/account/",
 			// signOut: '/auth/signout',
 		},
 		secret: process.env.NEXTAUTH_SECRET,

@@ -15,7 +15,7 @@ import { useSession } from "next-auth/react"
 import useSWR from "swr"
 export default function Home() {
 	const { status, data: session } = useSession()
-	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
+	const fetcher = (url) => fetch(url, { credentials: "include",sameSite:"none" }).then((r) => r.json())
 	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/homepage/", fetcher)
 	return (
 		<>
@@ -97,12 +97,7 @@ export default function Home() {
 
 				<section className="section-padding pb-5">
 					<div className="container">
-						<div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
-							<h3 className="">本日優惠</h3>
-							{/* <Link href="/products" className="show-all">
-								All Deals<i className="fi-rs-angle-right"></i>
-							</Link> */}
-						</div>
+						
 						<FeatchDeals />
 					</div>
 				</section>

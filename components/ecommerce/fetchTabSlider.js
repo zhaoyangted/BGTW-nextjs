@@ -13,8 +13,9 @@ function FeatchTabSlider() {
 		fetch(url, { credentials: "include" })
 			.then((r) => r.json())
 			.catch()
-	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/product/newproducts", fetcher)
+	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/product/newproducts/", fetcher)
 	if (data) {
+		console.log(data)
 		return (
 			<>
 				<div className="section-title wow animate__animated animate__fadeIn">

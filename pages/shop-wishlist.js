@@ -40,7 +40,7 @@ const Wishlist = ({
                                                     <th scope="col">
                                                         庫存
                                                     </th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col">購物車</th>
                                                     <th scope="col" className="end">
                                                         移出
                                                     </th>
@@ -71,7 +71,7 @@ const Wishlist = ({
                                                                         }
                                                                     </a>
                                                                 </h6>
-                                                                <div className="product-rate-cover">
+                                                               {/*  <div className="product-rate-cover">
                                                                     <div className="product-rate d-inline-block">
                                                                         <div
                                                                             className="product-rating"
@@ -84,22 +84,22 @@ const Wishlist = ({
                                                                         {" "}
                                                                         (4.0)
                                                                     </span>
-                                                                </div>
+                                                                </div> */}
                                                             </td>
                                                             <td
                                                                 className="price"
-                                                                data-title="Price"
+                                                                data-title="價格"
                                                             >
-                                                                <h3 className="text-brand">
+                                                                <h6 className="text-brand">
                                                                     $
                                                                     {
                                                                         product.d_price
                                                                     }
-                                                                </h3>
+                                                                </h6>
                                                             </td>
                                                             <td
                                                                 className="text-center detail-info"
-                                                                data-title="Stock"
+                                                                data-title="庫存"
                                                             >
                                                                 {product.stock ===
                                                                 0 ? (
@@ -114,7 +114,7 @@ const Wishlist = ({
                                                             </td>
                                                             <td
                                                                 className="text-right"
-                                                                data-title="Cart"
+                                                                data-title="購物車"
                                                             >
                                                                 {product.d_stock ===
                                                                 0 ? (

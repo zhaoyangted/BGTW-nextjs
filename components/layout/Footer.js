@@ -1,80 +1,76 @@
-import React from "react";
+import React from "react"
 import Link from "next/link"
-import styles from '../footer.module.css'
-const Footer = ({data}) => {
-      return (
-    <>
-      {data?<footer>
-            <div className={styles.footBOX}>
-                <div className={styles.foot_LinkBox}>
-                    <ul>
-                        <Link href="/about"
-                        >關於平台
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/about#position"
-                        >公司據點
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/news"
-                        >最新消息
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/qa"
-                        >常見問題
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/cart"
-                        >購物流程
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/clause"
-                        >隱私條款
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/sitemap"
-                        >網站導覽
-                        </Link>
-                    </ul>
-                    <ul>
-                        <Link href="/contact"
-                        >聯絡我們
-                        </Link>
-                    </ul>
-                </div>
-                <div className={styles.FUTALL}>
-                    <div className={styles.domeLogoBox}><img src='/assets/imgs/theme/beautygarage_logo02.svg' alt=""/></div>
-                    <div className={styles.FUT01}>
-                        {Object.values(data)[10]?
-                            <ul className={styles.foot_ConfTxBx}><img src='/assets/imgs/theme/foot_ic02.svg' alt=""/>
-                            服務專線：{Object.values(data)[8]}</ul>
-                        :null}
-                        {Object.values(data)[12]?
-                            <ul className={styles.foot_ConfTxBx}>
-                                <img src='/assets/imgs/theme/foot_ic03.svg' alt=""/>
-                            服務時間：{Object.values(data)[9]}</ul>
-                        :null}
-                        {Object.values(data)[13]?
-                            <ul className={styles.foot_ConfTxBx}><img src='/assets/imgs/theme/foot_ic04.svg' alt=""/>
-                            E-mail：{Object.values(data)[10]}</ul>
-                        :null}
-                    </div>
-                </div>
-                <div className={styles.foot_Copy}>
-                    <ul>台灣美麗平台股份有限公司 Copyright © 2019 All Right Reserved. </ul>
-                </div>
-            </div>
-        </footer>:null}
-        </>)
-    
-};
-{/* <footer className="main">
+import styles from "../footer.module.css"
+const Footer = ({ data }) => {
+	return (
+		<>
+			{data ? (
+				<footer>
+					<div className={styles.footBOX}>
+						<div className={styles.FUTALL}>
+							<div className={styles.domeLogoBox}>
+								<img src="/assets/imgs/theme/beautygarage_logo02.svg" alt="" />
+							</div>
+						</div>
+						<div className={styles.foot_LinkBox}>
+							<ul>
+								<Link href="/about">關於平台</Link>
+							</ul>
+							<ul>
+								<Link href="/about#position">公司據點</Link>
+							</ul>
+							<ul>
+								<Link href="/news">最新消息</Link>
+							</ul>
+							<ul>
+								<Link href="/qa">常見問題</Link>
+							</ul>
+							<ul>
+								<Link href="/cart">購物流程</Link>
+							</ul>
+							<ul>
+								<Link href="/clause">隱私條款</Link>
+							</ul>
+							<ul>
+								<Link href="/sitemap">網站導覽</Link>
+							</ul>
+							<ul>
+								<Link href="/contact">聯絡我們</Link>
+							</ul>
+						</div>
+						<div className={styles.FUTALL}>
+							<div className={styles.FUT01}>
+								{Object.values(data)[10] ? (
+									<ul className={styles.foot_ConfTxBx}>
+										<img src="/assets/imgs/theme/foot_ic02.svg" alt="" />
+										服務專線：{Object.values(data)[8]}
+									</ul>
+								) : null}
+								{Object.values(data)[12] ? (
+									<ul className={styles.foot_ConfTxBx}>
+										<img src="/assets/imgs/theme/foot_ic03.svg" alt="" />
+										服務時間：{Object.values(data)[9]}
+									</ul>
+								) : null}
+								{Object.values(data)[13] ? (
+									<ul className={styles.foot_ConfTxBx}>
+										<img src="/assets/imgs/theme/foot_ic04.svg" alt="" />
+										E-mail：{Object.values(data)[10]}
+									</ul>
+								) : null}
+							</div>
+						</div>
+						<div className={styles.foot_Copy}>
+							<ul>台灣美麗平台股份有限公司 Copyright © 2019 All Right Reserved. </ul>
+						</div>
+					</div>
+				</footer>
+			) : null}
+		</>
+	)
+}
+{
+	/* <footer className="main">
             <section className="newsletter mb-15  wow animate__animated animate__fadeIn">
                 <div className="container">
                     <div className="row">
@@ -518,5 +514,6 @@ const Footer = ({data}) => {
                     </div>
                 </div>
             </div>
-        </footer> */}
-export default Footer;
+        </footer> */
+}
+export default Footer
