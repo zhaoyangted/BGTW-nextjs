@@ -108,7 +108,7 @@ const OrderInfo = () => {
 								<div className="namebox">
 									<div className="name">
 										<dd>
-											<img src={"/" + d.d_img} />
+											<img src={process.env.s3Host + d.d_img} />
 										</dd>
 										<dt>
 											<div className="tt">
@@ -188,7 +188,7 @@ const OrderInfo = () => {
 								<div className="namebox">
 									<div className="name">
 										<dd>
-											<img src={a.d_img} />
+											<img src={process.env.s3Host+a.d_img} />
 										</dd>
 										<dt>
 											<div className="tt">{a.d_title}</div>
@@ -222,7 +222,7 @@ const OrderInfo = () => {
 								<div className="namebox">
 									<div className="name">
 										<dd>
-											<img src={"/" + t.d_img} />
+											<img src={process.env.s3Host + t.d_img} />
 										</dd>
 										<dt>
 											<div className="tt">{t.d_title}</div>
@@ -251,7 +251,7 @@ const OrderInfo = () => {
 								<div className="namebox">
 									<div className="name">
 										<dd>
-											<img src={"/" + g.d_img} />
+											<img src={process.env.s3Host + g.d_img} />
 										</dd>
 										<dt>
 											<div className="tt">{g.title}</div>

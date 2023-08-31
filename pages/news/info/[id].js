@@ -25,7 +25,7 @@ function PageBlogSingle() {
         });
     return (
         <>
-            <Layout parent="Home" sub="Blog" subChild="Blog Details">
+            <Layout parent="首頁" sub=" > 活動資訊" /* subChild="Blog Details" */>
                 <section className="mt-50 mb-50">
                     <div className="container custom">
                         <div className="row">

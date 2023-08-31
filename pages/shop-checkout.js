@@ -1877,7 +1877,7 @@ const Cart = ({
                                                             <td className="image product-thumbnail">
                                                                 <img
                                                                     src={
-                                                                        item.d_img1
+                                                                        process.env.s3Host+item.d_img1
                                                                     }
                                                                     alt="#"
                                                                 />

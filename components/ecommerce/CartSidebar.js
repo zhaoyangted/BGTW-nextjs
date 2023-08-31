@@ -55,7 +55,7 @@ const CartSidebar = ({
                             <div className="d-flex">
                                 <div className="flex-grow-1">
                                     <img
-                                        src={item.image}
+                                        src={process.env.s3Host+item.image}
                                         style={{
                                             width: "75px",
                                             height: "75px",

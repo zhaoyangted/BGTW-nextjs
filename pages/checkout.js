@@ -188,7 +188,7 @@ const Cart = ({
 													<div className={styles.name}>
 														<dd>
 															<a href={"/products/" + item.d_id}>
-																<img src={"/"+item.d_img1} alt="" />
+																<img src={process.env.s3Host+item.d_img1} alt="" />
 															</a>
 														</dd>
 														<dt>
@@ -249,7 +249,7 @@ const Cart = ({
 														<div className="namebox">
 															<div className="name">
 																<dd>
-																	<img src={"/"+item.d_img} alt="" />
+																	<img src={process.env.s3Host+item.d_img} alt="" />
 																</dd>
 																<dt>
 																	<div className="tt">{item.d_title}</div>
@@ -285,7 +285,7 @@ const Cart = ({
 														<div className="namebox">
 															<div className="name">
 																<dd>
-																	<img src={"/"+item.d_img} alt="" />
+																	<img src={process.env.s3Host+item.d_img} alt="" />
 																</dd>
 																<dt>
 																	<div className="tt">{item.d_title}</div>
@@ -314,7 +314,7 @@ const Cart = ({
 														<div className="namebox">
 															<div className="name">
 																<dd>
-																	<img src={"/" + item.d_img} alt="" />
+																	<img src={process.env.s3Host + item.d_img} alt="" />
 																</dd>
 																<dt>
 																	<div className="tt">{item.d_title}</div>

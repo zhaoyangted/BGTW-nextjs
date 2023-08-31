@@ -12,7 +12,7 @@ const Banner5 = ({data}) => {
                         <ul key={i}>
                           <a href={d.d_link} target="_BLANK">
                             <li className="comm_phtBox">
-                                <img src={"/"+d.d_img} alt=""/>
+                                <img src={process.env.s3Host+d.d_img} alt=""/>
                             </li>
                             <li className="comm_TxBx">{d.d_title}
                             </li>

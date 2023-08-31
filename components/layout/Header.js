@@ -79,11 +79,11 @@ const Header = ({
 							return (
 								<li className="position-static" key={index}>
 									{/* <img src="/assets/imgs/theme/icons/icon-hot.svg" alt="hot deals" /> */}
-									<Link href={`/products/products_list/${li[0].split("_")[1]}`}>{li[0].split("_")[0]}</Link>
+									<Link href={`/products/top_list/${li[0].split("_")[1]}/`}>{li[0].split("_")[0]}</Link>
 									{/* <i className="fi-rs-angle-down"></i> */}
 									<ul className="mega-menu">
 										<div className={styles.HdNAVUBTopTT}>
-											<a className="menu-title" href={`/products/top_list/${li[0].split("_")[1]}`}>
+											<a className="menu-title" href={`/products/top_list/${li[0].split("_")[1]}/`}>
 												{li[0].split("_")[0]}TOP
 											</a>
 										</div>
@@ -109,7 +109,7 @@ const Header = ({
 	}
 	const handleSignOut = async () => {
 		if (status === "authenticated") {
-			const response = await axios.put(process.env.apiServer + "/api/auth/logout/")
+			const response = await axios.put(process.env.apiServer + "/api/auth/logout",{credentials:'include'})
 			if (response.status === 200) {
 				await signOut()
 			} else {
@@ -309,7 +309,7 @@ const Header = ({
 																			return (
 																				<div className="IndSPContUr" key={i}>
 																					<ul className="IndSprPHT">
-																						<img src={"/" + item["d_img1"]} alt="" />
+																						<img src={process.env.s3Host + item["d_img1"]} alt="" />
 																					</ul>
 																					<ul className="IndSprTxBx">
 																						<li className="CrProdName">{item["d_title"]}</li>

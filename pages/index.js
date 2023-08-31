@@ -83,9 +83,9 @@ export default function Home() {
 
 				<section className="product-tabs section-padding position-relative">
 					<div className="container">
-						<div className="col-lg-12">
+						{/* <div className="col-lg-12"> */}
 							<CategoryTab />
-						</div>
+						{/* </div> */}
 					</div>
 				</section>
 
@@ -98,10 +98,10 @@ export default function Home() {
 				<section className="section-padding pb-5">
 					<div className="container">
 						<div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
-							<h3 className="">Deals Of The Day</h3>
-							<Link href="/products" className="show-all">
+							<h3 className="">本日優惠</h3>
+							{/* <Link href="/products" className="show-all">
 								All Deals<i className="fi-rs-angle-right"></i>
-							</Link>
+							</Link> */}
 						</div>
 						<FeatchDeals />
 					</div>

@@ -37,7 +37,7 @@ const ThumbSlider = ({ img }) => {
 			>
 				{img?.map((item, i) => (
 					<SwiperSlide key={i}>
-						<img src={"http://localhost:3000/" + item} />
+						<img src={process.env.s3Host + item} />
 					</SwiperSlide>
 				))}
 			</Swiper>
@@ -51,7 +51,7 @@ const ThumbSlider = ({ img }) => {
 			>
 				{img?.map((item, i) => (
 					<SwiperSlide key={i}>
-						<img src={"http://localhost:3000/" + item} />
+						<img src={process.env.s3Host + item} />
 					</SwiperSlide>
 				))}
 			</Swiper>

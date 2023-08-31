@@ -42,12 +42,12 @@ const SingleProductList = ({
 
                                 <img
                                     className="default-img"
-                                    src={product.d_img1}
+                                    src={process.env.s3Host+product.d_img1}
                                     alt=""
                                 />
                                 <img
                                     className="hover-img"
-                                    src={product.d_img2/* ?product.d_img2:product.d_img1 */}
+                                    src={process.env.s3Host+product.d_img2/* ?product.d_img2:product.d_img1 */}
                                     alt=""
                                 />
 

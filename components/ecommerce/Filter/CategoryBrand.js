@@ -83,14 +83,14 @@ const CategoryBrand = (
 									{li[1]?.map((ul, index) => {
 										return (
 											<ul className={isActive2.key == index ? "menu-item-has-children dropdown "+styles.menuitem : "menu-item-has-childrend-none "+styles.menuitem} key={index} >
-												<Link href={"/products/products_list/"+ul.d_id}>{ul.d_title}</Link>
+												<Link href={"/products/products_list/"+ul.d_id+"/"}>{ul.d_title}</Link>
                                                 <span className="menu-expand" onClick={() => handleToggle2(index)}>
                                                 {ul.Subdata?.length>0&&<i className="fi-rs-angle-small-right"></i>}
                                                 </span>
                                                 {ul.Subdata?.map((li,i)=>{
                                                     return (
                                                         <li key={i} className={styles.li}>
-                                                            <Link href={"/products/products_list/"+li.d_id}>{li.d_title}</Link>
+                                                            <Link href={"/products/products_list/"+li.d_id+"/"}>{li.d_title}</Link>
                                                             
                                                         </li>
                                                     )

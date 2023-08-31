@@ -16,7 +16,7 @@ const Breadcrumb2 = ({parent, sub, subChild, noBreadcrumb,types,menuData}) => {
                         <h2 className="mb-15 text-capitalize">{titlex ? titlex : types?.d_title}</h2>
                         <div className="breadcrumb">
                             <Link href="/" rel="nofollow"><i className="fi-rs-home mr-5"></i>首頁</Link>
-                            {menuData&&<Link href={"/products/products_list/"+types?.TID} rel="nofollow">
+                            {menuData&&<Link href={"/products/top_list/"+types?.TID} rel="nofollow">
                                 <span></span> {menuData?.d_title} <span></span>
                             </Link>} 
                             <Link href="#">{menuData?null:<span></span>}{types?.d_title}</Link>

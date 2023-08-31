@@ -52,7 +52,7 @@ const Wishlist = ({
                                                         <tr className="pt-30" key={i}>
                                                             <td className="image product-thumbnail pt-40">
                                                                 <img
-                                                                    src={'/'+product.d_img1}
+                                                                    src={process.env.s3Host+product.d_img1}
                                                                     /* src={
                                                                         product
                                                                             .images[0]

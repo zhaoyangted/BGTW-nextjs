@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import styles from "../../components/account.module.css"
 import axios from "axios"
 import Pagination from "../ecommerce/Pagination"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 const Orders = () => {
 	//const fetcher = (url) => fetch(url, { method:"POST", credentials: "include" }).then((r) => r.json())
 	//const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/orders", fetcher)
@@ -14,6 +16,14 @@ const Orders = () => {
 	let [pages, setPages] = useState(Math.ceil(data?.dbdata?.PageList?.TotalRecord / limit))
 	let [currentPage, setCurrentPage] = useState(1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
+	const router = useRouter()
+	const { data:session } = useSession()
+	React.useEffect(() => {
+		if (!session ) {
+			router.push("/login/")
+		}
+		return
+	}, [])
 	useEffect(() => {
 		const cratePagination = () => {
 			// set pagination

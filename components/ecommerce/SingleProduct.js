@@ -33,18 +33,18 @@ const SingleProduct = ({
             <div className="product-img-action-wrap">
                 <div className="product-img product-img-zoom">
                     <Link
-                        href="/products/[slug]"
-                        as={`/products/${product.d_id}`}
+                        href="/products/[slug]/"
+                        as={`/products/${product.d_id}/`}
                     >
 
                         <img
                             className="default-img"
-                            src={'/'+product.d_img1}
+                            src={process.env.s3Host+product.d_img1}
                             alt=""
                         />
                         <img
                             className="hover-img"
-                            src={product.d_img2?'/'+product.d_img2:'/'+product.d_img2}
+                            src={product.d_img2?process.env.s3Host+product.d_img2:process.env.s3Host+product.d_img2}
                             alt=""
                         />
 
@@ -99,8 +99,8 @@ const SingleProduct = ({
                 </div> */}
                 <h2>
                     <Link
-                        href="/products/[slug]"
-                        as={`/products/${product.d_id}`}
+                        href="/products/[slug]/"
+                        as={`/products/${product.d_id}/`}
                     >
                         {product.d_title}
                     </Link>
@@ -130,10 +130,10 @@ const SingleProduct = ({
                         {product.Chked==='Y'?
                         <>
                         <span>{product.Lvtitle}${product.d_price} </span>
-                        <span className="old-price">市價$:{product.d_price1 && `$ ${product.d_price1}`}</span>
+                        <span className="old-price">市價:${product.d_price1 && `${product.d_price1}`}</span>
                         </>
                         :<>
-                        <span className="price">市價$:{product.d_price1 && `${product.d_price1}`}</span>
+                        <span className="price">市價:${product.d_price1 && `${product.d_price1}`}</span>
                         </>
                         }
                     </div>

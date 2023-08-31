@@ -53,7 +53,7 @@ function Login(context/* {csrfToken} */) {
 					<div className="container">
 						{/*<div className="row">
 							 <div className="col-xl-8 col-lg-10 col-md-12 m-auto"> */}
-								<div className="row">
+								<div className="row col-lg-12 col-md-12 col-sm-12 col-xs-12 m-auto">
 									{/* <div className="col-lg-6 pr-30 d-none d-lg-block">
 										<img className="border-radius-15" src="assets/imgs/page/login-1.png" alt="" />
 									</div> */}

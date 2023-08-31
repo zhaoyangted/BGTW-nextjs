@@ -2088,7 +2088,7 @@ input[type="checkbox"].account {
     float: left; */
     display: block;
     color: #ff3c6c;
-    font-size: 20px;
+    /* font-size: 20px; */
     font-weight: bold;
 }
 

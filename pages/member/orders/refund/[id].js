@@ -144,7 +144,7 @@ const Refund = () => {
 																		<div className={styles.namebox}>
 																			<div className={styles.name}>
 																				<dd>
-																					<img src={"/" + o.d_img} />
+																					<img src={process.env.s3Host + o.d_img} />
 																				</dd>
 																				<dt>
 																					<div className={styles.tt}>

@@ -7,10 +7,10 @@ function Clause() {
     
     return (
         <>
-            <Layout parent="Home" sub="Pages" subChild="Guide">
+            <Layout parent="首頁" sub=" > 隱私條款" /* subChild="Guide" */>
             <div className="page-content pt-50">
                 <div className="container">
-                    <div className="row">
+                    <div className="row ml-100 mr-100">
                     <section className={styles.content_box}>
             <div className={styles.title01}>隱私權條款</div>
             <div className="user_editor"

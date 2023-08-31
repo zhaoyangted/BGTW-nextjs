@@ -15,7 +15,7 @@ const QuickView = ({ quickView, closeQuickView }) => {
         customPaging: function (i) {
             return (
                 <a>
-                    <img src={images[i].src} width="75" />
+                    <img src={process.env.s3Host+images[i].src} width="75" />
                 </a>
             );
         },

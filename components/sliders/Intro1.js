@@ -68,7 +68,7 @@ const Intro1 = ({data}) => {
 								}} */
 							>
 								<Link href={`${url.d_link}`}>
-									 <img className="img-hover-slide" src={`${url.d_img}`} />
+									 <img className="img-hover-slide" src={process.env.s3Host+url.d_img} />
 								{/*	 <img src="assets/imgs/slider/slider-1.png" /> */}
 								</Link>
 							</div>

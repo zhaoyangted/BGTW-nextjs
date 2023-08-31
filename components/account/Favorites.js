@@ -43,7 +43,7 @@ const Favorites = ({ product, addToCart, deleteFromWishlist }) => {
 										<div className={styles.name}>
 											<dd>
 												<a href={"products/" + p.d_id}>
-													<img src={"/" + p.d_img1} />
+													<img src={process.env.s3Host + p.d_img1} />
 												</a>
 											</dd>
 											<dt>

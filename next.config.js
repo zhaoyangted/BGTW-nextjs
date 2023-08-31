@@ -5,19 +5,27 @@ const {
   } = require('next/constants')
 const nextConfig = {
     env: {
-        apiServer : 'http://localhost',
+        apiServer : 'https://beautygarage.tw',
         NEXTAUTH_SECRET : 'ted2zhao',
-        NEXTAUTH_URL:'http://localhost:3000/',
+        NEXTAUTH_URL:'http://localhost:3000',
         S3_ACCESS_KEY:'AKIAQAVTMB3SG4XXGPIH',
         S3_SECRET_KEY:'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',
         BUCKET_NAME:'bgtwmedia',
-        s3Host:'https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/uploads/'
+        s3Host:'https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/'
         
     },
-    //trailingSlash: true,
+    trailingSlash: true,
     /* images: {
-      domains: ["images.pexels.com"],
+      remotePatterns: [
+        {
+          protocol: 'http',
+          hostname: 'bgtwmedia.s3.ap-northeast-1.amazonaws.com',
+          port: '',
+          pathname: '/bgtwmedia/uploads/*',
+        },
+      ],
     }, */
+    output: 'export',
   };
 module.exports = nextConfig
     

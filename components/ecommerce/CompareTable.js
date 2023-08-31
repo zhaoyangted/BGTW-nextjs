@@ -24,7 +24,7 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                         {data.map((product,i) =>
                             feature == "產品預覽" ? (
                                 <td className="row_img" key={i}>
-                                    <img style={{width:"30%"}}src={product.d_img1} />
+                                    <img style={{width:"30%"}}src={process.env.s3Host+product.d_img1} />
                                 </td>
                             ) : feature == "產品名稱" ? (
                                 <td className="product_name" key={i}>

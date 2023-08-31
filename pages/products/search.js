@@ -14,61 +14,64 @@ import WishlistModal from "../../components/ecommerce/WishlistModal"
 import Layout from "../../components/layout/Layout"
 import { fetchProduct } from "../../redux/action/product"
 import SingleProduct from "../../components/ecommerce/SingleProduct"
+import ShowFilter from "../../components/ecommerce/Filter/ShowFilter"
 const SearchList = ({ products, productFilters, fetchProduct }) => {
 	const router = useRouter(),
 		searchTerm = router.query.search,
 		showLimit = 12,
 		showPagination = 4,
-        page=0
-    //const { id,page } = Router.query
-    const {Pkeyword,Ptype} = router.query
+		page = 0
+	//const { id,page } = Router.query
+	const { Pkeyword, Ptype } = router.query
 	let [pagination, setPagination] = useState([])
 	let [limit, setLimit] = useState(showLimit)
 	let [pages, setPages] = useState(products.pages?.TotalPage /* Math.ceil(products.items.length / limit) */)
-	let [currentPage, setCurrentPage] = useState(page?page:1)
-    let [getPaginationGroup,setGetPaginationGroup] = useState()
-    //console.log(Pkeyword,Ptype)
-    const postdata={Pkeyword:Pkeyword,Ptype:Ptype,page:currentPage-1,limit:12}
+	let [currentPage, setCurrentPage] = useState(page ? page : 1)
+	let [getPaginationGroup, setGetPaginationGroup] = useState()
+	//console.log(Pkeyword,Ptype)
+	const postdata = { Pkeyword: Pkeyword, Ptype: Ptype, page: currentPage - 1, limit: 12 }
+	const [modal, setModal] = useState(false)
+	const handleModalClose = () => {
+		setModal(!modal)
+	}
 	useEffect(() => {
 		if (!router.isReady) {
 			return
 		}
-        /* const podata = new FormData()
+		/* const podata = new FormData()
 
 		// Turn our formData state into data we can use with a form submission
 		Object.entries(postdata).forEach(([key, value]) => {
 			podata.append(key, value)
 		})
         console.log(podata) */
-        //console.log(postdata)
+		//console.log(postdata)
 		fetchProduct(
 			searchTerm,
-			 process.env.apiServer +
-				`/api/product/search/?page=${currentPage-1}&order=${productFilters.featured}&limit=12`, productFilters,
+			process.env.apiServer + `/api/product/search/?page=${currentPage - 1}&order=${productFilters.featured}&limit=12`,
+			productFilters,
 			postdata
 		)
-		
-	}, [productFilters, limit, pages, currentPage,Pkeyword,Ptype])
-    useEffect(()=>{
-        const cratePagination = () => {
-            // set pagination
-            let arr = new Array(products.pages?.TotalPage /* Math.ceil(products.pages?.TotalRecord / limit) */)
-                .fill()
-                .map((_, idx) => idx + 1)
-    
-            setPagination(arr)
-            setPages(products.pages?.TotalPage /* Math.ceil(products.pages?.TotalRecord / limit) */)
-            let start = Math.floor((currentPage - 1) / showPagination) * showPagination
-            let end = start + showPagination
-            setGetPaginationGroup(arr.slice(start, end))
-        }
-        cratePagination()
-    },[products,currentPage,productFilters,Pkeyword,Ptype])
-	
+	}, [productFilters, limit, pages, currentPage, Pkeyword, Ptype])
+	useEffect(() => {
+		const cratePagination = () => {
+			// set pagination
+			let arr = new Array(products.pages?.TotalPage /* Math.ceil(products.pages?.TotalRecord / limit) */)
+				.fill()
+				.map((_, idx) => idx + 1)
+
+			setPagination(arr)
+			setPages(products.pages?.TotalPage /* Math.ceil(products.pages?.TotalRecord / limit) */)
+			let start = Math.floor((currentPage - 1) / showPagination) * showPagination
+			let end = start + showPagination
+			setGetPaginationGroup(arr.slice(start, end))
+		}
+		cratePagination()
+	}, [products, currentPage, productFilters, Pkeyword, Ptype])
 
 	/* const startIndex = currentPage * limit - limit
 	const endIndex = startIndex + limit */
-	 /*const getPaginatedProducts = products.items .slice(startIndex, endIndex) */
+	/*const getPaginatedProducts = products.items .slice(startIndex, endIndex) */
 
 	const next = () => {
 		setCurrentPage((page) => page + 1)
@@ -94,13 +97,17 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 				<section className="mt-50 mb-50">
 					<div className="container-fluid">
 						<div className="row flex-row">
-							<div className="col-lg-3 primary-sidebar sticky-sidebar">
+							<div
+								className={
+									modal ? "d-block stick-sidebar col-lg-3" : "col-lg-3 primary-sidebar sticky-sidebar d-none d-lg-flex"
+								}
+							>
 								<div className="sidebar-widget  mb-30">
 									<h5 className="section-title style-1 mb-30">{products.menudatas?.d_title}</h5>
 									<CategoryProduct menuDatas={products.types} menus={products.menus} />
 								</div>
 
-								<div className="sidebar-widget price_range range mb-30">
+								{/* <div className="sidebar-widget price_range range mb-30">
 									<h5 className="section-title style-1 mb-30">Fill by price</h5>
 
 									<div className="price-filter">
@@ -123,7 +130,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 									<br />
 								</div>
 
-								{/* <div className="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+								<div className="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
 									<h5 className="section-title style-1 mb-30">New products</h5>
 									<div className="single-post clearfix">
 										<div className="image">
@@ -197,6 +204,9 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 										</p>
 									</div>
 									<div className="sort-by-product-area">
+										<div className="sort-by-cover d-block d-lg-none mr-10">
+											<ShowFilter setModal={handleModalClose} modal={modal} />
+										</div>
 										<div className="sort-by-cover mr-10">
 											<ShowSelect selectChange={selectChange} showLimit={showLimit} />
 										</div>
@@ -218,14 +228,16 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 
 								<div className="pagination-area mt-15 mb-sm-5 mb-lg-0">
 									<nav aria-label="Page navigation example">
-										{getPaginationGroup&&<Pagination
-											getPaginationGroup={getPaginationGroup}
-											currentPage={currentPage}
-											pages={pages}
-											next={next}
-											prev={prev}
-											handleActive={handleActive}
-										/>}
+										{getPaginationGroup && (
+											<Pagination
+												getPaginationGroup={getPaginationGroup}
+												currentPage={currentPage}
+												pages={pages}
+												next={next}
+												prev={prev}
+												handleActive={handleActive}
+											/>
+										)}
 									</nav>
 								</div>
 							</div>

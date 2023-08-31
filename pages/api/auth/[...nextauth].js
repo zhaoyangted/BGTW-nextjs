@@ -98,7 +98,7 @@ const nextAuthOptions = (req, res) => {
 					const response = await axios.post(process.env.apiServer + "/api/auth/login/", {
 						d_account: credentials.username,
 						d_password: credentials.password,
-						d_captcha:credentials.d_captcha
+						//d_captcha:credentials.d_captcha
 					})
 					const cookies = response.headers["set-cookie"]
 					// console.log(cookies)

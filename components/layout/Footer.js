@@ -9,7 +9,7 @@ const Footer = ({data}) => {
                 <div className={styles.foot_LinkBox}>
                     <ul>
                         <Link href="/about"
-                        >關於美麗平台
+                        >關於平台
                         </Link>
                     </ul>
                     <ul>
@@ -24,7 +24,7 @@ const Footer = ({data}) => {
                     </ul>
                     <ul>
                         <Link href="/qa"
-                        >常見問題 Q&A
+                        >常見問題
                         </Link>
                     </ul>
                     <ul>
@@ -34,7 +34,7 @@ const Footer = ({data}) => {
                     </ul>
                     <ul>
                         <Link href="/clause"
-                        >隱私權條款說明
+                        >隱私條款
                         </Link>
                     </ul>
                     <ul>
