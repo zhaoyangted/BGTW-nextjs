@@ -1,7 +1,7 @@
 import Layout from "../components/layout/Layout"
 import Link from "next/link"
 import React, { useState } from "react"
-import Member from "../components/account/member"
+import Member from "../components/account/Member"
 import Point from "../components/account/Point"
 import AccEdit from "../components/account/AccEdit"
 import Favorites from "../components/account/Favorites"
