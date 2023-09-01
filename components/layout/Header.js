@@ -4,7 +4,8 @@ import { connect } from "react-redux"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useAuthContext } from "../../util/useAuthContext"
+//import { useSession, signIn, signOut } from "next-auth/react"
 import styles from "../../components/header.module.css"
 import axios from "axios"
 axios.defaults.withCredentials = true
@@ -35,7 +36,9 @@ const Header = ({
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
 	const [apiData, setApiData] = useState({})
-	const { status, data: session } = useSession()
+	//const { status, data: session } = useSession()
+	const auth=useAuthContext()
+	//console.log(auth.user)
 	const price = () => {
 		let price = 0
 		cartItems.forEach((item) => (price += item.d_price * item.quantity))
@@ -108,18 +111,19 @@ const Header = ({
 		)
 	}
 	const handleSignOut = async () => {
-		if (status === "authenticated") {
-			const response = await axios.put(process.env.apiServer + "/api/auth/logout",{credentials:'include'})
-			if (response.status === 200) {
-				await signOut()
-			} else {
+		if (auth.user) {
+			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout",{credentials:'include'})
+			if (response.status === 200) { */
+				await auth.signOut()
+			/* } else {
 				alert("logout failed")
 				await signOut()
 			}
 		} else {
 			alert("not login.")
-		}
+		} */
 	}
+}
 	const handleToggle = () => setToggled(!isToggled)
 	// console.log(Object.values(config)[13])
 	return (
@@ -164,10 +168,10 @@ const Header = ({
 					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap">
 							<div className="header-right">
-								{status === "authenticated" ? (
+								{auth.user ? (
 									<>
 										<Link href="/account/" className="user__link user__link--login">
-											會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}
+											會員{auth.user.data.d_pname}您好!您的目前等級：{auth.user.data.d_title}
 										</Link>
 										<Link
 											href="/#"

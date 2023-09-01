@@ -18,7 +18,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
   },
 } */
 import axios from "axios"
-axios.defaults.withCredentials=true
+axios.defaults.withCredentials = true
 const nextAuthOptions = (req, res) => {
 	return {
 		//export default async function auth(req: NextApiRequest, resp: NextApiResp) {
@@ -85,7 +85,7 @@ const nextAuthOptions = (req, res) => {
 					const payload = {
 						d_account: credentials.username,
 						d_password: credentials.password,
-						d_captcha: credentials.d_captcha
+						d_captcha: credentials.d_captcha,
 					}
 					//console.log(payload)
 					/* const response = await fetch(process.env.apiServer + "/api/auth/login/", {
@@ -99,10 +99,11 @@ const nextAuthOptions = (req, res) => {
 						d_account: credentials.username,
 						d_password: credentials.password,
 						//d_captcha:credentials.d_captcha
-					})
+					},{credentials:'include'})
 					const cookies = response.headers["set-cookie"]
-					 console.log(cookies)
-					res.setHeader("set-cookie", cookies)
+					console.log(cookies)
+					res.setHeader("set-cookie", cookies, { samesite: "none", path: "/", domain: "https://beautygarage.tw" })
+					req.setHeader("set-cookie", cookies, { samesite: "none", path: "/", domain: "https://beautygarage.tw" })
 					//const resp = await response.json()
 					//console.log(cookies)
 					//resp.end()
@@ -122,6 +123,7 @@ const nextAuthOptions = (req, res) => {
 		session: {
 			strategy: "jwt",
 			maxAge: 1 * 24 * 60 * 60,
+			jwt: true,
 		},
 		callbacks: {
 			// 每次调用 getSession() 、useSession() 的时候 都会触发并将 token 存入 user 中
@@ -141,7 +143,7 @@ const nextAuthOptions = (req, res) => {
 				 const cookieStore = cookies();
 				const phpSessID = cookieStore.get('PHPSESSID');
 				 */
-				/* console.log(req.cookies)
+			/* console.log(req.cookies)
 				headers["Set-Cookie"] = req.cookies; 
 
 				try {

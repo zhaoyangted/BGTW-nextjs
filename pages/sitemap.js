@@ -2,12 +2,14 @@ import React, { useEffect, useState, useCallback, useRef } from "react"
 import Layout from "../components/layout/Layout"
 import styles from "../components/about.module.css"
 import useSWR from "swr"
-import { useSession } from "next-auth/react"
+//import { useSession } from "next-auth/react"
+import { useAuthContext } from "../../util/useAuthContext"
 import Qainfo from '../components/qa/Qainfo'
 function SiteMap() {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/homepage/sitemap", fetcher)
-	const { status, data: session } = useSession()
+	//const { status, data: session } = useSession()
+	const auth=useAuthContext()
 	const [isActive, setIsActive] = useState({
 		status: true,
 		key: "",
@@ -80,7 +82,7 @@ function SiteMap() {
 											})}
 										</ul>
 									</div>
-									{status === "authenticated" ? (
+									{auth.user  ? (
 										<div class={styles.site_box}>
 											<div class={styles.title02}>會員服務</div>
 											<ul>

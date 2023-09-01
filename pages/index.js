@@ -11,10 +11,12 @@ import Layout from "./../components/layout/Layout"
 import CategorySlider from "./../components/sliders/Category"
 import Intro1 from "./../components/sliders/Intro1"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
+import { useAuthContext } from "../util/useAuthContext"
+//import { useSession } from "next-auth/react"
 import useSWR from "swr"
 export default function Home() {
-	const { status, data: session } = useSession()
+	//const { status, data: session } = useSession()
+	const auth=useAuthContext()
 	const fetcher = (url) => fetch(url, { credentials: "include",sameSite:"none" }).then((r) => r.json())
 	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/homepage/", fetcher)
 	return (

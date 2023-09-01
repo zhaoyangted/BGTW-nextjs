@@ -5,7 +5,8 @@ import Member from "../components/account/Member"
 import Point from "../components/account/Point"
 import AccEdit from "../components/account/AccEdit"
 import Favorites from "../components/account/Favorites"
-import { useSession,signOut } from "next-auth/react"
+//import { useSession,signOut } from "next-auth/react"
+import { useAuthContext } from "../util/useAuthContext"
 import { useRouter } from "next/router"
 import Orders from "../components/account/Orders"
 import Friends from "../components/account/Friends"
@@ -13,7 +14,8 @@ import axios from "axios"
 //import OrderInfo from "../components/account/OrderInfo"
 const Account = (props) => {
 	const { query } = useRouter()
-	const { data: session } = useSession()
+	//const { data: session } = useSession()
+	const auth=useAuthContext()
 	const activeTab = useActiveTab()
 	const router = useRouter()
 	const orderId = query.orderId
@@ -26,25 +28,26 @@ const Account = (props) => {
 		setActiveIndex(index) // remove the curly braces
 	} */
 	React.useEffect(() => {
-		if (!session) {
+		if (!auth) {
 			router.push("/login/")
 		}
 		return
 	}, [])
 	//console.log(activeTab)
 	const handleSignOut = async () => {
-		if (session) {
-			const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
-			if (response.status === 200) {
-				await signOut()
-			} else {
+		if (auth) {
+			//const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
+			//if (response.status === 200) {
+				await auth.signOut()
+			/* } else {
 				alert("logout failed")
 				await signOut()
 			}
 		} else {
 			alert("not login.")
-		}
+		} */
 	}
+}
 	return (
 		<>
 			<Layout parent="首頁" /*sub="Account" */ subChild=" > 會員中心">
