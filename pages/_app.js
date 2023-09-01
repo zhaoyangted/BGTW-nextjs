@@ -19,7 +19,7 @@ import store from "../redux/store"
 import Preloader from "./../components/elements/Preloader"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config, library } from "@fortawesome/fontawesome-svg-core"
-import { SessionProvider } from "next-auth/react"
+//import { SessionProvider } from "next-auth/react"
 import { AuthProvider } from "../util/useAuthContext"
 import "../pages/global.css"
 import { QueryClient, QueryClientProvider } from "react-query"
@@ -48,7 +48,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 					},
 				}}
 			>
-				<SessionProvider session={session}>
 					<AuthProvider>
 						<Provider store={store}>
 							<StorageWrapper>
@@ -60,7 +59,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 							</StorageWrapper>
 						</Provider>
 					</AuthProvider>
-				</SessionProvider>
 			</SWRConfig>
 		</>
 	)

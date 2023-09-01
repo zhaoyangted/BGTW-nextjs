@@ -24,8 +24,8 @@ const nextConfig = {
           pathname: '/bgtwmedia/uploads/*',
         },
       ],
-    }, 
-    output: 'export',*/
+    }, */
+    output: 'export',
   };
 module.exports = nextConfig
     
