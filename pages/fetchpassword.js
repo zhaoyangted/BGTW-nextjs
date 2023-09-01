@@ -2,7 +2,7 @@ import Layout from "../components/layout/Layout"
 import Link from "next/link"
 import React, { useState } from "react"
 //import { useSession } from "next-auth/react"
-import { useAuthContext } from "../../util/useAuthContext"
+import { useAuthContext } from "../util/useAuthContext"
 import { useRouter } from "next/router"
 import styles from '../components/account.module.css'
 const GetPassword = (props) => {
