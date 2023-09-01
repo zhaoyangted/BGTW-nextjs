@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout"
 import styles from "../components/about.module.css"
 import useSWR from "swr"
 //import { useSession } from "next-auth/react"
-import { useAuthContext } from "../../util/useAuthContext"
+import { useAuthContext } from "../util/useAuthContext"
 import Qainfo from '../components/qa/Qainfo'
 function SiteMap() {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
