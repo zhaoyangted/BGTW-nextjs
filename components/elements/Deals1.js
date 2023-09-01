@@ -16,7 +16,7 @@ const Deals1 = ({ product, addToCart }) => {
                 <div className="product-img">
                     <Link href="/products/[id]" as={`/products/${product.d_id}`}>
 
-                        <img src={product.d_img1} alt="" />
+                        <img src={process.env.s3Host+product.d_img1} alt="" />
 
                     </Link>
                 </div>

@@ -98,7 +98,7 @@ const SingleProduct2 = ({
                     </Link>
                 </div> */}
                 <h2>
-                    <Link href="/products/[slug]" as={`/products/${product.d_id}`}>
+                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
                         {product.d_title}
                     </Link>
                 </h2>

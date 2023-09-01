@@ -101,7 +101,7 @@ const nextAuthOptions = (req, res) => {
 						//d_captcha:credentials.d_captcha
 					})
 					const cookies = response.headers["set-cookie"]
-					// console.log(cookies)
+					 console.log(cookies)
 					res.setHeader("set-cookie", cookies)
 					//const resp = await response.json()
 					//console.log(cookies)

@@ -5,7 +5,7 @@ const {
   } = require('next/constants')
 const nextConfig = {
     env: {
-        apiServer : 'http://localhost',
+        apiServer : 'https://beautygarage.tw',
         NEXTAUTH_SECRET : 'ted2zhao',
         NEXTAUTH_URL:'http://localhost:3000',
         S3_ACCESS_KEY:'AKIAQAVTMB3SG4XXGPIH',

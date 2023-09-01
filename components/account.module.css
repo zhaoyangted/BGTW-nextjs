@@ -1480,7 +1480,7 @@ select.select_sort {
 .content_box {
 	width: 100%;
 	margin: 0 auto 0px auto;
-	padding: 60px 0px;
+	/* padding: 60px 0px; */
 	height: auto;
 }
 .text_right {
