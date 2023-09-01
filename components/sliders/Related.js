@@ -23,9 +23,13 @@ const RelatedSlider = ({product}) => {
     return (
         <>
             <Swiper
-                slidesPerView={4}
-                spaceBetween={30}
-                
+                //slidesPerView={4}
+                //spaceBetween={30}
+                spaceBetween={24}
+                grid={{
+                    rows: 2
+                }}
+                autoplay={true}
                 navigation={{
                     prevEl: ".custom_prev_n",
                     nextEl: ".custom_next_n",

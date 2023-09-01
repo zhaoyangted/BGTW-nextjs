@@ -33,7 +33,7 @@ const SingleProduct = ({
             <div className="product-img-action-wrap">
                 <div className="product-img product-img-zoom">
                     <Link
-                        href="/products/[slug]/"
+                        href="/products/[id]/"
                         as={`/products/${product.d_id}/`}
                     >
 
@@ -99,7 +99,7 @@ const SingleProduct = ({
                 </div> */}
                 <h2>
                     <Link
-                        href="/products/[slug]/"
+                        href="/products/[id]/"
                         as={`/products/${product.d_id}/`}
                     >
                         {product.d_title}

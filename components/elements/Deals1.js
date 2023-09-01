@@ -14,7 +14,7 @@ const Deals1 = ({ product, addToCart }) => {
         <div className="product-cart-wrap style-2 wow animate__animated animate__fadeInUp" data-wow-delay="0">
             <div className="product-img-action-wrap">
                 <div className="product-img">
-                    <Link href="/products">
+                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
 
                         <img src={product.d_img1} alt="" />
 
@@ -27,7 +27,7 @@ const Deals1 = ({ product, addToCart }) => {
                 </div>
                 <div className="deals-content">
                     <h2>
-                        <Link href="/products/[slug]" as={`/products/${product.d_id}`}>
+                        <Link href="/products/[id]" as={`/products/${product.d_id}`}>
                             {product.d_title}
                         </Link>
                     </h2>
