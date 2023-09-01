@@ -28,14 +28,14 @@ const Account = (props) => {
 		setActiveIndex(index) // remove the curly braces
 	} */
 	React.useEffect(() => {
-		if (!auth) {
+		if (!auth.user) {
 			router.push("/login/")
 		}
 		return
 	}, [])
 	//console.log(activeTab)
 	const handleSignOut = async () => {
-		if (auth) {
+		if (auth.user) {
 			//const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			//if (response.status === 200) {
 				await auth.signOut()
