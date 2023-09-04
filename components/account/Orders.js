@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "../../components/account.module.css"
 import axios from "axios"
 import Pagination from "../ecommerce/Pagination"
-//import { useSession } from "next-auth/react"
-import { useAuthContext } from "../../util/useAuthContext"
+import { useAuth } from "../../util/useAuth"
 import { useRouter } from "next/router"
+import { AuthContext } from "../../util/useAuthContext"
 const Orders = () => {
 	//const fetcher = (url) => fetch(url, { method:"POST", credentials: "include" }).then((r) => r.json())
 	//const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/orders", fetcher)
@@ -19,13 +19,13 @@ const Orders = () => {
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
 	const router = useRouter()
 	//const { data:session } = useSession()
-	const auth=useAuthContext()
-	React.useEffect(() => {
-		if (auth.user ) {
+	const {user,setUser}=useContext(AuthContext)
+	//console.log(user?.isLoggedIn)
+	/* useEffect(() => {
+		if (!user?.isLoggedIn) {
 			router.push("/login/")
 		}
-		return
-	}, [])
+	}, []) */
 	useEffect(() => {
 		const cratePagination = () => {
 			// set pagination

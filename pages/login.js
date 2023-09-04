@@ -4,14 +4,15 @@ import Layout from "../components/layout/Layout"
 import styles from "../components/account.module.css"
 import { useRouter } from "next/router"
 import { useAuthContext } from "../util/useAuthContext"
+import { useAuth } from "../util/useAuth"
 function Login() {
-	const [userInfo, setUserInfo] = useState({ d_account: "", d_password: "",d_captcha:"" })
-	const auth = useAuthContext()
+	const [userInfo, setUserInfo] = useState({ d_account: "", d_password: "", d_captcha: "" })
+	const {user,setUser,signIn,signOut} = useAuth()
 	const router = useRouter()
 	const handleSignout = (e) => {
 		e.preventDefault()
 		//signOut()
-		auth.signOut
+		signOut()
 	}
 	const handleImgClick = (e) => {
 		e.target.src = process.env.apiServer + "/login/make_vcode_img" + "?" + Math.random()
@@ -25,9 +26,13 @@ function Login() {
 			data.append(key, value)
 		})
 		//console.log(data)
-		auth.signIn(data)
-		
+		await signIn(data)
 	}
+	/* useEffect(() => {
+		if (user.isLoggedIn) {
+			router.push("/account/")
+		}
+	}, []) */
 	return (
 		<>
 			<Layout parent="首頁" /* sub="Pages"  */ subChild=" > 會員中心">
@@ -48,16 +53,13 @@ function Login() {
 														Don't have an account? <Link href="/page-register">{errorMsg?errorMsg:'Create here'}</Link>
 													</p> */}
 								</div>
-								{auth.user ? (
+								{user?.isLoggedIn ? (
 									<div>
 										This page is Protected for special people. like
-										{JSON.stringify(auth.user, null, 2)}
-										
-										{auth.user && (
-											<a href="#" onClick={handleSignout} className="btn-signin">
-												Sign out
-											</a>
-										)}
+										{JSON.stringify(user, null, 2)}
+										<a href="#" onClick={handleSignout} className="btn-signin">
+											Sign out
+										</a>
 									</div>
 								) : (
 									<form method="post" onSubmit={handleSubmit}>

@@ -1,15 +1,17 @@
-import React, { useEffect, useState, useCallback, useRef } from "react"
+import React, { useEffect, useState, useCallback, useRef, useContext } from "react"
 import Layout from "../components/layout/Layout"
 import styles from "../components/about.module.css"
 import useSWR from "swr"
 //import { useSession } from "next-auth/react"
-import { useAuthContext } from "../util/useAuthContext"
+import { AuthContext, useAuthContext } from "../util/useAuthContext"
+import { useAuth } from "../util/useAuth"
 import Qainfo from '../components/qa/Qainfo'
+import Link from "next/link"
 function SiteMap() {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/homepage/sitemap", fetcher)
 	//const { status, data: session } = useSession()
-	const auth=useAuthContext()
+	const {user,setUser,signOut}=useContext(AuthContext)
 	const [isActive, setIsActive] = useState({
 		status: true,
 		key: "",
@@ -42,10 +44,10 @@ function SiteMap() {
 					<div className="container">
 						<div className="row">
 							<div className="col-xl-10 col-lg-12 m-auto">
-								<section class={styles.content_box}>
-									<div class={styles.title01}>網站導覽</div>
-									<div class={styles.site_box}>
-										<div class={styles.title02}>關於美麗平台</div>
+								<section className={styles.content_box}>
+									<div className={styles.title01}>網站導覽</div>
+									<div className={styles.site_box}>
+										<div className={styles.title02}>關於美麗平台</div>
 										<ul>
 											<li>
 												<a href={"/about"}>公司簡介</a>
@@ -58,8 +60,8 @@ function SiteMap() {
 											</li>
 										</ul>
 									</div>
-									<div class={styles.site_box}>
-										<div class={styles.title02}>常見問題 Q&A</div>
+									<div className={styles.site_box}>
+										<div className={styles.title02}>常見問題 Q&A</div>
 										<ul>
 											{data?.qa.map((q, i) => {
 												return (
@@ -70,8 +72,8 @@ function SiteMap() {
 											})}
 										</ul>
 									</div>
-									<div class={styles.site_box}>
-										<div class={styles.title02}>產品分類</div>
+									<div className={styles.site_box}>
+										<div className={styles.title02}>產品分類</div>
 										<ul>
 											{data?.products_type.map((t, i) => {
 												return (
@@ -82,30 +84,30 @@ function SiteMap() {
 											})}
 										</ul>
 									</div>
-									{auth.user  ? (
-										<div class={styles.site_box}>
-											<div class={styles.title02}>會員服務</div>
+									{user?.isLoggedIn  ? (
+										<div className={styles.site_box}>
+											<div className={styles.title02}>會員服務</div>
 											<ul>
 												<li>
-													<a href={"/member"}>會員中心</a>
+													<Link href={"/account"}>會員中心</Link>
 												</li>
 												<li>
-													<a href={"/member/orders"}>購物紀錄與訂單查詢</a>
+													<Link href={"/account/?activeTab=order"}>購物紀錄與訂單查詢</Link>
 												</li>
 												<li>
-													<a href={"/member/favorite"}>我的收藏</a>
+													<Link href={"/account/?activeTab=favor"}>我的收藏</Link>
 												</li>
 												<li>
-													<a href={"/member/friend"}>邀請好友加入會員</a>
+													<Link href={"/account/?activeTab=friend"}>邀請好友加入會員</Link>
 												</li>
 												<li>
-													<a href={"/member/accoun"}>會員資料修改</a>
+													<Link href={"/account?activeTab=info"}>會員資料修改</Link>
 												</li>
 												<li>
-													<a href={"/member/point'"}>會員點數查詢</a>
+													<Link href={"/account?activeTab=point"}>會員點數查詢</Link>
 												</li>
 												<li>
-													<a href={"/member/accoun"}>訂閱/取消 電子報</a>
+													<Link href={"/account?activeTab=info"}>訂閱/取消 電子報</Link>
 												</li>
 											</ul>
 										</div>

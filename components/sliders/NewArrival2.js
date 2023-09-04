@@ -13,31 +13,34 @@ const NewArrival2 = () => {
     }, []);
 
     const fetchProducts = async () => {
-        // With Category
+        /* // With Category
         const request = await fetch(`${server}/static/product.json`);
         const allProducts = await request.json();
 
         const newArrivalProducts = allProducts.sort(function (a, b) {
             return a.created > b.created ? -1 : 1;
-        });
-
-        setNewArrival(newArrivalProducts);
+        }); */
+        const request = await fetch(process.env.apiServer+`/api/product/hot/`,
+        {credentials: 'include'});
+        
+        const allProducts = await request.json();
+        setNewArrival(Object.values(allProducts)[5]);
     };
 
     return <>
         {newArrival.slice(0, 3).map((product, i) => (
             <article className="row align-items-center hover-up" key={i}>
                 <figure className="col-md-4 mb-0">
-                    <Link href="/products/[slug]" as={`/products/${product.slug}`}>
+                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
 
-                        <img src={product.images[0].img} alt="" />
+                    <img src={process.env.s3Host+product.d_img1} alt="" />
 
                     </Link>
                 </figure>
                 <div className="col-md-8 mb-0">
                     <h6>
-                        <Link href="/products/[slug]" as={`/products/${product.slug}`}>
-                            {product.title}
+                        <Link href="/products/[id]" as={`/products/${product.d_id}`}>
+                            {product.d_title}
                         </Link>
                     </h6>
                     <div className="product-rate-cover">
@@ -47,8 +50,8 @@ const NewArrival2 = () => {
                         <span className="font-small ml-5 text-muted"> (4.0)</span>
                     </div>
                     <div className="product-price">
-                        <span>${product.price} </span>
-                        <span className="old-price">{product.oldPrice && `$ ${product.oldPrice}`}</span>
+                        <span>${product.d_price} </span>
+                       {/*  <span className="old-price">{product.oldPrice && `$ ${product.oldPrice}`}</span> */}
                     </div>
                 </div>
             </article>

@@ -3,7 +3,7 @@ import { useEffect, useState} from "react";
 import { connect } from "react-redux";
 import { updateProductCategory } from "../../../redux/action/productFiltersAction";
 import Link from "next/link";
-import useClickOutside from "../../../util/outsideClick";
+//import useClickOutside from "../../../util/outsideClick";
 import styles from '../../catmenu.module.css'
 const CategoryBrand = (
     { 

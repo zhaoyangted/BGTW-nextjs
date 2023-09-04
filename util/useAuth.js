@@ -1,21 +1,23 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
 import {toast} from 'react-toastify'
 export const useAuth = () => {
 	const [user, setUser] = useState(null)
     const router = useRouter()
+    
 	const signIn = async (data) => {
 		try {
 			let authresult = await axios.post(process.env.apiServer + "/api/auth/login", data, { credentials: "include" })
 			//let userObj = { ...authresult.data?.foundUser }
 			//userObj = authresult.data?.encodedToken;
-            console.log(authresult.data)
+            //console.log(authresult)
 			setUser(authresult.data)
-			toast("Login Successfull")
             router.push(
                 '/account/'
             )
+			toast("Login Successfull")
+            
 		} catch (err) {
 			console.error(err)
 			toast("Login Failed")
@@ -35,18 +37,52 @@ export const useAuth = () => {
 		}
 	}
 
+    const isOnline = async () =>{
+        try {
+            let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+            
+                setUser(response.data)
+          
+        } catch (err) {
+            console.error(err)
+
+        }
+    }
+    const isAuthed = async () =>{
+        try {
+            let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+            console.log(response.data)
+                if (response.data.isLoggedIn) {
+                    return true
+                }
+                else {
+                    return false
+                }
+          
+        } catch (err) {
+            console.error(err)
+
+        }
+    }
 	const signOut = async () => {
 		try {
 			let response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				setUser(null)
-				toast("Logout Successfull")
+				router.push('/')
+                toast("Logout Successfull")
+                
 			}
 		} catch (err) {
 			console.error(err)
 			toast("Login Failed")
 		}
 	}
+    useEffect(()=>{
+        isOnline()
+       
+    },[])
 
-	return { user, signIn, signUp, signOut }
+    //console.log(user)
+	return { user, signIn, signUp, signOut,isOnline,setUser,isAuthed}
 }

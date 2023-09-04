@@ -1,13 +1,15 @@
 import Link from "next/link"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
-import { useAuthContext } from "../../util/useAuthContext"
+import { AuthContext, useAuthContext } from "../../util/useAuthContext"
+import { useAuth } from "../../util/useAuth"
 //import { useSession, signIn, signOut } from "next-auth/react"
 import styles from "../../components/header.module.css"
 import axios from "axios"
+import { useRouter } from "next/router"
 axios.defaults.withCredentials = true
 import {
 	clearCart,
@@ -36,9 +38,16 @@ const Header = ({
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
 	const [apiData, setApiData] = useState({})
+	const router=useRouter()
+
 	//const { status, data: session } = useSession()
-	const auth=useAuthContext()
-	//console.log(auth.user)
+	const {user,setUser,signIn,signOut,isOnline}=useContext(AuthContext)
+	useEffect(()=>{
+		if (!user) {
+		 isOnline()
+		}
+	},[])
+	//console.log(auth.user.data)
 	const price = () => {
 		let price = 0
 		cartItems.forEach((item) => (price += item.d_price * item.quantity))
@@ -56,7 +65,6 @@ const Header = ({
 			}
 		})
 	})
-
 	useEffect(() => {
 		const point = async () => {
 			let str = ""
@@ -111,10 +119,10 @@ const Header = ({
 		)
 	}
 	const handleSignOut = async () => {
-		if (auth.user) {
+		if (user?.isLoggedIn) {
 			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout",{credentials:'include'})
 			if (response.status === 200) { */
-				await auth.signOut()
+				await signOut()
 			/* } else {
 				alert("logout failed")
 				await signOut()
@@ -168,10 +176,10 @@ const Header = ({
 					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap">
 							<div className="header-right">
-								{auth.user ? (
+								{user?.isLoggedIn ? (
 									<>
 										<Link href="/account/" className="user__link user__link--login">
-											會員{auth.user.data.d_pname}您好!您的目前等級：{auth.user.data.d_title}
+											會員{user?.data?.d_pname}您好!您的目前等級：{user?.data?.d_title}
 										</Link>
 										<Link
 											href="/#"

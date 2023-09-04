@@ -1,12 +1,13 @@
 import Layout from "../components/layout/Layout"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 //import { useSession } from "next-auth/react"
-import { useAuthContext } from "../util/useAuthContext"
+import { AuthContext, useAuthContext } from "../util/useAuthContext"
+import { useAuth } from "../util/useAuth"
 import { useRouter } from "next/router"
 import styles from '../components/account.module.css'
 const GetPassword = (props) => {
-	const auth=useAuthContext()
+	const {user,setUser,signOut}=useContext(AuthContext)
 	//const { data: session } = useSession()
 	const router = useRouter()
 	const [formData, setFormData] = useState({})
@@ -46,7 +47,7 @@ const GetPassword = (props) => {
 			(error)=>console.log(error))
 	}
 	React.useEffect(() => {
-		if (auth.user) {
+		if (user?.isLoggedIn) {
 			router.push("/")
 		}
 		return

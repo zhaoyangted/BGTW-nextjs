@@ -27,22 +27,28 @@ function FeatchDeals() {
 
 	// console.log(deals);
 
-	if (data) {return (
-		<>
-			<div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
-				{/* <Link href="/products" className="show-all">
+	if (data?.length > 0) {
+		return (
+			<>
+				<section className="section-padding pb-5">
+					<div className="container">
+						<div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
+							{/* <Link href="/products" className="show-all">
 								All Deals<i className="fi-rs-angle-right"></i>
 							</Link> */}
-                <h3 className="">本日優惠</h3>
-			</div>
-			<div className="row">
-				{data?.slice(0, 4).map((product, i) => (
-					<div className="col-xl-3 col-lg-4 col-md-6" key={i}>
-						<Deals1 product={product} />
+							<h3 className="">本日優惠</h3>
+						</div>
+						<div className="row">
+							{data?.slice(0, 4).map((product, i) => (
+								<div className="col-xl-3 col-lg-4 col-md-6" key={i}>
+									<Deals1 product={product} />
+								</div>
+							))}
+						</div>
 					</div>
-				))}
-			</div>
-		</>
-	)}
+				</section>
+			</>
+		)
+	}
 }
 export default FeatchDeals

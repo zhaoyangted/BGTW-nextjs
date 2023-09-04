@@ -11,13 +11,15 @@ import Layout from "./../components/layout/Layout"
 import CategorySlider from "./../components/sliders/Category"
 import Intro1 from "./../components/sliders/Intro1"
 import Link from "next/link"
-import { useAuthContext } from "../util/useAuthContext"
+import { useAuth } from "../util/useAuth"
 //import { useSession } from "next-auth/react"
 import useSWR from "swr"
+import { useContext } from "react"
+import { AuthContext } from "../util/useAuthContext"
 export default function Home() {
 	//const { status, data: session } = useSession()
-	const auth=useAuthContext()
-	const fetcher = (url) => fetch(url, { credentials: "include",sameSite:"none" }).then((r) => r.json())
+	const {user,setUser} = useContext(AuthContext)
+	const fetcher = (url) => fetch(url, { credentials: "include", sameSite: "none" }).then((r) => r.json())
 	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/homepage/", fetcher)
 	return (
 		<>
@@ -71,7 +73,7 @@ export default function Home() {
 
 				<section className="banners mb-25">
 					<div className="container">
-                    <div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
+						<div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
 							<h3 className="">最新消息</h3>
 							<Link href="/news" className="show-all">
 								全部<i className="fi-rs-angle-right"></i>
@@ -86,23 +88,18 @@ export default function Home() {
 				<section className="product-tabs section-padding position-relative">
 					<div className="container">
 						{/* <div className="col-lg-12"> */}
-							<CategoryTab />
+						<CategoryTab />
 						{/* </div> */}
 					</div>
 				</section>
 
-				<section className="section-padding pb-5">
-					<div className="container">
-						<FetchTabSlider />
-					</div>
-				</section>
+				{/* <section className="section-padding pb-5">
+					<div className="container"> */}
+				<FetchTabSlider />
+				{/* </div>
+				</section> */}
 
-				<section className="section-padding pb-5">
-					<div className="container">
-						
-						<FeatchDeals />
-					</div>
-				</section>
+				<FeatchDeals />
 
 				<Bottom />
 

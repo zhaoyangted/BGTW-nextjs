@@ -9,7 +9,9 @@ const Footer = ({ data }) => {
 					<div className={styles.footBOX}>
 						<div className={styles.FUTALL}>
 							<div className={styles.domeLogoBox}>
-								<img src="/assets/imgs/theme/beautygarage_logo02.svg" alt="" />
+								<Link href={"/"}>
+									<img src="/assets/imgs/theme/beautygarage_logo02.svg" alt="" />
+								</Link>
 							</div>
 						</div>
 						<div className={styles.foot_LinkBox}>

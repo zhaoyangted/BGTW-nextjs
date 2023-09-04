@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { SWRConfig } from "swr"
-import fetchJson from "../lib/fetchJson"
+//import { SWRConfig } from "swr"
+//import fetchJson from "../lib/fetchJson"
 // import "react-input-range/lib/css/index.css";
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { Provider } from "react-redux"
@@ -16,11 +16,12 @@ import "swiper/css/navigation"
 import StorageWrapper from "../components/ecommerce/storage-wrapper"
 import "../public/assets/css/main.css"
 import store from "../redux/store"
-import Preloader from "./../components/elements/Preloader"
+//import Preloader from "./../components/elements/Preloader"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config, library } from "@fortawesome/fontawesome-svg-core"
 //import { SessionProvider } from "next-auth/react"
-import { AuthProvider } from "../util/useAuthContext"
+import { AuthContext, AuthProvider } from "../util/useAuthContext"
+import { useAuth } from "../util/useAuth"
 import "../pages/global.css"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
@@ -38,28 +39,20 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 		//     live: false
 		//   }).init()
 	}, [])
+
 	return (
 		<>
-			<SWRConfig
-				value={{
-					//fetcher: fetchJson,
-					onError: (err) => {
-						console.error(err)
-					},
-				}}
-			>
-					<AuthProvider>
-						<Provider store={store}>
-							<StorageWrapper>
-								<QueryClientProvider client={queryClient}>
-									<Component {...pageProps} />
-									<ReactQueryDevtools initialIsOpen={false} />
-								</QueryClientProvider>
-								<ToastContainer />
-							</StorageWrapper>
-						</Provider>
-					</AuthProvider>
-			</SWRConfig>
+			<AuthProvider>
+				<Provider store={store}>
+					<StorageWrapper>
+						<QueryClientProvider client={queryClient}>
+							<Component {...pageProps} />
+							<ReactQueryDevtools initialIsOpen={false} />
+						</QueryClientProvider>
+						<ToastContainer />
+					</StorageWrapper>
+				</Provider>
+			</AuthProvider>
 		</>
 	)
 }

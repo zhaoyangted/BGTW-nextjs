@@ -2,16 +2,19 @@ import Link from "next/link"
 import { useState } from "react"
 import useClickOutside from "../../util/outsideClick"
 import Search from "../ecommerce/Search"
-import { useSession, signIn, signOut } from "next-auth/react"
+//import { useSession, signIn, signOut } from "next-auth/react"
+import { useAuthContext } from "../../util/useAuthContext"
+import { useAuth } from "../../util/useAuth"
 const MobileMenu = ({ isToggled, toggleClick, data }) => {
-	const { status, data: session } = useSession()
+	//const { status, data: session } = useSession()
+	const {user,setUser,isOnline,signOut} = useAuth()
 	const [isActive, setIsActive] = useState({
 		status: false,
 		key: "",
 	})
 	const handleSignOut = async () => {
-		if (status === "authenticated") {
-			const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
+		if (user.isLoggedIn ) {
+			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				await signOut()
 			} else {
@@ -20,7 +23,9 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 			}
 		} else {
 			alert("not login.")
-		}
+		} */
+		await signOut()
+	}
 	}
 	const handleToggle = (key) => {
 		if (isActive.key === key) {
@@ -327,10 +332,10 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 							{/* <div className="single-mobile-header-info mt-30">
 								<Link href="/page-contact">Our location</Link>
 							</div> */}
-							{status === "authenticated" ? (
+							{user?.isLoggedIn ? (
 								<div className="single-mobile-header-info">
 									<Link href="/account">會員中心</Link>
-									會員{session.user.data.d_pname}您好!您的目前等級：{session.user.data.d_title}
+									會員{user?.data?.d_pname}您好!您的目前等級：{user?.data?.d_title}
 								</div>
 							) : (
 								<Link href="/login">會員登入 / 加入會員</Link>

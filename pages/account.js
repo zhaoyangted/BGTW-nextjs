@@ -1,54 +1,38 @@
 import Layout from "../components/layout/Layout"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useState,useEffect,useContext} from "react"
 import Member from "../components/account/Member"
 import Point from "../components/account/Point"
 import AccEdit from "../components/account/AccEdit"
 import Favorites from "../components/account/Favorites"
-//import { useSession,signOut } from "next-auth/react"
-import { useAuthContext } from "../util/useAuthContext"
+import { useAuth } from "../util/useAuth"
 import { useRouter } from "next/router"
 import Orders from "../components/account/Orders"
 import Friends from "../components/account/Friends"
-import axios from "axios"
-//import OrderInfo from "../components/account/OrderInfo"
+import { AuthContext } from "../util/useAuthContext"
 const Account = (props) => {
-	const { query } = useRouter()
-	//const { data: session } = useSession()
-	const auth=useAuthContext()
-	const activeTab = useActiveTab()
+	const { query} = useRouter()
 	const router = useRouter()
+	const activeTab = useActiveTab()
 	const orderId = query.orderId
+	const {user,signOut,isOnline}=useContext(AuthContext)
 	function useActiveTab() {
 		const activeTab = query.activeTab || "account"
 		return activeTab
 	}
-	/* const [activeIndex, setActiveIndex] = useState(1)
-	const handleOnClick = (index) => {
-		setActiveIndex(index) // remove the curly braces
-	} */
-	React.useEffect(() => {
-		if (!auth.user) {
-			router.push("/login/")
-		}
-		return
-	}, [])
-	//console.log(activeTab)
 	const handleSignOut = async () => {
-		if (auth.user) {
-			//const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
-			//if (response.status === 200) {
-				await auth.signOut()
-			/* } else {
-				alert("logout failed")
-				await signOut()
-			}
-		} else {
-			alert("not login.")
-		} */
+		await signOut()
 	}
-}
-	return (
+	
+	useEffect(()=>{
+		let res=isOnline()
+		console.log(user.isLoggedIn)
+		if (!user.isLoggedIn) {
+			router.push('/login')
+		}
+	},[])
+	
+		return (
 		<>
 			<Layout parent="首頁" /*sub="Account" */ subChild=" > 會員中心">
 				<div className="page-content pt-50 pb-50">
@@ -190,7 +174,8 @@ const Account = (props) => {
 				</div>
 			</Layout>
 		</>
-	)
+		)
+	
 }
 
 export default Account

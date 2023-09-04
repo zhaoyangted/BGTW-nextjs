@@ -1,13 +1,19 @@
-import React from "react"
+import React,{useEffect} from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
-import { useSession } from "next-auth/react"
+import { useAuth } from "../../util/useAuth"
+import { useRouter } from "next/router"
 const Member = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
-	const { data: session } = useSession()
+	const { user, setUser, signOut } = useAuth()
+	const router = useRouter()
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/", fetcher)
+	/* useEffect(()=>{
+		if (!user?.isLoggedin) {
+			router.push('/login')
+		}
+	},[]) */
 	return (
-		session && (
 			<>
 				<section className={styles.content_box}>
 					<div className={styles.title01}>會員中心</div>
@@ -78,7 +84,6 @@ const Member = () => {
 					</div>
 				</section>
 			</>
-		)
 	)
 }
 
