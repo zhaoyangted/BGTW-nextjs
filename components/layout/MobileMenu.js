@@ -1,13 +1,13 @@
 import Link from "next/link"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import useClickOutside from "../../util/outsideClick"
 import Search from "../ecommerce/Search"
 //import { useSession, signIn, signOut } from "next-auth/react"
-import { useAuthContext } from "../../util/useAuthContext"
+import { AuthContext, useAuthContext } from "../../util/useAuthContext"
 import { useAuth } from "../../util/useAuth"
 const MobileMenu = ({ isToggled, toggleClick, data }) => {
 	//const { status, data: session } = useSession()
-	const {user,setUser,isOnline,signOut} = useAuth()
+	const {user,setUser,isOnline,signOut} = useContext(AuthContext)
 	const [isActive, setIsActive] = useState({
 		status: false,
 		key: "",
