@@ -126,9 +126,9 @@ const Account = (props) => {
 											<div className={activeTab === "point" ? "tab-pane fade active show" : "tab-pane fade "}>
 												<Point />
 											</div>
-											{/* <div className={activeTab === "favor" ? "tab-pane fade active show" : "tab-pane fade "}>
+											<div className={activeTab === "favor" ? "tab-pane fade active show" : "tab-pane fade "}>
 												<Favorites />
-											</div> */}
+											</div>
 											<div className={activeTab === "friend" ? "tab-pane fade active show" : "tab-pane fade "}>
 												<Friends />
 											</div>
