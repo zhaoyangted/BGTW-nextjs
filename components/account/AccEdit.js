@@ -288,7 +288,7 @@ const AccEdit = () => {
 									</li>
 									<li>
 										<h2>公司地址*</h2>
-										{/* <div className={styles.mem_add}>
+										<div className={styles.mem_add}>
 											<TWzipcode
 												className={styles.mem_add}
 												css={["mem_add_inpt county-sel", "mem_add_inpt district-sel", "mem_add_inpt zipcode"]}
@@ -296,11 +296,11 @@ const AccEdit = () => {
 												handleChangeDistrict={handleComChange}
 												handleChangeZipcode={handleComChange}
 												zipcodePlaceholder={"郵遞區號"}
-												countyValue={formData?.d_company_county}
-												districtValue={formData?.d_company_district}
-												zipcodeValue={formData?.d_company_zipcode}
+												countyValue={formData?.d_company_county?formData?.d_company_county:''}
+												districtValue={formData?.d_company_district?formData?.d_company_district:''}
+												zipcodeValue={formData?.d_company_zipcode?formData?.d_company_zipcode:''}
 											/>
-										</div> */}
+										</div>
 										<input
 											type="text2"
 											name="d_company_address"
@@ -350,18 +350,18 @@ const AccEdit = () => {
 						{data?.dbdata?.d_user_type === "1" && (
 							<li>
 								<h2>地址*</h2>
-								{/* <div className={styles.mem_add}>
+								<div className={styles.mem_add}>
 									<TWzipcode
 										css={["mem_add_inpt county-sel", "mem_add_inpt district-sel", "mem_add_inpt zipcode"]}
 										handleChangeCounty={handlePesChange}
 										handleChangeDistrict={handlePesChange}
 										handleChangeZipcode={handlePesChange}
 										zipcodePlaceholder={"郵遞區號"}
-										countyValue={formData?.d_county}
-										districtValue={formData?.d_district}
-										zipcodeValue={formData?.d_zipcode}
+										countyValue={formData?.d_county?formData?.d_county:''}
+										districtValue={formData?.d_district?formData?.d_district:''}
+										zipcodeValue={formData?.d_zipcode?formData?.d_zipcode:''}
 									/>
-								</div> */}
+								</div>
 								<input type="text2" name="d_address" onChange={handleInput} value={formData?.d_address} />
 							</li>
 						)}
