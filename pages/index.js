@@ -14,13 +14,17 @@ import Link from "next/link"
 import { useAuth } from "../util/useAuth"
 //import { useSession } from "next-auth/react"
 import useSWR from "swr"
-import { useContext } from "react"
+import useSWRMutation from 'swr/mutation'
+import { useContext, useEffect } from "react"
 import { AuthContext } from "../util/useAuthContext"
 export default function Home() {
 	//const { status, data: session } = useSession()
 	const {user,setUser} = useContext(AuthContext)
 	const fetcher = (url) => fetch(url, { credentials: "include", sameSite: "none" }).then((r) => r.json())
-	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/homepage/", fetcher)
+	const { data, isLoading, error,trigger } = useSWRMutation(process.env.apiServer + "/api/homepage/", fetcher)
+	useEffect(()=>{
+		trigger()
+	},[user])
 	return (
 		<>
 			{/* <IntroPopup /> */}

@@ -37,7 +37,7 @@ const Cart = ({
 	const outFreightRef = useRef('1')
 	const bonusRef = useRef(0)
 	const totalRef = useRef(0)
-    const router = useRouter()
+    //const router = useRouter()
 	useEffect(() => {
         const point = async () => {
             let str = ""
@@ -51,8 +51,8 @@ const Cart = ({
             })
             )
 			const res = await axios.post(process.env.apiServer + "/api/cart/cart_info/", {
-                cart: str,
-			})
+                cart: str
+			},{credentials:'included'})
 			setApiData(res.data)
 			//return res.data['BonusTotal']
 		}
@@ -128,7 +128,7 @@ const Cart = ({
 		return total
 	},[formData])
 	//console.log(apiData?.CartProduct?.Total)
-	console.log(formData)
+	//console.log(formData)
 	const submitForm = async (e) => {
 		// We don't want the page to refresh
 		e.preventDefault()
@@ -400,9 +400,9 @@ const Cart = ({
 													<dt>${apiData?.CartProduct?.Total}</dt>
 												</ul>
 
-												{apiData?.Mdata && apiData.Mdata?.d_bonus !== 0 ? (
+												{apiData?.Mdata && apiData?.Mdata?.d_bonus !== 0 ? (
 													<ul>
-														<dd>{"可用紅利點數：" + apiData?.Mdata.d_bonus + "點"}</dd>
+														<dd>{"可用紅利點數：" + apiData?.Mdata?.d_bonus?apiData?.Mdata?.d_bonus:0 + "點"}</dd>
 														<dt>
 															<input
 																className={styles.select_point}
@@ -516,7 +516,7 @@ const Cart = ({
 												<input
 													type="text"
 													name="d_cname"
-                                                    defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
+                                                    //defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
 													value={formData?.d_cname}
                                                     //value={formData?.d_cname}
 													onChange={handleInput}
@@ -527,7 +527,7 @@ const Cart = ({
 												<input
 													type="text"
 													name="d_name"
-                                                    defaultValue={apiData?.Mdata?.d_name ? apiData?.Mdata?.d_name : ""}
+                                                    //defaultValue={apiData?.Mdata?.d_name ? apiData?.Mdata?.d_name : ""}
 													value={formData?.d_name}
 													onChange={handleInput}
                                                     //value={formData?.d_name}
@@ -540,7 +540,7 @@ const Cart = ({
 													type="text"
 													name="d_moblie"
 													required
-                                                    defaultValue={apiData?.Mdata?.d_moblie ? apiData?.Mdata?.d_moblie : ""}
+                                                    //defaultValue={apiData?.Mdata?.d_moblie ? apiData?.Mdata?.d_moblie : ""}
 													value={formData?.d_moblie}
 													onChange={handleInput}
                                                     //value={formData?.d_mobile}
@@ -552,7 +552,7 @@ const Cart = ({
 												<input
 													type="text"
 													name="d_phone"
-                                                    defaultValue={apiData?.Mdata?.d_phone ? apiData?.Mdata?.d_phone : ""}
+                                                    //defaultValue={apiData?.Mdata?.d_phone ? apiData?.Mdata?.d_phone : ""}
 													value={formData?.d_phone}
                                                     //value={formData?.d_phone}
 													onChange={handleInput}
@@ -564,7 +564,7 @@ const Cart = ({
 													type="text"
 													name="d_email"
 													required
-                                                    defaultValue={apiData?.Mdata?.d_email ? apiData?.Mdata?.d_email : ""}
+                                                    //defaultValue={apiData?.Mdata?.d_email ? apiData?.Mdata?.d_email : ""}
 													value={formData?.d_email}
 													onChange={handleInput}
                                                     //value={formData?.d_email}
@@ -594,7 +594,7 @@ const Cart = ({
 													type="text2"
 													name="d_address"
 													required={formData?.d_invoice === "2" ? true : false}
-                                                    defaultValue={apiData?.Mdata?.d_address ? apiData?.Mdata?.d_address : ""}
+                                                    //defaultValue={apiData?.Mdata?.d_address ? apiData?.Mdata?.d_address : ""}
 													value={formData?.d_address}
 													onChange={handleInput}
                                                     //value={formData.d_address}
@@ -683,7 +683,7 @@ const Cart = ({
 													type="text"
 													name="d_icname"
 													required={formData?.d_invoice === "2" ? true : false}
-													defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
+													//defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
                                                     value={formData?.d_icname}
 													onChange={handleInput}
 												/>
@@ -694,7 +694,7 @@ const Cart = ({
 													type="text"
 													name="d_ium"
 													required={formData?.d_invoice === "2" ? true : false}
-													defaultValue={apiData?.Mdata?.d_company_number ? apiData?.Mdata?.d_company_number : ""}
+													//defaultValue={apiData?.Mdata?.d_company_number ? apiData?.Mdata?.d_company_number : ""}
 													value={formData?.d_ium}
                                                     onChange={handleInput}
 												/>
@@ -718,7 +718,7 @@ const Cart = ({
 													className="text2"
 													required={formData?.d_invoice === "2" ? true : false}
 													name="d_iaddress"
-													defaultValue={apiData?.Mdata?.d_address}
+													//defaultValue={apiData?.Mdata?.d_address}
                                                     value={formData?.d_iaddress}
 													onChange={handleInput}
 												/>

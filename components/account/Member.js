@@ -54,29 +54,29 @@ const Member = () => {
 						<li>
 							<div className={styles.title06}>個人帳戶管理/資料維護</div>
 							<div className={styles.member_info_btn}>
-								<a href="/account/?activeTab=info">
+								<Link href="/account/?activeTab=info">
 									<ul>會員資料修改</ul>
-								</a>
-								<a href="/account/?activeTab=favor">
+								</Link>
+								<Link href="/account/?activeTab=favor">
 									<ul>我的收藏清單</ul>
-								</a>
-								<a href="/account/?activeTab=point">
+								</Link>
+								<Link href="/account/?activeTab=point">
 									<ul>會員點數查詢</ul>
-								</a>
+								</Link>
 							</div>
 						</li>
 						<li>
 							<div className={styles.title06}>客服中心</div>
 							<div className={styles.member_info_btn}>
-								<a href="">
+								<Link href="">
 									<ul>購物說明</ul>
-								</a>
-								<a href="">
+								</Link>
+								<Link href="/clause">
 									<ul>隱私權條款</ul>
-								</a>
-								<a href="">
+								</Link>
+								<Link href="/contact">
 									<ul>與我們聯繫</ul>
-								</a>
+								</Link>
 								{/* <a href="">
 								<ul>型錄下載</ul>
 							</a> */}

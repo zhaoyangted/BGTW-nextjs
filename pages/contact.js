@@ -106,8 +106,8 @@ function Contact() {
 											</li>
 											<li>
 												<h2>內容*</h2>
-												<textarea rows="5" name="d_content" value={formData.d_content}>
-													{data?.PID ? data.PID : ""}
+												<textarea rows="5" name="d_content" /* value={formData.d_content} */ onChange={handleInput}>
+													{/* data?.PID ? data.PID : "" */formData.d_content}
 												</textarea>
 											</li>
 											<div className={styles.title03} style={{ marginTop: "30px" }}>

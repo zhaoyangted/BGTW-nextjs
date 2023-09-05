@@ -50,13 +50,13 @@ function SiteMap() {
 										<div className={styles.title02}>關於美麗平台</div>
 										<ul>
 											<li>
-												<a href={"/about"}>公司簡介</a>
+												<Link href={"/about"}>公司簡介</Link>
 											</li>
 											<li>
-												<a href={"/clause"}>隱私權條款</a>
+												<Link href={"/clause"}>隱私權條款</Link>
 											</li>
 											<li>
-												<a href={"/contact"}>聯絡我們</a>
+												<Link href={"/contact"}>聯絡我們</Link>
 											</li>
 										</ul>
 									</div>

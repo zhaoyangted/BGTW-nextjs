@@ -75,9 +75,9 @@ export const useAuth = () => {
 			let response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				setUser(null)
-				router.push('/')
+				
                 toast("Logout Successfull")
-                
+                router.push('/')
 			}
 		} catch (err) {
 			console.error(err)

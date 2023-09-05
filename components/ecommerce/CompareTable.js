@@ -29,7 +29,7 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                             ) : feature == "產品名稱" ? (
                                 <td className="product_name" key={i}>
                                     <h5>
-                                        <a href={"/products/"+product.d_id}>{product.d_title}</a>
+                                        <Link href={"/products/"+product.d_id}>{product.d_title}</Link>
                                     </h5>
                                 </td>
                             ) : feature == "產品價格" ? (
@@ -99,14 +99,14 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                 </td>
                             ) : feature == " " ? (
                                 <td className="row_remove" key={i}>
-                                    <a
+                                    <Link
                                         onClick={() =>
                                             deleteFromCompare(product.d_id)
                                         }
                                     >
                                         <i className="fi-rs-trash mr-5"></i>
                                         <span>移出</span>
-                                    </a>
+                                    </Link>
                                 </td>
                             ) : null
                         )}

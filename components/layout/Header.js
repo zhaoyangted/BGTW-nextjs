@@ -38,7 +38,7 @@ const Header = ({
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
 	const [apiData, setApiData] = useState({})
-	const router=useRouter()
+	//const router=useRouter()
 
 	//const { status, data: session } = useSession()
 	const {user,setUser,signIn,signOut/* ,isOnline */}=useContext(AuthContext)
@@ -47,7 +47,7 @@ const Header = ({
 		 isOnline()
 		}
 	},[]) */
-	console.log(user)
+	//console.log(user)
 	const price = () => {
 		let price = 0
 		cartItems.forEach((item) => (price += item.d_price * item.quantity))

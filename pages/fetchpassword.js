@@ -3,7 +3,8 @@ import Link from "next/link"
 import React, { useContext, useState } from "react"
 //import { useSession } from "next-auth/react"
 import { AuthContext, useAuthContext } from "../util/useAuthContext"
-import { useAuth } from "../util/useAuth"
+//import { useAuth } from "../util/useAuth"
+import axios from "axios"
 import { useRouter } from "next/router"
 import styles from '../components/account.module.css'
 const GetPassword = (props) => {
