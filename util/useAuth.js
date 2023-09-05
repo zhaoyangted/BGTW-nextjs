@@ -41,14 +41,20 @@ export const useAuth = () => {
         try {
             let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
             
-                setUser(response.data)
+                if (response.data.isOnline){
+                    return true
+                }
+                else 
+                {
+                    return false
+                }
           
         } catch (err) {
             console.error(err)
 
         }
     }
-    const isAuthed = async () =>{
+    /* const isAuthed = async () =>{
         try {
             let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
             console.log(response.data)
@@ -63,7 +69,7 @@ export const useAuth = () => {
             console.error(err)
 
         }
-    }
+    } */
 	const signOut = async () => {
 		try {
 			let response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
@@ -84,5 +90,5 @@ export const useAuth = () => {
     },[])
 
     //console.log(user)
-	return { user, signIn, signUp, signOut,isOnline,setUser,isAuthed}
+	return { user, signIn, signUp, signOut,isOnline,setUser/* ,isAuthed */}
 }

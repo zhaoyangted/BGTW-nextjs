@@ -25,9 +25,9 @@ const Account = (props) => {
 	}
 	
 	useEffect(()=>{
-		let res=isOnline()
-		console.log(user.isLoggedIn)
-		if (!user.isLoggedIn) {
+		//let res=isOnline()
+		//console.log(user.isLoggedIn)
+		if (!user?.isLoggedIn) {
 			router.push('/login')
 		}
 	},[])

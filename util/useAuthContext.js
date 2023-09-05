@@ -10,10 +10,10 @@ const AuthContext = createContext()
 //const useAuthContext = () => useContext(AuthContext)
 //const { Provider } = AuthContext;
 const AuthProvider = ({ children }) => {
-	const {user,setUser,signIn, signUp, signOut,isOnline,isAuthed} = useAuth()
+	const {user,setUser,signIn, signUp, signOut/* ,isOnline */} = useAuth()
     
 
-	return <AuthContext.Provider value={{user,setUser,signIn, signUp, signOut,isOnline,isAuthed}}>{children}</AuthContext.Provider>
+	return <AuthContext.Provider value={{user,setUser,signIn, signUp, signOut/* ,isOnline */}}>{children}</AuthContext.Provider>
 }
 
 export { AuthContext, AuthProvider }

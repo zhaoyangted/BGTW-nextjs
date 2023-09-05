@@ -41,13 +41,13 @@ const Header = ({
 	const router=useRouter()
 
 	//const { status, data: session } = useSession()
-	const {user,setUser,signIn,signOut,isOnline}=useContext(AuthContext)
-	useEffect(()=>{
+	const {user,setUser,signIn,signOut/* ,isOnline */}=useContext(AuthContext)
+	/* useEffect(()=>{
 		if (!user) {
 		 isOnline()
 		}
-	},[])
-	//console.log(auth.user.data)
+	},[]) */
+	console.log(user)
 	const price = () => {
 		let price = 0
 		cartItems.forEach((item) => (price += item.d_price * item.quantity))

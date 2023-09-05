@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import Layout from "../components/layout/Layout"
 import styles from "../components/account.module.css"
 import { useRouter } from "next/router"
-import { useAuthContext } from "../util/useAuthContext"
+import { AuthContext, useAuthContext } from "../util/useAuthContext"
 import { useAuth } from "../util/useAuth"
 function Login() {
 	const [userInfo, setUserInfo] = useState({ d_account: "", d_password: "", d_captcha: "" })
-	const {user,setUser,signIn,signOut} = useAuth()
+	const {user,setUser,signIn,signOut} = useContext(AuthContext)
 	const router = useRouter()
 	const handleSignout = (e) => {
 		e.preventDefault()

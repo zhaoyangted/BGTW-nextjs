@@ -1,12 +1,13 @@
 import React,{useEffect} from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
-import { useAuth } from "../../util/useAuth"
-import { useRouter } from "next/router"
+//import { useAuth } from "../../util/useAuth"
+//import { useRouter } from "next/router"
+import Link from "next/link"
 const Member = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
-	const { user, setUser, signOut } = useAuth()
-	const router = useRouter()
+	//const { user, setUser, signOut } = useAuth()
+	//const router = useRouter()
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/", fetcher)
 	/* useEffect(()=>{
 		if (!user?.isLoggedin) {
@@ -45,9 +46,9 @@ const Member = () => {
 						<li>
 							<div className={styles.title06}>訂單狀態與管理</div>
 							<div className={styles.member_info_btn}>
-								<a href="/account?activeTab=order">
+								<Link href={"/account/?activeTab=order"}>
 									<ul>訂單查詢 ({data?.Orders_total?.total ? data?.Orders_total?.total : "0"})</ul>
-								</a>
+								</Link>
 							</div>
 						</li>
 						<li>
