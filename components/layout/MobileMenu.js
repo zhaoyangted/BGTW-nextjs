@@ -13,7 +13,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 		key: "",
 	})
 	const handleSignOut = async () => {
-		if (user.isLoggedIn ) {
+		//if (user.isLoggedIn ) {
 			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				await signOut()
@@ -25,7 +25,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 			alert("not login.")
 		} */
 		await signOut()
-	}
+	//}
 	}
 	const handleToggle = (key) => {
 		if (isActive.key === key) {

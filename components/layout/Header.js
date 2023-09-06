@@ -119,7 +119,7 @@ const Header = ({
 		)
 	}
 	const handleSignOut = async () => {
-		if (user?.isLoggedIn) {
+		//if (user?.isLoggedIn) {
 			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout",{credentials:'include'})
 			if (response.status === 200) { */
 				await signOut()
@@ -130,7 +130,7 @@ const Header = ({
 		} else {
 			alert("not login.")
 		} */
-	}
+	//}
 }
 	const handleToggle = () => setToggled(!isToggled)
 	// console.log(Object.values(config)[13])

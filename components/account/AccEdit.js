@@ -16,20 +16,20 @@ const AccEdit = () => {
 		d_company_fax_area: data?.dbdata.d_company_fax_area || "",
 		d_company_fax: data?.dbdata.d_company_fax || "",
 		d_company_website: data?.dbdata.d_company_website || "",
-		d_company_county: data?.dbdata.d_company_county || "",
-		d_company_district: data?.dbdata.d_company_district || "",
-		d_company_address: data?.dbdata.d_company_address || "",
-		d_company_zipcode: data?.dbdata.d_company_zipcode || "",
+		d_company_county: /* data?.dbdata.d_company_county || */ "",
+		d_company_district:/*  data?.dbdata.d_company_district || */ "",
+		d_company_address: /* data?.dbdata.d_company_address || */ "",
+		d_company_zipcode: /* data?.dbdata.d_company_zipcode || */ "",
 		//d_company_account: data?.dbdata.d_company_account || "",
 		d_pname: data?.dbdata.d_pname || "",
 		d_job: data?.dbdata.d_job || "",
 		d_birthday: data?.dbdata.d_birthday || "",
 		d_phone: data?.dbdata.d_phone || "",
 		d_newsletter: data?.dbdata.d_newsletter || "",
-		d_county: data?.dbdata.d_county || "",
-		d_district: data?.dbdata.d_district || "",
-		d_zipcode: data?.dbdata.d_zipcode || "",
-		d_address: data?.dbdata.d_address || "",
+		d_county: /* data?.dbdata.d_county || */ "",
+		d_district: /* data?.dbdata.d_district || */ "",
+		d_zipcode: /* data?.dbdata.d_zipcode || */ "",
+		d_address: /* data?.dbdata.d_address || */ "",
 		d_account: data?.dbdata.d_account || "",
 		d_captcha: '',
 		d_password:'',
@@ -296,9 +296,9 @@ const AccEdit = () => {
 												handleChangeDistrict={handleComChange}
 												handleChangeZipcode={handleComChange}
 												zipcodePlaceholder={"郵遞區號"}
-												countyValue={formData?.d_company_county?formData?.d_company_county:''}
+												/* countyValue={formData?.d_company_county?formData?.d_company_county:''}
 												districtValue={formData?.d_company_district?formData?.d_company_district:''}
-												zipcodeValue={formData?.d_company_zipcode?formData?.d_company_zipcode:''}
+												zipcodeValue={formData?.d_company_zipcode?formData?.d_company_zipcode:''} */
 											/>
 										</div>
 										<input
@@ -357,9 +357,9 @@ const AccEdit = () => {
 										handleChangeDistrict={handlePesChange}
 										handleChangeZipcode={handlePesChange}
 										zipcodePlaceholder={"郵遞區號"}
-										countyValue={formData?.d_county?formData?.d_county:''}
+										/* countyValue={formData?.d_county?formData?.d_county:''}
 										districtValue={formData?.d_district?formData?.d_district:''}
-										zipcodeValue={formData?.d_zipcode?formData?.d_zipcode:''}
+										zipcodeValue={formData?.d_zipcode?formData?.d_zipcode:''} */
 									/>
 								</div>
 								<input type="text2" name="d_address" onChange={handleInput} value={formData?.d_address} />
