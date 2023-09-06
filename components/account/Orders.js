@@ -5,6 +5,7 @@ import Pagination from "../ecommerce/Pagination"
 import { useAuth } from "../../util/useAuth"
 import { useRouter } from "next/router"
 import { AuthContext } from "../../util/useAuthContext"
+import Link from "next/link"
 const Orders = () => {
 	//const fetcher = (url) => fetch(url, { method:"POST", credentials: "include" }).then((r) => r.json())
 	//const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/orders", fetcher)
@@ -150,7 +151,7 @@ const Orders = () => {
 												<div className="dbox">
 													<dd>訂單編號</dd>
 													<em>
-														<a href={"/order/" + o.d_id}>{o.OID}</a>
+														<Link href={"/order/" + o.d_id}>{o.OID}</Link>
 													</em>
 												</div>
 												<div className="dbox">

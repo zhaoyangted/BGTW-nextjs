@@ -37,7 +37,7 @@ const Cart = ({
 	const outFreightRef = useRef('1')
 	const bonusRef = useRef(0)
 	const totalRef = useRef(0)
-    //const router = useRouter()
+    const router = useRouter()
 	useEffect(() => {
         const point = async () => {
             let str = ""

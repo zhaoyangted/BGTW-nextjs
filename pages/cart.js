@@ -133,7 +133,7 @@ const Cart = ({
                                                 </td>
                                                 <td
                                                     className="price"
-                                                    data-title="Price"
+                                                    data-title="價格"
                                                 >
                                                     <div className={styles.price}>
                                                         <span>
@@ -143,7 +143,7 @@ const Cart = ({
                                                 </td>
                                                 <td
                                                     className="text-center detail-info"
-                                                    data-title="Stock"
+                                                    data-title="庫存"
                                                 ><div className="detail-extralink mr-15">
                                                     <div className="detail-qty border radius ">
                                                         <a
@@ -174,7 +174,7 @@ const Cart = ({
                                                 </td>
                                                 <td
                                                     className="text-right"
-                                                    data-title="Cart"
+                                                    data-title="購物車"
                                                 >
                                                     <div className={styles.price}>
                                                         <span>
@@ -186,7 +186,7 @@ const Cart = ({
                                                 </td>
                                                 <td
                                                     className="action"
-                                                    data-title="Remove"
+                                                    data-title="清除產品"
                                                 >
                                                     <a
                                                         onClick={(e) =>

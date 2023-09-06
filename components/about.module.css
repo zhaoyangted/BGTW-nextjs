@@ -301,3 +301,21 @@
 .site_box ul li a {
     color: #70ACCB;
 }
+.user_editor {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: static !important;
+    line-height: 2;
+}
+.user_editor iframe {
+    max-width: 100% !important;
+}
+@media only screen and (min-width: 0px) and (max-width: 1023px)
+{
+.store li {
+    width: 100%;
+    margin: 20px 0px 0 0px;
+    min-height: auto;
+}
+}
