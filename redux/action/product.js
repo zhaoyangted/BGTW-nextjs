@@ -41,7 +41,26 @@ export const fetchProduct = (searchTerm, url, filters, podata) => async (dispatc
 		console.log(error)
 	}
 }
-
+export const fetchProductByID = (id) => async (dispatch) => {
+	let data
+	try {
+		//console.log(podata)
+		let sendRequest = ""
+		if (!id) {
+			sendRequest = await fetch(process.env.apiServer + `/api/product/${id}`, { credentials: "include" })
+			data = await sendRequest.json()
+		}
+		
+		dispatch({
+			type: Types.FETCHED_PRODUCT_ID,
+			payload: {
+				product:data
+			},
+		})
+	} catch (error) {
+		console.log(error)
+	}
+}
 // Fetch More Product
 export const fetchMoreProduct = (url, total) => async (dispatch) => {
 	try {
