@@ -56,22 +56,25 @@ function CategoryTab() {
     return (
         <>
             <div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0" style={{textAlign:"center"}}>
-                <h4>人氣商品特賣</h4>
+                <h3>人氣商品特賣</h3>
             </div>
             
                 
                 <ul className="nav nav-tabs links" id="myTab" role="tablist">
                     {cats?.map((item,i)=>{
                         return (
-                            <li className="nav-item" key={i} role="presentation">
-                                <button
+                            <li className="nav-item" key={i} role="presentation" >
+                                <a
+                                    aria-label={item}
                                     className={
-                                        active === `${i+1}` ? "nav-link active" : "nav-link"
+                                        active === `${i+1}` ? "nav-link active action-btn hover-up" : "nav-link action-btn hover-up"
                                     }
+                                    data-bs-toggle="modal"
                                     onClick={()=>{setHotProd(catAll[`${i}`]);setActive(`${i+1}`)}}
+                                    
                                 >
-                                    {item}
-                                </button>
+                                    {item.slice(0,4)/* +"..." */}
+                                </a>
                             </li>
                         )
                     })

@@ -2127,6 +2127,11 @@ input[type="checkbox"].account {
     font-size: 15px;
     font-style: normal;
 }
+.cost > ul dd em {
+    color: #ff3c6c;
+    font-size: 15px;
+    font-style: normal;
+}
 .invoice_list {
     height: auto;
     overflow: hidden;

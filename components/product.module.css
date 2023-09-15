@@ -7,7 +7,7 @@
 
 }
 .desc{
-    padding: 50px 20px;
+    /* padding: 50px 20px; */
     font-weight: normal;
     color:#292b2c;
 }
@@ -16,6 +16,9 @@
    font-size: 100%;
     margin-bottom: 25px;
     font-weight: normal;
+}
+.desc iframe{
+        max-width: 100%;
 }
 .desc h3  strong{
     font-weight: bolder;
@@ -59,4 +62,13 @@
     border-bottom:1px solid #ececec;
     font-size: 13px;
     list-style-type: none;
+}
+.tab_container {
+    clear: left;
+    width: 100%;
+    border-top: none;
+    background: #fff;
+}
+.tab_content {
+    padding: 20px 20px;
 }

@@ -28,9 +28,9 @@ const CompareTable = ({ data, features, deleteFromCompare, addToCart }) => {
                                 </td>
                             ) : feature == "產品名稱" ? (
                                 <td className="product_name" key={i}>
-                                    <h5>
+                                    <h6>
                                         <Link href={"/products/"+product.d_id}>{product.d_title}</Link>
-                                    </h5>
+                                    </h6>
                                 </td>
                             ) : feature == "產品價格" ? (
                                 <td className="product_price" key={i}>

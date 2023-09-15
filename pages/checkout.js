@@ -155,7 +155,7 @@ const Cart = ({
 	}
 	return (
 		<>
-			<Layout parent="首頁" /* sub="Shop" */ subChild=">結帳">
+			<Layout parent="首頁" /* sub="Shop" */ sub=" > 結帳">
 				<form action={process.env.apiServer + "/api/cart/addorder"} method="post" onSubmit={submitForm}>
 					{/* <section className="mt-50 mb-50">
 						<div className="container">

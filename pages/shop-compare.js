@@ -7,7 +7,7 @@ import { clearCompare, deleteFromCompare } from "../redux/action/compareAction";
 const Compare = ({ compare, clearCompare, deleteFromCompare }) => {
     return (
         <>
-            <Layout parent="首頁" /* sub="Shop" */ subChild=" > 產品比價">
+            <Layout parent="首頁" /* sub="Shop" */ sub=" > 產品比價">
                 <section className="mt-50 mb-50">
                     <div className="container">
                         <div className="row">

@@ -2102,6 +2102,10 @@ label {
   border: 0;
   margin-bottom: 40px;
 }
+.nav-tabs .nav-item {
+  padding-top: 10px;
+  overflow-x: scroll;
+}
 .nav-tabs .nav-link {
   background-color: rgb(238, 238, 238);
   font-size: 15px;
@@ -2142,6 +2146,7 @@ label {
 }
 .nav-tabs.links .nav-link:hover, .nav-tabs.links .nav-link.active {
   color: #3d9ed1;
+  border-bottom: 4px solid;
 }
 .nav-tabs.no-border {
   border: none;
@@ -4750,6 +4755,10 @@ table.no-border thead {
 }
 
 .single-content {
+  width: 100%;
+  margin: 0 auto 0px auto;
+  padding: 60px 0px;
+  height: auto;
   text-rendering: optimizeLegibility;
   color: #253D4E;
   font-size: 17px;
@@ -4789,6 +4798,10 @@ table.no-border thead {
 .single-content p {
   margin-bottom: 1.2em;
   font-weight: 400;
+}
+.single-content img {
+  max-width: 100% !important;
+  height: auto !important;
 }
 .single-content ul {
   list-style: circle;

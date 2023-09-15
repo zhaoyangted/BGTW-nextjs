@@ -49,7 +49,7 @@ const Cancel = () => {
 	}
 	return (
 		<>
-			<Layout parent="Home" /*sub="Account" */ subChild=" > 會員中心">
+			<Layout parent="Home" /*sub="Account" */ sub=" > 會員中心">
 				<div className="page-content pt-50 pb-50">
 					<div className="container-fluid">
 						<div className="row">

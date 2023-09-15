@@ -34,7 +34,7 @@ const SingleProduct2 = ({
         <div className="product-cart-wrap mb-30">
             <div className="product-img-action-wrap">
                 <div className="product-img product-img-zoom">
-                    <Link href="/products/[slug]" as={`/products/${product.d_id}`}>
+                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
 
                         <img
                             className="default-img"

@@ -35,7 +35,7 @@ function Qa() {
     }
 	return (
 		<>
-			<Layout parent="首頁" /* sub="Pages" */ subChild=" > 常見問題">
+			<Layout parent="首頁" /* sub="Pages" */ sub=" > 常見問題">
 				<div className="page-content pt-50">
 					<div className="container">
 						<section className={styles.content_box}>

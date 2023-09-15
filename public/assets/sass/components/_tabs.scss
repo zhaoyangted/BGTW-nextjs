@@ -2,6 +2,10 @@
 .nav-tabs {
     border: 0;
     margin-bottom: 40px;
+    .nav-item {
+        padding-top: 10px;
+        overflow-x: scroll;
+    }
     .nav-link {
         background-color: rgb(238, 238, 238);
         font-size: 15px;
@@ -41,6 +45,7 @@
             color: $color-heading;
             &:hover, &.active {
                 color: $color-brand;
+                border-bottom: 4px solid;
             }
 
         }

@@ -53,7 +53,7 @@ const Cart = ({
 		point()
 	},[cartItems])
     return <>
-        <Layout parent="首頁" sub=">" subChild="購物車">
+        <Layout parent="首頁" sub=" > 購物車" /* subChild="" */>
             <section className={styles.content_box}>
                 <div className="container">
                     <section className="content_box">

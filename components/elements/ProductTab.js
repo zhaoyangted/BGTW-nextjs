@@ -54,7 +54,7 @@ const ProductTab = ({ product }) => {
 						</a>
 					</li>
 				</ul>
-				<div className="tab-content shop_info_tab entry-main-content">
+				<div className={styles.tab_content}/* "tab-content shop_info_tab entry-main-content" */>
 					<div className={activeIndex === 1 ? "tab-pane fade show active" : "tab-pane fade"} id="Description">
 						<div className={styles.desc} dangerouslySetInnerHTML={{ __html: content }}>
 							

@@ -23,7 +23,7 @@ const Wishlist = ({
     };
     return (
         <>
-            <Layout parent="首頁" /* sub="Shop"  */subChild=" > 我的最愛">
+            <Layout parent="首頁" /* sub="Shop"  */sub=" > 我的最愛">
                 <section className="mt-50 mb-50">
                     <div className="container">
                         <div className="row">

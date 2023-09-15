@@ -8,6 +8,7 @@ import ProductTab from "../elements/ProductTab"
 import RelatedSlider from "../sliders/Related"
 import ThumbSlider from "../sliders/Thumb"
 import styles from "../product.module.css"
+import Link from "next/link"
 const ProductDetails = ({
 	product,
 	cartItems,
@@ -78,7 +79,7 @@ const ProductDetails = ({
 													<li>
 														<div className={styles.dtt}>商品品牌</div>
 														<div className={styles.spec}>
-															<a href={"/products/brands_list/" + product?.BID}>{product.pbtitle}</a>
+															<Link href={"/products/brands_list/" + product?.BID+"/"}>{product.pbtitle}</Link>
 														</div>
 													</li>
 												) : null}
@@ -166,7 +167,7 @@ const ProductDetails = ({
 													<div className={styles.dtt}>商品規格</div>
 													<div className={styles.spec}>
 														<select id="ChangeSpec" className="select_pd" name="spec" onChange={handleChange}>
-															<option value={product?.d_id}>{product?.d_spectitle}</option>
+															<option value={product?.d_id} >{product?.d_spectitle}</option>
 															{specData?.map((clr, i) => (
 																<option key={i} value={clr.d_id}>
 																	{clr.d_spectitle}

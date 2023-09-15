@@ -50,7 +50,11 @@
         }
     }
 }
-.single-content {    
+.single-content {   
+	width: 100%;
+    margin: 0 auto 0px auto;
+    padding: 60px 0px;
+    height: auto;
     text-rendering: optimizeLegibility;
 	color: $color-heading;
 	font-size: $font-lg;
@@ -61,7 +65,10 @@
     h5{font-size:20px;line-height:24px;margin-bottom: 24px;}
     h6{font-size:14px;line-height:24px;letter-spacing:0.5px;text-transform:uppercase;margin-bottom: 22px;}
     p{margin-bottom:1.2em;font-weight:400;}
-
+	img{
+		max-width: 100% !important;
+		height: auto !important
+	}
     ul {
         list-style: circle;
         padding-left: 1rem;

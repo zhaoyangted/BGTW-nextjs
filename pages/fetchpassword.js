@@ -56,7 +56,7 @@ const GetPassword = (props) => {
 
 	return (
 		<>
-			<Layout parent="首頁" /*sub="Account" */ subChild=" > 會員中心">
+			<Layout parent="首頁" /*sub="Account" */ sub=" > 會員中心">
 				<div className="page-content pt-50 pb-50">
 					<div className="container">
 						<div className="row">

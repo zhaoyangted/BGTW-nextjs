@@ -3,7 +3,6 @@
   padding:5px
 }
 .breadcrumb {
-    /* display: inline-block; */
     display: inline-flex;
     padding: 5px 0;
     text-transform: capitalize;
@@ -12,6 +11,7 @@
     background: none;
     margin: 0;
     border-radius: 0;
+    overflow: hidden;
   }
   .breadcrumb a:before {
     list-style: none;
@@ -19,6 +19,7 @@
   .breadcrumb a {
     vertical-align: middle;
     justify-content: center;
+    font-size: small;
   }
   .breadcrumb li {
     display:flex;
@@ -26,11 +27,13 @@
     justify-content: center;
     list-style-type: none;
     vertical-align: middle;
+    overflow: hidden;
   }
   .breadcrumblink {
     display: inline-flex;
     box-sizing: content-box;
     flex-direction: row;
+    overflow: hidden;
   }
    
   /* .breadcrumblink li a:nth-child(1):before {
