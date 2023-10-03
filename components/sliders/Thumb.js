@@ -51,7 +51,7 @@ const ThumbSlider = ({ img }) => {
 			>
 				{img?.map((item, i) => (
 					<SwiperSlide key={i}>
-						<img src={process.env.s3Host + item} />
+						<img className="product-img-zoom"src={process.env.s3Host + item} />
 					</SwiperSlide>
 				))}
 			</Swiper>

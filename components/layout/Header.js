@@ -211,7 +211,7 @@ const Header = ({
 						<div className="header-wrap header-space-between">
 							<div className="logo logo-width-1">
 								<Link href="/">
-									<img src="/assets/imgs/theme/beautygarage_logo.svg" alt="logo" />
+									<img src="https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/images/front/CKL_LOGO.svg" alt="logo" />
 								</Link>
 							</div>
 							<div className="search-style-2">
@@ -221,21 +221,21 @@ const Header = ({
 								<div className="header-action-right">
 									<div className="header-action-2">
 										<div className="header-action-icon-2">
-											<Link href="/shop-compare">
+											<Link href="/compare">
 												<img className="svgInject" alt="Evara" src="/assets/imgs/theme/icons/icon-compare.svg" />
 												<span className="pro-count blue">{totalCompareItems}</span>
 											</Link>
-											<Link href="/shop-compare">
+											<Link href="/compare">
 												<span className="lable ml-0"></span>
 											</Link>
 										</div>
 										<div className="header-action-icon-2">
-											<Link href="/shop-wishlist">
+											<Link href="/wishlist">
 												{/* <FontAwesomeIcon icon={faHeart} size="lg"  className="svgInject"  /> */}
 												<img className="svgInject" alt="Evara" src="/assets/imgs/theme/icons/icon-heart.svg" />
 												<span className="pro-count blue">{totalWishlistItems}</span>
 											</Link>
-											<Link href="/shop-wishlist" legacyBehavior>
+											<Link href="/wishlist" legacyBehavior>
 												<span className="lable">收藏</span>
 											</Link>
 										</div>
@@ -404,7 +404,7 @@ const Header = ({
 							<div className="header-action-right d-block d-lg-none">
 								<div className="header-action-2">
 									<div className="header-action-icon-2">
-										<Link href="/shop-wishlist">
+										<Link href="/wishlist">
 											<img alt="Evara" src="/assets/imgs/theme/icons/icon-heart.svg" />
 											<span className="pro-count white">{totalWishlistItems}</span>
 										</Link>

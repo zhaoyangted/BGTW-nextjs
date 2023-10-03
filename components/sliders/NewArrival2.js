@@ -28,10 +28,15 @@ const NewArrival2 = () => {
     };
 
     return <>
-        {newArrival.slice(0, 3).map((product, i) => (
+        {newArrival.slice(0, 4).map((product, i) => (
             <article className="row align-items-center hover-up" key={i}>
                 <figure className="col-md-4 mb-0">
-                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
+                    <Link href={{
+                            pathname: "/products/info",
+                            query: { id: product.d_id},
+                        }}
+                         //as={`/products/${product.d_id}`}
+                         >
 
                     <img src={process.env.s3Host+product.d_img1} alt="" />
 
@@ -39,7 +44,12 @@ const NewArrival2 = () => {
                 </figure>
                 <div className="col-md-8 mb-0">
                     <h6>
-                        <Link href="/products/[id]" as={`/products/${product.d_id}`}>
+                        <Link href={{
+                            pathname: "/products/info",
+                            query: { id: product.d_id},
+                        }}
+                        // as={`/products/${product.d_id}`}
+                        >
                             {product.d_title}
                         </Link>
                     </h6>

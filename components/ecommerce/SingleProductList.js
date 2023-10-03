@@ -16,17 +16,17 @@ const SingleProductList = ({
 }) => {
     const handleCart = (product) => {
         addToCart(product);
-        toast("Product added to Cart !");
+        toast("已加入購物車 !");
     };
 
     const handleCompare = (product) => {
         addToCompare(product);
-        toast("Added to Compare list !");
+        toast("已加入比較 !");
     };
 
     const handleWishlist = (product) => {
         addToWishlist(product);
-        toast("Added to Wishlist !");
+        toast("已加入願望清單 !");
     };
 
     return <>

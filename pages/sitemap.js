@@ -39,7 +39,7 @@ function SiteMap() {
     }
 	return (
 		<>
-			<Layout parent="首頁" sub=" > 網站導覽" /* subChild="Contact" */>
+			<Layout parent="首頁" sub=" 網站導覽" /* subChild="Contact" */>
 				<div className="page-content pt-50">
 					<div className="container">
 						<div className="row">

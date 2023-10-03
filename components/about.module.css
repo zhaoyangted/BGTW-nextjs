@@ -290,7 +290,7 @@
     padding: 0;
     color: #70ACCB;
     font-size: 15px;
-    display: inline-block;
+    display: table-footer-group;
 }
 .site_box ul li:before {
     top: 0;
@@ -317,5 +317,12 @@
     width: 100%;
     margin: 20px 0px 0 0px;
     min-height: auto;
+}
+}
+
+@media only screen and (min-width: 0px) and (max-width: 768px)
+{
+    .site_box ul li {
+    width: calc(100% / 2 - 5px);
 }
 }

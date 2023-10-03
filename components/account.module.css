@@ -69,7 +69,7 @@
 }
 @media only screen and (min-width: 0px) and (max-width: 768px) {
 	.box_contact_us {
-		margin: 0px 0px 20px 0px;
+		margin: 0px 10px 0px 0px;
 		width: 100%;
 	}
 	.box_contact_us:nth-child(2) {

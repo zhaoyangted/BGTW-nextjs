@@ -88,7 +88,7 @@ function PageBlogGrid() {
 	return (
 		<>
 			{data ? (
-				<Layout parent="首頁" sub=" > 最新消息" /* subChild="Grid" */>
+				<Layout parent="首頁" sub=" 最新消息" /* subChild="Grid" */>
 					<section className="mt-50 mb-50">
 						<div className="container custom">
 							<div className="row">

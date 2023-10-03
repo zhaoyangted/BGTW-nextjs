@@ -1,70 +1,63 @@
-import Link from "next/link";
-import React from "react";
+import Link from "next/link"
+import React from "react"
 
-const BlogSingle = ({data}) => {
-    return <>
-        <div className="single-page pt-50 pr-30">
-            <div className="single-header style-2">
-                <div className="row">
-                    <div className="col-xl-10 col-lg-12 m-auto">
-                        <h6 className="mb-10">
-                            <Link href={"/news/?id="+data?.category?.d_id}>{data?.category?.d_title}</Link>
-                        </h6>
-                        <h2 className="mb-10">
-                            {data?.dbdata?.d_title}
-                        </h2>
-                        <div className="single-header-meta">
-                            <div className="entry-meta meta-1 font-xs mt-15 mb-15">
-                                {/* <Link href="#" className="author-avatar">
+const BlogSingle = ({ data }) => {
+	return (
+		<>
+			<div className="single-page pt-50 pr-30">
+				<div className="single-header style-2">
+					<div className="row">
+						<div className="col-xl-10 col-lg-12 m-auto">
+							<h2 className="mb-10">{data?.dbdata?.d_title}</h2>
+							<div className="single-header-meta">
+								<div className="entry-meta meta-1 font-xs mt-15 mb-15">
+									{/* <Link href="#" className="author-avatar">
                                     <img
                                         className="img-circle"
                                         src="/assets/imgs/blog/author-1.png"
                                         alt=""
                                     />
                                 </Link> */}
-                                {/* <span className="post-by">
+									{/* <span className="post-by">
                                     By <Link href="#">Sugar Rosie</Link>
                                 </span> */}
-                                <span className="post-on has-dot">
-                                    {data?.dbdata?.d_date}
-                                </span>
-                                {/* <span className="time-reading has-dot">
+									<span className="post-on has-dot">{data?.dbdata?.d_date}</span>
+									{/* <span className="time-reading has-dot">
                                     8 mins read
                                 </span> */}
-                            </div>
-                            <div className="social-icons single-share">
-                                <ul className="text-grey-5 d-inline-block">
-                                    <li className="mr-5">
-                                        <Link href="#">
-                                            <img
-                                                src="/assets/imgs/theme/icons/icon-bookmark.svg"
-                                                alt=""
-                                            />
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#">
-                                            <img
-                                                src="/assets/imgs/theme/icons/icon-heart-2.svg"
-                                                alt=""
-                                            />
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* <figure className="single-thumbnail">
+								</div>
+								<div className="social-icons single-share">
+									<ul className="text-grey-5 d-inline-block">
+										<li className="mr-5">
+											<h6 className="mb-5">
+												<Link href={"/news/?id=" + data?.category?.d_id}>{data?.category?.d_title}</Link>
+											</h6>
+										</li>
+										{/* <li className="mr-5">
+											<Link href="#">
+												<img src="/assets/imgs/theme/icons/icon-bookmark.svg" alt="" />
+											</Link>
+										</li>
+										<li>
+											<Link href="#">
+												<img src="/assets/imgs/theme/icons/icon-heart-2.svg" alt="" />
+											</Link>
+										</li> */}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{/* <figure className="single-thumbnail">
                 <img src="/assets/imgs/blog/blog-19.png" alt="" />
             </figure> */}
 
-            <div className="single-content" >
-                {/* <div className="row"> */}
-                    <div className="col-xl-10 col-lg-12 m-auto">
-                        <div  dangerouslySetInnerHTML={{__html:data?.dbdata?.d_content}} />
-                        {/* <p className="single-excerpt">
+				<div className="single-content">
+					{/* <div className="row"> */}
+					<div className="col-xl-10 col-lg-12 m-auto">
+						<div dangerouslySetInnerHTML={{ __html: data?.dbdata?.d_content }} />
+						{/* <p className="single-excerpt">
                             Helping everyone live happier, healthier lives
                             at home through their kitchen. Kitchn is a daily
                             food magazine on the Web celebrating life in the
@@ -138,8 +131,8 @@ const BlogSingle = ({data}) => {
                             elit sit sit.
                         </p> */}
 
-                        <div className="entry-bottom mt-50 mb-30">
-                            {/* <div className="tags w-50 w-sm-100">
+						<div className="entry-bottom mt-50 mb-30">
+							{/* <div className="tags w-50 w-sm-100">
                                 <Link
                                     href="/blog-category-big"
                                     rel="tag"
@@ -159,50 +152,36 @@ const BlogSingle = ({data}) => {
                                     conserve
                                 </Link>
                             </div> */}
-                            <div className="social-icons single-share">
-                                <ul className="text-grey-5 d-inline-block">
-                                    <li>
-                                        <strong className="mr-10">
-                                            Share this:
-                                        </strong>
-                                    </li>
-                                    <li className="social-facebook">
-                                        <Link href="#">
-                                            <img
-                                                src="/assets/imgs/theme/icons/icon-facebook.svg"
-                                                alt=""
-                                            />
-                                        </Link>
-                                    </li>
-                                    <li className="social-twitter">
-                                        <Link href="#">
-                                            <img
-                                                src="/assets/imgs/theme/icons/icon-twitter.svg"
-                                                alt=""
-                                            />
-                                        </Link>
-                                    </li>
-                                    <li className="social-instagram">
-                                        <Link href="#">
-                                            <img
-                                                src="/assets/imgs/theme/icons/icon-instagram.svg"
-                                                alt=""
-                                            />
-                                        </Link>
-                                    </li>
-                                    <li className="social-linkedin">
-                                        <Link href="#">
-                                            <img
-                                                src="/assets/imgs/theme/icons/icon-pinterest.svg"
-                                                alt=""
-                                            />
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+							<div className="social-icons single-share">
+								<ul className="text-grey-5 d-inline-block">
+									<li>
+										<strong className="mr-10">Share this:</strong>
+									</li>
+									<li className="social-facebook">
+										<Link href="#">
+											<img src="/assets/imgs/theme/icons/icon-facebook.svg" alt="" />
+										</Link>
+									</li>
+									<li className="social-twitter">
+										<Link href="#">
+											<img src="/assets/imgs/theme/icons/icon-twitter.svg" alt="" />
+										</Link>
+									</li>
+									<li className="social-instagram">
+										<Link href="#">
+											<img src="/assets/imgs/theme/icons/icon-instagram.svg" alt="" />
+										</Link>
+									</li>
+									<li className="social-linkedin">
+										<Link href="#">
+											<img src="/assets/imgs/theme/icons/icon-pinterest.svg" alt="" />
+										</Link>
+									</li>
+								</ul>
+							</div>
+						</div>
 
-                        {/* <div className="author-bio p-30 mt-50 border-radius-15 bg-white">
+						{/* <div className="author-bio p-30 mt-50 border-radius-15 bg-white">
                             <div className="author-image mb-30">
                                 <Link href="/author">
                                     <img
@@ -235,7 +214,7 @@ const BlogSingle = ({data}) => {
                             </div>
                         </div> */}
 
-                        {/*<div className="comment-form">
+						{/*<div className="comment-form">
                             <h3 className="mb-15">Leave a Comment</h3>
                             <div className="product-rate d-inline-block mb-30"></div>
                             <div className="row">
@@ -416,7 +395,7 @@ const BlogSingle = ({data}) => {
                                                     </div>
                                                 </div>
                                             </div> */}
-                                            {/* <div className="single-comment justify-content-between d-flex">
+						{/* <div className="single-comment justify-content-between d-flex">
                                                 <div className="user justify-content-between d-flex">
                                                     <div className="thumb text-center">
                                                         <img
@@ -477,11 +456,12 @@ const BlogSingle = ({data}) => {
                                 </div>
                             </div>
                         </div>*/}
-                    </div>
-                {/* </div> */}
-            </div>
-        </div>
-    </>;
-};
+					</div>
+					{/* </div> */}
+				</div>
+			</div>
+		</>
+	)
+}
 
-export default BlogSingle;
+export default BlogSingle

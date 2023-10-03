@@ -49,9 +49,9 @@ const Pay = () => {
 	}
 	return (
 		<>
-			<Layout parent="Home" /*sub="Account" */ sub=" > 會員中心">
+			<Layout parent="Home" /*sub="Account" */ sub=" 會員中心">
 				<div className="page-content pt-50 pb-50">
-					<div className="container-fluid">
+					<div className="container">
 						<div className="row">
 							<div className="col-lg-10 m-auto">
 								<div className="row">
@@ -135,7 +135,7 @@ const Pay = () => {
 															<div className={styles.join_line}></div>
 															<li className={styles.half}>
 																<h2>訂單編號</h2>
-																<Link href={"/order/" + data?.id}>
+																<Link href={"/order/info?id=" + data?.id}>
 																	<h4>{data?.OID}</h4>
 																</Link>
 															</li>

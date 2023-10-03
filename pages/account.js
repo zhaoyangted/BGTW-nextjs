@@ -34,13 +34,13 @@ const Account = (props) => {
 	
 		return (
 		<>
-			<Layout parent="首頁" /*sub="Account" */ sub=" > 會員中心">
+			<Layout parent="首頁" /*sub="Account" */ sub=" 會員中心">
 				<div className="page-content pt-50 pb-50">
-					<div className="container-fluid">
-						<div className="row">
-							<div className="col-lg-10 m-auto">
+					<div className="container">
+						{/* <div className="row"> */}
+							<div className="col-lg-12 m-auto">
 								<div className="row">
-									<div className="col-md-3">
+									<div className="col-md-3 col-xs-10">
 										<div className="dashboard-menu">
 											<ul className="nav flex-column" role="tablist">
 												<li className="nav-item">
@@ -112,8 +112,8 @@ const Account = (props) => {
 											</ul>
 										</div>
 									</div>
-									<div className="col-md-9">
-										<div className="tab-content account dashboard-content pl-50">
+									<div className="col-md-9 col-xs-10">
+										<div className="tab-content account dashboard-content pt-50">
 											<div className={activeTab === "account" ? "tab-pane fade active show" : "tab-pane fade "}>
 												<Member />
 											</div>
@@ -139,28 +139,28 @@ const Account = (props) => {
 											</div>
 											<div
 												className={
-													activeTab === "/member/orders/ask/" && orderId
+													activeTab === "/member/orders/ask?id=" && orderId
 														? "tab-pane fade active show"
 														: "tab-pane fade "
 												}
 											></div>
 											<div
 												className={
-													activeTab === "/member/orders/cancel/" && orderId
+													activeTab === "/member/orders/cancel?id=" && orderId
 														? "tab-pane fade active show"
 														: "tab-pane fade "
 												}
 											></div>
 											<div
 												className={
-													activeTab === "/member/orders/refund/" && orderId
+													activeTab === "/member/orders/refund?id=" && orderId
 														? "tab-pane fade active show"
 														: "tab-pane fade "
 												}
 											></div>
 											<div
 												className={
-													activeTab === "/member/orders/pay/" && orderId
+													activeTab === "/member/orders/pay?id=" && orderId
 														? "tab-pane fade active show"
 														: "tab-pane fade "
 												}
@@ -169,7 +169,7 @@ const Account = (props) => {
 									</div>
 								</div>
 							</div>
-						</div>
+						{/* </div> */}
 					</div>
 				</div>
 			</Layout>

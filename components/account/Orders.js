@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import styles from "../../components/account.module.css"
 import axios from "axios"
 import Pagination from "../ecommerce/Pagination"
-import { useAuth } from "../../util/useAuth"
+//import { useAuth } from "../../util/useAuth"
 import { useRouter } from "next/router"
 import { AuthContext } from "../../util/useAuthContext"
 import Link from "next/link"
@@ -151,7 +151,13 @@ const Orders = () => {
 												<div className="dbox">
 													<dd>訂單編號</dd>
 													<em>
-														<Link href={"/order/" + o.d_id}>{o.OID}</Link>
+														<Link 
+														//href={"/order/" + o.d_id}
+														href={{
+															pathname:"/order/info",
+															query:{id:o.d_id}
+														}}
+														>{o.OID}</Link>
 													</em>
 												</div>
 												<div className="dbox">
@@ -179,35 +185,60 @@ const Orders = () => {
 												</div>
 												<div className="dbox">
 													{o.d_pay === 1 && o.d_orderstatus < 3 ? (
-														<a
+														<Link
 															className={"bn" + o.d_paystatus === 3 ? "2" : ""}
-															href={o.d_paystatus === 3 ? null : "member/orders/pay/" + o.d_id}
+															href={{
+																pathname:"/member/orders/pay",
+																query:{id: o.d_id}
+															}}
+															//href={o.d_paystatus === 3 ? null : "member/orders/pay/" + o.d_id}
 														>
 															{" "}
 															{o.d_paystatus === 3 ? "已填寫" : "匯款回覆"}
-														</a>
+														</Link>
 													) : null}
 													{o.d_orderstatus === 3 ? (
-														<a className="bn" href={"/member/orders/refund/" + o.d_id}>
+														<Link className="bn" 
+														//href={"/member/orders/refund/" + o.d_id}
+														href={{
+															pathname:"/member/orders/refund",
+															query:{id: o.d_id}
+														}}
+														>
 															申請退貨
-														</a>
+														</Link>
 													) : null}
-													<a className={styles.bn} href={"/member/orders/ask/" + o.d_id}>
+													<Link className={styles.bn} 
+													//href={"/member/orders/ask/" + o.d_id}
+													href={{
+														pathname:"/member/orders/ask",
+														query:{id: o.d_id}
+													}}
+													>
 														訂單詢問
-													</a>
+													</Link>
 													{o.d_orderstatus < 3 || o.d_orderstatus === 10 || o.d_orderstatus === 1 ? (
-														<a className="bn" href={"/member/orders/cancel/" + o.d_id}>
+														<Link className="bn" 
+														//href={"/member/orders/cancel/" + o.d_id}
+														href={{
+															pathname:"/member/orders/cancel",
+															query:{id: o.d_id}
+														}}
+														>
 															取消訂單
-														</a>
+														</Link>
 													) : null}
 													{o.d_orderstatus === 11 ? (
-														<a
+														<Link
 															className="bn"
-															href={"/member/orders/info/" + o.d_id}
+															href={{
+																pathname:"/member/orders/info",
+																query:{id: o.d_id}
+															}}
 															style={{ backgroundColor: "#ff3c6c", border: "1px solid #ff3c6c" }}
 														>
 															繼續付款
-														</a>
+														</Link>
 													) : null}
 												</div>
 											</li>

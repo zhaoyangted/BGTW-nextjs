@@ -35,7 +35,7 @@ function Login() {
 	}, []) */
 	return (
 		<>
-			<Layout parent="首頁" /* sub="Pages"  */ sub=" > 會員中心">
+			<Layout parent="首頁" /* sub="Pages"  */ sub=" 會員中心">
 				<div className="page-content pt-150 pb-150">
 					<div className="container">
 						{/*<div className="row">

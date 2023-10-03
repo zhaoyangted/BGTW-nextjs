@@ -43,7 +43,13 @@ const Point = () => {
 												<dd>訂單編號</dd>
 												{item.OID ? (
 													<em>
-														<a href={item.d_enable === "N" ? "#" : `/order/` + item.orderid}>{item.OID}</a>
+														{item.d_enable !== "N"&&<Link 
+														//href={item.d_enable === "N" ? "#" : `/order/` + item.orderid}
+														href={{
+															pathname:"/order/info",
+															query:{id:item.orderid}
+														}}
+														>{item.OID}</Link>}
 													</em>
 												) : (
 													"---"

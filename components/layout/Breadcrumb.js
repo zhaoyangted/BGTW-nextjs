@@ -19,15 +19,15 @@ const Breadcrumb = ({ parent, sub, subChild, noBreadcrumb }) => {
 					//console.log(l.split("#")[1])
 					if (i === 0) {
 						return(<li key={i}>
-							<Link href={"/products/top_list/" + l.split("#")[0]}>{" > "+l.split("#")[1]}</Link>
+						<Link href={"/products/top_list/" + l.split("#")[0]} rel="nofollow"><span></span>{l.split("#")[1]}</Link>
 						</li>)
 					} else if (i === 1) {
 						return(<li key={i}>
-							<Link href={"/products/products_list/" + l.split("#")[0]}>{" > "+l.split("#")[1]}</Link>
+						<Link href={"/products/products_list/" + l.split("#")[0]}rel="nofollow"><span></span>{l.split("#")[1]}</Link>
 						</li>)
 					} else {
 						return(<li key={i}>
-							<Link href={"/products/products_list/" + l.split("#")[0] + "#"}>{" > "+l.split("#")[1]}</Link>
+							<Link href={"/products/products_list/" + l.split("#")[0] + "#"}rel="nofollow"><span></span>{l.split("#")[1]}</Link>
 						</li>)
 					}
 				})}
@@ -36,9 +36,9 @@ const Breadcrumb = ({ parent, sub, subChild, noBreadcrumb }) => {
 	}
 	return (
 		<>
-			<div className="container">
-				<div className={"page-header"}>
-					<div className={styles.breadcrumb}>
+			{!noBreadcrumb&&<div className="container">
+				<div className={`page-header ${noBreadcrumb}`}>
+					<div className="breadcrumb">
 						{/* <li>
 							<Link href="/">{parent}</Link>
 						</li>
@@ -52,7 +52,7 @@ const Breadcrumb = ({ parent, sub, subChild, noBreadcrumb }) => {
 						<BreadC />
 					</div>
 				</div>
-			</div>
+			</div>}
 		</>
 	)
 }

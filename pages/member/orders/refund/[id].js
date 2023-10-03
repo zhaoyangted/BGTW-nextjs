@@ -49,9 +49,9 @@ const Refund = () => {
 	}
 	return (
 		<>
-			<Layout parent="Home" /*sub="Account" */ sub=" > 會員中心">
+			<Layout parent="Home" /*sub="Account" */ sub=" 會員中心">
 				<div className="page-content pt-50 pb-50">
-					<div className="container-fluid">
+					<div className="container">
 						<div className="row">
 							<div className="col-lg-10 m-auto">
 								<div className="row">
@@ -128,7 +128,7 @@ const Refund = () => {
 												<div className="col-lg-">
 													{/* <section className={styles.content_box}> */}
 													<form action={process.env.apiServer+"/api/member/check/refund/" + id} method="post" onSubmit={submitForm}>
-														<Link href={"/order/" + data?.id}>
+														<Link href={"/order/info?id=" + data?.id}>
 															<h4>{data?.OID}</h4>
 														</Link>
 														<div className={styles.w16}>請勾選欲退貨品項</div>

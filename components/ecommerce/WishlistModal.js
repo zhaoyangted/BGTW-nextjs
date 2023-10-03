@@ -18,7 +18,7 @@ const WishlistModal = ({
   
     const handleCart = (product) => {
         addToCart(product);
-        toast("Product added to Cart !");
+        toast("已加入購物車 !");
     };
 
     return (

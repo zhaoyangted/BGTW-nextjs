@@ -1,5 +1,5 @@
-import BlogSingle from '../../../components/elements/BlogSingle';
-import Layout from "../../../components/layout/Layout";
+import BlogSingle from '../../components/elements/BlogSingle';
+import Layout from "../../components/layout/Layout";
 import { useRouter } from 'next/router';
 import { useQuery} from 'react-query'
 function PageBlogSingle() {

@@ -54,7 +54,7 @@ const ProductTab = ({ product }) => {
 						</a>
 					</li>
 				</ul>
-				<div className={styles.tab_content}/* "tab-content shop_info_tab entry-main-content" */>
+				<div className={ "tab-content shop_info_tab entry-main-content"}>
 					<div className={activeIndex === 1 ? "tab-pane fade show active" : "tab-pane fade"} id="Description">
 						<div className={styles.desc} dangerouslySetInnerHTML={{ __html: content }}>
 							
@@ -200,8 +200,8 @@ const ProductTab = ({ product }) => {
 						</p>
 					</div> */}
 					<div className={activeIndex === 4 ? "tab-pane fade show active" : "tab-pane fade"} id="Reviews">
-						<div className="comments-area">
-							<div className="row">
+						{/* <div className="comments-area">
+							<div className="row"> */}
 							<div className={styles.desc} dangerouslySetInnerHTML={{__html:bc}}></div>
 								{/* <div className="col-lg-8">
 									<h4 className="mb-30">Customer questions & answers</h4>
@@ -397,9 +397,9 @@ const ProductTab = ({ product }) => {
 										How are ratings calculated?
 									</a>
 								</div>
-							</div> */}
+							</div> 
 						</div>
-						</div>
+						</div>*/}
 
 					{/* 	<div className="comment-form">
 							<h4 className="mb-15">Add a review</h4>

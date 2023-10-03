@@ -152,7 +152,7 @@ const BlogGrid = ({ show, wide,data,cat }) => {
                 key={i}
             >
                 <div className="post-thumb">
-                    <Link href={"/news/info/"+item.d_id}>
+                    <Link href={"/news/info/?id="+item.d_id}>
 
                         <img
                             className="border-radius-15"
@@ -162,7 +162,7 @@ const BlogGrid = ({ show, wide,data,cat }) => {
 
                     </Link>
                     <div className="entry-meta">
-                        <Link href={"/news/info/"+item.d_id} className="entry-meta meta-2">
+                        <Link href={"/news/info/?id="+item.d_id} className="entry-meta meta-2">
 
                             <i className="fi-rs-heart"></i>
 
@@ -178,7 +178,7 @@ const BlogGrid = ({ show, wide,data,cat }) => {
                         </Link>
                     </h6>
                     <h6 className="post-title mb-15">
-                        <Link href={"/news/info/"+item.d_id}>
+                        <Link href={"/news/info?="+item.d_id}>
                             {item.d_title}
                         </Link>
                     </h6>

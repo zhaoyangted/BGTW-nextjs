@@ -10,7 +10,7 @@ import { deleteFromWishlist } from "../../redux/action/wishlistAction"
 const Favorites = ({ product, addToCart, deleteFromWishlist }) => {
 	const handleCart = (product) => {
 		addToCart(product)
-		toast("Product added to Cart !")
+		toast("已加入購物車!")
 	}
 
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
@@ -42,13 +42,13 @@ const Favorites = ({ product, addToCart, deleteFromWishlist }) => {
 									<div className={styles.namebox}>
 										<div className={styles.name}>
 											<dd>
-												<a href={"products/" + p.d_id}>
+												<a href={"products/info?id=" + p.d_id}>
 													<img src={process.env.s3Host + p.d_img1} />
 												</a>
 											</dd>
 											<dt>
 												<div className={styles.tt}>
-													<a href={"/products/" + p.d_id} target="_blank">
+													<a href={"/products/info?id=" + p.d_id} target="_blank">
 														{p.d_title}
 													</a>
 												</div>

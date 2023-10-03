@@ -117,7 +117,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 							) : (
 								<nav>
 									<ul className="mobile-menu" ref={domNode}>
-										<li className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"}>
+										{/* <li className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(1)}>
 												<i className="fi-rs-angle-small-down"></i>
 											</span>
@@ -135,9 +135,9 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 												<li>
 													<Link href="/index-4">Home 4</Link>
 												</li>
-											</ul>
-										</li>
-										<li className={isActive.key == 2 ? "menu-item-has-children active" : "menu-item-has-children"}>
+											</ul> 
+										</li>*/}
+										{/* <li className={isActive.key == 2 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(2)}>
 												<i className="fi-rs-angle-small-down"></i>
 											</span>
@@ -174,8 +174,8 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 													<Link href="/shop-compare">Shop – Compare</Link>
 												</li>
 											</ul>
-										</li>
-										<li className={isActive.key == 3 ? "menu-item-has-children active" : "menu-item-has-children"}>
+										</li> */}
+										{/* <li className={isActive.key == 3 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(3)}>
 												<i className="fi-rs-angle-small-down"></i>
 											</span>
@@ -236,8 +236,8 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 													</ul>
 												</li>
 											</ul>
-										</li>
-										<li className={isActive.key == 4 ? "menu-item-has-children active" : "menu-item-has-children"}>
+										</li> */}
+										{/* <li className={isActive.key == 4 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(4)}>
 												<i className="fi-rs-angle-small-down"></i>
 											</span>
@@ -271,8 +271,8 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 													</ul>
 												</li>
 											</ul>
-										</li>
-										<li className={isActive.key == 5 ? "menu-item-has-children active" : "menu-item-has-children"}>
+										</li> */}
+										{/* <li className={isActive.key == 5 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(5)}>
 												<i className="fi-rs-angle-small-down"></i>
 											</span>
@@ -303,8 +303,8 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 													<Link href="/page-404">404 Page</Link>
 												</li>
 											</ul>
-										</li>
-										<li className={isActive.key == 6 ? "menu-item-has-children active" : "menu-item-has-children"}>
+										</li> */}
+										{/* <li className={isActive.key == 6 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(6)}>
 												<i className="fi-rs-angle-small-down"></i>
 											</span>
@@ -323,7 +323,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 													<Link href="#">Spanish</Link>
 												</li>
 											</ul>
-										</li>
+										</li> */}
 									</ul>
 								</nav>
 							)}

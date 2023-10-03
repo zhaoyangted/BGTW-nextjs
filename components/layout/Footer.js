@@ -10,7 +10,7 @@ const Footer = ({ data }) => {
 						<div className={styles.FUTALL}>
 							<div className={styles.domeLogoBox}>
 								<Link href={"/"}>
-									<img src="/assets/imgs/theme/beautygarage_logo02.svg" alt="" />
+									<img src="https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/images/front/CKL_LOGO-03.svg" alt="" />
 								</Link>
 							</div>
 						</div>

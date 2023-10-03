@@ -20,7 +20,7 @@ const OrderInfo = () => {
     
 	return (
     <>
-        <Layout parent="Home" /*sub="Account" */ sub=" 會員中心">
+        <Layout parent="首頁" /*sub="Account" */ sub=" 會員中心">
 				<div className="page-content pt-50 pb-50">
 					<div className="container">
 						<div className="row">
@@ -149,7 +149,7 @@ const OrderInfo = () => {
                                                                     <div className="dbox">
                                                                         <dd>訂單編號</dd>
                                                                         <em>
-                                                                            <Link href={"/member/orders/" + data?.Odata.OID}>{data?.Odata.OID}</Link>
+                                                                            <a href="#">{data?.Odata.OID}</a>
                                                                         </em>
                                                                     </div>
                                                                     <div className="dbox">

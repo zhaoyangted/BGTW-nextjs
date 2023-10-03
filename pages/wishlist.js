@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Layout from "../components/layout/Layout";
 import { addToCart } from "../redux/action/cart";
+import Link from "next/link";
 import {
     clearWishlist,
     closeWishlistModal,
@@ -23,7 +24,7 @@ const Wishlist = ({
     };
     return (
         <>
-            <Layout parent="首頁" /* sub="Shop"  */sub=" > 我的最愛">
+            <Layout parent="首頁" /* sub="Shop"  */sub=" 我的最愛">
                 <section className="mt-50 mb-50">
                     <div className="container">
                         <div className="row">
@@ -31,7 +32,7 @@ const Wishlist = ({
                                 {wishlist.items.length > 0 ? (
                                     <div className="table-responsive shopping-summery">
                                         <table className="table table-wishlist">
-                                            <thead>
+                                            <thead className="d-none d-xs-block">
                                                 <tr className="main-heading">
                                                     <th className="custome-checkbox start pl-30" colSpan="2">
                                                         產品
@@ -65,11 +66,11 @@ const Wishlist = ({
 
                                                             <td className="product-des product-name">
                                                                 <h6 className="product-name  mb-10">
-                                                                    <a>
+                                                                    <Link href={"products/info?id="+product.d_id}>
                                                                         {
                                                                             product.d_title
                                                                         }
-                                                                    </a>
+                                                                    </Link>
                                                                 </h6>
                                                                {/*  <div className="product-rate-cover">
                                                                     <div className="product-rate d-inline-block">

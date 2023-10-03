@@ -70,5 +70,6 @@
     background: #fff;
 }
 .tab_content {
+    display: block;
     padding: 20px 20px;
 }

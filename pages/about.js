@@ -9,7 +9,7 @@ function About() {
 
 	return (
 		<>
-			<Layout parent="首頁" /* sub="關於美麗平台" */ sub=" > 關於美麗平台">
+			<Layout parent="首頁" /* sub="關於美麗平台" */ sub=" 關於美麗平台">
 				<div className="container  pt-50">
 					<div className="row">
 						<div className="col-xl-10 col-lg-12 m-auto">

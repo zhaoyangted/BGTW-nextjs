@@ -28,17 +28,17 @@ const ProductDetails = ({
 	// console.log(specData)
 	const handleCart = (product) => {
 		addToCart(product)
-		toast("產品已加入購物車 !")
+		toast("已加入購物車 !")
 	}
 
 	const handleCompare = (product) => {
 		addToCompare(product)
-		toast("產品加入比較 !")
+		toast("加入比較 !")
 	}
 
 	const handleWishlist = (product) => {
 		addToWishlist(product)
-		toast("產品加入願望清單 !")
+		toast("加入願望清單 !")
 	}
 	const handleChange = (e) => {
 		e.preventDefault
@@ -53,7 +53,7 @@ const ProductDetails = ({
 //console.log(info)
 	return (
 		<>
-			<section className="col-xl-10 col-lg-12 col-xs-12 mb-md-0 mb-sm-5 /* mb-50 */">
+			<section className="col-xl-10 col-lg-12 col-12 mb-md-0 mb-sm-5">
 				{/* <div className="container"> */}
 					<div className="row flex-row-reverse">
 						{/* <div className="col-xl-10 col-lg-12 col-xs-12 m-auto"> */}
@@ -61,9 +61,9 @@ const ProductDetails = ({
 								<div className="row mb-50  mt-30">
 									<div className="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
 										<div className="detail-gallery">
-											<span className="zoom-icon">
+											{/* <span className="zoom-icon">
 												<i className="fi-rs-search"></i>
-											</span>
+											</span> */}
 
 											<div className="product-image-slider">
 												<ThumbSlider img={img} />
@@ -162,7 +162,7 @@ const ProductDetails = ({
 													</li>
 												) : null}
 											</ul>
-											{specData ? (
+											{specData || !quickView? (
 												<ul className={styles.productmeta}>
 													<div className={styles.dtt}>商品規格</div>
 													<div className={styles.spec}>

@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import Layout from "../../../../components/layout/Layout"
+import Layout from "../../../components/layout/Layout"
 import Link from "next/link"
-import styles from "../../../../components/account.module.css"
+import styles from "../../../components/account.module.css"
 import useSWR from "swr"
 import { useRouter } from "next/router"
 import axios from "axios"
 //import { METHODS } from "http"
-const Ask = () => {
+const Pay = () => {
 	const { query } = useRouter()
 	const activeTab = useActiveTab()
 	const { id } = query
@@ -16,7 +16,7 @@ const Ask = () => {
 	}
 	//console.log(id)
 	const fetcher = (url) => fetch(url, { credentials: "include", method: "POST" }).then((r) => r.json())
-	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/ask/${id}`, fetcher)
+	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/pay/${id}`, fetcher)
 	const [formData, setFormData] = useState({})
 	const handleInput = (e) => {
 		//console.log(e.targe?.name)
@@ -124,66 +124,68 @@ const Ask = () => {
 										<div className="tab-content account dashboard-content pl-50"></div>
 										<div className={id ? "tab-pane fade active show" : "tab-pane fade "}>
 											{/* <OrderInfo /> */}
-											<div className="container">
-												<div className="col-lg-">
-													{/* <section className={styles.content_box}> */}
-													<form
-														action={process.env.apiServer + "/api/member/check/ask/" + id}
-														method="post"
-														onSubmit={submitForm}
-													>
-														<ul className={styles.styled_input}>
-															<div className={styles.title03} style={{ marginTop: "30px" }}>
-																訂單詢問
-															</div>
-															<div className={styles.join_line}></div>
-															<li className={styles.half}>
-																<h2>訂單編號</h2>
-																<Link href={"/order/info?id=" + data?.id}>
-																	<h4>{data?.OID}</h4>
-																</Link>
-															</li>
-															<li>
-																<h2>姓名*</h2>
-																<input
-																	type="text"
-																	name="d_name"
-																	value={data?.member_info?.LName}
-																	onChange={handleInput}
-																/>
-															</li>
-															<li className={styles.half}>
-																<h2>E-mail*</h2>
-																<input
-																	type="text"
-																	name="d_email"
-																	value={data?.member_info?.LEmail}
-																	onChange={handleInput}
-																/>
-															</li>
-															<li className={styles.half}>
-																<h2>聯絡電話*</h2>
-																<input
-																	type="text"
-																	name="d_phone"
-																	value={data?.member_info?.LPhone}
-																	onChange={handleInput}
-																/>
-															</li>
-															<li>
-																<h2>詢問內容</h2>
-																<textarea name="d_content" rows="5" onChange={handleInput}></textarea>
-															</li>
-															<div className={styles.join_line}></div>
-															<li style={{ textAlign: "center" }}>
-																<input type="submit" className={styles.btn_style02} value="確認送出" />{" "}
-																<input type="reset" className={styles.btn_style02} value="重新填寫" />
-															</li>
-														</ul>
-													</form>
-													{/* </section> */}
-												</div>
+											{/* <div className="container"> */}
+											<div className="col-lg-">
+												{/* <section className={styles.content_box}> */}
+												<form
+													action={process.env.apiServer + "/api/member/check/pay/" + id}
+													method="post"
+													onSubmit={submitForm}
+												>
+													<ul className={styles.styled_input}>
+														<div className={styles.title03} style={{ marginTop: "30px" }}>
+															匯款回覆
+														</div>
+														<div className={styles.join_line}></div>
+														<li className={styles.half}>
+															<h2>訂單編號</h2>
+															<Link href={"/order/info?id=" + data?.id}>
+																<h4>{data?.OID}</h4>
+															</Link>
+														</li>
+														<li className={styles.half}>
+															<h2>訂購日期</h2>
+															<h4>{data?.create_date}</h4>
+														</li>
+														<li className={styles.half}>
+															<h2>帳號末五碼*</h2>
+															<input
+																type="text"
+																name="d_remit_account"
+																maxlength="5"
+																value={formData.d_remit_account}
+																onChange={handleInput}
+															/>
+														</li>
+														<li className={styles.half}>
+															<h2>匯款金額*</h2>
+															<input
+																type="text"
+																name="d_remit_price"
+																value={formData.d_remit_price}
+																onChange={handleInput}
+															/>
+														</li>
+														<li>
+															<h2>匯款時間*</h2>
+															<input
+																type="text"
+																name="d_remit_time"
+																id="d_remit_time"
+																value={formData.d_remit_time}
+																onChange={handleInput}
+															/>
+														</li>
+														<div className={styles.join_line}></div>
+														<li style={{ textAlign: "center" }}>
+															<input type="submit" className={styles.btn_style02} value="確認送出" />
+															<input type="reset" className={styles.btn_style02} value="重新填寫" />
+														</li>
+													</ul>
+												</form>
+												{/* </section> */}
 											</div>
+											{/* </div> */}
 										</div>
 									</div>
 								</div>
@@ -196,4 +198,4 @@ const Ask = () => {
 	)
 }
 
-export default Ask
+export default Pay

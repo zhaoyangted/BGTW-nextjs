@@ -4,6 +4,7 @@ import TWzipcode from "react-twzipcode"
 import axios from "axios"
 import styles from "../components/about.module.css"
 import useSWR from "swr"
+import Link from "next/link"
 
 function Contact() {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
@@ -50,7 +51,7 @@ function Contact() {
 	}
 	return (
 		<>
-			<Layout parent="首頁" sub=" > 聯繫我們" /* subChild="Contact" */>
+			<Layout parent="首頁" sub=" 聯繫我們" /* subChild="Contact" */>
 				<div className="page-content pt-50">
 					<div className="container">
 						<div className="row">
@@ -75,14 +76,15 @@ function Contact() {
 											<p>
 												{" "}
 												（服務時間：
-												{homeData?Object.values(homeData)[11]:null}
+												{homeData?Object.values(homeData)[9]:null}
+												）
 											</p>
 										</div>
 										<div className={styles.box_contact_us}>
 											<p>
 												{" "}
 												<b>
-													<a href={"/qa"}>更多常見問題</a>
+													<Link href={"/qa"}>更多常見問題</Link>
 												</b>
 											</p>
 											<p> （您可在常見問題來解決您的問題！）</p>

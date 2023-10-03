@@ -107,7 +107,7 @@ function Register() {
 	console.log(formData)
 	return (
 		<>
-			<Layout parent="首頁" /* sub="Pages" */ sub=" > 加入會員">
+			<Layout parent="首頁" /* sub="Pages" */ sub=" 加入會員">
 				<div className="container">
 					<div className="col-lg-">
 						<section className={styles.content_box}>
@@ -564,7 +564,7 @@ function Register() {
 												<span></span>
 												<h5>
 													我已詳細閱讀
-													<a href="#member_terms" onClick={(e)=>{e.preventDefault;setModal(true)}} className="fancybox">
+													<a /* href="#member_terms" */ onClick={(e)=>{e.preventDefault;setModal(true)}} className="fancybox">
 														會員條款
 													</a>
 												</h5>

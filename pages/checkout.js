@@ -6,6 +6,7 @@ import axios from "axios"
 import TWzipcode from "react-twzipcode"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
+import Link from "next/link"
 import {
 	clearCart,
 	closeCart,
@@ -34,110 +35,111 @@ const Cart = ({
 	const [apiData, setApiData] = useState({})
 	const freightRef = useRef(0)
 	const bigFreightRef = useRef(0)
-	const outFreightRef = useRef('1')
+	const outFreightRef = useRef("1")
 	const bonusRef = useRef(0)
 	const totalRef = useRef(0)
-    const router = useRouter()
+	const router = useRouter()
 	useEffect(() => {
-        const point = async () => {
-            let str = ""
+		const point = async () => {
+			let str = ""
 			cartItems?.map((p, i) => {
-                p.d_id ? (str = str + p.d_id + "@#" + p.quantity + "@#;") : null
+				p.d_id ? (str = str + p.d_id + "@#" + p.quantity + "@#;") : null
 			})
 			str = str.replace(/;\s*$/, "")
-            setFormData((prevState) => ({
-                ...prevState,
-                'cart':str,
-            })
-            )
-			const res = await axios.post(process.env.apiServer + "/api/cart/cart_info/", {
-                cart: str
-			},{credentials:'included'})
+			setFormData((prevState) => ({
+				...prevState,
+				cart: str,
+			}))
+			const res = await axios.post(
+				process.env.apiServer + "/api/cart/cart_info/",
+				{
+					cart: str,
+				},
+				{ credentials: "included" }
+			)
 			setApiData(res.data)
 			//return res.data['BonusTotal']
 		}
 		point()
 	}, [cartItems])
-    const [formData, setFormData] = useState({
-        SubBonus: 0,
-        d_donate:"",
-        d_cname:"",
-        d_invoice:"",
-        d_othername:"",
-        d_icname:"",
-        d_iaddress:"",
-        d_Invoicecity:"",
-        d_Invoicearea:"",
-        d_Invoicezip:"",
-        d_ium:"",
-        /* d_cname:apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : "",
+	const [formData, setFormData] = useState({
+		SubBonus: 0,
+		d_donate: "",
+		d_cname: "",
+		d_invoice: "",
+		d_othername: "",
+		d_icname: "",
+		d_iaddress: "",
+		d_Invoicecity: "",
+		d_Invoicearea: "",
+		d_Invoicezip: "",
+		d_ium: "",
+		/* d_cname:apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : "",
         d_name:apiData?.Mdata?.d_pname ? apiData?.Mdata?.d_pname : "",
         d_mobile:apiData?.Mdata?.d_phone ? apiData?.Mdata?.d_phone : "",
         d_phone:apiData?.Mdata?.d_company_tel ? apiData?.Mdata?.d_company_tel : "",
         d_email:apiData?.Mdata?.d_account ? apiData?.Mdata?.d_account : "",
         d_address:apiData?.Mdata?.d_address ? apiData?.Mdata?.d_address : "", */
-    })
+	})
 	const handlePesChange = ({ county, district, zipcode }) => {
-        //console.log(data)
+		//console.log(data)
 		setFormData((prevState) => ({
-            ...prevState,
+			...prevState,
 			d_city: county || "",
 			d_area: district || "",
 			d_zip: zipcode || "",
 		}))
 	}
 	const handleComChange = ({ county, district, zipcode }) => {
-        //console.log(data)
+		//console.log(data)
 		setFormData((prevState) => ({
-            ...prevState,
+			...prevState,
 			d_Invoicecounty: county || "",
 			d_Invoicedistrict: district || "",
 			d_Invoicezipcode: zipcode || "",
 		}))
 	}
 	const handleInput = (e) => {
-        //console.log(e.targe?.name)
-        
+		//console.log(e.targe?.name)
+
 		e.preventDefault
 		const fieldName = e.target?.name
 		const fieldValue = e.target?.value
-        
+
 		setFormData((prevState) => ({
-            ...prevState,
+			...prevState,
 			[fieldName]: fieldValue || "",
 		}))
 		//console.log(formData)
 	}
-	
-    const handleTotal = useCallback(() => {
-        let total = 0;
-        total =
-        parseInt(apiData?.CartProduct?.Total) -
-        parseInt(bonusRef.current.value) +
-        parseInt(apiData?.CartProduct?.BigFreight) +
-        parseInt(apiData?.CartProduct?.Total < "2500" ? apiData?.CartProduct?.Freight : "0") +
-        //parseInt(/* freightRef.current.value */fre) 
-        +
-        (formData?.d_logistics==='2'?apiData?.CartProduct?.Outisland:0)
-        //parseInt(/* outFreightRef.current.value */outf)
+
+	const handleTotal = useCallback(() => {
+		let total = 0
+		total =
+			parseInt(apiData?.CartProduct?.Total) -
+			parseInt(bonusRef.current.value) +
+			parseInt(apiData?.CartProduct?.BigFreight) +
+			parseInt(apiData?.CartProduct?.Total < "2500" ? apiData?.CartProduct?.Freight : "0") +
+			//parseInt(/* freightRef.current.value */fre)
+			+(formData?.d_logistics === "2" ? apiData?.CartProduct?.Outisland : 0)
+		//parseInt(/* outFreightRef.current.value */outf)
 		/* setFormData((prevState) => ({
             ...prevState,
 			AllTotal: total,
 		})) */
 		//console.log(bigFreightRef.current.value)
 		return total
-	},[formData])
+	}, [formData])
 	//console.log(apiData?.CartProduct?.Total)
 	//console.log(formData)
 	const submitForm = async (e) => {
 		// We don't want the page to refresh
 		e.preventDefault()
 		//console.log(e.target.action)
-        if (!formData?.d_backagree==="Y")
-        {
-            toast("請勾選");
-            return;
-        }
+		if (!formData?.d_backagree === "Y") {
+			toast.error("請勾選")
+			return
+		}
 
 		const formURL = e.target.action
 		const data = new FormData()
@@ -155,7 +157,7 @@ const Cart = ({
 	}
 	return (
 		<>
-			<Layout parent="首頁" /* sub="Shop" */ sub=" > 結帳">
+			<Layout parent="首頁" /* sub="Shop" */ sub=" 結帳">
 				<form action={process.env.apiServer + "/api/cart/addorder"} method="post" onSubmit={submitForm}>
 					{/* <section className="mt-50 mb-50">
 						<div className="container">
@@ -187,13 +189,13 @@ const Cart = ({
 												<div className={styles.namebox}>
 													<div className={styles.name}>
 														<dd>
-															<a href={"/products/" + item.d_id}>
-																<img src={process.env.s3Host+item.d_img1} alt="" />
-															</a>
+															<Link href={"/products/info?id=" + item.d_id}>
+																<img src={process.env.s3Host + item.d_img1} alt="" />
+															</Link>
 														</dd>
 														<dt>
 															<div className={styles.tt}>
-																<a href={"/products/" + item.d_id}>{item.d_title}</a>
+																<Link href={"/products/info?id=" + item.d_id}>{item.d_title}</Link>
 															</div>
 															<div className={styles.sbox}>
 																<div className={styles.dtt}>商品編號</div>
@@ -221,7 +223,7 @@ const Cart = ({
 												</div>
 												<div className={styles.numberbox}>
 													<div className={styles.number}>{item.num}</div>
-													
+
 													<div className={styles.price}>{item.d_total}</div>
 												</div>
 												{item.IsSale ? (
@@ -231,9 +233,9 @@ const Cart = ({
 																<span className="icon_ok">符合</span>
 															</div>
 															<div className={styles.sales}>
-																<a href={"/products/sales/" + item.d_id} target="_blank">
+																<Link href={"/products/sales/" + item.d_id} target="_blank">
 																	{/*  <?php echo $this->autoful->DiscountData[$value['d_id']]['d_title'] ?>*/}
-																</a>
+																</Link>
 															</div>
 														</div>
 													</div>
@@ -249,7 +251,7 @@ const Cart = ({
 														<div className="namebox">
 															<div className="name">
 																<dd>
-																	<img src={process.env.s3Host+item.d_img} alt="" />
+																	<img src={process.env.s3Host + item.d_img} alt="" />
 																</dd>
 																<dt>
 																	<div className="tt">{item.d_title}</div>
@@ -285,7 +287,7 @@ const Cart = ({
 														<div className="namebox">
 															<div className="name">
 																<dd>
-																	<img src={process.env.s3Host+item.d_img} alt="" />
+																	<img src={process.env.s3Host + item.d_img} alt="" />
 																</dd>
 																<dt>
 																	<div className="tt">{item.d_title}</div>
@@ -402,7 +404,7 @@ const Cart = ({
 
 												{apiData?.Mdata && apiData?.Mdata?.d_bonus !== 0 ? (
 													<ul>
-														<dd>{"可用紅利點數：" + apiData?.Mdata?.d_bonus?apiData?.Mdata?.d_bonus:0 + "點"}</dd>
+														<dd>{"可用紅利點數：" + apiData?.Mdata?.d_bonus ? apiData?.Mdata?.d_bonus : 0 + "點"}</dd>
 														<dt>
 															<input
 																className={styles.select_point}
@@ -467,19 +469,22 @@ const Cart = ({
 													</dd>
 													<dt>
 														<span className={styles.txt_total} name="AllTotal" ref={totalRef}>
-															${handleTotal(/* bonusRef.current.value,
+															$
+															{
+																handleTotal(/* bonusRef.current.value,
                                                                 bigFreightRef.current.value,
                                                                 freightRef.current.value,
-                                                                outFreightRef.current.value */)}
+                                                                outFreightRef.current.value */)
+															}
 														</span>
-                                                        <input
-														hidden
-														name="AllTotal"
-														value={formData.AllTotal}
-														ref={totalRef}
-                                                        readOnly
-														onChange={handleInput}
-													    />
+														<input
+															hidden
+															name="AllTotal"
+															value={formData.AllTotal}
+															ref={totalRef}
+															readOnly
+															onChange={handleInput}
+														/>
 													</dt>
 												</ul>
 												<ul>
@@ -516,9 +521,9 @@ const Cart = ({
 												<input
 													type="text"
 													name="d_cname"
-                                                    //defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
+													//defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
 													value={formData?.d_cname}
-                                                    //value={formData?.d_cname}
+													//value={formData?.d_cname}
 													onChange={handleInput}
 												/>
 											</li>
@@ -527,10 +532,10 @@ const Cart = ({
 												<input
 													type="text"
 													name="d_name"
-                                                    //defaultValue={apiData?.Mdata?.d_name ? apiData?.Mdata?.d_name : ""}
+													//defaultValue={apiData?.Mdata?.d_name ? apiData?.Mdata?.d_name : ""}
 													value={formData?.d_name}
 													onChange={handleInput}
-                                                    //value={formData?.d_name}
+													//value={formData?.d_name}
 													required
 												/>
 											</li>
@@ -540,10 +545,10 @@ const Cart = ({
 													type="text"
 													name="d_moblie"
 													required
-                                                    //defaultValue={apiData?.Mdata?.d_moblie ? apiData?.Mdata?.d_moblie : ""}
+													//defaultValue={apiData?.Mdata?.d_moblie ? apiData?.Mdata?.d_moblie : ""}
 													value={formData?.d_moblie}
 													onChange={handleInput}
-                                                    //value={formData?.d_mobile}
+													//value={formData?.d_mobile}
 													placeholder=""
 												/>
 											</li>
@@ -552,9 +557,9 @@ const Cart = ({
 												<input
 													type="text"
 													name="d_phone"
-                                                    //defaultValue={apiData?.Mdata?.d_phone ? apiData?.Mdata?.d_phone : ""}
+													//defaultValue={apiData?.Mdata?.d_phone ? apiData?.Mdata?.d_phone : ""}
 													value={formData?.d_phone}
-                                                    //value={formData?.d_phone}
+													//value={formData?.d_phone}
 													onChange={handleInput}
 												/>
 											</li>
@@ -564,10 +569,10 @@ const Cart = ({
 													type="text"
 													name="d_email"
 													required
-                                                    //defaultValue={apiData?.Mdata?.d_email ? apiData?.Mdata?.d_email : ""}
+													//defaultValue={apiData?.Mdata?.d_email ? apiData?.Mdata?.d_email : ""}
 													value={formData?.d_email}
 													onChange={handleInput}
-                                                    //value={formData?.d_email}
+													//value={formData?.d_email}
 													placeholder=""
 												/>
 											</li>
@@ -585,19 +590,21 @@ const Cart = ({
 														handleChangeDistrict={handlePesChange}
 														handleChangeZipcode={handlePesChange}
 														zipcodePlaceholder={"郵遞區號"}
-														countyValue={/* apiData?.Mdata?.d_county?apiData?.Mdata?.d_county: */formData?.d_city}
-														districtValue={/* apiData?.Mdata?.d_district?apiData?.Mdata?.d_district: */formData?.d_area}
-														zipcodeValue={/* apiData?.Mdata?.d_zipcode?apiData?.Mdata?.d_zipcode: */formData?.d_zip}
+														countyValue={/* apiData?.Mdata?.d_county?apiData?.Mdata?.d_county: */ formData?.d_city}
+														districtValue={
+															/* apiData?.Mdata?.d_district?apiData?.Mdata?.d_district: */ formData?.d_area
+														}
+														zipcodeValue={/* apiData?.Mdata?.d_zipcode?apiData?.Mdata?.d_zipcode: */ formData?.d_zip}
 													/>
 												</div>
 												<input
 													type="text2"
 													name="d_address"
 													required={formData?.d_invoice === "2" ? true : false}
-                                                    //defaultValue={apiData?.Mdata?.d_address ? apiData?.Mdata?.d_address : ""}
+													//defaultValue={apiData?.Mdata?.d_address ? apiData?.Mdata?.d_address : ""}
 													value={formData?.d_address}
 													onChange={handleInput}
-                                                    //value={formData.d_address}
+													//value={formData.d_address}
 												/>
 											</li>
 										</ul>
@@ -665,11 +672,11 @@ const Cart = ({
 														style={{ display: "list-item" }}
 														onChange={handleInput}
 													/>
-													<a href="images/demo/invoice.pdf">
+													<Link href="images/demo/invoice.pdf">
 														<span>
 															(捐贈清冊下載<i className="fas fa-download"></i>)
 														</span>
-													</a>
+													</Link>
 												</li>
 											) : null}
 											<div className={styles.cart_line}></div>
@@ -684,7 +691,7 @@ const Cart = ({
 													name="d_icname"
 													required={formData?.d_invoice === "2" ? true : false}
 													//defaultValue={apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : ""}
-                                                    value={formData?.d_icname}
+													value={formData?.d_icname}
 													onChange={handleInput}
 												/>
 											</li>
@@ -696,7 +703,7 @@ const Cart = ({
 													required={formData?.d_invoice === "2" ? true : false}
 													//defaultValue={apiData?.Mdata?.d_company_number ? apiData?.Mdata?.d_company_number : ""}
 													value={formData?.d_ium}
-                                                    onChange={handleInput}
+													onChange={handleInput}
 												/>
 											</li>
 											<li>
@@ -719,7 +726,7 @@ const Cart = ({
 													required={formData?.d_invoice === "2" ? true : false}
 													name="d_iaddress"
 													//defaultValue={apiData?.Mdata?.d_address}
-                                                    value={formData?.d_iaddress}
+													value={formData?.d_iaddress}
 													onChange={handleInput}
 												/>
 											</li>
@@ -751,7 +758,15 @@ const Cart = ({
 									</div>
 								) : null}
 								<div className={styles.text_right} style={{ marginTop: "30px" }}>
-									<input type="button" className={styles.btn_style07} value="返回購物車" onClick={(e)=>{e.preventDefault;router.back()}} />
+									<input
+										type="button"
+										className={styles.btn_style07}
+										value="返回購物"
+										onClick={(e) => {
+											e.preventDefault
+											router.back()
+										}}
+									/>
 									<input type="submit" className={styles.btn_style07} value="結帳" />
 								</div>
 							</section>

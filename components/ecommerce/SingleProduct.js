@@ -16,25 +16,29 @@ const SingleProduct = ({
 }) => {
     const handleCart = (product) => {
         addToCart(product);
-        toast("Product added to Cart !");
+        toast("已加入購物車 !");
     };
 
     const handleCompare = (product) => {
         addToCompare(product);
-        toast("Added to Compare list !");
+        toast("已加入比較 !");
     };
 
     const handleWishlist = (product) => {
         addToWishlist(product);
-        toast("Added to Wishlist !");
+        toast("已加入願望清單 !");
     };
     return <>
         <div className="product-cart-wrap pt-30 pb-30">
             <div className="product-img-action-wrap">
                 <div className="product-img product-img-zoom">
                     <Link
-                        href="/products/[id]/"
-                        as={`/products/${product.d_id}/`}
+                        href={{
+                            pathname: "/products/info",
+                            query: { id: product.d_id},
+                        }}
+                        
+                        //as={`/products/${product.d_id}/`}
                     >
 
                         <img
@@ -50,9 +54,9 @@ const SingleProduct = ({
 
                     </Link>
                 </div>
-                <div className="product-action-1">
+                <div className="product-action-1  d-none d-md-block">
                     <a
-                        aria-label="Quick view"
+                        aria-label="快速預覽"
                         className="action-btn hover-up"
                         data-bs-toggle="modal"
                         onClick={(e) => openQuickView(product)}
@@ -60,14 +64,14 @@ const SingleProduct = ({
                         <i className="fi-rs-eye"></i>
                     </a>
                     <a
-                        aria-label="Add To Wishlist"
+                        aria-label="加入最愛"
                         className="action-btn hover-up"
                         onClick={(e) => handleWishlist(product)}
                     >
                         <i className="fi-rs-heart"></i>
                     </a>
                     <a
-                        aria-label="Compare"
+                        aria-label="加入比較"
                         className="action-btn hover-up"
                         onClick={(e) => handleCompare(product)}
                     >
@@ -99,8 +103,11 @@ const SingleProduct = ({
                 </div> */}
                 <h2>
                     <Link
-                        href="/products/[id]/"
-                        as={`/products/${product.d_id}/`}
+                        href={{
+                            pathname: "/products/info",
+                            query: { id: product.d_id},
+                        }}
+                        //as={`/products/info?id=${product.d_id}/`}
                     >
                         {product.d_title}
                     </Link>

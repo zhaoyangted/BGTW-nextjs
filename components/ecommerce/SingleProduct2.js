@@ -34,7 +34,12 @@ const SingleProduct2 = ({
         <div className="product-cart-wrap mb-30">
             <div className="product-img-action-wrap">
                 <div className="product-img product-img-zoom">
-                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
+                    <Link href={{
+                            pathname: "/products/info",
+                            query: { id: product.d_id},
+                        }} 
+                    as={`/products/${product.d_id}`}
+                    >
 
                         <img
                             className="default-img"
@@ -49,9 +54,9 @@ const SingleProduct2 = ({
 
                     </Link>
                 </div>
-                <div className="product-action-1">
+                <div className="product-action-1 d-none d-md-block">
                     <a
-                        aria-label="Quick view"
+                        aria-label="快速預覽"
                         className="action-btn hover-up"
                         data-bs-toggle="modal"
                         // data-bs-target="#quickViewModal"
@@ -60,14 +65,14 @@ const SingleProduct2 = ({
                         <i className="fi-rs-eye"></i>
                     </a>
                     <a
-                        aria-label="Add To Wishlist"
+                        aria-label="加入最愛"
                         className="action-btn hover-up"
                         onClick={(e) => handleWishlist(product)}
                     >
                         <i className="fi-rs-heart"></i>
                     </a>
                     <a
-                        aria-label="Compare"
+                        aria-label="加入比較"
                         className="action-btn hover-up"
                         onClick={(e) => handleCompare(product)}
                     >
@@ -98,7 +103,12 @@ const SingleProduct2 = ({
                     </Link>
                 </div> */}
                 <h2>
-                    <Link href="/products/[id]" as={`/products/${product.d_id}`}>
+                    <Link href={{
+                            pathname: "/products/info",
+                            query: { id: product.d_id},
+                        }}
+                        // as={`/products/${product.d_id}`}
+                        >
                         {product.d_title}
                     </Link>
                 </h2>

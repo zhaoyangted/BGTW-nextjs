@@ -219,7 +219,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 									{products.items.length === 0 && <h3>無產品 </h3>}
 
 									{products.items.map((item, i) => (
-										<div className="col-lg-3 col-md-4 col-12 col-sm-6 mb-30" key={i}>
+										<div className="col-lg-3 col-md-4 col-6 col-sm-6 mb-30" key={i}>
 											<SingleProduct product={item} />
 											{/* <SingleProductList product={item}/> */}
 										</div>
