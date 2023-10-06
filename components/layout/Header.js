@@ -38,9 +38,8 @@ const Header = ({
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
 	const [apiData, setApiData] = useState({})
-	//const router=useRouter()
+	const router=useRouter()
 
-	//const { status, data: session } = useSession()
 	const {user,setUser,signIn,signOut/* ,isOnline */}=useContext(AuthContext)
 	/* useEffect(()=>{
 		if (!user) {
@@ -74,7 +73,7 @@ const Header = ({
 			str = str.replace(/;\s*$/, "")
 			const res = await axios.post(process?.env?.apiServer + "/api/cart/cart/", {
 				cart: str,
-			})
+			},)
 			setApiData(res.data)
 			//return res.data['BonusTotal']
 		}
@@ -389,7 +388,7 @@ const Header = ({
 						<div className="header-wrap header-space-between position-relative">
 							<div className="logo logo-width-1 d-block d-lg-none">
 								<Link href="/">
-									<img src="/assets/imgs/theme/beautygarage_logo.svg" alt="logo" />
+									<img src="https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/images/front/CKL_LOGO.svg" alt="logo" />
 								</Link>
 							</div>
 							<div className="header-nav d-none d-lg-flex">{data ? <Navmenu /> : null}</div>

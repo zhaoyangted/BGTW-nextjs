@@ -13,9 +13,7 @@ export const useAuth = () => {
 			//userObj = authresult.data?.encodedToken;
             //console.log(authresult)
 			setUser(authresult.data)
-            router.push(
-                '/account/'
-            )
+            router.back()
 			toast("Login Successfull")
             
 		} catch (err) {
@@ -26,7 +24,7 @@ export const useAuth = () => {
 
 	const signUp = async (data) => {
 		try {
-			let authresult = await axios.post("/api/auth/signup", data)
+			let authresult = await axios.post("/api/auth/signup", data,{credentials:'include'})
 			let userObj = { ...authresult.data?.createdUser }
 			userObj.token = authresult.data?.encodedToken
 			setUser(userObj)
@@ -75,9 +73,8 @@ export const useAuth = () => {
 			let response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				setUser(null)
-				
+				router.push('/')
                 toast("Logout Successfull")
-                router.push('/')
 			}
 		} catch (err) {
 			console.error(err)

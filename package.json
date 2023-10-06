@@ -35,6 +35,7 @@
         "react-query": "^3.39.3",
         "react-redux": "^8.0.2",
         "react-responsive-modal": "^6.2.0",
+        "react-to-print": "^2.14.15",
         "react-toastify": "^9.0.3",
         "react-twzipcode": "^3.0.1",
         "reactstrap": "^9.0.3",

@@ -1,9 +1,10 @@
-import React from "react"
+import React,{useRef} from "react"
 import Layout from "../../components/layout/Layout"
 import Link from "next/link"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import { useRouter } from "next/router"
+import { useReactToPrint } from 'react-to-print';
 //import axios from "axios"
 //import { METHODS } from "http"
 const OrderInfo = () => {
@@ -17,7 +18,10 @@ const OrderInfo = () => {
     //console.log(id)
 	const fetcher = (url) => fetch(url, { credentials: "include",method:'POST' }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/info/${id}`, fetcher)
-    
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current,
+    });
 	return (
     <>
         <Layout parent="首頁" /*sub="Account" */ sub=" 會員中心">
@@ -111,7 +115,7 @@ const OrderInfo = () => {
 											</div> */}
                                             <div className={ id ? "tab-pane fade active show" : "tab-pane fade "}>
 												{/* <OrderInfo /> */}
-                                                <div className="container">
+                                                <div className="container" ref={componentRef}>
                                                     <section className={styles.content_box03}>
                                                         {data?.Odata.d_orderstatus !== 10 ? (
                                                             data?.Odata.d_pay === 4 ? (
@@ -146,33 +150,33 @@ const OrderInfo = () => {
                                                         <div className={styles.order02}>
                                                             <ul>
                                                                 <li>
-                                                                    <div className="dbox">
+                                                                    <div className={styles.dbox}>
                                                                         <dd>訂單編號</dd>
                                                                         <em>
                                                                             <a href="#">{data?.Odata.OID}</a>
                                                                         </em>
                                                                     </div>
-                                                                    <div className="dbox">
+                                                                    <div className={styles.dbox}>
                                                                         <dd>訂購日期</dd>
                                                                         {data?.Odata.d_create_time.substr(0, 10)}
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div className="dbox">
+                                                                    <div className={styles.dbox}>
                                                                         <dd>訂單金額</dd>
                                                                         <b>{parseInt(data?.Odata.d_total)||''}</b>
                                                                     </div>
-                                                                    <div className="dbox">
+                                                                    <div className={styles.dbox}>
                                                                         <dd>付款方式</dd>
                                                                         {data?.Cashflow.d_title ? data?.Cashflow.d_title : "付款方式已不存在"}
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div className="dbox">
+                                                                    <div className={styles.dbox}>
                                                                         <dd>訂單狀態</dd>
                                                                         {data?.Orders_status[data?.Odata?.d_orderstatus]}
                                                                     </div>
-                                                                    <div className="dbox">
+                                                                    <div className={styles.dbox}>
                                                                         <dd>付款狀態</dd>
                                                                         {data?.Pay_status[data?.Odata.d_paystatus]}
                                                                     </div>
@@ -565,7 +569,7 @@ const OrderInfo = () => {
                                                                     <div className={styles.cart_line}></div>
                                                                 </div>
                                                                 <div className={styles.text_right} style={{marginTop: "30px"}}>
-                                                                    <input type="button" className={styles.btn_style07} value="列印訂單" onClick={(e)=>{console.log(e)}} />
+                                                                    <input type="button" className={styles.btn_style07} value="列印訂單" onClick={handlePrint} />
                                                                     {data?.Odata.d_orderstatus === "11" ? (
                                                                         <input
                                                                             type="button"

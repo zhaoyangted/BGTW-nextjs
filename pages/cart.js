@@ -42,7 +42,7 @@ const Cart = ({
 			str = str.replace(/;\s*$/, "")
 			const res = await axios.post(process.env.apiServer + "/api/cart/cart/", {
 				cart: str,
-			})
+			},{credentials:'include'})
 			setApiData(res.data)
 			//return res.data['BonusTotal']
 		}

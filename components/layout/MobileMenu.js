@@ -58,7 +58,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 								<span className="menu-expand" onClick={() => handleToggle(index)}>
 									<i className="fi-rs-angle-small-down"></i>
 								</span>
-								<Link href={`/products/top_list/${li[0].split("_")[1]}`}>{li[0].split("_")[0]}TOP</Link>
+								<Link href={`/products/top_list/${li[0].split("_")[1]}/`}rel="nofollow">{li[0].split("_")[0]}TOP</Link>
 								<ul className={isActive.key == index ? "dropdown" : "d-none"}>
 									{li[1].map((ul, index) => {
 										return (
@@ -91,7 +91,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 					<div className="mobile-header-top">
 						<div className="mobile-header-logo">
 							<Link href="/">
-								<img src="/assets/imgs/theme/beautygarage_logo.svg" alt="logo" />
+								<img src="https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/images/front/CKL_LOGO.svg" alt="logo" />
 							</Link>
 						</div>
 						<div className="mobile-menu-close close-style-wrap close-style-position-inherit">

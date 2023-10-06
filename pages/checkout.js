@@ -1,11 +1,12 @@
 import { connect } from "react-redux"
 import Layout from "../components/layout/Layout"
 import styles from "../components/account.module.css"
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef, useCallback, useContext } from "react"
 import axios from "axios"
 import TWzipcode from "react-twzipcode"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
+import { AuthContext } from "../util/useAuthContext"
 import Link from "next/link"
 import {
 	clearCart,
@@ -36,6 +37,7 @@ const Cart = ({
 	const freightRef = useRef(0)
 	const bigFreightRef = useRef(0)
 	const outFreightRef = useRef("1")
+	const {user}=useContext(AuthContext)
 	const bonusRef = useRef(0)
 	const totalRef = useRef(0)
 	const router = useRouter()
@@ -62,6 +64,14 @@ const Cart = ({
 		}
 		point()
 	}, [cartItems])
+	useEffect(()=>{
+		//let res=isOnline()
+		//console.log(user.isLoggedIn)
+		if (!user?.isLoggedIn) {
+			toast("請先登入", { autoClose: 15000 })
+			router.push('/login')
+		}
+	},[])
 	const [formData, setFormData] = useState({
 		SubBonus: 0,
 		d_donate: "",

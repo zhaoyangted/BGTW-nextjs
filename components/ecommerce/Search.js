@@ -29,6 +29,7 @@ const Search = ({ data }) => {
 	return (
 		<>
 			<form >
+				<div className="sort-by-dropdown-wrap">
 				<select
 					className="select-active"
 					onChange={(e) => {
@@ -47,6 +48,7 @@ const Search = ({ data }) => {
 						  })
 						: null}
 				</select>
+				</div>
 				<input
 					value={searchTerm}
 					onKeyDown={handleInput}
