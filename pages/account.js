@@ -9,12 +9,13 @@ import { useRouter } from "next/router"
 import Orders from "../components/account/Orders"
 import Friends from "../components/account/Friends"
 import { AuthContext } from "../util/useAuthContext"
+import axios from "axios"
 const Account = (props) => {
 	const { query} = useRouter()
 	const router = useRouter()
 	const activeTab = useActiveTab()
 	const orderId = query.orderId
-	const {user,signOut,isOnline}=useContext(AuthContext)
+	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
 	function useActiveTab() {
 		const activeTab = query.activeTab || "account"
 		return activeTab
@@ -26,7 +27,25 @@ const Account = (props) => {
 	useEffect(()=>{
 		//let res=isOnline()
 		//console.log(user.isLoggedIn)
-		if (!user?.isLoggedIn) {
+		const getAuth = async () =>{
+			try {
+				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+				
+					if (response.data.isLoggedIn){
+						setUser(response.data.data)
+					}
+					else 
+					{
+						setUser("")
+					}
+			  
+			} catch (err) {
+				console.error(err)
+	
+			}
+		}
+		getAuth()
+		if (!user) {
 			router.push('/login')
 		}
 	},[])

@@ -12,7 +12,7 @@ import {
 	increaseQuantity,
 	openCart,
 } from "../redux/action/cart"
-import { number } from "prop-types"
+import { relative } from "path"
 
 const Cart = ({
 	openCart,
@@ -40,9 +40,13 @@ const Cart = ({
 				p.d_id ? (str = str + p.d_id + "@#" + p.quantity + "@#;") : null
 			})
 			str = str.replace(/;\s*$/, "")
-			const res = await axios.post(process.env.apiServer + "/api/cart/cart/", {
-				cart: str,
-			},{credentials:'include'})
+			const res = await axios.post(
+				process.env.apiServer + "/api/cart/cart/",
+				{
+					cart: str,
+				},
+				{ credentials: "include" }
+			)
 			setApiData(res.data)
 			//return res.data['BonusTotal']
 		}
@@ -69,95 +73,182 @@ const Cart = ({
 								</div>
 							</div>
 						</section>
-						<section className={styles.cart01}>
+						<div className={styles.cart01}>
 							<div className="col-lg-">
-								<div className="table-responsive shopping-summery">
-									{cartItems.length <= 0 && "No Products"}
-									<table className={cartItems.length > 0 ? "table table-wishlist" : "d-none"}>
-										<thead className="d-none d-xs-block">
-											<tr className="main-heading">
-												<th className="custome-checkbox start pl-30" colSpan="2">
-													商品
-												</th>
-												<th scope="col">單價</th>
-												<th scope="col">數量</th>
-												<th scope="col">小計</th>
-												<th scope="col" className="end">
-													移除
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-											{cartItems.map((item, i) => (
-												<tr key={i}>
-													<td className="image product-thumbnail">
-														<img src={process.env.s3Host + item.d_img1} />
-													</td>
+								{cartItems.length <= 0 && "No Products"}
 
-													<td className="product-des product-name">
-														<h6 className="product-name">
-															<Link href={"/products/info?id=" + item.d_id}>{item.d_title}</Link>
-														</h6>
-														<div className="product-rate-cover">
-															{/* <div className="product-rate d-inline-block">
-                                                            <div
-                                                                className="product-rating"
-                                                                style={{
-                                                                    width: "90%",
-                                                                }}
-                                                            ></div>
-                                                        </div> */}
-															<span className="font-small ml-5 text-muted">{/* {apiData?.Cart[i]?.d_model} */}</span>
-														</div>
-													</td>
-													<td className="price" data-title="價格">
-														<div className={styles.price}>
-															<span>NT${item.d_price}</span>
-														</div>
-													</td>
-													<td className="text-center detail-info" data-title="庫存">
-														<div className="detail-extralink mr-15">
-															{item.d_num==="0"||item.num==="0" ?
-															<div className="detail-qty border radius ">
-																"庫存不足，請刪除後再進行結帳!"
-															</div>:
-															<div className="detail-qty border radius ">
-																<a onClick={(e) => decreaseQuantity(item.d_id)} className="qty-down">
-																	<i className="fi-rs-angle-small-down"></i>
-																</a>
-																<span className="qty-val">{item.quantity}</span>
-																<a onClick={(e) => increaseQuantity(item.d_id)} className="qty-up">
-																	<i className="fi-rs-angle-small-up"></i>
-																</a>
-															</div>
-															}
-														</div>
-													</td>
-													<td className="text-right" data-title="購物車">
-														<div className={styles.price}>
-															<span>${item.quantity * item.d_price}</span>
-														</div>
-													</td>
-													<td className="action" data-title="清除產品">
-														<a onClick={(e) => deleteFromCart(item.d_id)} className="text-muted">
-															<i className="fi-rs-trash"></i>
-														</a>
-													</td>
-												</tr>
-											))}
-											<tr>
-												<td colSpan="6" className="text-end">
-													{cartItems.length > 0 && (
-														<a onClick={clearCart} className="text-muted">
-															<i className="fi-rs-cross-small"></i>
-															清空購物車
-														</a>
-													)}
-												</td>
-											</tr>
-										</tbody>
-									</table>
+								<div className={styles.titlebox}>
+									<div className={styles.name}>商品</div>
+									<div className={styles.number}>數量</div>
+									<div className={styles.price}>小計</div>
+									<div className={styles.del}></div>
 								</div>
+								{cartItems.map((item, i) => {
+									console.log(item)
+									return (
+										<ul
+											key={i}
+											className={
+												item.d_stock <= 0 || (!item.AddDate?.Chkop && item.AddDate?.Chkop === "N") ? "stock_btn" : ""
+											}
+										>
+											{item.stock <= 0 ? (
+												<div className={styles.stock}>
+													<span>目前無庫存</span>
+												</div>
+											) : (
+												!item.AddDate?.Chkop &&
+												item.AddDate?.Chkop === "N" && (
+													<div className={styles.stock}>
+														<span>
+															目前商品選配：{item.AddData?.AddTitle}
+															庫存剩餘：{item.AddData?.Addstock}
+														</span>
+													</div>
+												)
+											)}
+											<div className={styles.namebox}>
+												<div className={styles.name}>
+													<dd>
+														<Link href={{ pathname: "/products/info/", query: { id: item.d_id } }}>
+															<img src={process.env.s3Host + item.d_img1} alt="" />
+														</Link>
+													</dd>
+													<dt>
+														<div className={styles.tt}>
+															<Link href={{ pathname: "/products/info", query: { id: item.d_id } }}>
+																{item.d_title}
+															</Link>
+														</div>
+														<div className={styles.sbox}>
+															<div className={styles.dtt}>商品編號</div>
+															<div className={styles.spec}>{item.d_model}</div>
+														</div>
+														<div className={styles.sbox}>
+															<div className={styles.dtt}>單價</div>
+															<div className={styles.spec}>
+																<span>
+																	NT$
+																	{item.d_price}
+																</span>
+															</div>
+														</div>
+														{item.AddData && (
+															<div className={styles.sbox}>
+																<div className={styles.dtt}>商品選配</div>
+																<div className={styles.spec}>
+																	{item.AddData.AddTitle + ":" + "NT$" + item.AddData.AddPrice}
+																</div>
+															</div>
+														)}
+													</dt>
+												</div>
+											</div>
+											<div className={styles.numberbox}>
+												<div className={styles.number}>
+													<div className={styles.quantity + " " + styles.buttons_added}>
+														<a onClick={(e) => decreaseQuantity(item.d_id)} className="qty-down">
+															<i className="fi-rs-angle-small-down"></i>
+														</a>
+														<span className="qty-val">{item.quantity}</span>
+														<a onClick={(e) => increaseQuantity(item.d_id)} className="qty-up">
+															<i className="fi-rs-angle-small-up"></i>
+														</a>
+													</div>
+												</div>
+												<div className={styles.price}>
+													<span>NT${item.quantity * item.d_price}</span>
+												</div>
+												<div className={styles.del}>
+													<a onClick={(e) => deleteFromCart(item.d_id)} className="text-muted">
+														<i className="fi-rs-trash"></i>
+													</a>
+												</div>
+											</div>
+										</ul>
+									)
+								})}
+								{apiData.AddData?.map((a, i) => {
+									return (
+										<ul key={i}>
+											<div className={styles.namebox}>
+												<div className={styles.name}>
+													<dd>
+														<img src={process.env.s3Host + a.d_img} alt="" />
+													</dd>
+													<dt>
+														<div className={styles.tt}>{a.d_title}</div>
+														<div className={styles.sbox}>
+															<div className={styles.dtt}>加購價</div>
+															<div className={styles.spec}>
+																<span>
+																	NT$
+																	{a.d_price}
+																</span>
+															</div>
+														</div>
+													</dt>
+												</div>
+											</div>
+											<div className={styles.numberbox}>
+												<div className={styles.number}>1</div>
+												<div className={styles.price}>
+													NT$
+													{a.d_price}
+												</div>
+												<div className={styles.del}>
+													<a onClick={(e) => deleteFromCart(a.d_id)} className="text-muted">
+														<i className="fi-rs-trash"></i>
+													</a>
+												</div>
+											</div>
+											<div className={styles.salesbox}>
+												<div className={styles.slist}>
+													<div className={styles.sales}>加購價產品</div>
+												</div>
+											</div>
+										</ul>
+									)
+								})}
+								{apiData.TrialData?.map((t, i) => {
+									return (
+										<ul key={i} className={t.d_stock <= 0 ? styles.stock_btn : ""}>
+											{t.d_stock <= 0 && (
+												<div className={styles.stock}>
+													<span>目前無庫存</span>
+												</div>
+											)}
+											<div className={styles.namebox}>
+												<div className={styles.name}>
+													<dd>
+														<img src={process.env.s3Host + t.d_img} alt="" />
+													</dd>
+													<dt>
+														<div className={styles.tt}>{t.d_title}</div>
+														<div className={styles.sbox}>
+															<div className={styles.dtt}>商品編號</div>
+															<div className={styles.spec}>{t.d_model}</div>
+														</div>
+													</dt>
+												</div>
+											</div>
+											<div className={styles.numberbox}>
+												<div className={styles.number}>1</div>
+												<div className={styles.price}>---</div>
+												<div className={styles.del}>
+													<a onClick={(e) => deleteFromCart(t.d_id)} className="text-muted">
+														<i className="fi-rs-trash"></i>
+													</a>
+												</div>
+											</div>
+											<div className={styles.salesbox}>
+												<div className={styles.slist}>
+													<div className={styles.slist}>試用品</div>
+												</div>
+											</div>
+										</ul>
+									)
+								})}
 								<div className="cart-action text-end">
 									<a className="btn ">
 										<i className="fi-rs-shopping-bag mr-10"></i>
@@ -262,7 +353,7 @@ const Cart = ({
 									</div>
 								</div>
 							</div>
-						</section>
+						</div>
 					</div>
 				</section>
 			</Layout>

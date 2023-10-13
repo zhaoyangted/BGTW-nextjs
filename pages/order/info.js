@@ -1,10 +1,11 @@
-import React,{useRef} from "react"
+import React,{useRef,useContext} from "react"
 import Layout from "../../components/layout/Layout"
 import Link from "next/link"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import { useRouter } from "next/router"
 import { useReactToPrint } from 'react-to-print';
+import { AuthContext } from "../../util/useAuthContext"
 //import axios from "axios"
 //import { METHODS } from "http"
 const OrderInfo = () => {
@@ -18,6 +19,10 @@ const OrderInfo = () => {
     //console.log(id)
 	const fetcher = (url) => fetch(url, { credentials: "include",method:'POST' }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/info/${id}`, fetcher)
+    const {user,signOut,isOnline,setUser}=useContext(AuthContext)
+	const handleSignOut = async () => {
+		await signOut()
+	}
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
       content: () => componentRef.current,
@@ -86,7 +91,14 @@ const OrderInfo = () => {
 													</Link>
 												</li>
 												<li className="nav-item">
-													<Link href="/page-login" className="nav-link">
+                                                <Link
+														href=""
+														className="nav-link"
+														onClick={(e) => {
+															e.preventDefault
+															handleSignOut()
+														}}
+													>
 														<i className="fi-rs-sign-out mr-10"></i>登出
 													</Link>
 												</li>

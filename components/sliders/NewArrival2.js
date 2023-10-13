@@ -35,7 +35,7 @@ const NewArrival2 = () => {
                             pathname: "/products/info",
                             query: { id: product.d_id},
                         }}
-                         //as={`/products/${product.d_id}`}
+                         //as={`/products/info/${product.d_id}`}
                          >
 
                     <img src={process.env.s3Host+product.d_img1} alt="" />
@@ -48,7 +48,7 @@ const NewArrival2 = () => {
                             pathname: "/products/info",
                             query: { id: product.d_id},
                         }}
-                        // as={`/products/${product.d_id}`}
+                         //as={`/products/info/${product.d_id}`}
                         >
                             {product.d_title}
                         </Link>

@@ -82,9 +82,11 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 				<section className="mt-50 mb-50">
 					<div className="container-fluid">
 						<div className="row flex-row">
-							<div className={
+							<div
+								className={
 									modal ? "d-block stick-sidebar col-lg-3" : "col-lg-3 primary-sidebar sticky-sidebar d-none d-lg-flex"
-								}>
+								}
+							>
 								<div className="sidebar-widget  mb-30">
 									<h5 className="section-title style-1 mb-30">{products.menudatas?.d_title}</h5>
 									<CategoryProduct menuDatas={products.types} menus={products.menus} />
@@ -223,7 +225,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									</div>
 								</div>
 								<div className="row product-grid-3">
-									{products.items.length === 0 && <h3>No Products Found </h3>}
+									{products.items.length === 0 || (!products && <h3>無產品 </h3>)}
 
 									{products.items.map((item, i) => (
 										<div className="col-lg-3 col-md-4 col-6 col-sm-6 mb-30" key={i}>

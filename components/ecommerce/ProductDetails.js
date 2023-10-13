@@ -79,7 +79,7 @@ const ProductDetails = ({
 													<li>
 														<div className={styles.dtt}>商品品牌</div>
 														<div className={styles.spec}>
-															<Link href={"/products/brands_list/" + product?.BID+"/"}>{product.pbtitle}</Link>
+															<Link href={"/products/blist?id=" + product?.BID+"/"}>{product.pbtitle}</Link>
 														</div>
 													</li>
 												) : null}

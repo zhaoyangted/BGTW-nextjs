@@ -44,7 +44,7 @@ const TrendingSlider = () => {
                             pathname: "/products/info",
                             query: { id: product.d_id},
                         }}
-                            //as={`/products/${product.d_id}`}
+                            //as={`/products/info/${product.d_id}`}
                             >{product.d_title}</Link>
                     </h6>
                     <div className="product-rate-cover">

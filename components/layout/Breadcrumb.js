@@ -19,15 +19,21 @@ const Breadcrumb = ({ parent, sub, subChild, noBreadcrumb }) => {
 					//console.log(l.split("#")[1])
 					if (i === 0) {
 						return(<li key={i}>
-						<Link href={"/products/top_list/" + l.split("#")[0]} rel="nofollow"><span></span>{l.split("#")[1]}</Link>
+						<Link href={{pathname:"/products/toplist",query:{id:l.split("#")[0]}}} rel="nofollow" 
+						//as={`/products/top_list/${l.d_id}`}
+						><span></span>{l.split("#")[1]}</Link>
 						</li>)
 					} else if (i === 1) {
 						return(<li key={i}>
-						<Link href={"/products/products_list/" + l.split("#")[0]}rel="nofollow"><span></span>{l.split("#")[1]}</Link>
+						<Link href={{pathname:"/products/plist",query:{ id:l.split("#")[0]}}}rel="nofollow" 
+						//as={`/products/products_list/${l.d_id}`}
+						><span></span>{l.split("#")[1]}</Link>
 						</li>)
 					} else {
 						return(<li key={i}>
-							<Link href={"/products/products_list/" + l.split("#")[0] + "#"}rel="nofollow"><span></span>{l.split("#")[1]}</Link>
+							<Link href={{pathname:"/products/plist",query:{ id:l.split("#")[0]}}}rel="nofollow"
+							//as={`/products/products_list/${l.d_id}`}
+							><span></span>{l.split("#")[1]}</Link>
 						</li>)
 					}
 				})}

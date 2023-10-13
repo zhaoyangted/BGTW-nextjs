@@ -3220,7 +3220,7 @@ table .product-thumbnail img {
   padding: 25px 25px 0 25px;
 }
 .product-cart-wrap .product-img-action-wrap .product-action-1 {
-  display: inline-flex !important;
+  display: inline-flex;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #3d9ed1;

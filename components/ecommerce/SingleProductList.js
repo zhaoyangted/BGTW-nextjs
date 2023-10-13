@@ -37,7 +37,7 @@ const SingleProductList = ({
                         <div className="product-img-inner">
                             <Link
                                 href="/[id]"
-                                as={`/${product.d_id}`}
+                                //as={`/${product.d_id}`}
                             >
 
                                 <img
@@ -54,9 +54,9 @@ const SingleProductList = ({
                             </Link>
                         </div>
                     </div>
-                    <div className="product-action-1">
+                    <div className="product-action-1 d-none d-md-block">
                         <a
-                            aria-label="Quick view"
+                            aria-label="快速預覽"
                             className="action-btn hover-up"
                             data-bs-toggle="modal"
                             // data-bs-target="#quickViewModal"
@@ -65,14 +65,14 @@ const SingleProductList = ({
                             <i className="fi-rs-eye"></i>
                         </a>
                         <a
-                            aria-label="Add To Wishlist"
+                            aria-label="加入願望清單"
                             className="action-btn hover-up"
                             onClick={(e) => handleWishlist(product)}
                         >
                             <i className="fi-rs-heart"></i>
                         </a>
                         <a
-                            aria-label="Compare"
+                            aria-label="加入比較"
                             className="action-btn hover-up"
                             onClick={(e) => handleCompare(product)}
                         >
@@ -109,7 +109,7 @@ const SingleProductList = ({
                     <h2>
                         <Link
                             href="/[id]"
-                            as={`/${product.d_id}`}
+                            //as={`/${product.d_id}`}
                         >
                             {product.d_title}
                         </Link>

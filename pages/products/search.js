@@ -15,6 +15,7 @@ import Layout from "../../components/layout/Layout"
 import { fetchProduct } from "../../redux/action/product"
 import SingleProduct from "../../components/ecommerce/SingleProduct"
 import ShowFilter from "../../components/ecommerce/Filter/ShowFilter"
+import CategoryAll from "../../components/ecommerce/Filter/CategoryAll"
 const SearchList = ({ products, productFilters, fetchProduct }) => {
 	const router = useRouter(),
 		searchTerm = router.query.search,
@@ -90,6 +91,8 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 		setCurrentPage(1)
 		setPages(Math.ceil(products.pages?.TotalRecord / Number(e.target.value)))
 	}
+	//console.log(products.menudatas)
+	//console.log(Ptype,Pkeyword)
 	return (
 		<>
 			<Layout noBreadcrumb="d-none">
@@ -103,8 +106,14 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 								}
 							>
 								<div className="sidebar-widget  mb-30">
-									<h5 className="section-title style-1 mb-30">{products.menudatas?.d_title}</h5>
-									<CategoryProduct menuDatas={products.types} menus={products.menus} />
+									<h5 className="section-title style-1 mb-30">
+										{Ptype === "" ? "全部品類" : products.menudatas?.d_title}
+									</h5>
+									{Ptype === "" ? (
+										<CategoryAll menusData={products.menudatas} />
+									) : (
+										<CategoryProduct menuDatas={products.types} menus={products.menus} />
+									)}
 								</div>
 
 								{/* <div className="sidebar-widget price_range range mb-30">
@@ -284,7 +293,7 @@ const mapStateToProps = (state) => ({
 	products: state.products,
 	sortData: state.sorts,
 	typeData: state.types,
-	productFilters: state.productFilters,
+	productFilters: state.productFilters || 1,
 })
 
 const mapDidpatchToProps = {

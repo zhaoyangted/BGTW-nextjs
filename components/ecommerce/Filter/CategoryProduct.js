@@ -3,20 +3,20 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { updateProductCategory } from "../../../redux/action/productFiltersAction"
 import Link from "next/link"
-import useClickOutside from "../../../util/outsideClick"
 import styles from "../../catmenu.module.css"
 const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
-	//console.log(Object.entries(menus))
+	
 	const router = useRouter()
 	const menusArray = menus ? Object.values(menus) : null /* Object.entries(menuDatas) */
+	const menusAll = Object.entries(menuDatas)
 	const selectCategory = (e, category) => {
 		e.preventDefault()
 		// removeSearchTerm();
 		updateProductCategory(category)
 		router.push({
-			pathname: "/products/products_list/",
+			pathname: "/products/plist",
 			query: {
-				cat: category, //
+				id: category, //
 			},
 		})
 	}
@@ -51,7 +51,7 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 			}
 		})
 	}, [menus])
-	//console.log(menuDatas)
+	//console.log(menus)
 	return (
 		<>
 			<ul className="mobile-menu-wrap" /* ref={domNode} */>
@@ -62,12 +62,14 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 						<li
 							key={index}
 							className={
-								li.d_id === menuDatas.d_id
+								li.d_title === menuDatas.d_title
 									? "menu-item-has-children active " + styles.menuitem
 									: "menu-item-has-children " + styles.menuitem
 							}
 						>
-							<Link href={"/products/products_list/" + li.d_id}>{li.d_title}</Link>
+							<Link href={{pathname:"/products/plist" ,query:{id: li.d_id}}} 
+							//as={`/products/products_list/${li.d_id}`}
+							>{li.d_title}</Link>
 							<span className="menu-expand" onClick={() => handleToggle(index)}>
 								{li?.Subdata?.length > 0 && <i className="fi-rs-angle-small-down"></i>}
 							</span>
@@ -76,7 +78,9 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 									{li?.Subdata?.map((ul, index) => {
 										return (
 											<li key={index} className={styles.li}>
-												<Link href={"/products/products_list/" + ul.d_id}>{ul.d_title}</Link>
+												<Link href={{pathname:"/products/plist",query:{id: ul.d_id}}} 
+												//as={`/products/products_list/${li.d_id}`}
+												>{ul.d_title}</Link>
 												{/* <i className="fi-rs-angle-right"></i> */}
 											</li>
 										)

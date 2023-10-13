@@ -37,7 +37,7 @@ const Cart = ({
 	const freightRef = useRef(0)
 	const bigFreightRef = useRef(0)
 	const outFreightRef = useRef("1")
-	const {user}=useContext(AuthContext)
+	const {user,setUser}=useContext(AuthContext)
 	const bonusRef = useRef(0)
 	const totalRef = useRef(0)
 	const router = useRouter()
@@ -67,7 +67,25 @@ const Cart = ({
 	useEffect(()=>{
 		//let res=isOnline()
 		//console.log(user.isLoggedIn)
-		if (!user?.isLoggedIn) {
+		const getAuth = async () =>{
+			try {
+				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+				
+					if (response.data.isLoggedIn){
+						setUser(response.data.data)
+					}
+					else 
+					{
+						setUser("")
+					}
+			  
+			} catch (err) {
+				console.error(err)
+	
+			}
+		}
+		getAuth()
+		if (!user) {
 			toast("請先登入", { autoClose: 15000 })
 			router.push('/login')
 		}
@@ -199,13 +217,13 @@ const Cart = ({
 												<div className={styles.namebox}>
 													<div className={styles.name}>
 														<dd>
-															<Link href={"/products/info?id=" + item.d_id}>
+															<Link href={{pathname:"/products/info",query:{id:item.d_id}}}>
 																<img src={process.env.s3Host + item.d_img1} alt="" />
 															</Link>
 														</dd>
 														<dt>
 															<div className={styles.tt}>
-																<Link href={"/products/info?id=" + item.d_id}>{item.d_title}</Link>
+																<Link href={{pathname:"/products/info",query:{id:item.d_id}}}>{item.d_title}</Link>
 															</div>
 															<div className={styles.sbox}>
 																<div className={styles.dtt}>商品編號</div>

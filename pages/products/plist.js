@@ -206,7 +206,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									</div>
 								</div>
 								<div className="row product-grid-3">
-									{products.items.length === 0 && <h3>無產品 </h3>}
+									{products.items.length === 0 || (!products && <h3>無產品 </h3>)}
 
 									{products.items.map((item, i) => (
 										<div className="col-lg-3 col-md-4 col-6 col-sm-6 mb-30" key={i}>

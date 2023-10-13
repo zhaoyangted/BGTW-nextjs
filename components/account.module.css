@@ -2344,3 +2344,269 @@ label.checked > input[type="radio"] {
     font-family: "Microsoft JhengHei";
     border: 1px solid #ccc;
 }
+.cart01 ul .namebox .name dd {
+    width: 130px;
+    float: left;
+}
+.cart01 ul .namebox .name dd img {
+    width: 100%;
+    border: 1px solid #eee;
+}
+.cart01 ul .namebox .name {
+    margin: 0px;
+}
+.cart01 ul .namebox {
+    margin: 0px;
+    width: calc(100% - 320px);
+    padding: 0px 0px 0 0px;
+    float: left;
+}
+.cart01 ul {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-top: 1px solid #dcdcdc;
+    margin: 0px 0px 0px 0px;
+    padding: 20px 15px 20px 15px;
+    color: #333;
+    font-size: 13px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.cart01 .titlebox {
+    margin: 0px;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    height: auto;
+    overflow: hidden;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    border-top: 1px solid #dcdcdc;
+}
+.cart01 .titlebox .name {
+    margin: 0px;
+    width: calc(100% - 335px);
+    float: left;
+}
+.cart01 .titlebox .number {
+    margin: 0px;
+    width: 100px;
+    float: left;
+    display: block;
+}
+.cart01 .titlebox .price {
+    margin: 0px;
+    width: 130px;
+    float: left;
+    display: block;
+}
+.cart01 .titlebox .del {
+    margin: 0px;
+    width: 105px;
+    float: left;
+    display: block;
+}
+.cart01 ul .namebox .name dt .tt a {
+    text-decoration: none;
+    color: #333;
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: bold;
+}
+.cart01 ul .namebox .name dt .sbox {
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+}
+.cart01 ul .namebox .name dt .sbox .dtt {
+    width: 90px;
+    padding: 0px 0px 0px 0px;
+    float: left;
+    font-size: 14px;
+    color: #888;
+    position: relative;
+}
+.cart01 ul .namebox .name dt .sbox .dtt:after {
+    content: "：";
+    font-size: 14px;
+    color: #888;
+    margin: 0px 5px 0px 0px;
+    position: absolute;
+    right: 0;
+}
+.cart01 ul .namebox .name dt .sbox .spec {
+    width: calc(100% - 95px);
+    float: left;
+    margin: 0px 0px 0px 5px;
+    padding: 0px 0px;
+    font-size: 14px;
+    color: #888;
+}
+.cart01 ul .namebox .name dt .sbox .spec {
+    width: calc(100% - 95px);
+    float: left;
+    margin: 0px 0px 0px 5px;
+    padding: 0px 0px;
+    font-size: 14px;
+    color: #888;
+}
+.cart01 ul .numberbox {
+    margin: 0px;
+    width: 320px;
+    padding: 0px 0px 0 0px;
+    float: left;
+}
+.cart01 ul .numberbox .number {
+    margin: 0px;
+    width: 100px;
+    padding: 20px 0px 0 0px;
+    text-align: center;
+    float: left;
+    display: block;
+}
+.quantity {
+    display: inline-block;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+}
+.quantity.buttons_added {
+    text-align: left;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: top;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.quantity.buttons_added .minus {
+    border-right: 0;
+}
+.quantity .input_text.qty {
+    width: 30px;
+    height: 27px;
+    padding: 0 0px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+}
+.quantity.buttons_added input {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+    box-shadow: none;
+}
+.quantity.buttons_added .plus {
+    border-left: 0;
+}
+.quantity.buttons_added .minus, .quantity.buttons_added .plus {
+    padding: 0px 10px;
+    height: 27px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+.quantity.buttons_added input {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+    box-shadow: none;
+}
+.cart01 ul .namebox .name dt {
+    width: calc(100% - 150px);
+    float: left;
+    margin: 0px 0px 0px 20px;
+}
+.cart01 ul .numberbox .price {
+    margin: 0px;
+    width: 130px;
+    padding: 20px 0px 0 0px;
+    text-align: center;
+    float: left;
+    display: block;
+    color: #ff3c6c;
+    font-size: 20px;
+    font-weight: bold;
+}
+.cart01 ul .numberbox .del {
+    margin: 0px;
+    width: 90px;
+    padding: 5px 0px 0 0px;
+    float: left;
+    display: block;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    position: relative;
+    z-index: 1;
+}
+@media only screen and (min-width: 0px) and (max-width: 768px){
+.cart02 ul .namebox {
+    margin: 0px;
+    width: 100%;
+}
+.cart02 ul .numberbox .price {
+    width: auto;
+    padding: 0px 0px 0 0px;
+    float: right;
+    text-align: right;
+}
+.cart02 ul .numberbox {
+    margin: 20px 0px 0px 0px;
+    width: 100%;
+}
+.cart02 ul .numberbox .number {
+    width: auto;
+    padding: 0px 0px 0 0px;
+}
+.cart01 .titlebox {
+    display: none;
+}
+.cart01 ul .namebox .name dd {
+    width: 90px;
+    float: left;
+}
+.cart01 ul .namebox {
+    margin: 0px;
+    width: 100%;
+}
+.cart01 ul .numberbox .price {
+    width: auto;
+    padding: 0px 0px 0 0px;
+    float: right;
+    text-align: right;
+}
+.cart01 ul .numberbox {
+    margin: 20px 0px 0px 0px;
+    width: 100%;
+}
+.cart01 ul .numberbox .del {
+    width: auto;
+    padding: 0px 0px 0 10px;
+}
+.cart01 ul .numberbox .number {
+    width: 100px;
+    padding: 0px 0px 0 0px;
+}
+.cart01 ul .numberbox .price {
+    width: auto;
+    padding: 0px 0px 0 0px;
+    float: right;
+    text-align: right;
+}
+}

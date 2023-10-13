@@ -38,7 +38,7 @@ const SingleProduct2 = ({
                             pathname: "/products/info",
                             query: { id: product.d_id},
                         }} 
-                    as={`/products/${product.d_id}`}
+                    //as={`/products/info/${product.d_id}`}
                     >
 
                         <img
@@ -65,7 +65,7 @@ const SingleProduct2 = ({
                         <i className="fi-rs-eye"></i>
                     </a>
                     <a
-                        aria-label="加入最愛"
+                        aria-label="加入願望清單"
                         className="action-btn hover-up"
                         onClick={(e) => handleWishlist(product)}
                     >
@@ -107,7 +107,7 @@ const SingleProduct2 = ({
                             pathname: "/products/info",
                             query: { id: product.d_id},
                         }}
-                        // as={`/products/${product.d_id}`}
+                         //as={`/products/info/${product.d_id}`}
                         >
                         {product.d_title}
                     </Link>

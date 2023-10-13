@@ -5,7 +5,7 @@ import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { AuthContext, useAuthContext } from "../../util/useAuthContext"
-import { useAuth } from "../../util/useAuth"
+//import { useAuth } from "../../util/useAuth"
 //import { useSession, signIn, signOut } from "next-auth/react"
 import styles from "../../components/header.module.css"
 import axios from "axios"
@@ -40,7 +40,7 @@ const Header = ({
 	const [apiData, setApiData] = useState({})
 	const router=useRouter()
 
-	const {user,setUser,signIn,signOut/* ,isOnline */}=useContext(AuthContext)
+	const {user,setUser,signIn,signOut,isOnline}=useContext(AuthContext)
 	/* useEffect(()=>{
 		if (!user) {
 		 isOnline()
@@ -64,6 +64,26 @@ const Header = ({
 			}
 		})
 	})
+	useEffect (()=>{
+		const getAuth = async () =>{
+			try {
+				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+				
+					if (response.data.isLoggedIn){
+						setUser(response.data.data)
+					}
+					else 
+					{
+						setUser("")
+					}
+			  
+			} catch (err) {
+				console.error(err)
+	
+			}
+		}
+		getAuth()
+	},[])
 	useEffect(() => {
 		const point = async () => {
 			let str = ""
@@ -89,19 +109,21 @@ const Header = ({
 							return (
 								<li className="position-static" key={index}>
 									{/* <img src="/assets/imgs/theme/icons/icon-hot.svg" alt="hot deals" /> */}
-									<Link href={`/products/top_list/${li[0].split("_")[1]}/`}>{li[0].split("_")[0]}</Link>
+									<Link href={{pathname:`/products/toplist`,query:{id:li[0].split("_")[1]}}}>{li[0].split("_")[0]}</Link>
 									{/* <i className="fi-rs-angle-down"></i> */}
 									<ul className="mega-menu">
 										<div className={styles.HdNAVUBTopTT}>
-											<a className="menu-title" href={`/products/top_list/${li[0].split("_")[1]}/`}>
+											<Link className="menu-title" href={`/products/toplist?id=${li[0].split("_")[1]}`}>
 												{li[0].split("_")[0]}TOP
-											</a>
+											</Link>
 										</div>
 										{li[1].map((ul, index) => {
 											//  console.log(ul)
 											return (
 												<li className="sub-mega-menu sub-mega-menu-width-22" key={index}>
-													<Link href={`/products/products_list/${ul.d_id}`}>{ul.d_title}</Link>
+													<Link href={{pathname:"/products/plist",query:{id:ul.d_id}}} 
+													//as={`/products/products_list/${ul.d_id}`}
+													>{ul.d_title}</Link>
 													<span className="menu-expand" onClick={() => handleToggle(index)}>
 														<i className="fi-rs-angle-right"></i>
 													</span>
@@ -175,10 +197,10 @@ const Header = ({
 					<div className="row" style={{ margin: "0px 10px 0px 10px" }}>
 						<div className="header-wrap">
 							<div className="header-right">
-								{user?.isLoggedIn ? (
+								{user ? (
 									<>
 										<Link href="/account/" className="user__link user__link--login">
-											會員{user?.data?.d_pname}您好!您的目前等級：{user?.data?.d_title}
+											會員{user?.d_pname}您好!您的目前等級：{user?.d_title}
 										</Link>
 										<Link
 											href="/#"

@@ -86,10 +86,10 @@ const CategorySlider = () => {
         // removeSearchTerm();
         updateProductCategory(category);
         router.push({
-            pathname:`/products/brands_list/${category}`,
-            /* query: {
-                cat: category 
-            } */
+            pathname:`/products/blist`,
+            query: {
+                id: category 
+            }
         });
 
        // console.log("Click");

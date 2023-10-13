@@ -6,6 +6,7 @@ import axios from "axios"
 const OrderInfo = () => {
 	const { query } = useRouter()
 	const orderId = query.orderId
+	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
 	const fetcher = (url) => axios(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/orders/info/" + { orderId }, fetcher)
     /* function number_format(user_input){
@@ -27,6 +28,9 @@ const OrderInfo = () => {
     
         return formated_number;
     } */
+	const handleSignOut = async () => {
+		await signOut()
+	}
 	return (
 		<>
 			<section className="content_box03">

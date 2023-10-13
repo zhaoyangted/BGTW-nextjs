@@ -5,7 +5,7 @@ import { updateProductCategory } from "../../../redux/action/productFiltersActio
 import Link from "next/link"
 //import useClickOutside from "../../../util/outsideClick";
 import styles from "../../catmenu.module.css"
-const CategoryBrand = ({ updateProductCategory, menusData }) => {
+const CategoryAll = ({ updateProductCategory, menusData }) => {
 	const router = useRouter()
 	//console.log(menusData)
 	const menusArray = menusData ? Object.entries(menusData) : null
@@ -67,7 +67,7 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 					{menusArray?.map((ul, index) => {
 						return (
 							<li key={index} className={styles.menuitemhaschildren + styles.menuitem}>
-								<Link href="#">{ul[0]}</Link>
+								<Link href="#">{ul[0].split("_")[0]}</Link>
 								<span className="menu-expand" onClick={() => handleToggle(index)}>
 									<i className="fi-rs-angle-small-down"></i>
 								</span>
@@ -84,7 +84,7 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 													key={i}
 												>
 													<Link
-														href={"/products/plist?id=" + li.d_id + "/"}
+														href={"/products/plist?id=" + li.d_id}
 														//as={`/products/products_list/${ul.d_id}`}
 													>
 														{li.d_title}
@@ -92,10 +92,10 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 													<span className="menu-expand" onClick={() => handleToggle2(i)}>
 														{li.Subdata?.length > 0 && <i className="fi-rs-angle-small-right"></i>}
 													</span>
-													<ul className={isActive2.key == i ? "dropdown" : "d-none"}>
+													<ul className={isActive2.key == i ? styles.dropdown : "d-none"}>
 														{li.Subdata?.map((lii, ii) => {
 															return (
-																<li key={ii} className={styles.li}>
+																<li key={ii} className={styles.lii}>
 																	<Link
 																		href={"/products/plist?id=" + lii.d_id}
 																		//as={`/products/products_list/${li.d_id}`}
@@ -120,4 +120,4 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 	)
 }
 
-export default connect(null, { updateProductCategory })(CategoryBrand)
+export default connect(null, { updateProductCategory })(CategoryAll)

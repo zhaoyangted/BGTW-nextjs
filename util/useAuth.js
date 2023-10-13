@@ -39,12 +39,12 @@ export const useAuth = () => {
         try {
             let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
             
-                if (response.data.isOnline){
-                    return true
+                if (response.data.isLoggedIn){
+                    setUser(response.data.data)
                 }
                 else 
                 {
-                    return false
+                    setUser("")
                 }
           
         } catch (err) {
@@ -81,11 +81,11 @@ export const useAuth = () => {
 			toast("Login Failed")
 		}
 	}
-    useEffect(()=>{
+   /*  useEffect(()=>{
         isOnline()
        
     },[])
 
-    //console.log(user)
+    console.log(user) */
 	return { user, signIn, signUp, signOut,isOnline,setUser/* ,isAuthed */}
 }

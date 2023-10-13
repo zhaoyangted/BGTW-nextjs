@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 import { toast } from "react-toastify"
 import { addToCart } from "../../redux/action/cart"
 import { deleteFromWishlist } from "../../redux/action/wishlistAction"
+import Link from "next/link"
 const Favorites = ({ product, addToCart, deleteFromWishlist }) => {
 	const handleCart = (product) => {
 		addToCart(product)
@@ -42,15 +43,19 @@ const Favorites = ({ product, addToCart, deleteFromWishlist }) => {
 									<div className={styles.namebox}>
 										<div className={styles.name}>
 											<dd>
-												<a href={"products/info?id=" + p.d_id}>
+												<Link href={{pathname:"/products/info" ,query:{id: p.d_id}}} 
+												//as={"/product/info/"+p.d_id}
+												>
 													<img src={process.env.s3Host + p.d_img1} />
-												</a>
+												</Link>
 											</dd>
 											<dt>
 												<div className={styles.tt}>
-													<a href={"/products/info?id=" + p.d_id} target="_blank">
+													<Link href={{pathname:"/products/info",query:{id:p.d_id}}} 
+													//as={"/product/info/"+p.d_id} target="_blank"
+													>
 														{p.d_title}
-													</a>
+													</Link>
 												</div>
 												<div className={styles.sbox}>
 													<div className={styles.dtt}>商品編號</div>

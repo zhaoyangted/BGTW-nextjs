@@ -1,14 +1,16 @@
-import React, { useState } from "react"
+import React, { useState,useContext } from "react"
 import Layout from "../../../components/layout/Layout"
 import Link from "next/link"
 import styles from "../../../components/account.module.css"
 import useSWR from "swr"
 import { useRouter } from "next/router"
 import axios from "axios"
+import { AuthContext } from "../../../util/useAuthContext"
 //import { METHODS } from "http"
 const Ask = () => {
 	const { query } = useRouter()
 	const activeTab = useActiveTab()
+	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
 	const { id } = query
 	function useActiveTab() {
 		const activeTab = query.activeTab || "account"
@@ -28,6 +30,9 @@ const Ask = () => {
 			...prevState,
 			[fieldName]: fieldValue || "",
 		}))
+	}
+	const handleSignOut = async () => {
+		await signOut()
 	}
 	const submitForm = async (e) => {
 		// We don't want the page to refresh
@@ -113,7 +118,14 @@ const Ask = () => {
 													</Link>
 												</li>
 												<li className="nav-item">
-													<Link href="/page-login" className="nav-link">
+												<Link
+														href=""
+														className="nav-link"
+														onClick={(e) => {
+															e.preventDefault
+															handleSignOut()
+														}}
+													>
 														<i className="fi-rs-sign-out mr-10"></i>登出
 													</Link>
 												</li>

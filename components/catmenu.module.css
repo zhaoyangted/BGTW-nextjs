@@ -30,7 +30,7 @@
 }
 .menuitem{
     margin-top:5px;
-    font-size: 12px;
+    /* font-size: 12px; */
     left: 10%;
    /*  padding: 6px 4px 6px 10px; */
     /* line-height: 40px; */
@@ -56,6 +56,10 @@
     overflow: hidden;
 }
 .menuitemhaschildren {
+    left:10%;
+    overflow: hidden;
+}
+.menuitemhaschildren .menuitem.dropdown {
     left:10%;
     overflow: hidden;
 }

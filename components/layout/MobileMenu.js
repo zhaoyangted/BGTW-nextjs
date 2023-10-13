@@ -1,10 +1,11 @@
 import Link from "next/link"
-import { useContext, useState } from "react"
+import { useContext, useState,useEffect } from "react"
 import useClickOutside from "../../util/outsideClick"
 import Search from "../ecommerce/Search"
 //import { useSession, signIn, signOut } from "next-auth/react"
 import { AuthContext, useAuthContext } from "../../util/useAuthContext"
 import { useAuth } from "../../util/useAuth"
+import axios from "axios"
 const MobileMenu = ({ isToggled, toggleClick, data }) => {
 	//const { status, data: session } = useSession()
 	const {user,setUser,isOnline,signOut} = useContext(AuthContext)
@@ -39,7 +40,26 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 			})
 		}
 	}
-
+	useEffect (()=>{
+		const getAuth = async () =>{
+			try {
+				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+				
+					if (response.data.isLoggedIn){
+						setUser(response.data.data)
+					}
+					else 
+					{
+						setUser("")
+					}
+			  
+			} catch (err) {
+				console.error(err)
+	
+			}
+		}
+		getAuth()
+	},[])
 	let domNode = useClickOutside(() => {
 		setIsActive({
 			status: false,
@@ -48,7 +68,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 	const Navmenu = () => {
 		return (
 			<nav>
-				<ul className="mobile-menu" ref={domNode}>
+				<ul className="mobile-menu" /* ref={domNode} */>
 					{Object.entries(data).map((li, index) => {
 						return (
 							<li
@@ -58,12 +78,16 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 								<span className="menu-expand" onClick={() => handleToggle(index)}>
 									<i className="fi-rs-angle-small-down"></i>
 								</span>
-								<Link href={`/products/top_list/${li[0].split("_")[1]}/`}rel="nofollow">{li[0].split("_")[0]}TOP</Link>
+								<Link href={{pathname:"/products/toplist",query:{id:li[0].split("_")[1]}}} 
+								//as={`/products/top_list/${li[0].split("_")[1]}`} 
+								rel="nofollow">{li[0].split("_")[0]}TOP</Link>
 								<ul className={isActive.key == index ? "dropdown" : "d-none"}>
 									{li[1].map((ul, index) => {
 										return (
 											<li key={index}>
-												<Link href={"/products/products_list/" + ul.d_id}>{ul.d_title}</Link>
+												<Link href={{pathname:"/products/plist",query:{id: ul.d_id}}}
+												//as={`/products/products_list/${ul.d_id}`}
+												>{ul.d_title}</Link>
 												<span className="menu-expand">
 													<i className="fi-rs-angle-right"></i>
 												</span>
@@ -113,10 +137,10 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 						</div>
 						<div className="mobile-menu-wrap mobile-header-border">
 							{data ? (
-								<Navmenu />
+								<Navmenu ref={domNode}/>
 							) : (
 								<nav>
-									<ul className="mobile-menu" ref={domNode}>
+									<ul className="mobile-menu" >
 										{/* <li className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(1)}>
 												<i className="fi-rs-angle-small-down"></i>
@@ -332,10 +356,10 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 							{/* <div className="single-mobile-header-info mt-30">
 								<Link href="/page-contact">Our location</Link>
 							</div> */}
-							{user?.isLoggedIn ? (
+							{user ? (
 								<div className="single-mobile-header-info">
 									<Link href="/account">會員中心</Link>
-									會員{user?.data?.d_pname}您好!您的目前等級：{user?.data?.d_title}
+									會員{user?.d_pname}您好!您的目前等級：{user?.d_title}
 								</div>
 							) : (
 								<Link href="/login">會員登入 / 加入會員</Link>
