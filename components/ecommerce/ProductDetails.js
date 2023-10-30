@@ -9,6 +9,7 @@ import RelatedSlider from "../sliders/Related"
 import ThumbSlider from "../sliders/Thumb"
 import styles from "../product.module.css"
 import Link from "next/link"
+import { useRouter } from "next/router"
 const ProductDetails = ({
 	product,
 	cartItems,
@@ -25,6 +26,7 @@ const ProductDetails = ({
 }) => {
 	const [quantity, setQuantity] = useState(1)
 	const [info, setInfo] = useState(product?.d_id)
+	const router=useRouter()
 	// console.log(specData)
 	const handleCart = (product) => {
 		addToCart(product)
@@ -39,6 +41,9 @@ const ProductDetails = ({
 	const handleWishlist = (product) => {
 		addToWishlist(product)
 		toast("加入願望清單 !")
+	}
+	const handleInquery = (product) => {
+		router.push({pathname:"/contact",query:{id:product.d_model,string:product.d_title}})
 	}
 	const handleChange = (e) => {
 		e.preventDefault
@@ -258,18 +263,28 @@ const ProductDetails = ({
 														{parseInt(product?.d_stock) - quantity >= 0 ? "加入購物車" : "無庫存"}
 													</button>
 													<a
-														aria-label="Add To Wishlist"
+														aria-label="加入願望清單"
 														className="action-btn hover-up"
+														data-bs-toggle="modal"
 														onClick={(e) => handleWishlist(product)}
 													>
 														<i className="fi-rs-heart"></i>
 													</a>
 													<a
-														aria-label="Compare"
+														aria-label="加入比較"
 														className="action-btn hover-up"
+														//data-bs-toggle="modal"
 														onClick={(e) => handleCompare(product)}
 													>
 														<i className="fi-rs-shuffle"></i>
+													</a>
+													<a
+														aria-label="產品詢問"
+														className="action-btn hover-up"
+														//data-bs-toggle="modal"
+														onClick={(e) => handleInquery(product)}
+													>
+														<i className="fi-rs-info"></i>
 													</a>
 												</div>
 											</div>
@@ -277,7 +292,7 @@ const ProductDetails = ({
 									</div>
 								</div>
 
-								{quickView ? null : (
+								{quickView || !watchedData ? null : (
 									<>
 										<ProductTab product={product} />
 										<div className="row mt-60">

@@ -1,21 +1,26 @@
 import Link from "next/link"
-import { useContext, useState,useEffect } from "react"
+import { useContext, useState, useEffect } from "react"
 import useClickOutside from "../../util/outsideClick"
 import Search from "../ecommerce/Search"
 //import { useSession, signIn, signOut } from "next-auth/react"
 import { AuthContext, useAuthContext } from "../../util/useAuthContext"
 import { useAuth } from "../../util/useAuth"
 import axios from "axios"
+import styles from '../../components/catmenu.module.css'
 const MobileMenu = ({ isToggled, toggleClick, data }) => {
 	//const { status, data: session } = useSession()
-	const {user,setUser,isOnline,signOut} = useContext(AuthContext)
-	const [isActive, setIsActive] = useState({
+	const { user, setUser, isOnline, signOut } = useContext(AuthContext)
+	const [isMactive, setIsMactive] = useState({
 		status: false,
-		key: "",
+		key: "100",
+	})
+	const [isMactive2, setIsMactive2] = useState({
+		status: false,
+		key: "100",
 	})
 	const handleSignOut = async () => {
 		//if (user.isLoggedIn ) {
-			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
+		/* const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				await signOut()
 			} else {
@@ -26,75 +31,115 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 			alert("not login.")
 		} */
 		await signOut()
-	//}
+		//}
 	}
-	const handleToggle = (key) => {
-		if (isActive.key === key) {
-			setIsActive({
+	const handleMtoggle = (key) => {
+		if (isMactive.key === key) {
+			setIsMactive({
 				status: false,
 			})
 		} else {
-			setIsActive({
+			setIsMactive({
 				status: true,
 				key,
 			})
 		}
 	}
-	useEffect (()=>{
-		const getAuth = async () =>{
+	const handleMtoggle2 = (key) => {
+		if (isMactive2.key === key) {
+			setIsMactive2({
+				status: false,
+			})
+		} else {
+			setIsMactive2({
+				status: true,
+				key,
+			})
+		}
+	}
+	useEffect(() => {
+		const getAuth = async () => {
 			try {
 				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
-				
-					if (response.data.isLoggedIn){
-						setUser(response.data.data)
-					}
-					else 
-					{
-						setUser("")
-					}
-			  
+
+				if (response.data.isLoggedIn) {
+					setUser(response.data.data)
+				} else {
+					setUser("")
+				}
 			} catch (err) {
 				console.error(err)
-	
 			}
 		}
 		getAuth()
-	},[])
-	let domNode = useClickOutside(() => {
+	}, [])
+	/* let domNode = useClickOutside(() => {
 		setIsActive({
 			status: false,
 		})
-	})
+	}) */
 	const Navmenu = () => {
 		return (
 			<nav>
 				<ul className="mobile-menu" /* ref={domNode} */>
+					{/* 1st level */}
 					{Object.entries(data).map((li, index) => {
 						return (
 							<li
 								key={index}
-								className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"}
+								className={"menu-item-has-children"}
+								/* className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"} */
 							>
-								<span className="menu-expand" onClick={() => handleToggle(index)}>
-									<i className="fi-rs-angle-small-down"></i>
+								<Link
+									href={{ pathname: "/products/toplist", query: { id: li[0].split("_")[1] } }}
+									//as={`/products/top_list/${li[0].split("_")[1]}`}
+									rel="nofollow"
+								>
+									{li[0].split("_")[0]}
+								</Link>
+								<span className="menu-expand" onClick={() => handleMtoggle(index)}>
+									{isMactive.key===index?<i className="fi-rs-angle-down"></i>:<i className="fi-rs-angle-right"></i>}
 								</span>
-								<Link href={{pathname:"/products/toplist",query:{id:li[0].split("_")[1]}}} 
-								//as={`/products/top_list/${li[0].split("_")[1]}`} 
-								rel="nofollow">{li[0].split("_")[0]}TOP</Link>
-								<ul className={isActive.key == index ? "dropdown" : "d-none"}>
-									{li[1].map((ul, index) => {
+								{/* 2nd level */}
+								{li[1].length>0&&
+								<ul className={isMactive.key == index ? "dropdown" : "d-none"}>
+									{li[1].map((ul, i) => {
 										return (
-											<li key={index}>
-												<Link href={{pathname:"/products/plist",query:{id: ul.d_id}}}
-												//as={`/products/products_list/${ul.d_id}`}
-												>{ul.d_title}</Link>
-												<span className="menu-expand">
-													<i className="fi-rs-angle-right"></i>
-												</span>
+											<li
+												key={i}
+												className={
+													"menu-item-has-children"
+												}
+											>
+												<Link
+													href={{ pathname: "/products/plist", query: { id: ul.d_id } }}
+													//as={`/products/products_list/${ul.d_id}`}
+												>
+													{ul.d_title}
+												</Link>
+												{ul.Subdata?.length > 0 &&<span className="menu-expand" onClick={() => handleMtoggle2(i)}>
+												{isMactive2.key === i?<i className="fi-rs-angle-down"></i>:<i className="fi-rs-angle-right"></i>}
+												</span>}
+												{/* 3rd level */}
+												<ul className={isMactive2.key == i ? "dropdown" : "d-none"}>
+												
+													{ul.Subdata?.map((lii, ii) => {
+														return (
+															<li key={ii} className={styles.lii}>
+																<Link
+																	href={"/products/plist?id=" + lii.d_id}
+																	//as={`/products/products_list/${li.d_id}`}
+																>
+																	{lii.d_title}
+																</Link>
+															</li>
+														)
+													})}
+												</ul>
 											</li>
 										)
 									})}
-								</ul>
+								</ul>}
 							</li>
 						)
 					})}
@@ -137,10 +182,10 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 						</div>
 						<div className="mobile-menu-wrap mobile-header-border">
 							{data ? (
-								<Navmenu ref={domNode}/>
+								<Navmenu /* ref={domNode} */ />
 							) : (
 								<nav>
-									<ul className="mobile-menu" >
+									<ul className="mobile-menu">
 										{/* <li className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"}>
 											<span className="menu-expand" onClick={() => handleToggle(1)}>
 												<i className="fi-rs-angle-small-down"></i>

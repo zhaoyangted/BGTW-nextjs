@@ -971,13 +971,15 @@
 
 		button {
 			position: absolute;
-			top: 50%;
+			top: 49%;
 			-webkit-transform: translateY(-20%);
 			-ms-transform: translateY(-20%);
 			transform: translateY(-20%);
 			right: 0;
 			border: none;
 			font-size: $font-md;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
 			/* height: 100%; */
 			padding: 0 14px;
 			background-color: transparent;
@@ -1344,7 +1346,7 @@
 									top: 5px;
 									color: $color-heading;
 									i {
-										font-size: 7px;
+										font-size: 18px;
 										font-weight: 300;
 									}
 								}

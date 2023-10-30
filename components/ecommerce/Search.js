@@ -55,7 +55,8 @@ const Search = ({ data }) => {
 					onChange={(e) => setSearchTerm(e.target.value)}
 					type="text"
 					placeholder="商品名"
-				/>
+				>
+				</input>
 				<button className={styles.btnsearch} type="button"onClick={(e)=>{e.preventDefault;handleSearch()}}>
 					<i className="fi-rs-search"></i>
 				</button>

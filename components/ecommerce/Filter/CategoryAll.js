@@ -75,11 +75,11 @@ const CategoryAll = ({ updateProductCategory, menusData }) => {
 									<ul className={isActive.key == index ? "dropdown " + styles.menuitem : "d-none " + styles.menuitem}>
 										{ul[1]?.map((li, i) => {
 											return (
-												<ul
-													className={
-														isActive2.key == i
+												<li
+													className={"menu-item-has-children" +styles.menuitem
+														/* isActive2.key == i
 															? "menu-item-has-children dropdown " + styles.menuitem
-															: "menu-item-has-childrend-none " + styles.menuitem
+															: "menu-item-has-childrend-none " + styles.menuitem */
 													}
 													key={i}
 												>
@@ -106,7 +106,7 @@ const CategoryAll = ({ updateProductCategory, menusData }) => {
 															)
 														})}
 													</ul>
-												</ul>
+												</li>
 											)
 										})}
 									</ul>

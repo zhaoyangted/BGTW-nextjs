@@ -7,13 +7,7 @@ const Footer = ({ data }) => {
 			{data ? (
 				<footer>
 					<div className={styles.footBOX}>
-						<div className={styles.FUTALL}>
-							<div className={styles.domeLogoBox}>
-								<Link href={"/"}>
-									<img src="https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/images/front/CKL_LOGO-03.svg" alt="" />
-								</Link>
-							</div>
-						</div>
+						
 						<div className={styles.foot_LinkBox}>
 							<ul>
 								<Link href="/about">關於平台</Link>
@@ -40,6 +34,13 @@ const Footer = ({ data }) => {
 								<Link href="/contact">聯絡我們</Link>
 							</ul>
 						</div>
+                        <div className={styles.FUTALL}>
+							<div className={styles.domeLogoBox}>
+								<Link href={"/"}>
+									<img src="https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/images/front/CKL_LOGO-03.svg" alt="" />
+								</Link>
+							</div>
+						</div>
 						<div className={styles.FUTALL}>
 							<div className={styles.FUT01}>
 								{Object.values(data)[10] ? (
@@ -63,7 +64,7 @@ const Footer = ({ data }) => {
 							</div>
 						</div>
 						<div className={styles.foot_Copy}>
-							<ul>台灣美麗平台股份有限公司 Copyright © 2019 All Right Reserved. </ul>
+							<ul>台灣千冠莉國際股份有限公司 Copyright © 2023 All Right Reserved. </ul>
 						</div>
 					</div>
 				</footer>

@@ -30,12 +30,12 @@ const OrderInfo = () => {
 	return (
     <>
         <Layout parent="首頁" /*sub="Account" */ sub=" 會員中心">
-				<div className="page-content pt-50 pb-50">
-					<div className="container">
+				<div className="page-content pt-50 pb-50 pl-10">
+					<div className="fluid-container">
 						<div className="row">
-							<div className="col-lg-10 m-auto">
+							{/* <div className="col-lg-10 m-auto"> */}
 								<div className="row">
-									<div className="col-md-3">
+									<div className="col-lg-3 col-md-1-5">
 										<div className="dashboard-menu">
 											<ul className="nav flex-column" role="tablist">
 												<li className="nav-item">
@@ -105,8 +105,8 @@ const OrderInfo = () => {
 											</ul>
 										</div>
 									</div>
-									<div className="col-md-9">
-										<div className="tab-content account dashboard-content pl-50">
+									<div className="col-lg-9 col-md-10">
+										<div className="tab-content account dashboard-content pl-10 pt-10">
 											{/* <div className={activeTab === 'account' ? "tab-pane fade active show" : "tab-pane fade "} >
                                                 <Member />
                                             </div>
@@ -244,7 +244,7 @@ const OrderInfo = () => {
                                                                                     </div>
                                                                                     <div className={styles.sbox}>
                                                                                         <div className={styles.dtt}>物流單號</div>
-                                                                                        <div className={styles.spec}>{d.d_shipnumber !== "0000-00-00" ? d.d_shipnumber : "無"}</div>
+                                                                                        <div className={styles.spec}>{d.d_shipnumber !== "" ? d.d_shipnumber : "無"}</div>
                                                                                     </div>
                                                                                     <div className={styles.sbox}>
                                                                                         <div className={styles.dtt}>物流商</div>
@@ -607,7 +607,7 @@ const OrderInfo = () => {
 										</div>
 									</div>
 								</div>
-							</div>
+							{/* </div> */}
 						</div>
 					</div>
 				</div>

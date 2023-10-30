@@ -23,11 +23,11 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 	}
 	const [isActive, setIsActive] = useState({
 		status: false,
-		key: "",
+		key: "100",
 	})
 	const [isActive2, setIsActive2] = useState({
 		status: false,
-		key: "",
+		key: "100",
 	})
 	const handleToggle = (key) => {
 		if (isActive.key === key) {

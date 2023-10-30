@@ -21,10 +21,11 @@ export const fetchProduct = (searchTerm, url, filters, podata) => async (dispatc
 		/* window.products = data.dbdata.dbdata
         window.sortData = data.OrderArray
         window.typeData = data.TypeData */
-
+        if (sendRequest.status!==404) {
+			
 		const searchedItems = searchItemsByText(searchTerm, data.dbdata.dbdata)
 		const filteredList = filterProductList(searchedItems, filters)
-
+		
 		dispatch({
 			type: Types.FETCHED_PRODUCT,
 			payload: {
@@ -37,6 +38,20 @@ export const fetchProduct = (searchTerm, url, filters, podata) => async (dispatc
 				page: data.dbdata.PageList,
 			},
 		})
+		}else{
+			dispatch({
+				type: Types.FETCHED_PRODUCT,
+				payload: {
+					products: [],
+					sortData: data.OrderArray,
+					typeData: data.TypeData,
+					brandData: data.BrandData,
+					menuData: data.Menudata,
+					menu: data.Menu,
+					page: data.dbdata.PageList,
+				},
+			})
+		}
 	} catch (error) {
 		console.log(error)
 	}

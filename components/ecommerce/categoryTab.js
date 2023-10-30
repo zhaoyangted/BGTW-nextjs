@@ -67,13 +67,13 @@ function CategoryTab() {
                                 <a
                                     aria-label={item}
                                     className={
-                                        active === `${i+1}` ? "nav-link active action-btn hover-up" : "nav-link action-btn hover-up"
+                                        active === `${i+1}` ? "nav-link   active" : "nav-link "
                                     }
-                                    data-bs-toggle="modal"
+                                    //data-bs-toggle="modal"
+                                    style={{whiteSpace:"nowrap",width:"70px",height:"30px",overflowX:"auto"}}
                                     onClick={()=>{setHotProd(catAll[`${i}`]);setActive(`${i+1}`)}}
-                                    
                                 >
-                                    {item.slice(0,4)/* +"..." */}
+                                    {item/*.slice(0,4) +"..." */}
                                 </a>
                             </li>
                         )

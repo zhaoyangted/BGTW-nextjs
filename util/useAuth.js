@@ -14,11 +14,11 @@ export const useAuth = () => {
             //console.log(authresult)
 			setUser(authresult.data)
             router.back()
-			toast("Login Successfull")
+			toast("登入成功")
             
 		} catch (err) {
 			console.error(err)
-			toast("Login Failed")
+			toast("登入失敗")
 		}
 	}
 
@@ -28,10 +28,10 @@ export const useAuth = () => {
 			let userObj = { ...authresult.data?.createdUser }
 			userObj.token = authresult.data?.encodedToken
 			setUser(userObj)
-			toast("Sign Up Successfull")
+			toast("註冊成功")
 		} catch (err) {
 			console.error(err)
-			toast("An Error Occuered")
+			toast("註冊失敗")
 		}
 	}
 
@@ -74,11 +74,11 @@ export const useAuth = () => {
 			if (response.status === 200) {
 				setUser(null)
 				router.push('/')
-                toast("Logout Successfull")
+                toast("登出成功")
 			}
 		} catch (err) {
 			console.error(err)
-			toast("Login Failed")
+			toast("登出失敗")
 		}
 	}
    /*  useEffect(()=>{

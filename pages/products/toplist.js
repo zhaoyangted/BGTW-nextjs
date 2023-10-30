@@ -208,7 +208,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									<div className="totall-product">
 										<p>
 											找到
-											<strong className="text-brand">{products.pages?.TotalRecord}</strong>
+											<strong className="text-brand">{products.items.length>0?products.pages?.TotalRecord:0}</strong>
 											個產品!
 										</p>
 									</div>
@@ -241,7 +241,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 											<Pagination
 												getPaginationGroup={getPaginationGroup}
 												currentPage={currentPage}
-												pages={pages}
+												pages={pages?pages:0}
 												next={next}
 												prev={prev}
 												handleActive={handleActive}

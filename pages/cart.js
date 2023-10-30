@@ -4,6 +4,7 @@ import styles from "../components/account.module.css"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { useRouter } from "next/router"
 import {
 	clearCart,
 	closeCart,
@@ -32,7 +33,9 @@ const Cart = ({
         else {console.log(price);return price} */
 		return price
 	}
+	const router=useRouter()
 	const [apiData, setApiData] = useState({})
+	const [numErr,setNumErr] = useState(false)
 	useEffect(() => {
 		const point = async () => {
 			let str = ""
@@ -52,6 +55,9 @@ const Cart = ({
 		}
 		point()
 	}, [cartItems])
+	const handleCheckout =() =>{
+		!numErr &&  router.push("/checkout")
+	}
 	return (
 		<>
 			<Layout parent="首頁" sub=" 購物車" /* subChild="" */>
@@ -84,7 +90,7 @@ const Cart = ({
 									<div className={styles.del}></div>
 								</div>
 								{cartItems.map((item, i) => {
-									console.log(item)
+									//console.log(item)
 									return (
 										<ul
 											key={i}
@@ -92,7 +98,7 @@ const Cart = ({
 												item.d_stock <= 0 || (!item.AddDate?.Chkop && item.AddDate?.Chkop === "N") ? "stock_btn" : ""
 											}
 										>
-											{item.stock <= 0 ? (
+											{item.stock <= 0 ? setNumErr(true) && (
 												<div className={styles.stock}>
 													<span>目前無庫存</span>
 												</div>
@@ -345,10 +351,10 @@ const Cart = ({
 													</tbody>
 												</table>
 											</div>
-											<Link href="/checkout" className="btn ">
+											<a  className="btn " onClick={handleCheckout}>
 												<i className="fi-rs-box-alt mr-10"></i>
 												結帳
-											</Link>
+											</a>
 										</div>
 									</div>
 								</div>

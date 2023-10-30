@@ -2,7 +2,12 @@ import React from "react";
 import Link from "next/link"
 const Banner5 = ({data}) => {
     return <>
-    
+                <div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
+							<h3 className="">最新消息</h3>
+							<Link href="/news" className="show-all">
+								全部<i className="fi-rs-angle-right"></i>
+							</Link>
+						</div>
         
                 <div className="commBannBx"  >
                    

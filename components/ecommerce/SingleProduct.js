@@ -38,7 +38,7 @@ const SingleProduct = ({
                             query: { id: product.d_id},
                         }}
                         
-                        as={`/products/info/${product.d_id}/`}
+                        //as={`/products/info/${product.d_id}/`}
                     >
 
                         <img

@@ -10,10 +10,10 @@ import Banner5 from "./../components/elements/Banner5"
 import Layout from "./../components/layout/Layout"
 import CategorySlider from "./../components/sliders/Category"
 import Intro1 from "./../components/sliders/Intro1"
-import Link from "next/link"
-import { useAuth } from "../util/useAuth"
+//import Link from "next/link"
+//import { useAuth } from "../util/useAuth"
 //import { useSession } from "next-auth/react"
-import useSWR from "swr"
+//import useSWR from "swr"
 import useSWRMutation from 'swr/mutation'
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../util/useAuthContext"
@@ -77,12 +77,7 @@ export default function Home() {
 
 				<section className="banners mb-25">
 					<div className="container">
-						<div className="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
-							<h3 className="">最新消息</h3>
-							<Link href="/news" className="show-all">
-								全部<i className="fi-rs-angle-right"></i>
-							</Link>
-						</div>
+						
 						<div className="row">
 							<Banner5 data={data?.ActionData} />
 						</div>

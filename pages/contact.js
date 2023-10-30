@@ -1,15 +1,18 @@
-import React, { useEffect, useState, useCallback, useRef } from "react"
+import React, { useEffect, useState, useCallback, useRef, use } from "react"
 import Layout from "../components/layout/Layout"
 import TWzipcode from "react-twzipcode"
 import axios from "axios"
 import styles from "../components/about.module.css"
 import useSWR from "swr"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 function Contact() {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/homepage/contact", fetcher)
     const { data:homeData, loading:homeLoading, error:homeError } = useSWR(process.env.apiServer + "/api/menus/config", fetcher)
+	const router=useRouter()
+	const {id,string} = router.query
 	const [formData, setFormData] = useState({})
 	const handlePesChange = ({ county, district, zipcode }) => {
 		//console.log(data)
@@ -49,6 +52,7 @@ function Contact() {
 			.then((response) => console.log(response))
 			.catch((error) => console.log(error))
 	}
+	//console.log(id,string)
 	return (
 		<>
 			<Layout parent="首頁" sub=" 聯繫我們" /* subChild="Contact" */>
@@ -95,11 +99,11 @@ function Contact() {
 											<div className={styles.join_line}></div>
 											<li>
 												<h2>詢問類型*</h2>
-												<select name={styles.d_type}>
-													<option value="">---請選擇---</option>
+												<select name={styles.d_type}defaultValue={id?"1":"0"}>
+													<option value="0">---請選擇---</option>
 													{data?.Contact_type.map((t, i) => {
 														return (
-															<option key={i} value={t.d_id} defaultValue={data?.PID ? true : false}>
+															<option key={i} value={t.d_id} >
 																{t.d_title}
 															</option>
 														)
@@ -108,8 +112,8 @@ function Contact() {
 											</li>
 											<li>
 												<h2>內容*</h2>
-												<textarea rows="5" name="d_content" /* value={formData.d_content} */ onChange={handleInput}>
-													{/* data?.PID ? data.PID : "" */formData.d_content}
+												<textarea rows="5" name="d_content" defaultValue={string?id+":"+string:''} onChange={handleInput}>
+													{/* id ? string :  */formData.d_content}
 												</textarea>
 											</li>
 											<div className={styles.title03} style={{ marginTop: "30px" }}>

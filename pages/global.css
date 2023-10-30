@@ -4,13 +4,13 @@
 	height: 40px;
 	padding: 0 13px;
 	color: #fff !important;
-	border: 1px solid #3d9ed1 !important;
-	background: #3d9ed1 !important;
+	border: 1px solid #c30c23 !important;
+	background: #c30c23 !important;
 	border-radius: 0px !important;
 }
 .btnsearch:hover {
 	opacity: 0.7 !important;
-	background-color: #3d9ed1 !important;
+	background-color: #c30c23 !important;
 }
 .cartlabel {
 	font-size: 11px !important;
@@ -513,7 +513,7 @@ a.menu-title {
 	}
 	.header-height-2 {
 		min-height: 50px;
-		border-bottom: 2px solid #3d9ed1;
+		border-bottom: 2px solid #c30c23;
 	}
 	.header-height-3 {
 		min-height: 50px;
@@ -783,7 +783,7 @@ a.menu-title {
 }
 
 .header-info > ul > li > ul li a:hover {
-	color: #3d9ed1;
+	color: #c30c23;
 	background-color: none;
 }
 
@@ -1020,7 +1020,7 @@ a.menu-title {
 .header-style-1 .header-top-ptb-1 {
 	background-image: none;
 	padding: 10px 0;
-	background-color: #3d9ed1;
+	background-color: #c30c23;
 	color: #fff;
 }
 
@@ -1040,7 +1040,7 @@ a.menu-title {
   }
   
   .cart-dropdown-wrap.account-dropdown a:hover {
-    color: #3d9ed1;
+    color: #c30c23;
   }
   
   .cart-dropdown-wrap ul li:last-child {
