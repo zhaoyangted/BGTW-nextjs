@@ -12,9 +12,14 @@ export const useAuth = () => {
 			//let userObj = { ...authresult.data?.foundUser }
 			//userObj = authresult.data?.encodedToken;
             //console.log(authresult)
+			if (authresult.status!==404){
 			setUser(authresult.data)
             router.back()
 			toast("登入成功")
+			}else{
+				//console.log(authresult)
+				toast("登入失敗=>"+authresult.data.msg)
+			}
             
 		} catch (err) {
 			console.error(err)

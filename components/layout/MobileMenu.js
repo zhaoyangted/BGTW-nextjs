@@ -127,7 +127,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 														return (
 															<li key={ii} className={styles.lii}>
 																<Link
-																	href={"/products/plist?id=" + lii.d_id}
+																	href={{pathname:"/products/plist",query:{id:lii.d_id}}}
 																	//as={`/products/products_list/${li.d_id}`}
 																>
 																	{lii.d_title}

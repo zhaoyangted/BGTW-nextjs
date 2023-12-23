@@ -6,9 +6,10 @@ import useSWR from "swr"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { AuthContext } from "../../../util/useAuthContext"
+import {toast} from 'react-toastify'
 //import { METHODS } from "http"
 const Ask = () => {
-	const { query } = useRouter()
+	const { query,router } = useRouter()
 	const activeTab = useActiveTab()
 	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
 	const { id } = query
@@ -19,7 +20,16 @@ const Ask = () => {
 	//console.log(id)
 	const fetcher = (url) => fetch(url, { credentials: "include", method: "POST" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/ask/${id}`, fetcher)
-	const [formData, setFormData] = useState({})
+	const [formData, setFormData] = useState({
+		d_name:user?.d_pname,
+		d_phone:user?.d_phone,
+		d_email:user?.d_account,
+		//d_county:user?.d_county,
+		//d_district:user?.d_district,
+		//d_zipcode:user?.d_zipcode,
+		//d_address:user?.d_address,
+		//d_cname:'',
+	})
 	const handleInput = (e) => {
 		//console.log(e.targe?.name)
 		e.preventDefault
@@ -49,8 +59,8 @@ const Ask = () => {
 		// POST the data to the URL of the form
 		await axios
 			.post(formURL, data, { credentials: "include" })
-			.then((response) => console.log(response))
-			.catch((error) => console.log(error))
+			.then((response) => {if(response.status===200){toast(response.msg);router.back()}})
+			.catch((response) => {response.status===404?toast(response.msg):console.log(response.msg)})
 	}
 	return (
 		<>
@@ -157,19 +167,19 @@ const Ask = () => {
 														</li>
 														<li>
 															<h2>姓名*</h2>
-															<input type="text" name="d_name" value={formData.d_name} onChange={handleInput} />
+															<input type="text" name="d_name" value={formData.d_name} onChange={handleInput} required/>
 														</li>
 														<li className={styles.half}>
 															<h2>E-mail*</h2>
-															<input type="text" name="d_email" value={formData.d_email} onChange={handleInput} />
+															<input type="text" name="d_email" value={formData.d_email} onChange={handleInput} required/>
 														</li>
 														<li className={styles.half}>
 															<h2>聯絡電話*</h2>
-															<input type="text" name="d_phone" value={formData.d_phone} onChange={handleInput} />
+															<input type="text" name="d_phone" value={formData.d_phone} onChange={handleInput} required/>
 														</li>
 														<li>
 															<h2>詢問內容</h2>
-															<textarea name="d_content" rows="5" onChange={handleInput}></textarea>
+															<textarea name="d_content" rows="5" onChange={handleInput}required></textarea>
 														</li>
 														<div className={styles.join_line}></div>
 														<li style={{ textAlign: "center" }}>

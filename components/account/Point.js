@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
+import Link from "next/link"
 const Point = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/point", fetcher)

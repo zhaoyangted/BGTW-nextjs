@@ -17,7 +17,7 @@ const SingleProduct2 = ({
     
 
     const handleCart = (product) => {
-        addToCart(product);
+        addToCart(product,1);
         toast("已加入購物車!");
     };
 

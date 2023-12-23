@@ -6,9 +6,10 @@ import useSWR from "swr"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { AuthContext } from "../../../util/useAuthContext"
+import {toast} from 'react-toastify'
 //import { METHODS } from "http"
 const Refund = () => {
-	const { query } = useRouter()
+	const { router,query } = useRouter()
 	const activeTab = useActiveTab()
 	const { id } = query
 	function useActiveTab() {
@@ -18,8 +19,17 @@ const Refund = () => {
 	//console.log(id)
 	const fetcher = (url) => fetch(url, { credentials: "include", method: "POST" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/refund/${id}`, fetcher)
-	const [formData, setFormData] = useState({})
 	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
+	const [formData, setFormData] = useState({
+		//d_name:user?.d_pname,
+		d_return_phone:user?.d_phone,
+		d_return_email:user?.d_account,
+		//d_county:user?.d_county,
+		//d_district:user?.d_district,
+		//d_zipcode:user?.d_zipcode,
+		//d_address:user?.d_address,
+		//d_cname:'',
+	})
 	const handleSignOut = async () => {
 		await signOut()
 	}
@@ -49,8 +59,8 @@ const Refund = () => {
 		// POST the data to the URL of the form
 		await axios
 			.post(formURL, data, { credentials: "include" })
-			.then((response) => console.log(response))
-			.catch((error) => console.log(error))
+			.then((response) => {if(response.status===200){toast(response.msg);router.back()}})
+			.catch((response) => {response.status===404?toast(response.msg):console.log(response.msg)})
 	}
 	return (
 		<>
@@ -206,7 +216,7 @@ const Refund = () => {
 																					<span className={styles.icon_ok}>符合</span>
 																				</div>
 																				<div className={styles.sales}>
-																					<a href="javascript:void(0)">{o.Stitle}</a>
+																					<a href="#">{o.Stitle}</a>
 																				</div>
 																			</div>
 																		</div>
@@ -227,12 +237,13 @@ const Refund = () => {
 															<h4>{data?.member_info?.LName}</h4>
 														</li>
 														<li className={styles.half}>
-															<h2>E-mail</h2>
+															<h2>E-mail*</h2>
 															<input
 																type="text"
 																name="d_return_email"
 																value={formData.d_return_email}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li className={styles.half}>
@@ -242,11 +253,12 @@ const Refund = () => {
 																name="d_return_phone"
 																value={formData.d_return_phone}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li>
 															<h2>退貨原因*</h2>
-															<textarea name="d_return_content" rows="5" onChange={handleInput}></textarea>
+															<textarea name="d_return_content" rows="5" onChange={handleInput} required></textarea>
 														</li>
 														<div className={styles.join_line}></div>
 														<li style={{ textAlign: "center" }}>

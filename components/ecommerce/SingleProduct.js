@@ -15,7 +15,7 @@ const SingleProduct = ({
     openQuickView,
 }) => {
     const handleCart = (product) => {
-        addToCart(product);
+        addToCart(product,1);
         toast("已加入購物車 !");
     };
 
@@ -35,7 +35,7 @@ const SingleProduct = ({
                     <Link
                         href={{
                             pathname: "/products/info",
-                            query: { id: product.d_id},
+                            query: { id: product?.d_id},
                         }}
                         
                         //as={`/products/info/${product.d_id}/`}
@@ -43,12 +43,12 @@ const SingleProduct = ({
 
                         <img
                             className="default-img"
-                            src={process.env.s3Host+product.d_img1}
+                            src={process.env.s3Host+product?.d_img1}
                             alt=""
                         />
                         <img
                             className="hover-img"
-                            src={product.d_img2?process.env.s3Host+product.d_img2:process.env.s3Host+product.d_img2}
+                            src={product?.d_img2?process.env.s3Host+product.d_img2:process.env.s3Host+product?.d_img1}
                             alt=""
                         />
 
@@ -105,11 +105,11 @@ const SingleProduct = ({
                     <Link
                         href={{
                             pathname: "/products/info",
-                            query: { id: product.d_id},
+                            query: { id: product?.d_id},
                         }}
                         //as={`/products/info/${product.d_id}/`}
                     >
-                        {product.d_title}
+                        {product?.d_title}
                     </Link>
                 </h2>
 
@@ -134,13 +134,13 @@ const SingleProduct = ({
 
                 <div className="product-card-bottom">
                     <div className="product-price">
-                        {product.Chked==='Y'?
+                        {product?.Chked==='Y'?
                         <>
-                        <span>{product.Lvtitle}${product.d_price} </span>
-                        <span className="old-price">市價:${product.d_price1 && `${product.d_price1}`}</span>
+                        <span>{product?.Lvtitle}${product.d_price} </span>
+                        <span className="old-price">市價:${product?.d_price1 && `${product?.d_price1}`}</span>
                         </>
                         :<>
-                        <span className="price">市價:${product.d_price1 && `${product.d_price1}`}</span>
+                        <span className="price">市價:${product?.d_price1 && `${product?.d_price1}`}</span>
                         </>
                         }
                     </div>

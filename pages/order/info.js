@@ -129,21 +129,25 @@ const OrderInfo = () => {
 												{/* <OrderInfo /> */}
                                                 <div className="container" ref={componentRef}>
                                                     <section className={styles.content_box03}>
-                                                        {data?.Odata.d_orderstatus !== 10 ? (
-                                                            data?.Odata.d_pay === 4 ? (
+                                                       { data?.Odata.d_orderstatus !== 10 ?
+                                                            data?.Odata.d_pay === 4 ?
+                                                          
                                                                 <div
                                                                     className={styles.w14}
                                                                     style={{fontSize: "18px",backgroundColor: "#ff3c6c",color: "#fff",fontWeight: "bolder"}}
                                                                 >
                                                                     您的轉帳資料已寄送至收件人信箱，準備可上網之電腦，持任一家金融機構發行之晶片金融卡且已申請非約定轉帳服務功能就可繳款。
                                                                 </div>
-                                                            ) : data?.Odata.d_orderstatus === 11 ? (
+                                                           :
+                                                           data?.Odata.d_orderstatus === 11 &&
+                                                           
                                                                 <div
                                                                     className={styles.w14} style={{fontSize: "18px", backgroundColor: "#ff3c6c",color: "#fff",fontWeight: "bolder"}}
                                                                 >
                                                                     您的訂單內含有特殊運費之商品，目前已完成運費報價，點選下方同意付款，即可完成該訂單。
-                                                                </div>
-                                                            ) : (
+                                                                </div> 
+                                                            :
+                                                                
                                                                 <div
                                                                     className={styles.w14} style={{fontSize: "18px",backgroundColor:" #ff3c6c",color: "#fff",fontWeight: "bolder"}}
                                                                 >
@@ -151,8 +155,8 @@ const OrderInfo = () => {
                                                                     <br />
                                                                     待運費報價後，方可繼續進行付款作業。
                                                                 </div>
-                                                            )
-                                                        ) : null}
+                                                             
+                                                               }
                                                         <div
                                                             className={styles.w14} style={{fontSize: "18px",backgroundColor: "#ff3c6c",color: "#fff",fontWeight: "bolder"}}
                                                         >

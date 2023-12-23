@@ -1,10 +1,10 @@
 import * as Types from '../constants/actionTypes'
 import storage from '../../util/localStorage';
 
-export const addToCart = product => dispatch => {
+export const addToCart = (product,quantity )=> dispatch => {
     dispatch({
         type: Types.ADD_TO_CART,
-        payload: { product } 
+        payload: { product,quantity } 
     })
 }
 

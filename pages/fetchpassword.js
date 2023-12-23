@@ -7,6 +7,7 @@ import { AuthContext, useAuthContext } from "../util/useAuthContext"
 import axios from "axios"
 import { useRouter } from "next/router"
 import styles from '../components/account.module.css'
+import {toast} from 'react-toastify'
 const GetPassword = (props) => {
 	const {user,setUser,signOut}=useContext(AuthContext)
 	//const { data: session } = useSession()
@@ -42,10 +43,8 @@ const GetPassword = (props) => {
 
 		// POST the data to the URL of the form
 		await axios.post(formURL, data, {credentials:'include'})
-		.then(
-			(response)=>console.log(response))
-		.catch(
-			(error)=>console.log(error))
+		.then((response) => {if(response.status===200){toast(response.msg);router.back()}})
+		.catch((response) => {response.status===404?toast(response.msg):console.log(response.msg)})
 	}
 	React.useEffect(() => {
 		if (user?.isLoggedIn) {

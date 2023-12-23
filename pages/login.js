@@ -5,6 +5,7 @@ import styles from "../components/account.module.css"
 import { useRouter } from "next/router"
 import { AuthContext, useAuthContext } from "../util/useAuthContext"
 import { useAuth } from "../util/useAuth"
+import axios from "axios"
 function Login() {
 	const [userInfo, setUserInfo] = useState({ d_account: "", d_password: "", d_captcha: "" })
 	const {user,setUser,signIn,signOut} = useContext(AuthContext)
@@ -28,11 +29,30 @@ function Login() {
 		//console.log(data)
 		await signIn(data)
 	}
-	/* useEffect(() => {
-		if (user.isLoggedIn) {
-			router.push("/account/")
+	useEffect(() => {
+		const getAuth = async () =>{
+			try {
+				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+				
+					if (response.data.isLoggedIn){
+						setUser(response.data.data)
+					}
+					else 
+					{
+						setUser("")
+					}
+			  
+			} catch (err) {
+				console.error(err)
+	
+			}
 		}
-	}, []) */
+		getAuth()
+		//console.log(user)
+		if (user) {
+			router.push("/account")
+		}
+	}, [])
 	return (
 		<>
 			<Layout parent="首頁" /* sub="Pages"  */ sub=" 會員中心">
@@ -53,15 +73,7 @@ function Login() {
 														Don't have an account? <Link href="/page-register">{errorMsg?errorMsg:'Create here'}</Link>
 													</p> */}
 								</div>
-								{user?.isLoggedIn ? (
-									<div>
-										This page is Protected for special people. like
-										{JSON.stringify(user, null, 2)}
-										<a href="#" onClick={handleSignout} className="btn-signin">
-											Sign out
-										</a>
-									</div>
-								) : (
+								{!user &&
 									<form method="post" onSubmit={handleSubmit}>
 										<ul className={styles.styled_input}>
 											<li>
@@ -121,7 +133,7 @@ function Login() {
 											</li>
 										</ul>
 									</form>
-								)}
+								}
 							</div>
 						</div>
 					</div>

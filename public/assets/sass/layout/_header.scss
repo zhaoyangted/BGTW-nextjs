@@ -787,14 +787,15 @@
 				border: 2px solid $color-brand;
 				&.outline {
 					background-color: transparent;
-					border: 2px solid $color-brand;
-					color:  $color-brand;
+					
+					color:  $color-primary;
 					&:hover {
 						color: #ffffff;
 					}
 				}
 				&:hover {
-					background-color: $color-brand-2;
+					border: 2px solid $color-primary;
+					background-color: $color-primary;
 				}
 			}
 

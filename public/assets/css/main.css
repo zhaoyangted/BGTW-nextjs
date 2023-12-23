@@ -4254,7 +4254,7 @@ table .product-thumbnail img {
 }
 .stock-status.in-stock {
   background: #e18691;
-  color: #e18691;
+  color: #fff;
 }
 .stock-status.out-stock {
   color: #f74b81;
@@ -5810,14 +5810,14 @@ h6.post-title {
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a.outline {
   background-color: transparent;
-  border: 2px solid #e18691;
-  color: #e18691;
+  color: #5a97fa;
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a.outline:hover {
   color: #ffffff;
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a:hover {
-  background-color: #FDC040;
+  border: 2px solid #5a97fa;
+  background-color: #5a97fa;
 }
 
 .sticky-bar.stick {

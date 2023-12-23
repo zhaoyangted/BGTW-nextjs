@@ -6,9 +6,10 @@ import useSWR from "swr"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { AuthContext } from "../../../util/useAuthContext"
+import {toast} from 'react-toastify'
 //import { METHODS } from "http"
 const Cancel = () => {
-	const { query } = useRouter()
+	const { router,query } = useRouter()
 	const activeTab = useActiveTab()
 	const { id } = query
 	function useActiveTab() {
@@ -16,10 +17,15 @@ const Cancel = () => {
 		return activeTab
 	}
 	//console.log(id)
+	const {user,signOut}=useContext(AuthContext)
 	const fetcher = (url) => fetch(url, { credentials: "include", method: "POST" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + `/api/member/orders/cancel/${id}`, fetcher)
-	const [formData, setFormData] = useState({})
-	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
+	const [formData, setFormData] = useState({
+		d_cancel_name:user?.d_pname,
+		d_cancel_phone:user?.d_phone,
+		d_cancel_email:user?.d_account,
+	})
+	
 	const handleSignOut = async () => {
 		await signOut()
 	}
@@ -49,8 +55,8 @@ const Cancel = () => {
 		// POST the data to the URL of the form
 		await axios
 			.post(formURL, data, { credentials: "include" })
-			.then((response) => console.log(response))
-			.catch((error) => console.log(error))
+			.then((response) => {if(response.status===200){toast(response.msg);router.back()}})
+			.catch((response) => {response.status===404?toast(response.msg):console.log(response.msg)})
 	}
 	return (
 		<>
@@ -153,22 +159,24 @@ const Cancel = () => {
 														</Link>
 														<div className={styles.join_line}></div>
 														<li>
-															<h2>姓名</h2>
+															<h2>姓名*</h2>
 															<h4>{data?.member_info?.LName}</h4>
 															<input
 																type="hidden"
 																name="d_cancel_name"
 																value={formData.d_cancel_name}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li className={styles.half}>
-															<h2>E-mail</h2>
+															<h2>E-mail*</h2>
 															<input
 																type="text"
 																name="d_cancel_email"
 																value={formData.d_cancel_email}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li className="half">
@@ -178,6 +186,7 @@ const Cancel = () => {
 																name="d_cancel_phone"
 																value={formData.d_cancel_phone}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li>
@@ -187,6 +196,7 @@ const Cancel = () => {
 																rows="5"
 																value={formData.d_cancel_content}
 																onChange={handleInput}
+																required
 															></textarea>
 														</li>
 														<div className="join_line"></div>

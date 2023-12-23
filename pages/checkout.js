@@ -93,38 +93,45 @@ const Cart = ({
 	const [formData, setFormData] = useState({
 		SubBonus: 0,
 		d_donate: "",
-		d_cname: "",
+		d_name: user?.pname||"",
 		d_invoice: "",
 		d_othername: "",
 		d_icname: "",
-		d_iaddress: "",
-		d_Invoicecity: "",
-		d_Invoicearea: "",
-		d_Invoicezip: "",
+		d_iaddress: user?.d_address||"",
+		d_Invoicecity: user?.d_district||"",
+		d_Invoicearea: user?.d_county||"",
+		d_Invoicezip: user?.d_zipcode||"",
+		d_city: user?.d_county||"",
+		d_area: user?.d_district||"",
+		d_zip: user?.d_zipcode||"",
+		d_address:user?.d_address||"",
 		d_ium: "",
-		/* d_cname:apiData?.Mdata?.d_company_title ? apiData?.Mdata?.d_company_title : "",
-        d_name:apiData?.Mdata?.d_pname ? apiData?.Mdata?.d_pname : "",
-        d_mobile:apiData?.Mdata?.d_phone ? apiData?.Mdata?.d_phone : "",
-        d_phone:apiData?.Mdata?.d_company_tel ? apiData?.Mdata?.d_company_tel : "",
-        d_email:apiData?.Mdata?.d_account ? apiData?.Mdata?.d_account : "",
-        d_address:apiData?.Mdata?.d_address ? apiData?.Mdata?.d_address : "", */
+		d_email:user?.d_account||"",
+		d_moblie:user?.d_phone||"",
+		d_cname: "",
+        d_name:"",
+        d_mobile:"",
+        d_phone:"",
+        d_address:"",
+		d_content:'',
+		SubBonus:0
 	})
 	const handlePesChange = ({ county, district, zipcode }) => {
 		//console.log(data)
 		setFormData((prevState) => ({
 			...prevState,
-			d_city: county || "",
-			d_area: district || "",
-			d_zip: zipcode || "",
+			d_city: county ,
+			d_area: district ,
+			d_zip: zipcode ,
 		}))
 	}
 	const handleComChange = ({ county, district, zipcode }) => {
 		//console.log(data)
 		setFormData((prevState) => ({
 			...prevState,
-			d_Invoicecounty: county || "",
-			d_Invoicedistrict: district || "",
-			d_Invoicezipcode: zipcode || "",
+			d_Invoicecounty: county ,
+			d_Invoicedistrict: district ,
+			d_Invoicezipcode: zipcode ,
 		}))
 	}
 	const handleInput = (e) => {
@@ -169,7 +176,7 @@ const Cart = ({
 			return
 		}
 
-		const formURL = e.target.action
+		const formURL = process.env.apiServer + "/api/cart/addorder"
 		const data = new FormData()
 
 		// Turn our formData state into data we can use with a form submission
@@ -180,13 +187,14 @@ const Cart = ({
 		// POST the data to the URL of the form
 		await axios
 			.post(formURL, data, { credentials: "include" })
-			.then((response) => console.log(response))
+			.then((response) =>{if(response.status===200){clearCart();toast.success('訂單建立成功，請通過下列網址付款。');console.log(response.msg)}})
 			.catch((error) => console.log(error))
 	}
+	//console.log(user)
 	return (
 		<>
 			<Layout parent="首頁" /* sub="Shop" */ sub=" 結帳">
-				<form action={process.env.apiServer + "/api/cart/addorder"} method="post" onSubmit={submitForm}>
+				<form /* action={process.env.apiServer + "/api/cart/addorder"} method="post" */ onSubmit={submitForm}>
 					{/* <section className="mt-50 mb-50">
 						<div className="container">
 							<div className="row">
@@ -606,7 +614,7 @@ const Cart = ({
 											</li>
 											<li>
 												<h2>備註</h2>
-												<textarea rows="5" name="d_content" onChange={handleInput}></textarea>
+												<textarea rows="5" name="d_content" value={formData.d_content}onChange={handleInput}></textarea>
 											</li>
 											<li>
 												<h2>地址*</h2>
@@ -618,11 +626,11 @@ const Cart = ({
 														handleChangeDistrict={handlePesChange}
 														handleChangeZipcode={handlePesChange}
 														zipcodePlaceholder={"郵遞區號"}
-														countyValue={/* apiData?.Mdata?.d_county?apiData?.Mdata?.d_county: */ formData?.d_city}
+														countyValue={ formData?.d_city}
 														districtValue={
-															/* apiData?.Mdata?.d_district?apiData?.Mdata?.d_district: */ formData?.d_area
+															formData?.d_area
 														}
-														zipcodeValue={/* apiData?.Mdata?.d_zipcode?apiData?.Mdata?.d_zipcode: */ formData?.d_zip}
+														zipcodeValue={ formData?.d_zip}
 													/>
 												</div>
 												<input
@@ -785,7 +793,7 @@ const Cart = ({
 										</ul>
 									</div>
 								) : null}
-								<div className={styles.text_right} style={{ marginTop: "30px" }}>
+								<div className={styles.text_right} style={{ marginTop: "30px",marginBottom: "30px" }}>
 									<input
 										type="button"
 										className={styles.btn_style07}

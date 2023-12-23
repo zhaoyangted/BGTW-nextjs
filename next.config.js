@@ -5,7 +5,7 @@ const {
   } = require('next/constants')
 const nextConfig = {
     env: {
-        apiServer : 'https://ckl.tw',
+        apiServer : 'http://localhost',
         NEXTAUTH_SECRET : 'ted2zhao',
         NEXTAUTH_URL:'http://localhost:3000',
         S3_ACCESS_KEY:'AKIAQAVTMB3SG4XXGPIH',
@@ -14,7 +14,7 @@ const nextConfig = {
         s3Host:'https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/'
         
     },
-    trailingSlash: true,
+    //trailingSlash: true,
     /* images: {
       remotePatterns: [
         {

@@ -77,17 +77,20 @@ export const fetchProductByID = (id) => async (dispatch) => {
 	}
 }
 // Fetch More Product
-export const fetchMoreProduct = (url, total) => async (dispatch) => {
+export const fetchMoreProduct = (url) => async (dispatch) => {
 	try {
 		const sendRequest = await fetch(url)
 		const data = await sendRequest.json()
-
+		//console.log(data.Pdata)
 		// const searchedItems = searchItemsByText(searchTerm,data)
 		// const filteredList  = filterProductList(searchedItems,filters)
 
 		dispatch({
 			type: Types.FETCHED_MORE_PRODUCT,
-			payload: { products: data, total },
+			payload: { 
+						product: data.Pdata,
+						vars:data.dbdata,
+						},
 		})
 	} catch (error) {
 		console.log(error)

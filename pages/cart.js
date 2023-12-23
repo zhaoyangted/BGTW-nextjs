@@ -13,7 +13,6 @@ import {
 	increaseQuantity,
 	openCart,
 } from "../redux/action/cart"
-import { relative } from "path"
 
 const Cart = ({
 	openCart,
@@ -58,6 +57,7 @@ const Cart = ({
 	const handleCheckout =() =>{
 		!numErr &&  router.push("/checkout")
 	}
+	console.log(apiData)
 	return (
 		<>
 			<Layout parent="首頁" sub=" 購物車" /* subChild="" */>
@@ -81,7 +81,7 @@ const Cart = ({
 						</section>
 						<div className={styles.cart01}>
 							<div className="col-lg-">
-								{cartItems.length <= 0 && "No Products"}
+								{cartItems.length <= 0 && "購物車無產品。"}
 
 								<div className={styles.titlebox}>
 									<div className={styles.name}>商品</div>
@@ -95,10 +95,10 @@ const Cart = ({
 										<ul
 											key={i}
 											className={
-												item.d_stock <= 0 || (!item.AddDate?.Chkop && item.AddDate?.Chkop === "N") ? "stock_btn" : ""
+												item.d_stock === 0 || (!item.AddDate?.Chkop && item.AddDate?.Chkop === "N") ? "stock_btn" : ""
 											}
 										>
-											{item.stock <= 0 ? setNumErr(true) && (
+											{item.stock === 0 ? setNumErr(true) && (
 												<div className={styles.stock}>
 													<span>目前無庫存</span>
 												</div>
@@ -153,13 +153,19 @@ const Cart = ({
 											<div className={styles.numberbox}>
 												<div className={styles.number}>
 													<div className={styles.quantity + " " + styles.buttons_added}>
+														{item.stock==="0"||item.num==="0"?
+														<div className={styles.dtt}>
+															產品已無庫存，請先刪除。
+														</div>
+														:<>
 														<a onClick={(e) => decreaseQuantity(item.d_id)} className="qty-down">
 															<i className="fi-rs-angle-small-down"></i>
 														</a>
 														<span className="qty-val">{item.quantity}</span>
 														<a onClick={(e) => increaseQuantity(item.d_id)} className="qty-up">
 															<i className="fi-rs-angle-small-up"></i>
-														</a>
+														</a></>
+														}
 													</div>
 												</div>
 												<div className={styles.price}>

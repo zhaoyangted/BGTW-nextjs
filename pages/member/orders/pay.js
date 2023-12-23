@@ -6,9 +6,10 @@ import useSWR from "swr"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { AuthContext } from "../../../util/useAuthContext"
+import {toast} from 'react-toastify'
 //import { METHODS } from "http"
 const Pay = () => {
-	const { query } = useRouter()
+	const { router,query } = useRouter()
 	const activeTab = useActiveTab()
 	const { id } = query
 	function useActiveTab() {
@@ -49,8 +50,8 @@ const Pay = () => {
 		// POST the data to the URL of the form
 		await axios
 			.post(formURL, data, { credentials: "include" })
-			.then((response) => console.log(response))
-			.catch((error) => console.log(error))
+			.then((response) => {if(response.status===200){toast(response.msg);router.back()}})
+			.catch((response) => {response.status===404?toast(response.msg):console.log(response.msg)})
 	}
 	return (
 		<>
@@ -162,20 +163,23 @@ const Pay = () => {
 														<li className={styles.half}>
 															<h2>帳號末五碼*</h2>
 															<input
-																type="text"
+																type="number"
 																name="d_remit_account"
 																maxlength="5"
 																value={formData.d_remit_account}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li className={styles.half}>
-															<h2>匯款金額*</h2>
+															<h2>匯款金額NT$*</h2>
 															<input
 																type="text"
+																//maxLength={5}
 																name="d_remit_price"
 																value={formData.d_remit_price}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<li>
@@ -186,6 +190,7 @@ const Pay = () => {
 																id="d_remit_time"
 																value={formData.d_remit_time}
 																onChange={handleInput}
+																required
 															/>
 														</li>
 														<div className={styles.join_line}></div>

@@ -4,37 +4,11 @@ import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import TWzipcode from "react-twzipcode"
 import axios from "axios"
+import {toast} from 'react-toastify'
 const AccEdit = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/account", fetcher)
-	const [formData, setFormData] = useState({
-		d_company_name: data?.dbdata.d_company_name || "",
-		d_company_title: data?.dbdata.d_company_title || "",
-		d_company_number: data?.dbdata.d_company_number || "",
-		d_company_tel_area: data?.dbdata.d_company_tel_area || "",
-		d_company_tel: data?.dbdata.d_company_tel || "",
-		d_company_fax_area: data?.dbdata.d_company_fax_area || "",
-		d_company_fax: data?.dbdata.d_company_fax || "",
-		d_company_website: data?.dbdata.d_company_website || "",
-		d_company_county: /* data?.dbdata.d_company_county || */ "",
-		d_company_district:/*  data?.dbdata.d_company_district || */ "",
-		d_company_address: /* data?.dbdata.d_company_address || */ "",
-		d_company_zipcode: /* data?.dbdata.d_company_zipcode || */ "",
-		//d_company_account: data?.dbdata.d_company_account || "",
-		d_pname: data?.dbdata.d_pname || "",
-		d_job: data?.dbdata.d_job || "",
-		d_birthday: data?.dbdata.d_birthday || "",
-		d_phone: data?.dbdata.d_phone || "",
-		d_newsletter: data?.dbdata.d_newsletter || "",
-		d_county: /* data?.dbdata.d_county || */ "",
-		d_district: /* data?.dbdata.d_district || */ "",
-		d_zipcode: /* data?.dbdata.d_zipcode || */ "",
-		d_address: /* data?.dbdata.d_address || */ "",
-		d_account: data?.dbdata.d_account || "",
-		d_captcha: '',
-		d_password:'',
-		d_repassword:''
-	})
+	
 	const handleImgClick =(e) =>{
 		
 		e.preventDefault();//console.log(e.target)
@@ -56,6 +30,7 @@ const AccEdit = () => {
 			d_county: county || "",
 			d_district: district || "",
 			d_zipcode: zipcode || "",
+			
 		}))
 	}
 	const handleInput = (e) => {
@@ -68,14 +43,31 @@ const AccEdit = () => {
 			...prevState,
 			[fieldName]: fieldValue||'',
 		}))
+		//console.log(formData)
 	}
 	const submitForm = async(e) => {
 		// We don't want the page to refresh
 		e.preventDefault()
 		//console.log(e.target.action)
-		const formURL = e.target.action
+		if (formData.d_captcha==='') {
+			toast("請填寫驗證碼")
+			handleImgClick
+			return
+		}
+		if (formData.d_password===null&&formData.d_repassword===null) {
+			setFormData((prevState)=>({
+				...prevState,
+				[d_password]:'',
+				[d_repassword]:'',
+			}))
+		} 
+		if (formData.d_password!==formData.d_repassword){
+			toast("密碼不一致")
+			return
+		}
+		const formURL = process.env.apiServer+"/api/member/checkaccount/"
 		const data = new FormData()
-
+		//console.log(data)
 		// Turn our formData state into data we can use with a form submission
 		Object.entries(formData).forEach(([key, value]) => {
 			data.append(key, value)
@@ -84,9 +76,9 @@ const AccEdit = () => {
 		// POST the data to the URL of the form
 		await axios.post(formURL, data, {credentials:'include'})
 		.then(
-			(response)=>console.log(response))
+			(response)=>{if(response.status===200){toast("會員資料更新成功！")}})
 		.catch(
-			(error)=>console.log(error))
+			(response)=>{response.status===404?toast(response.msg):console.log(response.msg)})
 		/*fetch(formURL, {
 			method: "POST",
 			body: data,
@@ -148,10 +140,13 @@ const AccEdit = () => {
 				d_company_district: data?.dbdata.d_company_district || "",
 				d_company_zipcode: data?.dbdata.d_company_zipcode || "",
 				d_company_address: data?.dbdata.d_company_address || "",
-				d_county: data?.dbdata.d_county || "",
+				/* d_county: data?.dbdata.d_county || "",
 				d_district: data?.dbdata.d_district || "",
 				d_zipcode: data?.dbdata.d_zipcode || "",
-				d_address: data?.dbdata.d_address || "",
+				d_address: data?.dbdata.d_address || "", */
+				d_password:"",
+				d_repassword:"",
+				d_captcha:""
 			})
 		} else {
 			setFormData({
@@ -174,23 +169,83 @@ const AccEdit = () => {
 				d_zipcode: data?.dbdata.d_zipcode || "",
 				d_address: data?.dbdata.d_address || "",
 				d_account: data?.dbdata.d_account || "",
-				d_county: data?.dbdata.d_county || "",
+				/* d_county: data?.dbdata.d_county || "",
 				d_district: data?.dbdata.d_district || "",
 				d_zipcode: data?.dbdata.d_zipcode || "",
-				d_address: data?.dbdata.d_address || "",
+				d_address: data?.dbdata.d_address || "", */
 				d_company_county: data?.dbdata.d_company_county || "",
 				d_company_district: data?.dbdata.d_company_district || "",
 				d_company_zipcode: data?.dbdata.d_company_zipcode || "",
 				d_company_address: data?.dbdata.d_company_address || "",
+				d_password:"",
+				d_repassword:""
 			})
 		}
 	}, [data])
+	//console.log(formData)
+	const [formData, setFormData] = useState({
+		d_company_name: "",
+			d_company_title: "",
+			d_company_number: "",
+			d_company_tel_area: "",
+			d_company_tel: "",
+			d_company_fax_area: "",
+			d_company_fax: "",
+			d_company_website: "",
+			//d_company_account: data?.dbdata.d_company_account || "",
+			d_pname: "",
+			d_job: "",
+			d_birthday: "",
+			d_phone: "",
+			d_newsletter: "",
+			d_county: "",
+			d_district: "",
+			d_zipcode: "",
+			d_address: "",
+			d_account: "",
+			d_company_county: "",
+			d_company_district: "",
+			d_company_zipcode: "",
+			d_company_address: "",
+			d_county: "",
+			d_district: "",
+			d_zipcode: "",
+			d_address: "",
+			d_password:"",
+			d_repassword:""
+		/* d_company_name: data?.dbdata.d_company_name || "",
+		d_company_title: data?.dbdata.d_company_title || "",
+		d_company_number: data?.dbdata.d_company_number || "",
+		d_company_tel_area: data?.dbdata.d_company_tel_area || "",
+		d_company_tel: data?.dbdata.d_company_tel || "",
+		d_company_fax_area: data?.dbdata.d_company_fax_area || "",
+		d_company_fax: data?.dbdata.d_company_fax || "",
+		d_company_website: data?.dbdata.d_company_website || "",
+		d_company_county: data?.dbdata.d_company_county || "",
+		d_company_district: data?.dbdata.d_company_district || "",
+		d_company_address: data?.dbdata.d_company_address || "",
+		d_company_zipcode: data?.dbdata.d_company_zipcode || "",
+		//d_company_account: data?.dbdata.d_company_account || "",
+		d_pname: data?.dbdata.d_pname || "",
+		d_job: data?.dbdata.d_job || "",
+		d_birthday: data?.dbdata.d_birthday || "",
+		d_phone: data?.dbdata.d_phone || "",
+		d_newsletter: data?.dbdata.d_newsletter || "",
+		d_county: data?.dbdata.d_county || "",
+		d_district: data?.dbdata.d_district || "",
+		d_zipcode: data?.dbdata.d_zipcode || "",
+		d_address: data?.dbdata.d_address || "",
+		d_account: data?.dbdata.d_account || "",
+		d_captcha: '',
+		d_password:'',
+		d_repassword:'' */
+	})
 	//console.log(formData)
 	return (
 		<>
 			<section className={styles.content_box}>
 				{/* <div className={styles.title01}>會員資料修改</div> */}
-				<form action={process.env.apiServer+"/api/member/checkaccount/"} method="post" onSubmit={submitForm}>
+				<form /* action={process.env.apiServer+"/api/member/checkaccount/"} method="post" */ onSubmit={submitForm}>
 					<div className={styles.mbox}>
 						<dd className={styles.sell} style={{ marginTop: "-20px" }}>
 							<li>
@@ -211,7 +266,14 @@ const AccEdit = () => {
 								<div className={styles.company_box}>
 									<li>
 										<h2>名稱*</h2>
-										<input type="text" name="d_company_name" onChange={handleInput} value={formData?.d_company_name} />
+										<input 
+										type="text" 
+										name="d_company_name" 
+										onChange={handleInput} 
+										value={formData?.d_company_name} 
+										placeholder="公司簡稱" 
+										required={data?.dbdata.d_user_type === "2"?true:false}
+										/>
 									</li>
 									<li>
 										<h2 id="d_company_title">公司抬頭*</h2>
@@ -220,6 +282,8 @@ const AccEdit = () => {
 											name="d_company_title"
 											onChange={handleInput}
 											value={formData?.d_company_title}
+											placeholder="公司抬頭"
+											required={data?.dbdata.d_user_type === "2"?true:false}
 										/>
 									</li>
 									<li>
@@ -229,6 +293,8 @@ const AccEdit = () => {
 											name="d_company_number"
 											onChange={handleInput}
 											value={formData?.d_company_number}
+											placeholder="公司統編"
+											required={data?.dbdata.d_user_type === "2"?true:false}
 										/>
 									</li>
 									<li className={styles.half}>
@@ -283,7 +349,7 @@ const AccEdit = () => {
 											type="text"
 											name="d_company_website"
 											onChange={handleInput}
-											value={data?.dbdata.d_company_website}
+											value={formData?.d_company_website}
 										/>
 									</li>
 									<li>
@@ -296,9 +362,9 @@ const AccEdit = () => {
 												handleChangeDistrict={handleComChange}
 												handleChangeZipcode={handleComChange}
 												zipcodePlaceholder={"郵遞區號"}
-												/* countyValue={formData?.d_company_county?formData?.d_company_county:''}
-												districtValue={formData?.d_company_district?formData?.d_company_district:''}
-												zipcodeValue={formData?.d_company_zipcode?formData?.d_company_zipcode:''} */
+												countyValue={formData?.d_company_county}
+												districtValue={formData?.d_company_district}
+												zipcodeValue={formData?.d_company_zipcode}
 											/>
 										</div>
 										<input
@@ -321,11 +387,11 @@ const AccEdit = () => {
 						</li>
 						<li>
 							<h2>密碼*</h2>
-							<input type="password" name="d_password" /* value={formData.d_password} */ onChange={handleInput}/>
+							<input type="password" name="d_password" value={formData.d_password} onChange={handleInput}/>
 						</li>
 						<li>
 							<h2>確認密碼*</h2>
-							<input type="password" name="d_repassword" /* value={formData.d_repassword} */ onChange={handleInput}/>
+							<input type="password" name="d_repassword" value={formData.d_repassword} onChange={handleInput}/>
 						</li>
 						<div className={styles.title03} style={{ marginTop: "30px" }}>
 							會員資料
@@ -357,9 +423,9 @@ const AccEdit = () => {
 										handleChangeDistrict={handlePesChange}
 										handleChangeZipcode={handlePesChange}
 										zipcodePlaceholder={"郵遞區號"}
-										/* countyValue={formData?.d_county?formData?.d_county:''}
-										districtValue={formData?.d_district?formData?.d_district:''}
-										zipcodeValue={formData?.d_zipcode?formData?.d_zipcode:''} */
+										countyValue={formData?.d_county}
+										districtValue={formData?.d_district}
+										zipcodeValue={formData?.d_zipcode}
 									/>
 								</div>
 								<input type="text2" name="d_address" onChange={handleInput} value={formData?.d_address} />
@@ -397,7 +463,7 @@ const AccEdit = () => {
 						</div>
 						<li>
 							<h2>驗証碼*</h2>
-							<input type="text" name="d_captcha" onChange={handleInput} /* value={formData?.d_captcha} */ />
+							<input type="text" name="d_captcha" onChange={handleInput} value={formData?.d_captcha} required />
 						</li>
 						<li className={styles.contact_captcha}>
 							<img width="10%" id="captcha" src={process.env.apiServer + "/login/make_vcode_img"} onClick={handleImgClick}/>

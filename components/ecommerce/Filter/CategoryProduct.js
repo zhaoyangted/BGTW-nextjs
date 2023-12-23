@@ -8,7 +8,7 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 	
 	const router = useRouter()
 	const menusArray = menus ? Object.values(menus) : null /* Object.entries(menuDatas) */
-	const menusAll = Object.entries(menuDatas)
+	//const menusAll = Object.entries(menuDatas)
 	const selectCategory = (e, category) => {
 		e.preventDefault()
 		// removeSearchTerm();

@@ -13,13 +13,13 @@ export default (state = [], action) => {
             index = findProductIndexById(state, action.payload.product.d_id);
 
             if (index !== -1) {
-                state[index].quantity += 1;
+                state[index].quantity += action.payload.product.quantity||1;
                 storage.set("dokani_cart", [...state]);
 
                 return [...state];
             } else {
                 if (!action.payload.product.quantity) {
-                    action.payload.product.quantity = 1;
+                    action.payload.product.quantity = action.payload.quantity||1;
                 }
                 storage.set("dokani_cart", [...state, action.payload.product]);
 
