@@ -14,7 +14,7 @@ const nextConfig = {
         s3Host:'https://bgtwmedia.s3.ap-northeast-1.amazonaws.com/'
         
     },
-    //trailingSlash: true,
+    trailingSlash: true,
     /* images: {
       remotePatterns: [
         {

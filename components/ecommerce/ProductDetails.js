@@ -299,15 +299,15 @@ const ProductDetails = ({
 												<i className="fi-rs-info"></i>
 											</a>
 										</div>
-										<div className="detail-extralink product-extra-link2 mt-20" style={{width:"100%"}}>
+										{specData&&<div className="detail-extralink product-extra-link2 mt-20" style={{width:"100%"}}>
 										<button 
 												className="button button-add-to-cart"
 												style={{width:"100%"}}
-												onClick={(e)=>router.push('/products/pmore/?id='+product?.d_id)}
+												onClick={(e)=>{e.preventDefault;router.push({pathname:'/products/pmore',query:{id:product?.d_id}})}}
 											>
 												批量購買
 											</button>
-										</div>
+										</div>}
 									</div>
 								</div>
 							</div>

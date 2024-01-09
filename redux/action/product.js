@@ -90,6 +90,7 @@ export const fetchMoreProduct = (url) => async (dispatch) => {
 			payload: { 
 						product: data.Pdata,
 						vars:data.dbdata,
+						Menutitle:data.Menutitle,
 						},
 		})
 	} catch (error) {

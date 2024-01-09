@@ -187,7 +187,13 @@ const Cart = ({
 		// POST the data to the URL of the form
 		await axios
 			.post(formURL, data, { credentials: "include" })
-			.then((response) =>{if(response.status===200){clearCart();toast.success('訂單建立成功，請通過下列網址付款。');console.log(response.msg)}})
+			.then((response) =>{
+				if(response.status===200){
+					clearCart();
+					toast.success('訂單建立成功，請通過下列網址付款。');
+					router.push({pathname:'/pay',query:{data:response.msg}})
+					console.log(response.msg)
+			}})
 			.catch((error) => console.log(error))
 	}
 	//console.log(user)

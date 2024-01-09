@@ -3,11 +3,11 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Breadcrumb2 from "../../components/layout/Breadcrumb2"
 //import CategoryProduct from "../../../components/ecommerce/Filter/CategoryProduct";
-import PriceRangeSlider from "../../components/ecommerce/Filter/PriceRangeSlider"
+//import PriceRangeSlider from "../../components/ecommerce/Filter/PriceRangeSlider"
 import ShowSelect from "../../components/ecommerce/Filter/ShowSelect"
-import SizeFilter from "../../components/ecommerce/Filter/SizeFilter"
+//import SizeFilter from "../../components/ecommerce/Filter/SizeFilter"
 import SortSelect from "../../components/ecommerce/Filter/SortSelect"
-import VendorFilter from "../../components/ecommerce/Filter/VendorFilter"
+//import VendorFilter from "../../components/ecommerce/Filter/VendorFilter"
 import Pagination from "../../components/ecommerce/Pagination"
 import QuickView from "../../components/ecommerce/QuickView"
 import WishlistModal from "../../components/ecommerce/WishlistModal"
@@ -180,7 +180,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									<div className="totall-product">
 										<p>
 											找到
-											<strong className="text-brand">{products.items.length>0?products.pages?.TotalRecord:0}</strong>
+											<strong className="text-brand">{products?.items?.length>0?products.pages?.TotalRecord:0}</strong>
 											個產品!
 										</p>
 									</div>
@@ -197,9 +197,9 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									</div>
 								</div>
 								<div className="row product-grid-3">
-									{products.items.length === 0 || (!products && <h3>無產品</h3>)}
+									{products?.items?.length === 0 || (!products && <h3>無產品</h3>)}
 
-									{products.items.map((item, i) => (
+									{products?.items?.map((item, i) => (
 										<div className="col-lg-3 col-md-4 col-6 col-sm-6 mb-30" key={i}>
 											<SingleProduct product={item} />
 											{/* <SingleProductList product={item}/> */}

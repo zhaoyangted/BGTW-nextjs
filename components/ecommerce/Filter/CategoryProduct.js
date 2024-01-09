@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { updateProductCategory } from "../../../redux/action/productFiltersAction"
+import SizeFilter from '../../../components/ecommerce/Filter/SizeFilter'
 import Link from "next/link"
 import styles from "../../catmenu.module.css"
 const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
@@ -90,6 +91,7 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 						</li>
 					)
 				})}
+				<SizeFilter></SizeFilter>
 			</ul>
 		</>
 	)

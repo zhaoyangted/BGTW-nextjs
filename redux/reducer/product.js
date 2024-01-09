@@ -32,7 +32,8 @@ export default (state = { items: [],sorts:{},types:{} }, action) => {
             return {
                 //...state,
                 vars:[...action.payload.vars],
-                var:{...action.payload.product}
+                var:{...action.payload.product},
+                Menutitle:[...action.payload.Menutitle]
                // items: [...limit],
             };
 

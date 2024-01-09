@@ -1,28 +1,29 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
-import Breadcrumb2 from "../../components/layout/Breadcrumb2"
+//import Breadcrumb2 from "../../components/layout/Breadcrumb2"
 import { addToCart } from "../../redux/action/cart"
 //import Pagination from "../../components/ecommerce/Pagination"
 import Layout from "../../components/layout/Layout"
 import { fetchMoreProduct } from "../../redux/action/product"
 //import ProductMore from "../../components/ecommerce/ProductMore"
 import styles from "../../components/pmore.module.css"
+import Link from "next/link"
 const ProductsMore = ({ products, cartItems, fetchMoreProduct, addToCart }) => {
 	let Router = useRouter()
 	const { id } = Router.query
 	const handleCart = async (e) => {
 		e.preventDefault()
 		//console.log(quantity)
-        const quant=Object.fromEntries(quantity)
-        //console.log(quant)
+		const quant = Object.fromEntries(quantity)
+		//console.log(quant)
 		Object.keys(quant).map((key) => {
-            //console.log(key)
-            if (quant[key]>0) {
-			//console.log({ d_id: key}, quant[key])
-            let pro=products.vars.find((item)=>item.d_id===key)
-			addToCart(pro,quant[key])
-            }
+			//console.log(key)
+			if (quant[key] > 0) {
+				//console.log({ d_id: key}, quant[key])
+				let pro = products.vars.find((item) => item.d_id === key)
+				addToCart(pro, quant[key])
+			}
 		})
 		//toast("已加入購物車 !")
 	}
@@ -41,32 +42,38 @@ const ProductsMore = ({ products, cartItems, fetchMoreProduct, addToCart }) => {
 		products?.vars?.map((item, i) => {
 			updateMap(item.d_id, 0)
 		})
-	}, [])
+	}, [products])
 	//console.log(quantity)
 	return (
-		<>
-			<Layout noBreadcrumb="d-none">
+		<div>
+			<Layout parent="主頁" subChild={products?.Menutitle}>
 				<div className={styles.box_1}>
 					<section className={styles.content_box}>
 						<div className={styles.products_more}>
-							<div className={styles.toppic}>
-								<img src={process.env.s3Host + products?.var?.d_img1} alt="" />
+							<div style={{ display: "inline-flex" }}>
+								<div className={styles.toppic}>
+									<img src={process.env.s3Host + products?.var?.d_img1} alt="" />
+								</div>
+								<div className={styles.toppic}>
+									<h4>{products?.var?.d_title}</h4>
+								</div>
 							</div>
 							<ul>
 								{products?.vars?.map((item, i) => (
-									<>
 										<li key={i}>
 											<div className={styles.name}>
-												<a href={"/products/info/?id=" + item.d_id}> {item.d_title}</a>
+												<Link href={"/products/info/?id=" + item.d_id}> {item.d_title}</Link>
 											</div>
 											<div className={styles.pic}>
-												<a href={"/products/info/?id=" + item.d_id}>
+												<Link href={"/products/info/?id=" + item.d_id}>
 													<img src={process.env.s3Host + item.d_img1} alt="" />
-												</a>
+												</Link>
 											</div>
 											<div className={styles.info_list}>
 												<div className={styles.dtt}>庫存數量</div>
-												<div className={styles.spec}>{item.d_stock > 0 ? item.d_stock : "補貨中"}</div>
+												<div className={styles.spec} style={{ color: item.d_stock > 0 ? null : "red" }}>
+													{item.d_stock > 0 ? item.d_stock : "補貨中"}
+												</div>
 											</div>
 											{item.Discount !== 0 && item.d_sprice !== 0 ? (
 												<div className={styles.info_list}>
@@ -102,6 +109,7 @@ const ProductsMore = ({ products, cartItems, fetchMoreProduct, addToCart }) => {
 															type="button"
 															value="-"
 															readOnly
+															disabled={item.d_stock === 0}
 															className={styles.minus}
 															onClick={(e) => {
 																//console.log(quantity[item.d_id])
@@ -112,28 +120,33 @@ const ProductsMore = ({ products, cartItems, fetchMoreProduct, addToCart }) => {
 															type="number"
 															name={"d_num_" + item.d_id}
 															title="Qty"
-															readOnly
-															value={quantity.get(item.d_id)}
+															//readOnly
+															value={quantity.get(item.d_id)||0}
 															//onChange={(e)=>quantity.get(item.d_id)}
 															className={styles.input_text}
+															style={{ color: item.d_stock > 0 ? "black" : "grey" }}
 															size="4"
 														/>
 														<input
 															type="button"
 															readOnly
 															value="+"
+															disabled={item.d_stock === 0}
 															className={styles.plus}
 															onClick={(e) => {
 																//console.log(quantity[item.d_id])
-																updateMap(item.d_id, quantity.get(item.d_id) + 1)
+																updateMap(
+																	item.d_id,
+																	item.d_stock > quantity.get(item.d_id)
+																		? quantity?.get(item.d_id) + 1
+																		: quantity?.get(item.d_id)
+																)
 															}}
 														/>
 													</div>
 												</div>
 											</div>
 										</li>
-										<input type="hidden" name="d_id" value={item.d_id} />
-									</>
 								))}
 							</ul>
 							<div id="sticker" className={styles.buyicon}>
@@ -145,7 +158,7 @@ const ProductsMore = ({ products, cartItems, fetchMoreProduct, addToCart }) => {
 					</section>
 				</div>
 			</Layout>
-		</>
+		</div>
 	)
 }
 
