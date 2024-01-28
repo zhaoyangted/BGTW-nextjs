@@ -21,15 +21,15 @@ export const fetchProduct = (searchTerm, url, filters, podata) => async (dispatc
 		/* window.products = data.dbdata.dbdata
         window.sortData = data.OrderArray
         window.typeData = data.TypeData */
-        if (sendRequest.status!==404) {
+        if (data.dbdata.dbdata) {
 			
 		const searchedItems = searchItemsByText(searchTerm, data.dbdata.dbdata)
-		const filteredList = filterProductList(searchedItems, filters)
+		//const filteredList = filterProductList(searchedItems, filters)
 		
 		dispatch({
 			type: Types.FETCHED_PRODUCT,
 			payload: {
-				products: filteredList,
+				products: searchedItems,//filteredList,
 				sortData: data.OrderArray,
 				typeData: data.TypeData,
 				brandData: data.BrandData,

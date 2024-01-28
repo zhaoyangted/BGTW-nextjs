@@ -23,9 +23,9 @@ const Breadcrumb2 = ({parent, sub, subChild, noBreadcrumb,types,menuData}) => {
                             {/* {titlex} */}
                         </div>
                     </div>
-                    <div className="col-xl-8 text-end d-none d-xl-block">
+                   {/*  <div className="col-xl-8 text-end d-none d-xl-block">
                         <Tags/>                            
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

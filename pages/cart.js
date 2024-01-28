@@ -57,7 +57,7 @@ const Cart = ({
 	const handleCheckout =() =>{
 		!numErr &&  router.push("/checkout")
 	}
-	console.log(apiData)
+	//console.log(apiData)
 	return (
 		<>
 			<Layout parent="首頁" sub=" 購物車" /* subChild="" */>

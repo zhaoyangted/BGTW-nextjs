@@ -49,7 +49,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 		//console.log(postdata)
 		fetchProduct(
 			searchTerm,
-			process.env.apiServer + `/api/product/search/?page=${currentPage - 1}&order=${productFilters.featured}&limit=12`,
+			process.env.apiServer + `/api/product/search/?page=${currentPage - 1}&order=${productFilters.featured}&color=${productFilters.tags}&limit=12`,
 			productFilters,
 			postdata
 		)

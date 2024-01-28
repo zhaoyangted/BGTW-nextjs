@@ -7,12 +7,13 @@ const Tags = ({ updateProductFilters }) => {
     const router = useRouter();
     const tags = [
         { value: "" },
-        { value: "snack" },
-        { value: "milk" },
-        { value: "fruit" },
-        { value: "broccoli" },
-        { value: "salad" },
-        { value: "appetizer" },
+        { value: "1",title:"red" },
+        { value: "2",title:"blue" },
+        { value: "3",title:"green" },
+        { value: "4",title:"yellow" },
+        { value: "5",title:"brown" },
+        { value: "6" ,title:"purple"},
+        { value: "7" ,title:"white"},
     ];
     const [selectedTags, setTags] = useState([]);
     const [active, setActive] = useState(0);
@@ -40,7 +41,7 @@ const Tags = ({ updateProductFilters }) => {
                                     : "cat-item text-brand"
                             }
                         ><i className="fi-rs-cross mr-10"></i>
-                            {i == 0 ? "All" : `${tag.value}`}
+                            {i == 0 ? "All" : `${tag.title}`}
                         </a>
                     </li>
                 ))}

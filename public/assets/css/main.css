@@ -663,7 +663,7 @@ strong,
 
 .section-title {
   display: flex;
-  align-items: flex-end;
+  align-items: end;
   margin-bottom: 44px;
   position: relative;
   justify-content: space-between;
@@ -3269,7 +3269,7 @@ table .product-thumbnail img {
   padding: 25px 25px 0 25px;
 }
 .product-cart-wrap .product-img-action-wrap .product-action-1 {
-  display: inline-block;
+  display: inline-flex !important;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #e18691;
@@ -9389,6 +9389,7 @@ footer .hotline img {
   }
   .product-cart-wrap .product-img-action-wrap .product-action-1 {
     min-width: 111px;
+    display: none !important;
   }
   .custom-modal .modal-dialog {
     max-width: 720px !important;

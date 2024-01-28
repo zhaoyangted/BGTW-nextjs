@@ -79,21 +79,21 @@ const SingleProduct = ({
                     </a>
                 </div>
 
-                {/* <div className="product-badges product-badges-position product-badges-mrg">
-                    {product.trending && <span className="hot">Hot</span>}
-                    {product.created && <span className="new">New</span>}
+                <div className="product-badges product-badges-position product-badges-mrg">
+                    {product.d_sprice !=="0" && <span className="hot">Hot</span>}
+                    {/* {product.created && <span className="new">New</span>}
                     {product.totalSell > 100 && (
                         <span className="best">Best Sell</span>
-                    )}
-                    {product.discount.isActive && (
+                    )} */}
+                    {product.d_dprice!=="0" && (
                         <span className="sale">Sale</span>
                     )}
-                    {product.discount.percentage >= 5 && (
+                    {/* {product.d_dprice!==0 && (
                         <span className="hot">
-                            {product.discount.percentage}%
+                            {product.d_dprice}
                         </span>
-                    )}
-                </div> */}
+                    )} */}
+                </div>
             </div>
             <div className="product-content-wrap">
                 {/* <div className="product-category">
@@ -150,7 +150,8 @@ const SingleProduct = ({
                 <div className="add-cart">
                         <a
                             className="add"
-                            onClick={(e) => handleCart(product)}
+                            onClick={(e) => product.d_stock>0?handleCart(product):null}
+                            
                         >
                           +  <i className="fi-rs-shopping-cart mr-5"></i> 
                         </a>

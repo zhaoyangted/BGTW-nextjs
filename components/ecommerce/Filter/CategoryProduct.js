@@ -2,11 +2,10 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { updateProductCategory } from "../../../redux/action/productFiltersAction"
-import SizeFilter from '../../../components/ecommerce/Filter/SizeFilter'
 import Link from "next/link"
 import styles from "../../catmenu.module.css"
+import Tags from "./Tags"
 const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
-	
 	const router = useRouter()
 	const menusArray = menus ? Object.values(menus) : null /* Object.entries(menuDatas) */
 	//const menusAll = Object.entries(menuDatas)
@@ -56,7 +55,7 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 	return (
 		<>
 			<ul className="mobile-menu-wrap" /* ref={domNode} */>
-				<li onClick={(e) => selectCategory(e, "")}>{/* <a>{menuDatas.d_title}</a> */}</li>
+				{/*<li onClick={(e) => selectCategory(e, "")}> <a>{menuDatas.d_title}</a> </li>*/}
 
 				{menusArray?.map((li, index) => {
 					return (
@@ -68,9 +67,12 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 									: "menu-item-has-children " + styles.menuitem
 							}
 						>
-							<Link href={{pathname:"/products/plist" ,query:{id: li.d_id}}} 
-							//as={`/products/products_list/${li.d_id}`}
-							>{li.d_title}</Link>
+							<Link
+								href={{ pathname: "/products/plist", query: { id: li.d_id } }}
+								//as={`/products/products_list/${li.d_id}`}
+							>
+								{li.d_title}
+							</Link>
 							<span className="menu-expand" onClick={() => handleToggle(index)}>
 								{li?.Subdata?.length > 0 && <i className="fi-rs-angle-small-down"></i>}
 							</span>
@@ -79,9 +81,12 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 									{li?.Subdata?.map((ul, index) => {
 										return (
 											<li key={index} className={styles.li}>
-												<Link href={{pathname:"/products/plist",query:{id: ul.d_id}}} 
-												//as={`/products/products_list/${li.d_id}`}
-												>{ul.d_title}</Link>
+												<Link
+													href={{ pathname: "/products/plist", query: { id: ul.d_id } }}
+													//as={`/products/products_list/${li.d_id}`}
+												>
+													{ul.d_title}
+												</Link>
 												{/* <i className="fi-rs-angle-right"></i> */}
 											</li>
 										)
@@ -91,8 +96,9 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 						</li>
 					)
 				})}
-				<SizeFilter></SizeFilter>
-			</ul>
+				<div className="mt-10"></div>
+				<Tags/>
+			</ ul>
 		</>
 	)
 }

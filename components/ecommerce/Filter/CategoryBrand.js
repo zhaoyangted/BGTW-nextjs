@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { updateProductCategory } from "../../../redux/action/productFiltersAction"
 import Link from "next/link"
+import Tags from "./Tags"
 //import useClickOutside from "../../../util/outsideClick";
 import styles from "../../catmenu.module.css"
 const CategoryBrand = ({ updateProductCategory, menusData }) => {
@@ -109,6 +110,8 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 												</ul>
 											)
 										})}
+										<div className="mt-10"></div>
+										<Tags />
 									</ul>
 								)}
 							</li>

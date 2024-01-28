@@ -38,7 +38,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 		fetchProduct(
 			searchTerm,
 			/* "/static/product.json" */ process.env.apiServer +
-				`/api/product/toplist/${id}?page=${currentPage - 1}&limit=${limit}&order=${productFilters.featured}`,
+				`/api/product/toplist/${id}?page=${currentPage - 1}&limit=${limit}&order=${productFilters.featured}&color=${productFilters.tags}`,
 			productFilters
 		)
 	}, [productFilters, limit, pages, currentPage /* products.items.length */, , id])

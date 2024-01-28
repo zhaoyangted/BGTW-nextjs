@@ -189,10 +189,11 @@ const Cart = ({
 			.post(formURL, data, { credentials: "include" })
 			.then((response) =>{
 				if(response.status===200){
-					clearCart();
+					//clearCart();
 					toast.success('訂單建立成功，請通過下列網址付款。');
-					router.push({pathname:'/pay',query:{data:response.msg}})
-					console.log(response.msg)
+					response.data?router.push({pathname:'/pay',query:response.data}):
+					router.push({pathname:'/webatm',query:{account:response.account,total:response.total}})
+					//console.log(response.data)
 			}})
 			.catch((error) => console.log(error))
 	}
