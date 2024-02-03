@@ -29,7 +29,7 @@ const ProductDetails = ({
 	const router = useRouter()
 	// console.log(specData)
 	const handleCart = (product) => {
-		addToCart(product,quantity)
+		addToCart(product, quantity)
 		toast("已加入購物車 !")
 	}
 
@@ -171,8 +171,14 @@ const ProductDetails = ({
 										<ul className={styles.productmeta}>
 											<div className={styles.dtt}>商品規格</div>
 											<div className={styles.spec}>
-												<select id="ChangeSpec" className="select_pd" defaultValue={product?.d_id} name="spec" onChange={handleChange}>
-													<option value={product?.d_id} >{product?.d_spectitle}</option>
+												<select
+													id="ChangeSpec"
+													className="select_pd"
+													defaultValue={product?.d_id}
+													name="spec"
+													onChange={handleChange}
+												>
+													<option value={product?.d_id}>{product?.d_spectitle}</option>
 													{specData?.map((clr, i) => (
 														<option key={i} value={clr.d_id}>
 															{clr.d_spectitle}
@@ -208,23 +214,23 @@ const ProductDetails = ({
 											))}
 										</ul>
 									</div> */}
-									<div className="attr-detail attr-size">
-										<strong className="mr-10">Size</strong>
+									{(product?.d_varcolor||product?.d_varmar||product?.d_varsize)&&<div className="attr-detail attr-size">
+									<div className={styles.dtt}>屬性：</div>
 										<ul className="list-filter size-filter font-small">
 											<li className="active">
-												<a>M</a>
+												{product?.d_varcolor&&<a>product?.d_varcolor</a>}
 											</li>
 											<li>
-												<a>L</a>
+												{product?.d_varmar&&<a>product?.d_varmar</a>}
 											</li>
 											<li>
-												<a>XL</a>
+												{product?.d_varsize&&<a>product?.d_varsize</a>}
 											</li>
-											<li>
+											{/* <li>
 												<a>XXL</a>
-											</li>
+											</li> */}
 										</ul>
-									</div>
+									</div>}
 									<div className="product-detail-rating">
 										<div className="product-rate-cover text-end">
 											{/* <div className="product-rate d-inline-block">
@@ -238,8 +244,10 @@ const ProductDetails = ({
 									<div className="detail-extralink">
 										<div className="detail-qty border radius">
 											<a
-												onClick={(e) =>
-													!inCart && setQuantity(quantity > 1 ? quantity - 1 : 1) /* : decreaseQuantity(product?.d_id) */
+												onClick={
+													(e) =>
+														!inCart &&
+														setQuantity(quantity > 1 ? quantity - 1 : 1) /* : decreaseQuantity(product?.d_id) */
 												}
 												className="qty-down"
 											>
@@ -247,10 +255,9 @@ const ProductDetails = ({
 											</a>
 											<span className="qty-val">{inCart?.quantity || quantity}</span>
 											<a
-												onClick={() =>
-													!inCart && parseInt(product?.d_stock) - quantity > 0
-														&& setQuantity(quantity + 1)
-														/* : increaseQuantity(product?.d_id) */
+												onClick={
+													() => !inCart && parseInt(product?.d_stock) - quantity > 0 && setQuantity(quantity + 1)
+													/* : increaseQuantity(product?.d_id) */
 												}
 												className="qty-up"
 											>
@@ -273,7 +280,7 @@ const ProductDetails = ({
 											>
 												{parseInt(product?.d_stock) - quantity >= 0 ? "加入購物車" : "無庫存"}
 											</button>
-											
+
 											<a
 												aria-label="加入願望清單"
 												className="action-btn hover-up"
@@ -299,15 +306,20 @@ const ProductDetails = ({
 												<i className="fi-rs-info"></i>
 											</a>
 										</div>
-										{specData&&<div className="detail-extralink product-extra-link2 mt-20" style={{width:"100%"}}>
-										<button 
-												className="button button-add-to-cart"
-												style={{width:"100%"}}
-												onClick={(e)=>{e.preventDefault;router.push({pathname:'/products/pmore',query:{id:product?.d_id}})}}
-											>
-												批量購買
-											</button>
-										</div>}
+										{specData && (
+											<div className="detail-extralink product-extra-link2 mt-20" style={{ width: "100%" }}>
+												<button
+													className="button button-add-to-cart"
+													style={{ width: "100%" }}
+													onClick={(e) => {
+														e.preventDefault
+														router.push({ pathname: "/products/pmore", query: { id: product?.d_id } })
+													}}
+												>
+													批量購買
+												</button>
+											</div>
+										)}
 									</div>
 								</div>
 							</div>

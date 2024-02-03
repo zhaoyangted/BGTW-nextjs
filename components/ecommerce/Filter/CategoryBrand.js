@@ -110,13 +110,13 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 												</ul>
 											)
 										})}
-										<div className="mt-10"></div>
-										<Tags />
 									</ul>
 								)}
 							</li>
 						)
 					})}
+					<div className="mt-10"></div>
+					<Tags />
 				</ul>
 			</>
 		)

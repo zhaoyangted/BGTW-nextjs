@@ -3,11 +3,11 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Breadcrumb2 from "../../components/layout/Breadcrumb2"
 import CategoryProduct from "../../components/ecommerce/Filter/CategoryProduct"
-import PriceRangeSlider from "../../components/ecommerce/Filter/PriceRangeSlider"
+//import PriceRangeSlider from "../../components/ecommerce/Filter/PriceRangeSlider"
 import ShowSelect from "../../components/ecommerce/Filter/ShowSelect"
-import SizeFilter from "../../components/ecommerce/Filter/SizeFilter"
+//import SizeFilter from "../../components/ecommerce/Filter/SizeFilter"
 import SortSelect from "../../components/ecommerce/Filter/SortSelect"
-import VendorFilter from "../../components/ecommerce/Filter/VendorFilter"
+//import VendorFilter from "../../components/ecommerce/Filter/VendorFilter"
 import Pagination from "../../components/ecommerce/Pagination"
 import QuickView from "../../components/ecommerce/QuickView"
 import WishlistModal from "../../components/ecommerce/WishlistModal"
@@ -30,7 +30,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 	let [currentPage, setCurrentPage] = useState(page ? page : 1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
 	//console.log(Pkeyword,Ptype)
-	const postdata = { Pkeyword: Pkeyword, Ptype: Ptype, page: currentPage - 1, limit: 12 }
+	const postdata = { Pkeyword: Pkeyword, Ptype: Ptype, page: currentPage - 1, limit: limit,color:productFilters.tags,order:productFilters.featured }
 	const [modal, setModal] = useState(false)
 	const handleModalClose = () => {
 		setModal(!modal)
@@ -49,7 +49,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 		//console.log(postdata)
 		fetchProduct(
 			searchTerm,
-			process.env.apiServer + `/api/product/search/?page=${currentPage - 1}&order=${productFilters.featured}&color=${productFilters.tags}&limit=12`,
+			process.env.apiServer + `/api/product/search/`,
 			productFilters,
 			postdata
 		)
@@ -110,7 +110,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 										{Ptype === "" ? "全部品類" : products.menudatas?.d_title}
 									</h5>
 									{Ptype === "" ? (
-										<CategoryAll menusData={products.menudatas} />
+										<CategoryAll menusData={products.menus} />
 									) : (
 										<CategoryProduct menuDatas={products.types} menus={products.menus} />
 									)}
@@ -207,9 +207,9 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 								<div className="shop-product-fillter">
 									<div className="totall-product">
 										<p>
-											找到
-											<strong className="text-brand">{products.items.length>0?products.pages?.TotalRecord:0}</strong>
-											個產品!
+											搜索關鍵字：
+											<strong className="text-brand">{Pkeyword}</strong>
+										
 										</p>
 									</div>
 									<div className="sort-by-product-area">

@@ -70,7 +70,7 @@ function CategoryTab() {
                                         active === `${i+1}` ? "nav-link   active" : "nav-link "
                                     }
                                     //data-bs-toggle="modal"
-                                    style={{whiteSpace:"nowrap",width:"70px",height:"30px",overflowX:"auto"}}
+                                    style={{whiteSpace:"nowrap",width:"70px",height:"30px",overflowX:"hidden"}}
                                     onClick={()=>{setHotProd(catAll[`${i}`]);setActive(`${i+1}`)}}
                                 >
                                     {item/*.slice(0,4) +"..." */}

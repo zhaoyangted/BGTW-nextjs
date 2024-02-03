@@ -10081,7 +10081,7 @@ footer .hotline img {
     font-size: 28px;
   }
   .section-title .show-all {
-    display: none;
+    /* display: none; */
   }
   .nav-tabs.links .nav-link {
     margin-bottom: 10px;

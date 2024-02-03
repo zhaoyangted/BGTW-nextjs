@@ -5,6 +5,7 @@ import { updateProductCategory } from "../../../redux/action/productFiltersActio
 import Link from "next/link"
 //import useClickOutside from "../../../util/outsideClick";
 import styles from "../../catmenu.module.css"
+import Tags from "./Tags"
 const CategoryAll = ({ updateProductCategory, menusData }) => {
 	const router = useRouter()
 	//console.log(menusData)
@@ -71,7 +72,7 @@ const CategoryAll = ({ updateProductCategory, menusData }) => {
 								<span className="menu-expand" onClick={() => handleToggle(index)}>
 									<i className="fi-rs-angle-small-down"></i>
 								</span>
-								{ul[1].length >= 0 && (
+								{ul[1]?.length >= 0 && (
 									<ul className={isActive.key == index ? "dropdown " + styles.menuitem : "d-none " + styles.menuitem}>
 										{ul[1]?.map((li, i) => {
 											return (
@@ -114,6 +115,8 @@ const CategoryAll = ({ updateProductCategory, menusData }) => {
 							</li>
 						)
 					})}
+					<div className="mt-10"></div>
+								<Tags />
 				</ul>
 			</>
 		)
