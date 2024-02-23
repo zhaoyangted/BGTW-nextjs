@@ -16,7 +16,9 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 		router.push({
 			pathname: "/products/plist",
 			query: {
-				id: category, //
+				id: category, 
+				page:0
+				//
 			},
 		})
 	}
@@ -54,51 +56,56 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 	//console.log(menus)
 	return (
 		<>
-			<ul className="mobile-menu-wrap" /* ref={domNode} */>
-				{/*<li onClick={(e) => selectCategory(e, "")}> <a>{menuDatas.d_title}</a> </li>*/}
+			<div className="row">
+				<div className="mobile-menu-wrap" /* ref={domNode} */>
+					<div className="">
+						{/*<li onClick={(e) => selectCategory(e, "")}> <a>{menuDatas.d_title}</a> </li>*/}
 
-				{menusArray?.map((li, index) => {
-					return (
-						<li
-							key={index}
-							className={
-								li.d_title === menuDatas.d_title
-									? "menu-item-has-children active " + styles.menuitem
-									: "menu-item-has-children " + styles.menuitem
-							}
-						>
-							<Link
-								href={{ pathname: "/products/plist", query: { id: li.d_id } }}
-								//as={`/products/products_list/${li.d_id}`}
-							>
-								{li.d_title}
-							</Link>
-							<span className="menu-expand" onClick={() => handleToggle(index)}>
-								{li?.Subdata?.length > 0 && <i className="fi-rs-angle-small-down"></i>}
-							</span>
-							{li?.Subdata && (
-								<ul className={isActive.key == index ? "dropdown" : "d-none"}>
-									{li?.Subdata?.map((ul, index) => {
-										return (
-											<li key={index} className={styles.li}>
-												<Link
-													href={{ pathname: "/products/plist", query: { id: ul.d_id } }}
-													//as={`/products/products_list/${li.d_id}`}
-												>
-													{ul.d_title}
-												</Link>
-												{/* <i className="fi-rs-angle-right"></i> */}
-											</li>
-										)
-									})}
-								</ul>
-							)}
-						</li>
-					)
-				})}
-				<div className="mt-10"></div>
-				<Tags/>
-			</ ul>
+						{menusArray?.map((li, index) => {
+							return (
+								<li
+									key={index}
+									className={
+										li.d_title === menuDatas.d_title
+											? "menu-item-has-children active " + styles.menuitem
+											: "menu-item-has-children " + styles.menuitem
+									}
+								>
+									<Link
+										href={{ pathname: "/products/plist", query: { id: li.d_id,page:0 } }}
+										//as={`/products/products_list/${li.d_id}`}
+									>
+										{li.d_title}
+									</Link>
+									<span className="menu-expand" onClick={() => handleToggle(index)}>
+										{li?.Subdata?.length > 0 && <i className="fi-rs-angle-small-down"></i>}
+									</span>
+									{li?.Subdata && (
+										<ul className={isActive.key == index ? "dropdown" : "d-none"}>
+											{li?.Subdata?.map((ul, index) => {
+												return (
+													<li key={index} className={styles.li}>
+														<Link
+															href={{ pathname: "/products/plist", query: { id: ul.d_id,page:0 } }}
+															//as={`/products/products_list/${li.d_id}`}
+														>
+															{ul.d_title}
+														</Link>
+														{/* <i className="fi-rs-angle-right"></i> */}
+													</li>
+												)
+											})}
+										</ul>
+									)}
+								</li>
+							)
+						})}
+					</div>
+				</div>
+				<div className="">
+					<Tags />
+				</div>
+			</div>
 		</>
 	)
 }

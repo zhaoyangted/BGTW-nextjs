@@ -19,6 +19,7 @@ const CategoryAll = ({ updateProductCategory, menusData }) => {
 			pathname: "/products/plist",
 			query: {
 				id: category, //
+				page:0
 			},
 		})
 	}

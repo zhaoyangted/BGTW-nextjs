@@ -92,7 +92,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									modal ? "d-block stick-sidebar col-lg-3" : "col-lg-3 primary-sidebar sticky-sidebar d-none d-lg-flex"
 								}
 							>
-								<div className="sidebar-widget  mb-30">
+								<div className="sidebar-widget  mb-30 col-lg-">
 									<h5 className="section-title style-1 mb-30">{products.menudatas?.d_title}</h5>
 									<CategoryProduct menuDatas={products.types} menus={products.menus} />
 								</div>

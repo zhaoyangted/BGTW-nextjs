@@ -14,12 +14,12 @@ const BlogSidebar = ({ data }) => {
                 </div>
             </div> */}
 				<div className="sidebar-widget widget-category-2 mb-50">
-					<h5 className="section-title style-1 mb-30"></h5>
+					<h5 className="section-title style-1 mb-30">分類</h5>
 					<ul>
 						{data
 							? data.map((item, i) => {
 									return (
-										<li style={{ backgroundColor: `${item.d_color}` }} key={i}>
+										<li style={{ color: `${item.d_color}` }} key={i}>
 											<Link href={{
                                                     pathname: '/news/',
                                                     query: { id: item.d_id },

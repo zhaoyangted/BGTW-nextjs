@@ -29,6 +29,7 @@
    /* padding: 6px 0px 6px 0px */
 }
 .menuitem{
+    list-style: none;
     margin-top:5px;
     /* font-size: 12px; */
     left: 10%;

@@ -4604,7 +4604,7 @@ table .product-thumbnail img {
 }
 
 .shopping-summery table > :not(caption) > * > * {
-  padding: 15px 0;
+  /*  padding: 15px 0; */
 }
 .shopping-summery table td,
 .shopping-summery table th,
@@ -4807,19 +4807,32 @@ table.no-border thead {
   background-size: cover;
 }
 
+.tags-header {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.tags-header h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #999;
+}
+
 .tags-list li {
   display: inline-block;
-  margin: 0 15px 0 0;
+  /* margin: 0 15px 0 0; */
+  padding: 0;
 }
 .tags-list li a {
   background-color: #fff;
-  display: inline-block;
-  border-radius: 30px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  display: inline-flex;
+  justify-self: center;
+  border-radius: 10%; /* 30px; */
+  /* box-shadow: $box-shadown-2; */
   padding: 10px 20px;
   border: 1px solid #ececec;
   font-family: "Quicksand", sans-serif;
-  font-size: 17px;
+  font-size: 14px;
+  overflow: hidden;
   font-weight: 700;
 }
 .tags-list li a i {

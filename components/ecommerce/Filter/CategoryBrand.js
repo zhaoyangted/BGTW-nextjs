@@ -18,7 +18,9 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 		router.push({
 			pathname: "/products/plist",
 			query: {
-				id: category, //
+				id: category,
+				page:0
+				//
 			},
 		})
 	}
@@ -85,7 +87,7 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 													key={i}
 												>
 													<Link
-														href={"/products/plist?id=" + li.d_id + "/"}
+														href={{pathname:"/products/plist" ,query:{id:li.d_id} }}
 														//as={`/products/products_list/${ul.d_id}`}
 													>
 														{li.d_title}
@@ -98,7 +100,7 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 															return (
 																<li key={ii} className={styles.li}>
 																	<Link
-																		href={"/products/plist?id=" + lii.d_id}
+																		href={{pathname:"/products/plist" ,query:{id: lii.d_id}}}
 																		//as={`/products/products_list/${li.d_id}`}
 																	>
 																		{lii.d_title}
