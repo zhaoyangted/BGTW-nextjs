@@ -24,10 +24,17 @@ const Account = () => {
 	}
 	
 	useEffect(()=>{
-		if (user==="") {
+		async function handleRouteChange() {
+			if (user==="") {
+			  await router.push('/login')
+			}
+		  }
+		  void handleRouteChange()
+	}, [user])
+	/* 	if (user==="") {
 			router.push('/login')
 		}
-	},[])
+	},[]) */
 /* 	useEffect(()=>{
 		//let res=isOnline()
 		//console.log(user.isLoggedIn)

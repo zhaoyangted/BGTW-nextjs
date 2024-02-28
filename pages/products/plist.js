@@ -32,11 +32,23 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	const handleModalClose = () => {
 		setModal(!modal)
 	}
+	
 	useEffect(() => {
 		if (!Router.isReady) {
 			return
 		}
+		const handleRouteChange = (url, { shallow }) => {
+			setCurrentPage(1)
+			/* console.log(
+			  `App is changing to ${url} ${
+				shallow ? 'with' : 'without'
+			  } shallow routing`
+			) */
+		  }
+	   
+		  Router.events.on('routeChangeStart', handleRouteChange)
 		//page?setCurrentPage(page):setCurrentPage(currentPage)
+		//console.log(currentPage)
 		fetchProduct(
 			searchTerm,
 			/* "/static/product.json" */ process.env.apiServer +
@@ -45,7 +57,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 				}`,
 			productFilters
 		)
-	}, [productFilters, limit, pages, currentPage, id,page])
+	}, [productFilters, limit, pages, currentPage, id,Router])
 	useEffect(() => {
 		const cratePagination = () => {
 			// set pagination
@@ -60,8 +72,10 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 			setGetPaginationGroup(arr.slice(start, end))
 		}
 		cratePagination()
-	}, [products, id, currentPage, productFilters,page])
-
+	}, [products, id, currentPage, productFilters])
+	/* useEffect(()=>{
+		if(page===1)setCurrentPage(1)
+	},[page]) */
 	/* const startIndex = currentPage * limit - limit
 	const endIndex = startIndex + limit */
 	/*const getPaginatedProducts = products.items .slice(startIndex, endIndex) */

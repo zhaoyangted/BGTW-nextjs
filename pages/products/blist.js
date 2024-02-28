@@ -36,6 +36,16 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 		if (!Router.isReady) {
 			return
 		}
+		const handleRouteChange = (url, { shallow }) => {
+			setCurrentPage(1)
+			/* console.log(
+			  `App is changing to ${url} ${
+				shallow ? 'with' : 'without'
+			  } shallow routing`
+			) */
+		  }
+	   
+		  Router.events.on('routeChangeStart', handleRouteChange)
 		fetchProduct(
 			searchTerm,
 			/* "/static/product.json" */ process.env.apiServer +

@@ -76,7 +76,7 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 								>
 									<Link
 										href={{ pathname: "/products/plist", query: { id: li.d_id,page:1 } }}
-										replace={false}
+										replace
 										shallow={false}
 										//href=""
 										//onClick={handleCat("/products/plist",li.d_id)}
@@ -94,7 +94,7 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 													<li key={index} className={styles.li}>
 														<Link
 															href={{ pathname: "/products/plist", query: { id: ul.d_id,page:1 } }}
-															replace={false}
+															replace
 															shallow={false}
 															//as={`/products/products_list/${li.d_id}`}
 															//onClick={handleCat("/products/plist",ul.d_id)}

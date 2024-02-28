@@ -5,7 +5,7 @@ import TrendingSlider2 from "../sliders/Trending2";
 import NewArrival2 from "../sliders/NewArrival2";
 import TopRatedSlider from "../sliders/TopRated";
 const Bottom = (data) => {
-    console.log(data)
+    //console.log(data)
     return (
         <>
             <section className="section-padding mb-30">
