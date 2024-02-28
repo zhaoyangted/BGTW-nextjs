@@ -26,7 +26,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	let [pages, setPages] = useState(products.pages?.TotalPage /* Math.ceil(products.items.length / limit) */)
 	let [currentPage, setCurrentPage] = useState(1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
-	const { id } = router.query
+	const { id,page } = router.query
 	const [modal, setModal] = useState(false)
 	const handleModalClose = () => {
 		setModal(!modal)
@@ -38,10 +38,12 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 		fetchProduct(
 			searchTerm,
 			/* "/static/product.json" */ process.env.apiServer +
-				`/api/product/toplist/${id}?page=${currentPage - 1}&limit=${limit}&order=${productFilters.featured}&color=${productFilters.tags}`,
+				`/api/product/toplist/${id}?page=${currentPage - 1}&limit=${limit}&order=${productFilters.featured||""}&color=${
+					productFilters.tags||0
+				}`,
 			productFilters
 		)
-	}, [productFilters, limit, pages, currentPage /* products.items.length */, , id])
+	}, [productFilters, limit, currentPage, id])
 	useEffect(() => {
 		const cratePagination = () => {
 			// set pagination
@@ -208,7 +210,9 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									<div className="totall-product">
 										<p>
 											找到
-											<strong className="text-brand">{products.items.length>0?products.pages?.TotalRecord:0}</strong>
+											<strong className="text-brand">
+												{products.items.length > 0 ? products.pages?.TotalRecord : 0}
+											</strong>
 											個產品!
 										</p>
 									</div>
@@ -241,7 +245,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 											<Pagination
 												getPaginationGroup={getPaginationGroup}
 												currentPage={currentPage}
-												pages={pages?pages:0}
+												pages={pages ? pages : 0}
 												next={next}
 												prev={prev}
 												handleActive={handleActive}

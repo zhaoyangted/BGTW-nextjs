@@ -1,14 +1,15 @@
-import { useEffect, useState, useCallback, useRef } from "react"
+import { useEffect, useState, useCallback, useRef, useContext } from "react"
 import React from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import TWzipcode from "react-twzipcode"
 import axios from "axios"
 import {toast} from 'react-toastify'
+import { AuthContext } from "../../util/useAuthContext"
 const AccEdit = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/account", fetcher)
-	
+	const {user,setUser} = useContext(AuthContext)
 	const handleImgClick =(e) =>{
 		
 		e.preventDefault();//console.log(e.target)
@@ -125,7 +126,6 @@ const AccEdit = () => {
 				d_company_fax_area: data?.dbdata.d_company_fax_area || "",
 				d_company_fax: data?.dbdata.d_company_fax || "",
 				d_company_website: data?.dbdata.d_company_website || "",
-				//d_company_account: data?.dbdata.d_company_account || "",
 				d_pname: data?.dbdata.d_pname || "",
 				d_job: data?.dbdata.d_job || "",
 				d_birthday: data?.dbdata.d_birthday || "",
@@ -140,10 +140,6 @@ const AccEdit = () => {
 				d_company_district: data?.dbdata.d_company_district || "",
 				d_company_zipcode: data?.dbdata.d_company_zipcode || "",
 				d_company_address: data?.dbdata.d_company_address || "",
-				/* d_county: data?.dbdata.d_county || "",
-				d_district: data?.dbdata.d_district || "",
-				d_zipcode: data?.dbdata.d_zipcode || "",
-				d_address: data?.dbdata.d_address || "", */
 				d_password:"",
 				d_repassword:"",
 				d_captcha:""
@@ -169,16 +165,13 @@ const AccEdit = () => {
 				d_zipcode: data?.dbdata.d_zipcode || "",
 				d_address: data?.dbdata.d_address || "",
 				d_account: data?.dbdata.d_account || "",
-				/* d_county: data?.dbdata.d_county || "",
-				d_district: data?.dbdata.d_district || "",
-				d_zipcode: data?.dbdata.d_zipcode || "",
-				d_address: data?.dbdata.d_address || "", */
 				d_company_county: data?.dbdata.d_company_county || "",
 				d_company_district: data?.dbdata.d_company_district || "",
 				d_company_zipcode: data?.dbdata.d_company_zipcode || "",
 				d_company_address: data?.dbdata.d_company_address || "",
 				d_password:"",
-				d_repassword:""
+				d_repassword:"",
+				d_captcha:""
 			})
 		}
 	}, [data])
@@ -192,7 +185,6 @@ const AccEdit = () => {
 			d_company_fax_area: "",
 			d_company_fax: "",
 			d_company_website: "",
-			//d_company_account: data?.dbdata.d_company_account || "",
 			d_pname: "",
 			d_job: "",
 			d_birthday: "",
@@ -212,33 +204,9 @@ const AccEdit = () => {
 			d_zipcode: "",
 			d_address: "",
 			d_password:"",
-			d_repassword:""
-		/* d_company_name: data?.dbdata.d_company_name || "",
-		d_company_title: data?.dbdata.d_company_title || "",
-		d_company_number: data?.dbdata.d_company_number || "",
-		d_company_tel_area: data?.dbdata.d_company_tel_area || "",
-		d_company_tel: data?.dbdata.d_company_tel || "",
-		d_company_fax_area: data?.dbdata.d_company_fax_area || "",
-		d_company_fax: data?.dbdata.d_company_fax || "",
-		d_company_website: data?.dbdata.d_company_website || "",
-		d_company_county: data?.dbdata.d_company_county || "",
-		d_company_district: data?.dbdata.d_company_district || "",
-		d_company_address: data?.dbdata.d_company_address || "",
-		d_company_zipcode: data?.dbdata.d_company_zipcode || "",
-		//d_company_account: data?.dbdata.d_company_account || "",
-		d_pname: data?.dbdata.d_pname || "",
-		d_job: data?.dbdata.d_job || "",
-		d_birthday: data?.dbdata.d_birthday || "",
-		d_phone: data?.dbdata.d_phone || "",
-		d_newsletter: data?.dbdata.d_newsletter || "",
-		d_county: data?.dbdata.d_county || "",
-		d_district: data?.dbdata.d_district || "",
-		d_zipcode: data?.dbdata.d_zipcode || "",
-		d_address: data?.dbdata.d_address || "",
-		d_account: data?.dbdata.d_account || "",
-		d_captcha: '',
-		d_password:'',
-		d_repassword:'' */
+			d_repassword:"",
+			d_captcha:""
+	
 	})
 	//console.log(formData)
 	return (
@@ -463,7 +431,7 @@ const AccEdit = () => {
 						</div>
 						<li>
 							<h2>驗証碼*</h2>
-							<input type="text" name="d_captcha" onChange={handleInput} value={formData?.d_captcha} required />
+							<input type="text" name="d_captcha"  onChange={handleInput}  value={formData.d_captcha} required />
 						</li>
 						<li className={styles.contact_captcha}>
 							<img width="10%" id="captcha" src={process.env.apiServer + "/login/make_vcode_img"} onClick={handleImgClick}/>

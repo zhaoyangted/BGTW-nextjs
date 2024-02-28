@@ -1,12 +1,14 @@
-import React from "react"
+import React, { useContext } from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import Link from "next/link"
+import { AuthContext } from "../../util/useAuthContext"
 const Point = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/point", fetcher)
+	const {user,setUser} = useContext(AuthContext)
 	return (
-		<>
+	<>
 			<section className={styles.content_box}>
 				<div className={styles.title01}>會員點數</div>
 				<div className={styles.point_info}>

@@ -13,7 +13,8 @@ import Intro1 from "./../components/sliders/Intro1"
 //import Link from "next/link"
 //import { useAuth } from "../util/useAuth"
 //import { useSession } from "next-auth/react"
-//import useSWR from "swr"
+import { useQuery } from "react-query"
+import useSWR from "swr"
 import useSWRMutation from 'swr/mutation'
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../util/useAuthContext"
@@ -21,10 +22,45 @@ export default function Home() {
 	//const { status, data: session } = useSession()
 	const {user,setUser} = useContext(AuthContext)
 	const fetcher = (url) => fetch(url, { credentials: "include", sameSite: "none" }).then((r) => r.json())
-	const { data, isLoading, error,trigger } = useSWRMutation(process.env.apiServer + "/api/homepage/", fetcher)
-	useEffect(()=>{
-		trigger()
-	},[user])
+	const { data, isLoading, error,refetch } = useQuery({
+	
+		queryKey:["gethomepage",process.env.apiServer + "/api/homepage/"],
+		queryFn:()=>fetcher(process.env.apiServer + "/api/homepage/"),
+		enabled:true,
+		refetchOnWindowFocus:true
+	})
+	
+	const { 
+		data:newData, 
+		isLoading:newLoading, 
+		error:newError,
+		//refetch:newFetch,
+		
+		//trigger:newTrigger
+	} = useQuery({
+		queryKey:["getnew",process.env.apiServer + "/api/product/newproducts"],
+		queryFn:()=>fetcher(process.env.apiServer + "/api/product/newproducts"),
+		enabled:true,
+		refetchOnWindowFocus:true
+		})
+	const { 
+		data:hot, 
+		isLoading:hotLoading, 
+		error:hotError,
+		//refetch:hotFetch
+		//trigger:hotTrigger
+	} = useQuery({
+		queryKey:["gethot",process.env.apiServer + "/api/product/hot"],
+		queryFn:()=>fetcher(process.env.apiServer + "/api/product/hot"),
+		enabled:true,
+		refetchOnWindowFocus:true
+	})
+	/* useEffect(()=>{
+		newFetch()
+		refetch()
+		hotFetch()
+	},[]) */
+	//console.log(hot)
 	return (
 		<>
 			{/* <IntroPopup /> */}
@@ -84,23 +120,19 @@ export default function Home() {
 					</div>
 				</section>
 
+				{hot&&
 				<section className="product-tabs section-padding position-relative">
 					<div className="container">
-						{/* <div className="col-lg-12"> */}
-						<CategoryTab />
-						{/* </div> */}
+						<CategoryTab  data={hot}/>
 					</div>
 				</section>
+				}
 
-				{/* <section className="section-padding pb-5">
-					<div className="container"> */}
-				<FetchTabSlider />
-				{/* </div>
-				</section> */}
+				{!newError&&<FetchTabSlider data={newData}/>}
+				
+				{!newError&&<FeatchDeals data={newData}/>}
 
-				<FeatchDeals />
-
-				<Bottom />
+				{hot&&<Bottom data={hot}/>}
 
 				<QuickView />
 			</Layout>

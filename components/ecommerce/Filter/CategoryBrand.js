@@ -87,7 +87,9 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 													key={i}
 												>
 													<Link
-														href={{pathname:"/products/plist" ,query:{id:li.d_id} }}
+														href={{pathname:"/products/plist" ,query:{id:li.d_id,page:1} }}
+														shallow
+														replace={false}
 														//as={`/products/products_list/${ul.d_id}`}
 													>
 														{li.d_title}
@@ -100,7 +102,9 @@ const CategoryBrand = ({ updateProductCategory, menusData }) => {
 															return (
 																<li key={ii} className={styles.li}>
 																	<Link
-																		href={{pathname:"/products/plist" ,query:{id: lii.d_id}}}
+																		href={{pathname:"/products/plist" ,query:{id: lii.d_id,page:1}}}
+																		replace={false}
+																		shallow
 																		//as={`/products/products_list/${li.d_id}`}
 																	>
 																		{lii.d_title}

@@ -2,10 +2,32 @@ import { useState,useEffect } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
 import {toast} from 'react-toastify'
+import { revalidatePath } from "next/cache"
 export const useAuth = () => {
 	const [user, setUser] = useState(null)
     const router = useRouter()
     
+	useEffect(()=>{
+		//isOnline
+		const getAuth = async () =>{
+			try {
+				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
+				
+					if (response.data.isLoggedIn){
+						setUser(response.data.data)
+					}
+					else 
+					{
+						setUser("")
+					}
+			  
+			} catch (err) {
+				console.error(err)
+	
+			}
+		}
+		getAuth()
+	},[])
 	const signIn = async (data) => {
 		try {
 			let authresult = await axios.post(process.env.apiServer + "/api/auth/login", data, { credentials: "include" })
@@ -44,13 +66,7 @@ export const useAuth = () => {
         try {
             let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
             
-                if (response.data.isLoggedIn){
-                    setUser(response.data.data)
-                }
-                else 
-                {
-                    setUser("")
-                }
+                return response.data.isLoggedIn
           
         } catch (err) {
             console.error(err)
@@ -77,8 +93,8 @@ export const useAuth = () => {
 		try {
 			let response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
-				setUser(null)
-				router.push('/')
+				setUser("")
+				router.push('/',null,{shallow:false})
                 toast("登出成功")
 			}
 		} catch (err) {

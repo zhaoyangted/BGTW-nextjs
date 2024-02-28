@@ -32,7 +32,7 @@ const OrderInfo = () => {
 		await signOut()
 	}
 	return (
-		<>
+	user?<>
 			<section className="content_box03">
 				{data?.Odata.d_orderstatus !== 10 ? (
 					data?.Odata.d_pay === 4 ? (
@@ -507,7 +507,7 @@ const OrderInfo = () => {
 					</section>
 				</div>
 			</div>
-		</>
+		</>:null
 	)
 }
 

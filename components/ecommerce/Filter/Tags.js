@@ -6,7 +6,7 @@ import { updateProductFilters } from "../../../redux/action/productFiltersAction
 const Tags = ({ updateProductFilters }) => {
 	const router = useRouter()
 	const tags = [
-		{ value: "" },
+		/* { value: "" }, */
 		{ value: "1", title: "red" },
 		{ value: "2", title: "blue" },
 		{ value: "3", title: "green" },
@@ -14,6 +14,8 @@ const Tags = ({ updateProductFilters }) => {
 		{ value: "5", title: "brown" },
 		{ value: "6", title: "purple" },
 		{ value: "7", title: "white" },
+		{ value: "8", title: "beige" },
+		{ value: "9", title: "pink" },
 	]
 	const [selectedTags, setTags] = useState([])
 	const [active, setActive] = useState(0)

@@ -4,7 +4,6 @@ import Layout from "../components/layout/Layout"
 import styles from "../components/account.module.css"
 import { useRouter } from "next/router"
 import { AuthContext, useAuthContext } from "../util/useAuthContext"
-import { useAuth } from "../util/useAuth"
 import axios from "axios"
 function Login() {
 	const [userInfo, setUserInfo] = useState({ d_account: "", d_password: "", d_captcha: "" })
@@ -29,30 +28,9 @@ function Login() {
 		//console.log(data)
 		await signIn(data)
 	}
-	useEffect(() => {
-		const getAuth = async () =>{
-			try {
-				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
-				
-					if (response.data.isLoggedIn){
-						setUser(response.data.data)
-					}
-					else 
-					{
-						setUser("")
-					}
-			  
-			} catch (err) {
-				console.error(err)
-	
-			}
-		}
-		getAuth()
-		//console.log(user)
-		if (user) {
-			router.push("/account")
-		}
-	}, [])
+	/* useEffect(()=>{
+		if(user!=="") router.push('/account',undefined,{shallow:false})
+	},[]) */
 	return (
 		<>
 			<Layout parent="首頁" /* sub="Pages"  */ sub=" 會員中心">
@@ -67,13 +45,15 @@ function Login() {
 							{/*<div className="col-lg-6 col-md-8">
 										 <div className="login_wrap widget-taber-content background-white"> */}
 							<div className={styles.content_box}>
+								
+								{!user?
+								<>
 								<div className={styles.mbox}>
 									<h1 className={styles.title01}>會員登入</h1>
 									{/* <p className="mb-30">
 														Don't have an account? <Link href="/page-register">{errorMsg?errorMsg:'Create here'}</Link>
 													</p> */}
 								</div>
-								{!user &&
 									<form method="post" onSubmit={handleSubmit}>
 										<ul className={styles.styled_input}>
 											<li>
@@ -133,6 +113,16 @@ function Login() {
 											</li>
 										</ul>
 									</form>
+									</>
+									:
+									<>
+									<div className={styles.mbox}>
+									<h1 className={styles.title01}>會員已登入</h1>
+									{/* <p className="mb-30">
+														Don't have an account? <Link href="/page-register">{errorMsg?errorMsg:'Create here'}</Link>
+													</p> */}
+									</div>
+									</>
 								}
 							</div>
 						</div>

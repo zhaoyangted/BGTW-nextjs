@@ -4,28 +4,30 @@ import Cat1Tab from '../elements/FeaturedTab';
 /* import Cat2Tab from '../elements/NewArrivalTab';
 import Cat3Tab from '../elements/TrendingTab';
 import Link from "next/link" */
-function CategoryTab() {
+function CategoryTab(data) {
     const [active, setActive] = useState("1");
     const [catAll, setCatAll] = useState([]);
     const [cats, setCats] = useState([]);
     const [hotProd, setHotProd] = useState([]);
-    const [cat3, setCat3] = useState([]);
+    //const [cat3, setCat3] = useState([]);
     //console.log(data)
     /* 
     setHotProd(Object.values(data)) */
     
-    const catPAll = async () => {
-        const request = await fetch(process.env.apiServer+`/api/product/hot/`,
-        {credentials: 'include'});
+   const catPAll =  (data) => {
+    /*      const request = await fetch(process.env.apiServer+`/api/product/hot`,
+        {credentials: 'include'});; */
         
-        const allProducts = await request.json();
-        setCats(Object.keys(allProducts))
+       // const allProducts =  data.json()
+       if (data) {
+        setCats(Object.keys(data.data))
         //console.log(hotProd)
-        //const catAllItem = allProducts.filter((item) => item.category);
-        setCatAll(Object.values(allProducts));
-        setHotProd(Object.values(allProducts)[0])
+        //const catAllItem = data.filter((item) => item.category);
+        setCatAll(Object.values(data.data));
+        setHotProd(Object.values(data.data)[0])
         setActive("1");
-    };
+       }
+   };
     /* const catP1 = async () => {
         const request = await fetch(`${server}/static/product.json`);
         const allProducts = await request.json();
@@ -50,8 +52,8 @@ function CategoryTab() {
     }; */
 
     useEffect(() => {
-        catPAll();
-    }, []);
+        if (data) catPAll(data);
+    }, [data]);
 
     return (
         <>

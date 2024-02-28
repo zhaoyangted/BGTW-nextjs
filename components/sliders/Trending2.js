@@ -3,30 +3,25 @@ import React, { useEffect, useState } from "react";
 
 import { fetchByCatagory } from "../../redux/action/product";
 
-const TrendingSlider = () => {
+const TrendingSlider = (allProducts) => {
 
-    const [trending, setTrending] = useState([]);
+    const [trending, setTrending] = useState(Object.values(allProducts.allProducts)[4]);
 
-    useEffect(() => {
+    /* useEffect(() => {
         fetchProducts();
     }, []);
 
     const fetchProducts = async () => {
-/* 
-        // With Category
-        const allProducts = await fetchByCatagory("/static/product.json");
-
-        const trendingItem = allProducts.filter((item) => item.trending); */
         const request = await fetch(process.env.apiServer+`/api/product/hot/`,
         {credentials: 'include'});
         
         const allProducts = await request.json();
         setTrending(Object.values(allProducts)[4]);
-    };
+    }; */
 
 
     return <>
-        {trending.slice(0, 4).map((product, i) => (
+        {trending?.slice(0, 4).map((product, i) => (
                 <article className="row align-items-center hover-up" key={i}>
                 <figure className="col-md-4 mb-0">
                     <Link href={{

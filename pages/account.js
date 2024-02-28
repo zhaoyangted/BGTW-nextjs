@@ -9,13 +9,12 @@ import { useRouter } from "next/router"
 import Orders from "../components/account/Orders"
 import Friends from "../components/account/Friends"
 import { AuthContext } from "../util/useAuthContext"
-import axios from "axios"
-const Account = (props) => {
+const Account = () => {
 	const { query} = useRouter()
 	const router = useRouter()
 	const activeTab = useActiveTab()
 	const orderId = query.orderId
-	const {user,signOut,isOnline,setUser}=useContext(AuthContext)
+	const {user,signOut,setUser,isOnline}=useContext(AuthContext)
 	function useActiveTab() {
 		const activeTab = query.activeTab || "account"
 		return activeTab
@@ -25,6 +24,11 @@ const Account = (props) => {
 	}
 	
 	useEffect(()=>{
+		if (user==="") {
+			router.push('/login')
+		}
+	},[])
+/* 	useEffect(()=>{
 		//let res=isOnline()
 		//console.log(user.isLoggedIn)
 		const getAuth = async () =>{
@@ -34,22 +38,13 @@ const Account = (props) => {
 					if (response.data.isLoggedIn){
 						setUser(response.data.data)
 					}
-					else 
-					{
-						setUser("")
-					}
-			  
 			} catch (err) {
 				console.error(err)
 	
 			}
 		}
-		getAuth()
-		if (!user) {
-			router.push('/login')
-		}
-	},[])
-	
+		if (user===null) getAuth()
+	},[]) */
 		return (
 		<>
 			<Layout parent="首頁" /*sub="Account" */ sub=" 會員中心">

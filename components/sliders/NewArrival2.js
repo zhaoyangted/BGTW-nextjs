@@ -5,30 +5,23 @@ import { server } from "../../config/index";
 
 SwiperCore.use([Navigation]);
 
-const NewArrival2 = () => {
-    const [newArrival, setNewArrival] = useState([]);
+const NewArrival2 = (allProducts) => {
+    const [newArrival, setNewArrival] = useState(Object.values(allProducts.allProducts)[5]);
 
-    useEffect(() => {
+   /*  useEffect(() => {
         fetchProducts();
     }, []);
 
     const fetchProducts = async () => {
-        /* // With Category
-        const request = await fetch(`${server}/static/product.json`);
-        const allProducts = await request.json();
-
-        const newArrivalProducts = allProducts.sort(function (a, b) {
-            return a.created > b.created ? -1 : 1;
-        }); */
         const request = await fetch(process.env.apiServer+`/api/product/hot/`,
         {credentials: 'include'});
         
         const allProducts = await request.json();
         setNewArrival(Object.values(allProducts)[5]);
     };
-
+ */
     return <>
-        {newArrival.slice(0, 4).map((product, i) => (
+        {newArrival?.slice(0, 4).map((product, i) => (
             <article className="row align-items-center hover-up" key={i}>
                 <figure className="col-md-4 mb-0">
                     <Link href={{

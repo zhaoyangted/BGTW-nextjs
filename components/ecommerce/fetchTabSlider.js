@@ -7,15 +7,15 @@ import FeaturedSlider from "../sliders/Featured"
 //import TrendingSlider from "../sliders/Trending"
 import useSWR from "swr"
 // import useSWR from 'swr'
-function FeatchTabSlider() {
+function FeatchTabSlider(data) {
 	const [active, setActive] = useState("1")
-	const fetcher = (url) =>
+	/* const fetcher = (url) =>
 		fetch(url, { credentials: "include" })
 			.then((r) => r.json())
 			.catch()
-	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/product/newproducts", fetcher)
+	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/product/newproducts", fetcher) */
 	//console.log(data)
-	if (data?.length > 0) {
+	if (data.data?.length > 0) {
 		return (
 			<>
 				<section className="section-padding pb-5">
@@ -42,7 +42,7 @@ function FeatchTabSlider() {
 								return ( */}
 									<div className={active === "1" ? "tab-pane fade show active" : "tab-pane fade"} /*  key={i} */>
 										<div className="carausel-4-columns-cover card-product-small arrow-center position-relative">
-											<FeaturedSlider products={data} />
+											<FeaturedSlider products={data.data} />
 										</div>
 									</div>
 									{/* 	)

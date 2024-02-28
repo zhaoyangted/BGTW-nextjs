@@ -5,31 +5,25 @@ import { fetchByCatagory } from "../../redux/action/product";
 
 SwiperCore.use([Navigation]);
 
-const TopRatedSlider = () => {
-    const [discount, setDiscount] = useState([]);
+const TopRatedSlider = (allProducts) => {
+    //console.log(allProducts)
+    const [discount, setDiscount] = useState(Object.values(allProducts.allProducts)[1]);
 
     // console.log(discount);
 
-    useEffect(() => {
+    /* useEffect(() => {
         fetchProducts();
     }, []);
 
     const fetchProducts = async () => {
-       /*  // With Category
-        const allProducts = await fetchByCatagory("/static/product.json");
-
-        // Discount
-        const discountProduct = allProducts.filter(
-            (item) => item.discount.isActive
-        ); */
         const request = await fetch(process.env.apiServer+`/api/product/hot/`,
         {credentials: 'include'});
         
         const allProducts = await request.json();
         setDiscount(Object.values(allProducts)[1]);
-    };
+    }; */
     return <>
-            {discount.slice(0,4).map((product, i) => (
+            {discount?.slice(0,4).map((product, i) => (
                 <article className="row align-items-center hover-up" key={i}>
                 <figure className="col-md-4 mb-0">
                     <Link href={{

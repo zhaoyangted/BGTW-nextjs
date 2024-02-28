@@ -162,7 +162,7 @@ const Cart = ({
 															<i className="fi-rs-angle-small-down"></i>
 														</a>
 														<span className="qty-val">{item.quantity}</span>
-														<a onClick={(e) => increaseQuantity(item.d_id)} className="qty-up">
+														<a onClick={(e) => {if (parseInt(item.quantity)<parseInt(item.d_stock)) increaseQuantity(item.d_id)}} className="qty-up">
 															<i className="fi-rs-angle-small-up"></i>
 														</a></>
 														}

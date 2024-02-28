@@ -1,21 +1,18 @@
-import React,{useEffect} from "react"
+import React,{useContext, useEffect} from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 //import { useAuth } from "../../util/useAuth"
 //import { useRouter } from "next/router"
 import Link from "next/link"
+import { AuthContext } from "../../util/useAuthContext"
 const Member = () => {
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	//const { user, setUser, signOut } = useAuth()
 	//const router = useRouter()
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/", fetcher)
-	/* useEffect(()=>{
-		if (!user?.isLoggedin) {
-			router.push('/login')
-		}
-	},[]) */
+	const {user,setUser} = useContext(AuthContext)
 	return (
-			<>
+		<>
 				<section className={styles.content_box}>
 					<div className={styles.title01}>會員中心</div>
 					<div className={styles.contact_box}>

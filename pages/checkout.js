@@ -85,7 +85,7 @@ const Cart = ({
 			}
 		}
 		getAuth()
-		if (!user) {
+		if (user==="") {
 			toast("請先登入", { autoClose: 15000 })
 			router.push('/login')
 		}

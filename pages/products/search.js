@@ -30,7 +30,14 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 	let [currentPage, setCurrentPage] = useState(page ? page : 1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
 	//console.log(Pkeyword,Ptype)
-	const postdata = { Pkeyword: Pkeyword, Ptype: Ptype, page: currentPage - 1, limit: limit,color:productFilters.tags,order:productFilters.featured }
+	const postdata = {
+		Pkeyword: Pkeyword,
+		Ptype: Ptype,
+		page: currentPage - 1,
+		limit: limit,
+		color: productFilters.tags,
+		order: productFilters.featured,
+	}
 	const [modal, setModal] = useState(false)
 	const handleModalClose = () => {
 		setModal(!modal)
@@ -47,12 +54,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 		})
         console.log(podata) */
 		//console.log(postdata)
-		fetchProduct(
-			searchTerm,
-			process.env.apiServer + `/api/product/search/`,
-			productFilters,
-			postdata
-		)
+		fetchProduct(searchTerm, process.env.apiServer + `/api/product/search/`, productFilters, postdata)
 	}, [productFilters, limit, pages, currentPage, Pkeyword, Ptype])
 	useEffect(() => {
 		const cratePagination = () => {
@@ -209,7 +211,6 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 										<p>
 											搜索關鍵字：
 											<strong className="text-brand">{Pkeyword}</strong>
-										
 										</p>
 									</div>
 									<div className="sort-by-product-area">
@@ -241,7 +242,7 @@ const SearchList = ({ products, productFilters, fetchProduct }) => {
 											<Pagination
 												getPaginationGroup={getPaginationGroup}
 												currentPage={currentPage}
-												pages={pages?pages:0}
+												pages={pages ? pages : 0}
 												next={next}
 												prev={prev}
 												handleActive={handleActive}

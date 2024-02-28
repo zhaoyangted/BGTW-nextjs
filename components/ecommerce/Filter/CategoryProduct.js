@@ -38,7 +38,10 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 			})
 		}
 	}
+	const handleCat = (url,query) =>{
+		router.push({pathname:url,query:{id:query}},undefined,{shallow:false})
 
+	}
 	/* let domNode = useClickOutside(() => {
 		setIsActive({
 			status: false,
@@ -72,7 +75,11 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 									}
 								>
 									<Link
-										href={{ pathname: "/products/plist", query: { id: li.d_id,page:0 } }}
+										href={{ pathname: "/products/plist", query: { id: li.d_id,page:1 } }}
+										replace={false}
+										shallow={false}
+										//href=""
+										//onClick={handleCat("/products/plist",li.d_id)}
 										//as={`/products/products_list/${li.d_id}`}
 									>
 										{li.d_title}
@@ -86,8 +93,11 @@ const CategoryProduct = ({ updateProductCategory, menuDatas, menus }) => {
 												return (
 													<li key={index} className={styles.li}>
 														<Link
-															href={{ pathname: "/products/plist", query: { id: ul.d_id,page:0 } }}
+															href={{ pathname: "/products/plist", query: { id: ul.d_id,page:1 } }}
+															replace={false}
+															shallow={false}
 															//as={`/products/products_list/${li.d_id}`}
+															//onClick={handleCat("/products/plist",ul.d_id)}
 														>
 															{ul.d_title}
 														</Link>

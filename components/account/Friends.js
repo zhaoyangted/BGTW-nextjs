@@ -1,8 +1,10 @@
-import React,{useState} from "react"
+import React,{useContext, useState} from "react"
 import styles from "../../components/account.module.css"
-import useSWR from "swr"
+//import useSWR from "swr"
+import { AuthContext } from "../../util/useAuthContext"
 const Friends = () => {
     const [email,setEmail]= useState({})
+	const {user,setUser}=useContext(AuthContext)
     const handleInput =(e)=>{
         e.preventDefault()
         const fieldName = e.target?.name
@@ -31,7 +33,7 @@ const Friends = () => {
 			(error)=>console.log(error))
     }
 	return (
-		<>
+	<>
 			<section className={styles.content_box}>
 				<div className={styles.w16}>
 					推薦Beauty Garage 台灣美麗平台給朋友，朋友成功加入會員，並首次購物成功，您可獲得{" "}

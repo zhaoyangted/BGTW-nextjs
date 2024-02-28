@@ -2,10 +2,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { fetchByCatagory } from "../../redux/action/product";
 
-const BestSellerSlider = () => {
-    const [bestSeller, setBestSeller] = useState([]);
+const BestSellerSlider = (allProducts) => {
+    const [bestSeller, setBestSeller] = useState(Object.values(allProducts.allProducts)[3]);
     
-    useEffect(() => {
+    /* useEffect(() => {
         fetchProducts();
     }, []);
 
@@ -14,19 +14,13 @@ const BestSellerSlider = () => {
         {credentials: 'include'});
         
         const allProducts = await request.json();
-        // With Category
-       /*  const allProducts = await fetchByCatagory("/static/product.json");
-
-        // Best Seller
-        const bestSellerProducts = allProducts.sort(function (a, b) {
-            return a.totalSell > b.totalSell ? -1 : 1; 
-        });*/
+   
 
         setBestSeller(Object.values(allProducts)[3]);
-    };
+    }; */
 
     return <>
-        {bestSeller.slice(0, 4).map((product, i) => (
+        {bestSeller?.slice(0, 4).map((product, i) => (
             <article className="row align-items-center hover-up" key={i}>
                 <figure className="col-md-4 mb-0">
                     <Link href={{

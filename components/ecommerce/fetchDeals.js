@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react"
 import { server } from "../../config/index"
 import Deals1 from "../elements/Deals1"
 import useSWR from "swr"
-function FeatchDeals() {
+function FeatchDeals(data) {
 	const [deals, setDeals] = useState([])
-	const fetcher = (url) =>
+	/*const fetcher = (url) =>
 		fetch(url, { credentials: "include" })
 			.then((r) => r.json())
 			.catch()
-	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/product/newproducts/", fetcher)
-	/*  const dealsProduct = async () => {
+	const { data, isLoading, error } = useSWR(process.env.apiServer + "/api/product/newproducts", fetcher)
+	  const dealsProduct = async () => {
         const request = await fetch(`${server}/static/product.json`);
         const allProducts = await request.json();
         // Discount

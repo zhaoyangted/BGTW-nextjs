@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import Search from "../ecommerce/Search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
-import { AuthContext, useAuthContext } from "../../util/useAuthContext"
+import { AuthContext } from "../../util/useAuthContext"
 //import { useAuth } from "../../util/useAuth"
 //import { useSession, signIn, signOut } from "next-auth/react"
 import styles from "../../components/header.module.css"
@@ -38,7 +38,7 @@ const Header = ({
 	const [isToggled, setToggled] = useState(false)
 	const [scroll, setScroll] = useState(0)
 	const [apiData, setApiData] = useState({})
-	const router=useRouter()
+	//const router=useRouter()
 
 	const {user,setUser,signIn,signOut,isOnline}=useContext(AuthContext)
 	/* useEffect(()=>{
@@ -64,7 +64,7 @@ const Header = ({
 			}
 		})
 	})
-	useEffect (()=>{
+	/* useEffect (()=>{
 		const getAuth = async () =>{
 			try {
 				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
@@ -83,7 +83,7 @@ const Header = ({
 			}
 		}
 		getAuth()
-	},[])
+	},[]) */
 	useEffect(() => {
 		const point = async () => {
 			let str = ""
@@ -109,11 +109,11 @@ const Header = ({
 							return (
 								<li className="position-static" key={index}>
 									{/* <img src="/assets/imgs/theme/icons/icon-hot.svg" alt="hot deals" /> */}
-									<Link href={{pathname:`/products/toplist`,query:{id:li[0].split("_")[1]}}}>{li[0].split("_")[0]}</Link>
+									<Link href={{pathname:`/products/toplist`,query:{id:li[0].split("_")[1],page:1}}}>{li[0].split("_")[0]}</Link>
 									{/* <i className="fi-rs-angle-down"></i> */}
 									<ul className="mega-menu">
 										<div className={styles.HdNAVUBTopTT}>
-											<Link className="menu-title" href={`/products/toplist?id=${li[0].split("_")[1]}`}>
+											<Link className="menu-title" href={{pathname:"/products/toplist",query:{id:li[0].split("_")[1],page:1}}}>
 												{li[0].split("_")[0]}TOP
 											</Link>
 										</div>
@@ -121,7 +121,7 @@ const Header = ({
 											//  console.log(ul)
 											return (
 												<li className="sub-mega-menu sub-mega-menu-width-22" key={index}>
-													<Link href={{pathname:"/products/plist",query:{id:ul.d_id}}} 
+													<Link href={{pathname:"/products/plist",query:{id:ul.d_id,page:1}}} 
 													//as={`/products/products_list/${ul.d_id}`}
 													>{ul.d_title}</Link>
 													<span className="menu-expand" onClick={() => handleToggle(index)}>
@@ -140,21 +140,13 @@ const Header = ({
 		)
 	}
 	const handleSignOut = async () => {
-		//if (user?.isLoggedIn) {
-			/* const response = await axios.put(process.env.apiServer + "/api/auth/logout",{credentials:'include'})
-			if (response.status === 200) { */
+		
 				await signOut()
-			/* } else {
-				alert("logout failed")
-				await signOut()
-			}
-		} else {
-			alert("not login.")
-		} */
-	//}
+		
 }
 	const handleToggle = () => setToggled(!isToggled)
 	// console.log(Object.values(config)[13])
+	//console.log(user)
 	return (
 		<>
 			<header className="header-area header-style-1 header-height-2">

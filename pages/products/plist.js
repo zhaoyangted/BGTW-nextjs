@@ -19,15 +19,15 @@ import ShowFilter from "../../components/ecommerce/Filter/ShowFilter"
 //import FilterModale from "../../../components/ecommerce/FilterModal"
 const ProductsList = ({ products, productFilters, fetchProduct }) => {
 	const Router = useRouter(),
-		searchTerm = Router.query.search,
-		showLimit = 12,
-		showPagination = 4
-	const { id, page } = Router.query
+	searchTerm = Router.query.search,
+	showLimit = 12,
+	showPagination = 4
 	let [pagination, setPagination] = useState([])
 	let [limit, setLimit] = useState(showLimit)
 	let [pages, setPages] = useState(products.pages?.TotalPage /* Math.ceil(products.items.length / limit) */)
-	let [currentPage, setCurrentPage] = useState(page ? page : 1)
 	let [getPaginationGroup, setGetPaginationGroup] = useState()
+	const { id,page } = Router.query
+	const [currentPage, setCurrentPage] = useState(1)
 	const [modal, setModal] = useState(false)
 	const handleModalClose = () => {
 		setModal(!modal)
@@ -36,13 +36,16 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 		if (!Router.isReady) {
 			return
 		}
+		//page?setCurrentPage(page):setCurrentPage(currentPage)
 		fetchProduct(
 			searchTerm,
 			/* "/static/product.json" */ process.env.apiServer +
-				`/api/product/plist/${id}?page=${currentPage - 1}&limit=${limit}&order=${productFilters.featured}&color=${productFilters.tags}`,
+				`/api/product/plist/${id}?page=${currentPage - 1}&limit=${limit}&order=${productFilters.featured||""}&color=${
+					productFilters.tags||0
+				}`,
 			productFilters
 		)
-	}, [productFilters, limit, pages, currentPage /* products.items.length */, id])
+	}, [productFilters, limit, pages, currentPage, id,page])
 	useEffect(() => {
 		const cratePagination = () => {
 			// set pagination
@@ -57,7 +60,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 			setGetPaginationGroup(arr.slice(start, end))
 		}
 		cratePagination()
-	}, [products, id, currentPage, productFilters])
+	}, [products, id, currentPage, productFilters,page])
 
 	/* const startIndex = currentPage * limit - limit
 	const endIndex = startIndex + limit */
@@ -189,7 +192,9 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									<div className="totall-product">
 										<p>
 											找到
-											<strong className="text-brand">{products?.items?.length>0?products.pages?.TotalRecord:0}</strong>
+											<strong className="text-brand">
+												{products?.items?.length > 0 ? products.pages?.TotalRecord : 0}
+											</strong>
 											個產品!
 										</p>
 									</div>
@@ -206,7 +211,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 									</div>
 								</div>
 								<div className="row product-grid-3">
-									{(products?.items?.length === 0 )&& <h3>無產品 </h3>}
+									{products?.items?.length === 0 && <h3>無產品 </h3>}
 
 									{products?.items?.map((item, i) => (
 										<div className="col-lg-3 col-md-4 col-6 col-sm-6 mb-30" key={i}>
@@ -222,7 +227,7 @@ const ProductsList = ({ products, productFilters, fetchProduct }) => {
 											<Pagination
 												getPaginationGroup={getPaginationGroup}
 												currentPage={currentPage}
-												pages={pages?pages:0}
+												pages={pages ? pages : 0}
 												next={next}
 												prev={prev}
 												handleActive={handleActive}

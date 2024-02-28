@@ -10,9 +10,9 @@ function About() {
 	return (
 		<>
 			<Layout parent="首頁" /* sub="關於美麗平台" */ sub=" 關於美麗平台">
-				<div className="container  pt-50">
-					<div className="row">
-						<div className="col-xl-10 col-lg-12 m-auto">
+				{/* <div className="container  pt-50">*/}
+					<div className="container-lg"> 
+						<div className="col-lg-">
 							{/* 							<section className="row align-items-center mb-50">
 								<div className="col-lg-6">
 									<img
@@ -46,7 +46,7 @@ function About() {
 									className={styles.user_editor}
 									dangerouslySetInnerHTML={{ __html: data?.AboutData ? data.AboutData : null }}
 								></div>
-								<div className="row">
+								{/* <div className="row"> */}
 									<div className={styles.store}>
 										<a
 											id="position"
@@ -69,11 +69,11 @@ function About() {
 											)
 										})}
 									</div>
-								</div>
+								{/* </div> */}
 							</section>
 						</div>
 					</div>
-				</div>
+				{/* </div> */}
 			</Layout>
 		</>
 	)

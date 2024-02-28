@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import styles from "../../components/account.module.css"
 import useSWR from "swr"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,22 +8,23 @@ import { toast } from "react-toastify"
 import { addToCart } from "../../redux/action/cart"
 import { deleteFromWishlist } from "../../redux/action/wishlistAction"
 import Link from "next/link"
+import { AuthContext } from "../../util/useAuthContext"
 const Favorites = ({ product, addToCart, deleteFromWishlist }) => {
 	const handleCart = (product) => {
 		addToCart(product)
 		toast("已加入購物車!")
 	}
-
+	//const {user,setUser} = useContext(AuthContext)
 	const fetcher = (url) => fetch(url, { credentials: "include" }).then((r) => r.json())
 	const { data, loading, error } = useSWR(process.env.apiServer + "/api/member/favorite", fetcher)
 	//console.log(data.dbdata.dbdata)
-	const getAdd = (str) => {
+	/* const getAdd = (str) => {
 		let Add_title = p.d_add_title.split(",")
 		let Add_price = p.d_add_price.split(",")
 		let Add_id = p.d_add_id.split(",")
 		let Add_stock = p.d_add_stock.split(",")
 		let Add_enable = p.d_add_enable.split(",")
-	}
+	} */
 	return (
 		<>
 			<section className="content_box">
