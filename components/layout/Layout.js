@@ -44,7 +44,7 @@ const Layout = ({ children, parent, sub, subChild, noBreadcrumb, headerStyle }) 
 			{isToggled && <div className="body-overlay-1" onClick={toggleClick}></div>}
 
 			<Header headerStyle={headerStyle} isToggled={isToggled} toggleClick={toggleClick} data={data} config={config} />
-			<MobileMenu isToggled={isToggled} toggleClick={toggleClick} data={data} />
+			<MobileMenu isToggled={isToggled} toggleClick={toggleClick} data={data} setToggled={setToggled}/>
 			<main className="main">
 				<Breadcrumb parent={parent} sub={sub} subChild={subChild} noBreadcrumb={noBreadcrumb} />
 				{children}

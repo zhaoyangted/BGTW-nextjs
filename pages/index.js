@@ -14,10 +14,11 @@ import Intro1 from "./../components/sliders/Intro1"
 //import { useAuth } from "../util/useAuth"
 //import { useSession } from "next-auth/react"
 import { useQuery } from "react-query"
-import useSWR from "swr"
-import useSWRMutation from 'swr/mutation'
+//import useSWR from "swr"
+//import useSWRMutation from 'swr/mutation'
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../util/useAuthContext"
+import CookieConsent from '../components/cookieconsent'
 export default function Home() {
 	//const { status, data: session } = useSession()
 	const {user,setUser} = useContext(AuthContext)
@@ -26,7 +27,7 @@ export default function Home() {
 	
 		queryKey:["gethomepage",process.env.apiServer + "/api/homepage/"],
 		queryFn:()=>fetcher(process.env.apiServer + "/api/homepage/"),
-		enabled:true,
+		//enabled:user?true:false,
 		refetchOnWindowFocus:true
 	})
 	
@@ -40,7 +41,7 @@ export default function Home() {
 	} = useQuery({
 		queryKey:["getnew",process.env.apiServer + "/api/product/newproducts"],
 		queryFn:()=>fetcher(process.env.apiServer + "/api/product/newproducts"),
-		enabled:true,
+		//enabled:user?true:false,
 		refetchOnWindowFocus:true
 		})
 	const { 
@@ -52,7 +53,7 @@ export default function Home() {
 	} = useQuery({
 		queryKey:["gethot",process.env.apiServer + "/api/product/hot"],
 		queryFn:()=>fetcher(process.env.apiServer + "/api/product/hot"),
-		enabled:true,
+		//enabled:user?true:false,
 		refetchOnWindowFocus:true
 	})
 	/* useEffect(()=>{
@@ -123,7 +124,9 @@ export default function Home() {
 				{hot&&
 				<section className="product-tabs section-padding position-relative">
 					<div className="container">
+					{/* <div className="row"> */}
 						<CategoryTab  data={hot}/>
+					{/* 	</div> */}
 					</div>
 				</section>
 				}
@@ -135,6 +138,7 @@ export default function Home() {
 				{hot&&<Bottom data={hot}/>}
 
 				<QuickView />
+				<CookieConsent />
 			</Layout>
 		</>
 	)

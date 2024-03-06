@@ -2,14 +2,12 @@ import Link from "next/link"
 import { useContext, useState, useEffect } from "react"
 import useClickOutside from "../../util/outsideClick"
 import Search from "../ecommerce/Search"
-//import { useSession, signIn, signOut } from "next-auth/react"
 import { AuthContext, useAuthContext } from "../../util/useAuthContext"
-import { useAuth } from "../../util/useAuth"
-import axios from "axios"
-import styles from '../../components/catmenu.module.css'
-const MobileMenu = ({ isToggled, toggleClick, data }) => {
-	//const { status, data: session } = useSession()
+import styles from "../../components/catmenu.module.css"
+import { useRouter } from "next/router"
+const MobileMenu = ({ isToggled, toggleClick, data, setToggled }) => {
 	const { user, setUser, isOnline, signOut } = useContext(AuthContext)
+	const Router = useRouter()
 	const [isMactive, setIsMactive] = useState({
 		status: false,
 		key: "100",
@@ -18,20 +16,12 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 		status: false,
 		key: "100",
 	})
+	const [isMactive3, setIsMactive3] = useState({
+		status: false,
+		key: "100",
+	})
 	const handleSignOut = async () => {
-		//if (user.isLoggedIn ) {
-		/* const response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
-			if (response.status === 200) {
-				await signOut()
-			} else {
-				alert("logout failed")
-				await signOut()
-			}
-		} else {
-			alert("not login.")
-		} */
 		await signOut()
-		//}
 	}
 	const handleMtoggle = (key) => {
 		if (isMactive.key === key) {
@@ -57,31 +47,31 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 			})
 		}
 	}
-	/* useEffect(() => {
-		const getAuth = async () => {
-			try {
-				let response = await axios.get(process.env.apiServer + "/api/auth/user", { credentials: "include" })
-
-				if (response.data.isLoggedIn) {
-					setUser(response.data.data)
-				} else {
-					setUser("")
-				}
-			} catch (err) {
-				console.error(err)
-			}
-		}
-		getAuth()
-	}, []) */
-	/* let domNode = useClickOutside(() => {
-		setIsActive({
+	let domNode = useClickOutside(() => {
+		setIsMactive({
 			status: false,
 		})
-	}) */
+		setIsMactive2({
+			status: false,
+		})
+		//toggleClick()
+	})
+	useEffect(() => {
+		const handleRouteChange = (url, { shallow }) => {
+			setToggled(false)
+			/* console.log(
+			  `App is changing to ${url} ${
+				shallow ? 'with' : 'without'
+			  } shallow routing`
+			) */
+		}
+
+		Router.events.on("routeChangeStart", handleRouteChange)
+	}, [])
 	const Navmenu = () => {
 		return (
-			<nav>
-				<ul className="mobile-menu" /* ref={domNode} */>
+			<nav ref={domNode}>
+				<ul className="mobile-menu">
 					{/* 1st level */}
 					{Object.entries(data).map((li, index) => {
 						return (
@@ -91,59 +81,66 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 								/* className={isActive.key == 1 ? "menu-item-has-children active" : "menu-item-has-children"} */
 							>
 								<Link
-									href={{ pathname: "/products/toplist", query: { id: li[0].split("_")[1],page:1 } }}
+									href={{ pathname: "/products/toplist", query: { id: li[0].split("_")[1], page: 1 } }}
 									//as={`/products/top_list/${li[0].split("_")[1]}`}
 									rel="nofollow"
 								>
 									{li[0].split("_")[0]}
 								</Link>
 								<span className="menu-expand" onClick={() => handleMtoggle(index)}>
-									{isMactive.key===index?<i className="fi-rs-angle-down"></i>:<i className="fi-rs-angle-right"></i>}
+									{isMactive.key === index ? (
+										<i className="fi-rs-angle-down"></i>
+									) : (
+										<i className="fi-rs-angle-right"></i>
+									)}
 								</span>
 								{/* 2nd level */}
-								{li[1].length>0&&
-								<ul className={isMactive.key == index ? "dropdown" : "d-none"}>
-									{li[1].map((ul, i) => {
-										return (
-											<li
-												key={i}
-												className={
-													"menu-item-has-children"
-												}
-											>
-												<Link
-													href={{ pathname: "/products/plist", query: { id: ul.d_id,page:1 } }}
-													shallow={false}
-													replace={false}
-													//as={`/products/products_list/${ul.d_id}`}
-												>
-													{ul.d_title}
-												</Link>
-												{ul.Subdata?.length > 0 &&<span className="menu-expand" onClick={() => handleMtoggle2(i)}>
-												{isMactive2.key === i?<i className="fi-rs-angle-down"></i>:<i className="fi-rs-angle-right"></i>}
-												</span>}
-												{/* 3rd level */}
-												<ul className={isMactive2.key == i ? "dropdown" : "d-none"}>
-												
-													{ul.Subdata?.map((lii, ii) => {
-														return (
-															<li key={ii} className={styles.lii}>
-																<Link
-																	href={{pathname:"/products/plist",query:{id:lii.d_id,page:1}}}
-																	shallow={false}
-																	replace={false}
-																	//as={`/products/products_list/${li.d_id}`}
-																>
-																	{lii.d_title}
-																</Link>
-															</li>
-														)
-													})}
-												</ul>
-											</li>
-										)
-									})}
-								</ul>}
+								{li[1].length > 0 && (
+									<ul className={isMactive.key == index ? "dropdown" : "d-none"}>
+										{li[1].map((ul, i) => {
+											return (
+												<li key={i} className={"menu-item-has-children"}>
+													<Link
+														href={{ pathname: "/products/plist", query: { id: ul.d_id, page: 1 } }}
+														shallow={false}
+														replace={false}
+														rel="nofollow"
+														//as={`/products/products_list/${ul.d_id}`}
+													>
+														{ul.d_title}
+													</Link>
+													{ul.Subdata?.length > 0 && (
+														<span className="menu-expand" onClick={() => handleMtoggle2(i)}>
+															{isMactive2.key === i ? (
+																<i className="fi-rs-angle-down"></i>
+															) : (
+																<i className="fi-rs-angle-right"></i>
+															)}
+														</span>
+													)}
+													{/* 3rd level */}
+													<ul className={isMactive2.key == i ? "dropdown" : "d-none"}>
+														{ul.Subdata?.map((lii, ii) => {
+															return (
+																<li key={ii} className={styles.lii}>
+																	<Link
+																		href={{ pathname: "/products/plist", query: { id: lii.d_id, page: 1 } }}
+																		shallow={false}
+																		replace={false}
+																		rel="nofollow"
+																		//as={`/products/products_list/${li.d_id}`}
+																	>
+																		{lii.d_title}
+																	</Link>
+																</li>
+															)
+														})}
+													</ul>
+												</li>
+											)
+										})}
+									</ul>
+								)}
 							</li>
 						)
 					})}
@@ -183,8 +180,7 @@ const MobileMenu = ({ isToggled, toggleClick, data }) => {
 								<Navmenu /* ref={domNode} */ />
 							) : (
 								<nav>
-									<ul className="mobile-menu">
-									</ul>
+									<ul className="mobile-menu"></ul>
 								</nav>
 							)}
 						</div>

@@ -133,8 +133,8 @@ function Contact() {
 											</li>
 											<li>
 												<h2>內容*</h2>
-												<textarea rows="5" name="d_content" /* defaultValue={string?id+":"+string:''} */ onChange={handleInput}required>
-													{/* id ? string :  */formData.d_content}
+												<textarea rows="5" name="d_content" /* defaultValue={string?id+":"+string:''} */ onChange={handleInput} value={formData.d_content}required>
+													{/* id ? string :  */}
 												</textarea>
 											</li>
 											<div className={styles.title03} style={{ marginTop: "30px" }}>

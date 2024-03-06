@@ -80,13 +80,13 @@ const SingleProduct = ({
                 </div>
 
                 <div className="product-badges product-badges-position product-badges-mrg">
-                    {product.d_sprice !=="0" && <span className="hot">Hot</span>}
+                    {product.d_sprice !=="0" && <span className="hot">熱</span>}
                     {/* {product.created && <span className="new">New</span>}
                     {product.totalSell > 100 && (
                         <span className="best">Best Sell</span>
                     )} */}
                     {product.d_dprice!=="0" && (
-                        <span className="sale">Sale</span>
+                        <span className="sale">特價</span>
                     )}
                     {/* {product.d_dprice!==0 && (
                         <span className="hot">

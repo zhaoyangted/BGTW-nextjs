@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 					<StorageWrapper>
 						<QueryClientProvider client={queryClient}>
 							<Component {...pageProps} />
-							<ReactQueryDevtools initialIsOpen={false} />
+							{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 						</QueryClientProvider>
 						<ToastContainer />
 					</StorageWrapper>

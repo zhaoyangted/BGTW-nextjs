@@ -9,7 +9,7 @@ import { AuthContext } from "../../util/useAuthContext"
 //import { useSession, signIn, signOut } from "next-auth/react"
 import styles from "../../components/header.module.css"
 import axios from "axios"
-import { useRouter } from "next/router"
+//import { useRouter } from "next/router"
 axios.defaults.withCredentials = true
 import {
 	clearCart,
@@ -40,7 +40,7 @@ const Header = ({
 	const [apiData, setApiData] = useState({})
 	//const router=useRouter()
 
-	const {user,setUser,signIn,signOut,isOnline}=useContext(AuthContext)
+	const { user, setUser, signIn, signOut, isOnline } = useContext(AuthContext)
 	/* useEffect(()=>{
 		if (!user) {
 		 isOnline()
@@ -93,7 +93,7 @@ const Header = ({
 			str = str.replace(/;\s*$/, "")
 			const res = await axios.post(process?.env?.apiServer + "/api/cart/cart/", {
 				cart: str,
-			},)
+			})
 			setApiData(res.data)
 			//return res.data['BonusTotal']
 		}
@@ -109,11 +109,16 @@ const Header = ({
 							return (
 								<li className="position-static" key={index}>
 									{/* <img src="/assets/imgs/theme/icons/icon-hot.svg" alt="hot deals" /> */}
-									<Link href={{pathname:`/products/toplist`,query:{id:li[0].split("_")[1],page:1}}}>{li[0].split("_")[0]}</Link>
+									<Link href={{ pathname: `/products/toplist`, query: { id: li[0].split("_")[1], page: 1 } }}>
+										{li[0].split("_")[0]}
+									</Link>
 									{/* <i className="fi-rs-angle-down"></i> */}
 									<ul className="mega-menu">
 										<div className={styles.HdNAVUBTopTT}>
-											<Link className="menu-title" href={{pathname:"/products/toplist",query:{id:li[0].split("_")[1],page:1}}}>
+											<Link
+												className="menu-title"
+												href={{ pathname: "/products/toplist", query: { id: li[0].split("_")[1], page: 1 } }}
+											>
 												{li[0].split("_")[0]}TOP
 											</Link>
 										</div>
@@ -121,9 +126,12 @@ const Header = ({
 											//  console.log(ul)
 											return (
 												<li className="sub-mega-menu sub-mega-menu-width-22" key={index}>
-													<Link href={{pathname:"/products/plist",query:{id:ul.d_id,page:1}}} 
-													//as={`/products/products_list/${ul.d_id}`}
-													>{ul.d_title}</Link>
+													<Link
+														href={{ pathname: "/products/plist", query: { id: ul.d_id, page: 1 } }}
+														//as={`/products/products_list/${ul.d_id}`}
+													>
+														{ul.d_title}
+													</Link>
 													<span className="menu-expand" onClick={() => handleToggle(index)}>
 														<i className="fi-rs-angle-right"></i>
 													</span>
@@ -140,10 +148,8 @@ const Header = ({
 		)
 	}
 	const handleSignOut = async () => {
-		
-				await signOut()
-		
-}
+		await signOut()
+	}
 	const handleToggle = () => setToggled(!isToggled)
 	// console.log(Object.values(config)[13])
 	//console.log(user)
@@ -191,13 +197,13 @@ const Header = ({
 							<div className="header-right">
 								{user ? (
 									<>
-										<Link href="/account/" className="user__link user__link--login">
-											會員{user?.d_pname}您好!您的目前等級：{user?.d_title}
+										<Link href="/account" className="user__link user__link--login">
+											會員{user?.data.d_pname}您好!您的目前等級：{user?.data.d_title}
 										</Link>
 										<Link
 											href="/#"
 											onClick={(e) => {
-												e.preventDefault
+												//e.preventDefault
 												handleSignOut()
 											}}
 											className="user__link user__link--register"
