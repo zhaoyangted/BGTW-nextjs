@@ -1,8 +1,7 @@
 
 import Link from "next/link";
-
 const BlogGrid = ({ show, wide,data,cat }) => {
-   /*  var data = [
+    /*  var data = [
         {
             id: 1,
             title: "The litigants on the screen are not actors",
@@ -139,26 +138,27 @@ const BlogGrid = ({ show, wide,data,cat }) => {
             desc: "These people envy me for having a lifestyle they don’t have, but the truth is, sometimes I envy their lifestyle instead. Struggling to sell one multi.",
         },
     ]; */
+    const regex=`/^\/uploads/`
     const reg = /src\s*=\s*"(.+?)"/
     return <>
         {data?.slice(0, show).map((item, i) => (
             
             <article
-                className={
-                    wide
-                        ? "col-xl-3 col-lg-4 col-md-6 text-center hover-up mb-30 animated"
-                        : "col-xl-4 col-lg-6 col-md-6 text-center hover-up mb-30 animated"
-                }
+            className={
+                wide
+                ? "col-xl-3 col-lg-4 col-md-6 text-center hover-up mb-30 animated"
+                : "col-xl-4 col-lg-6 col-md-6 text-center hover-up mb-30 animated"
+            }
                 key={i}
             >
                 <div className="post-thumb">
                     <Link href={{pathname:"/news/info/",query:{id:item.d_id}}}
                     //as={`/news/info/${item.d_id}`}
                     >
-
+                        {console.log(item.d_content.split(reg)[1].replace(regex,`${process.env.s3Host}uploads/`))}
                         <img
                             className="border-radius-15"
-                            src={item.d_content.split(reg)[1]}
+                            src={item.d_content.split(reg)[1].replace(regex,`${process.env.s3Host}uploads/`)}
                             alt=""
                         />
 

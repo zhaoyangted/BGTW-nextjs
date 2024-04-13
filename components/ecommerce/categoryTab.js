@@ -37,7 +37,7 @@ function CategoryTab(data) {
 								aria-label={item}
 								className={active === `${i + 1}` ? "nav-link   active" : "nav-link "}
 								//data-bs-toggle="modal"
-								style={{ whiteSpace: "nowrap", width: "70px", height: "30px", overflowX: "hidden" }}
+								style={{ whiteSpace: "nowrap", width: "70px", height: "40px", overflowX: "hidden" }}
 								onClick={() => {
 									setHotProd(catAll[`${i}`])
 									setActive(`${i + 1}`)

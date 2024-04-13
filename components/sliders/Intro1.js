@@ -3,7 +3,7 @@ import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
 //import useSWR from "swr"
 import Link from "next/link"
-import 'swiper/scss';
+import 'swiper/css';
 SwiperCore.use([Autoplay,Navigation, Pagination])
 
 const Intro1 = ({data}) => {
@@ -15,9 +15,14 @@ const Intro1 = ({data}) => {
 		<>
 			<Swiper
 				/* slidesPerView={1.5} */
+				autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false
+                }}
 				spaceBetween={0}
 				centeredSlides={true}
-				autoplay={true}
+				//autoHeight={true}
+				//autoplay={true}
 				loop={true}
 				pagination={{
 					clickable: true,
@@ -40,20 +45,23 @@ const Intro1 = ({data}) => {
 						slidesPerView: 1.95,
 					},
 					1600:{
-						slidesPerView: 3.3,
+						slidesPerView: 2.1,
 					},
 					1800: {
-						slidesPerView: 4.3,
+						slidesPerView: 2.3,
 					},
-					2000: {
-						slidesPerView: 4.5,
+					 2000: {
+						slidesPerView: 2.5,
 					},
 					2500:{
-						slidePerView:5.1,
-					},
+						slidePerView:2.8,
+					},/*
 					3000:{
-						slidePerView:5.3,
+						slidePerView:3.2,
 					},
+					4000:{
+						slidePerView:3.4
+					} */
 				}}
 				// modules={[Autoplay,Pagination, Navigation]}
 				className="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1"

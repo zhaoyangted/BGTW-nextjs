@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import SwiperCore, { A11y, Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { updateProductCategory } from "./../../redux/action/productFiltersAction";
 import useSWR from 'swr'
 import { useEffect,useState } from "react";
-SwiperCore.use([Navigation, Autoplay]);
+SwiperCore.use([Navigation, Autoplay,A11y]);
 const data = [
     {
         id: 1,
@@ -108,28 +108,39 @@ const CategorySlider = () => {
     return (
         !loading&&<>
             <Swiper
-                autoplay={true}
+                //modules={[Navigation, A11y]}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false
+                }}
                 navigation={{
                     prevEl: ".custom_prev_ct1",
                     nextEl: ".custom_next_ct1"
                 }}
+                autoHeight={true}
                 className="custom-class"
                 breakpoints={{
                     480: {
-                        slidesPerView: 2
+                        slidesPerView: 6
                     },
                     640: {
-                        slidesPerView: 3
+                        slidesPerView: 6
                     },
                     768: {
-                        slidesPerView: 5
+                        slidesPerView: 6
                     },
                     1024: {
-                        slidesPerView: 8
+                        slidesPerView: 6
                     },
-                    1200: {
+                    1600: {
                         slidesPerView: 10
-                    }
+                    },
+                    /* 1800:{
+                        slidesPerView:3
+                    },
+                    2400: {
+                        slidesPerView:3
+                    } */
                 }}
             >
                 {data?.map((item, i) => (

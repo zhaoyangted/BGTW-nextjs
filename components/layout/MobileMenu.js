@@ -191,7 +191,7 @@ const MobileMenu = ({ isToggled, toggleClick, data, setToggled }) => {
 							{user ? (
 								<div className="single-mobile-header-info">
 									<Link href="/account">會員中心</Link>
-									會員{user?.d_pname}您好!您的目前等級：{user?.d_title}
+									會員{user?.data?.d_pname}您好!您的目前等級：{user?.data?.d_title}
 								</div>
 							) : (
 								<Link href="/login">會員登入 / 加入會員</Link>

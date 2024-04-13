@@ -36,19 +36,19 @@ const Tags = ({ updateProductFilters }) => {
 			<div className="tags-header">
 				<h4>顏色屬性</h4>
 
-				<ul className="tags-list">
-					<li className="hover-up" onClick={() => handleClick(0, "")}>
-						<a className={"cat-item text-brand-2"}>
+				<div className="tags-list">
+					<div className="hover-up" onClick={() => handleClick(0, "")}>
+						<button className={"cat-item text-brand-2"}>
 							<i className="fi-rs-cross mr-10"></i>
 							All
-						</a>
-					</li>
-				</ul>
+						</button>
+					</div>
+				</div>
 			</div>
-			<ul className="tags-list">
+			<div className="tags-list">
 				{tags.map((tag, i) => (
-					<li className="hover-up" onClick={() => handleClick(i, tag.value)} key={i}>
-						<a
+					<div className="hover-up" onClick={() => handleClick(i, tag.value)} key={i}>
+						<button
 							className={active == i ? "cat-item text-brand-2" : "cat-item text-brand"}
 							style={{
 								backgroundImage: `url(/assets/imgs/colors/${tag.value}.webp)`,
@@ -56,10 +56,10 @@ const Tags = ({ updateProductFilters }) => {
 						>
 							<i className="fi-rs-cross mr-10"></i>
 							{/*i == 0 ? "All" : null  `${tag.title}` */}
-						</a>
-					</li>
+						</button>
+					</div>
 				))}
-			</ul>
+			</div>
 		</>
 	)
 }

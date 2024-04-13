@@ -198,7 +198,7 @@ const Header = ({
 								{user ? (
 									<>
 										<Link href="/account" className="user__link user__link--login">
-											會員{user?.data.d_pname}您好!您的目前等級：{user?.data.d_title}
+											會員{user?.data?.d_pname}您好!您的目前等級：{user?.data?.d_title}
 										</Link>
 										<Link
 											href="/#"

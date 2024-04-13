@@ -2,6 +2,9 @@ import Link from "next/link"
 import React from "react"
 
 const BlogSingle = ({ data }) => {
+    const regex=`src="/uploads/`
+    //const str="/uploads/news/ckfinder_image/images/"
+    //console.log(data?.dbdata?.d_content.replace(regex,`${process.env.s3Host}uploads/`))
 	return (
 		<>
 			<div className="single-page pt-50 pr-30">
@@ -56,7 +59,7 @@ const BlogSingle = ({ data }) => {
 				<div className="single-content">
 					{/* <div className="row"> */}
 					<div className="col-xl-10 col-lg-12 m-auto">
-						<div dangerouslySetInnerHTML={{ __html: data?.dbdata?.d_content }} />
+						<div dangerouslySetInnerHTML={{ __html: data?.dbdata?.d_content.replace(regex,`src="${process.env.s3Host}uploads/`) }} />
 						{/* <p className="single-excerpt">
                             Helping everyone live happier, healthier lives
                             at home through their kitchen. Kitchn is a daily

@@ -3,7 +3,6 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import {toast} from 'react-toastify'
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 export const useAuth = () => {
 	const [user, setUser] = useState(null)
     const router = useRouter()
@@ -37,8 +36,7 @@ export const useAuth = () => {
             //console.log(authresult)
 			if (authresult.status!==404){
 			setUser(authresult.data)
-            //router.back()
-			redirect('/account')
+            router.back()
 			toast("登入成功")
 			}else{
 				console.log(authresult)
@@ -96,9 +94,8 @@ export const useAuth = () => {
 			let response = await axios.put(process.env.apiServer + "/api/auth/logout", { credentials: "include" })
 			if (response.status === 200) {
 				setUser("")
-				//revalidatePath("/")
-				redirect("/")
-				//router.push('/',undefined,{shallow:false})
+				revalidatePath("/")
+				router.push('/',undefined,{shallow:false})
                 toast("登出成功")
 			}
 		} catch (err) {
